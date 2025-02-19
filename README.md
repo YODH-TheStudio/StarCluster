@@ -1,4 +1,4 @@
-# StarCluster Test
+# StarCluster
 
 ```
 NOMENCLATURE :
