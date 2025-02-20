@@ -30,6 +30,21 @@ public class S_PlayerScript : MonoBehaviour, IS_Controler.IPlayerActions
         _direction = IsoVectorConvert(toConvert);
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            Debug.Log("Can Interact");
+            hit.transform.position = transform.position;
+        }
+        else
+        {
+            Debug.Log("Can't Interact");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +52,8 @@ public class S_PlayerScript : MonoBehaviour, IS_Controler.IPlayerActions
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
-        _controller.Move(_direction * _speed *  Time.deltaTime);
+        _controller.Move(_direction * _speed * Time.deltaTime);
     }
 }
