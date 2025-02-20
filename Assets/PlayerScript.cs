@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +5,15 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
     private CharacterController _controller;
     private Vector3 _direction;
-    private float _speed = 5.0f;
+
+    private bool _isGrabbing = false;
+    private GameObject _objectGrabbed;
+
+    [SerializeField]
+    private float _speed = 250.0f;
+
+    [SerializeField]
+    private float _raycastDistance = 1.25f;
 
     private void Awake()
     {
@@ -16,33 +22,53 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         playerControls.Player.SetCallbacks(this);
     }
 
-    private Vector3 IsoVectorConvert(Vector3 vector)
-    {
-        Quaternion rotation = Quaternion.Euler(0, 45.0f, 0);
-        Matrix4x4 isoMatrix = Matrix4x4.Rotate(rotation);
-        Vector3 result = isoMatrix.MultiplyPoint3x4(vector);
-        return result;
-    }
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 readVector = context.ReadValue<Vector2>();
-        Vector3 toConvert = new Vector3(readVector.x, 0, readVector.y);
-        _direction = IsoVectorConvert(toConvert);
+        Vector3 position = new Vector3(readVector.x, 0, readVector.y);
+        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
+
+        _direction = isoMatrix.MultiplyPoint3x4(position);
+
+        var relative = (transform.position + _direction) - transform.position;
+        var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+        transform.rotation = rot;
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (_isGrabbing)
         {
-            Debug.Log("Can Interact");
-            hit.transform.position = transform.position;
+            _isGrabbing = false;
+            _objectGrabbed.GetComponent<BoxCollider>().enabled = true;
+            _objectGrabbed.GetComponent<Rigidbody>().useGravity = true;
         }
         else
         {
-            Debug.Log("Can't Interact");
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+            {
+                _objectGrabbed = hit.transform.gameObject;
+
+                if (_objectGrabbed.tag == "Movable")
+                {
+                    _isGrabbing = true;
+                    _objectGrabbed.GetComponent<BoxCollider>().enabled = false;
+                    _objectGrabbed.GetComponent<Rigidbody>().useGravity = false;
+                }
+                else
+                {
+                    _isGrabbing = false;
+                }
+            }
+            else
+            {
+                _isGrabbing = false;
+            }
         }
+        
     }
 
     // Start is called before the first frame update
@@ -54,6 +80,11 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     // Update is called once per frame
     void FixedUpdate()
     {
-        _controller.Move(_direction * _speed * Time.deltaTime);
+        _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+
+        if (_isGrabbing)
+        {
+            _objectGrabbed.transform.position = transform.position + Vector3.forward;
+        }
     }
 }
