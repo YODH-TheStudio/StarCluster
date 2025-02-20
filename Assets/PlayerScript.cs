@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class S_PlayerScript : MonoBehaviour, IS_Controler.IPlayerActions
+public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
     private CharacterController _controller;
     private Vector3 _direction;
@@ -12,7 +12,7 @@ public class S_PlayerScript : MonoBehaviour, IS_Controler.IPlayerActions
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        IS_Controler playerControls = new IS_Controler();
+        Controler playerControls = new Controler();
         playerControls.Player.SetCallbacks(this);
     }
 
