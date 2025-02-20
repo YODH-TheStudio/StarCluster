@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlatformTrigger : MonoBehaviour
 {
     public PlatformSettings Settings; 
     private Renderer _renderer;
+
+    public UnityEvent OnPlatformActivated;
+    public UnityEvent OnPlatformDeactivated;
 
     private void Awake()
     {
@@ -18,6 +22,7 @@ public class PlatformTrigger : MonoBehaviour
         if (activator != null && activator.Settings.ActivatorId == Settings.ActivatorId)
         {
             _renderer.material.color = Settings.ActiveColor;
+            OnPlatformActivated.Invoke();
             Debug.Log($"[PlatformTrigger] Activation par objet ID {activator.GetId()} - Couleur {Settings.ActiveColor}");
         }
     }
@@ -28,6 +33,7 @@ public class PlatformTrigger : MonoBehaviour
         if (activator != null && activator.Settings.ActivatorId == Settings.ActivatorId)
         {
             _renderer.material.color = Settings.DefaultColor;
+            OnPlatformDeactivated.Invoke();
             Debug.Log($"[PlatformTrigger] Désactivation - Retour à {Settings.DefaultColor}");
         }
     }
