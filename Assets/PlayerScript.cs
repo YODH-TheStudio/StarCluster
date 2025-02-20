@@ -84,7 +84,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 
         if (_isGrabbing)
         {
-            _objectGrabbed.transform.position = transform.position + Vector3.forward;
+            _objectGrabbed.transform.position = transform.position + (Vector3.forward * 2);
         }
     }
 }
