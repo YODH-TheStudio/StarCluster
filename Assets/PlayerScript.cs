@@ -29,10 +29,9 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     }
 
     // Allow the player to move, Is called by the character controler component in player
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(Vector2 readVector)
     {
         // Calculated the movement of the player with the 45° change due to isometric view
-        Vector2 readVector = context.ReadValue<Vector2>();
         Vector3 position = new Vector3(readVector.x, 0, readVector.y);
         Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
 
