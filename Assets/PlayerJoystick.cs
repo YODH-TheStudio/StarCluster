@@ -86,16 +86,7 @@ public class PlayerJoystick : MonoBehaviour
             ETouch.Touch currentTouche = TouchedFinger.currentTouch;
 
             Vector2 backgroundPosition = new Vector2(_background.position.x, _background.position.y);
-
-            if (Vector2.Distance(currentTouche.screenPosition, backgroundPosition) < movementRadius)
-            {
-                knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
-            }
-            else
-            {
-                // Small issue the more you move the knob the more the player speed increases
-                knobPosition = currentTouche.screenPosition - backgroundPosition;
-            }
+            knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
 
             _handle.anchoredPosition = knobPosition;
             _MovementAmount = knobPosition / movementRadius;
