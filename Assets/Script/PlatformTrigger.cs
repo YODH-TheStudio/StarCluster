@@ -24,7 +24,7 @@ public class PlatformTrigger : MonoBehaviour
         {
             _renderer.material.color = Settings.ActiveColor;
             OnPlatformActivated.Invoke();
-            Debug.Log($"[PlatformTrigger] Activation par objet ID {activator.GetId()} - Couleur {Settings.ActiveColor}");
+            //Debug.Log($"[PlatformTrigger] Activation par objet ID {activator.GetId()} - Couleur {Settings.ActiveColor}");
         }
     }
 
@@ -35,7 +35,7 @@ public class PlatformTrigger : MonoBehaviour
         {
             _renderer.material.color = Settings.DefaultColor;
             OnPlatformDeactivated.Invoke();
-            Debug.Log($"[PlatformTrigger] D�sactivation - Retour � {Settings.DefaultColor}");
+            //Debug.Log($"[PlatformTrigger] D�sactivation - Retour � {Settings.DefaultColor}");
         }
     }
 }

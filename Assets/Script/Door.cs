@@ -27,12 +27,12 @@ public class Door : MonoBehaviour
     public void OpenDoor()
     {
         _isOpen = true;
-        Debug.Log("[Door] Porte ouverte !");
+        //Debug.Log("[Door] Porte ouverte !");
     }
 
     public void CloseDoor()
     {
         _isOpen = false;
-        Debug.Log("[Door] Porte fermée !");
+        //Debug.Log("[Door] Porte fermée !");
     }
 }

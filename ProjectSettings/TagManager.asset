@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Movable
-  - Cube
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -36,9 +35,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Other
+  - Enigme
+  - MovableObject
   m_SortingLayers:
   - name: Default
     uniqueID: 0

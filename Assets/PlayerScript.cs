@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
     // Player Controler Variable 
-    private CharacterController _controller;
-    private Vector3 _direction;
-
     [SerializeField]
     private float _speed = 250.0f;
 
@@ -16,7 +13,12 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     [SerializeField]
     private float _turnSpeed = 360.0f;
 
-    // Might be deleted 
+    private CharacterController _controller;
+    private Vector3 _direction;
+
+    [SerializeField]
+    private InteractionSwitch _interactionSwitch;
+
     private bool _isGrabbing = false;
     private GameObject _objectGrabbed;
 
@@ -38,44 +40,32 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         _direction = isoMatrix.MultiplyPoint3x4(position);
     }
 
-    // Might be deleted 
     // Allow the player to interact with objetc, Is called by the character controler component in player
     public void OnInteract(InputAction.CallbackContext context)
     {
-        // if the player is interaction with an object stop the interaction
-        if (_isGrabbing)
+        if (context.started)
         {
-            _isGrabbing = false;
-            _objectGrabbed.GetComponent<BoxCollider>().enabled = true;
-            _objectGrabbed.GetComponent<Rigidbody>().useGravity = true;
-        }
-        // else starte interaction with the object in front of the player
-        else
-        {
-            RaycastHit hit;
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+            if (IsGrabbing())
             {
-                _objectGrabbed = hit.transform.gameObject;
+                SetGrabbing(false);
+                _objectGrabbed.GetComponent<BoxCollider>().enabled = true;
+                _objectGrabbed.GetComponent<Rigidbody>().useGravity = true;
 
-                // if the object can be move, disable colision for simplicity
-                if (_objectGrabbed.tag == "Movable")
-                {
-                    _isGrabbing = true;
-                    _objectGrabbed.GetComponent<BoxCollider>().enabled = false;
-                    _objectGrabbed.GetComponent<Rigidbody>().useGravity = false;
-                }
-                else
-                {
-                    _isGrabbing = false;
-                }
+                return;
             }
+
             else
             {
-                _isGrabbing = false;
+                RaycastHit hit;
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+                {
+                    _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
+                }
+
+                return;
             }
         }
-        
     }
 
     // Rotate the player in the direction he is walking
@@ -98,10 +88,30 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         Look();
 
-        // Might be deleted 
-        if (_isGrabbing)
+        if (IsGrabbing())
         {
             _objectGrabbed.transform.position = transform.position + (Vector3.forward * 2);
         }
+    }
+
+    // Code to interact with object
+    public bool IsGrabbing()
+    {
+        return _isGrabbing;
+    }
+
+    public void SetGrabbing(bool isGrabbing)
+    {
+        _isGrabbing = isGrabbing;
+    }
+
+    public GameObject GetObjectGrabbed()
+    {
+        return _objectGrabbed;
+    }
+
+    public void SetObjectGrabbed(GameObject objectGrabbed)
+    {
+        _objectGrabbed = objectGrabbed;
     }
 }
