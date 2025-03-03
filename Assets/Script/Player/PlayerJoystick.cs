@@ -35,8 +35,7 @@ public class PlayerJoystick : MonoBehaviour
         _handle.anchorMax = center;
         _handle.pivot = center;
         _handle.anchoredPosition = Vector2.zero;
-
-        //background.gameObject.SetActive(false)
+        _background.gameObject.SetActive(false);
     }
 
     private void OnEnable()
