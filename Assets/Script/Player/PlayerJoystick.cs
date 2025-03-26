@@ -14,7 +14,7 @@ public class PlayerJoystick : MonoBehaviour
 
     [SerializeField] protected RectTransform _background = null;
     [SerializeField] private RectTransform _handle = null;
-    [SerializeField] private GameObject _player = null;
+    private PlayerScript _player = null;
 
     private Finger _MovementFinger;
     private Vector2 _MovementAmount;
@@ -36,6 +36,8 @@ public class PlayerJoystick : MonoBehaviour
         _handle.pivot = center;
         _handle.anchoredPosition = Vector2.zero;
         _background.gameObject.SetActive(false);
+
+        _player = GameManager.Instance.GetPlayer();
     }
 
     private void OnEnable()
@@ -105,6 +107,6 @@ public class PlayerJoystick : MonoBehaviour
 
     private void Update()
     {
-        _player.GetComponent<PlayerScript>().OnMove(_MovementAmount);
+        _player.OnMove(_MovementAmount);
     }
 }
