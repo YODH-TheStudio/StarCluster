@@ -5,12 +5,17 @@ using UnityEngine;
 public class PlayerInteractionZone : MonoBehaviour
 {
     [SerializeField]
-    private float _raycastDistance = 5f;
+    private float _raycastDistance = 1.25f;
+
+    [SerializeField]
+    private GameObject _interactionButton;
+
+    private PlayerScript _player = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameManager.Instance.GetPlayer();
     }
 
     // Update is called once per frame
@@ -18,9 +23,29 @@ public class PlayerInteractionZone : MonoBehaviour
     {
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.25f, 0, 1)), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.25f, 0, 1)), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.5f, 0, 1)), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.5f, 0, 1)), out hit, _raycastDistance) 
+            )
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
+            if(hit.transform.gameObject.tag == "Interactable")
+            {
+                _interactionButton.SetActive(true);
+            }
+            else
+            {
+                _interactionButton.SetActive(false);
+            }
+        }
+        else if(_player.IsGrabbing())
+        {
+            _interactionButton.SetActive(true);
+        }
+        else
+        {
+            _interactionButton.SetActive(false);
         }
     }
 }

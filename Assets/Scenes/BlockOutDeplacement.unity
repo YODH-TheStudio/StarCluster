@@ -2040,6 +2040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastDistance: 1.25
+  _interactionButton: {fileID: 844171755}
 --- !u!1001 &1272041697
 PrefabInstance:
   m_ObjectHideFlags: 0
