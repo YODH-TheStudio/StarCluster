@@ -92,6 +92,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         {
             _objectGrabbed.transform.position = transform.position + (Vector3.forward * 2);
         }
+
     }
 
     // Code to interact with object

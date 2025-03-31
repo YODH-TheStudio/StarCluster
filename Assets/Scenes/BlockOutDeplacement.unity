@@ -1481,7 +1481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &844171756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1841,6 +1841,7 @@ GameObject:
   - component: {fileID: 1238707302}
   - component: {fileID: 1238707301}
   - component: {fileID: 1238707303}
+  - component: {fileID: 1238707304}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1951,7 +1952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 250
   _raycastDistance: 1.25
-  _turnSpeed: 360
+  _turnSpeed: 540
   _interactionSwitch: {fileID: 638118839}
 --- !u!114 &1238707302
 MonoBehaviour:
@@ -2026,6 +2027,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1238707304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238707294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba4d5837da21424aba0ff94e8a75fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _raycastDistance: 1.25
 --- !u!1001 &1272041697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2052,7 +2066,7 @@ PrefabInstance:
     - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: _movementRange
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
@@ -2164,6 +2178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floating Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2268,6 +2287,11 @@ PrefabInstance:
     - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263259, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

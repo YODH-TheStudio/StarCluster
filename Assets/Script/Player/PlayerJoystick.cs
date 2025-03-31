@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.OnScreen;
+using static UnityEngine.InputSystem.OnScreen.OnScreenStick;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public enum AxisOptions { Both, Horizontal, Vertical }
@@ -21,6 +22,7 @@ public class PlayerJoystick : MonoBehaviour
     private RectTransform _baseRect = null;
     private Canvas _canvas;
     private Camera _cam;
+    private Vector2 _handleStartPosition;
 
     protected virtual void Start()
     {
@@ -64,7 +66,8 @@ public class PlayerJoystick : MonoBehaviour
             _MovementAmount = Vector2.zero;
             _background.gameObject.SetActive(true);
             _background.anchoredPosition = ScreenPointToAnchoredPosition(TouchedFinger.screenPosition);
-            _handle.anchoredPosition =new Vector2(0.5f, 0.5f);
+            _handleStartPosition = Vector2.zero;
+            _handle.anchoredPosition = _handleStartPosition;
         }
     }
     private void Touch_OnFingerUp(Finger TouchedFinger)
@@ -82,17 +85,18 @@ public class PlayerJoystick : MonoBehaviour
     {
         if (TouchedFinger == _MovementFinger)
         {
-            
             Vector2 knobPosition;
             float movementRadius = _background.sizeDelta.x / 2f;
             ETouch.Touch currentTouche = TouchedFinger.currentTouch;
-
             Vector2 backgroundPosition = new Vector2(_background.position.x, _background.position.y);
             knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
 
-            Debug.Log((knobPosition / movementRadius) * _movementRange);
+            var delta = currentTouche.screenPosition - backgroundPosition;
 
-            _handle.anchoredPosition = (knobPosition / movementRadius) * _movementRange;
+            delta = Vector2.ClampMagnitude(delta, _movementRange);
+
+            _handle.anchoredPosition = _handleStartPosition + delta;
+
             _MovementAmount = knobPosition / movementRadius;
         }
     }
