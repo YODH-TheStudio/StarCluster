@@ -62,7 +62,7 @@ public class PlayerJoystick : MonoBehaviour
             _MovementAmount = Vector2.zero;
             _background.gameObject.SetActive(true);
             _background.anchoredPosition = ScreenPointToAnchoredPosition(TouchedFinger.screenPosition);
-            _handle.anchoredPosition = Vector2.zero;
+            _handle.anchoredPosition =new Vector2(0.5f, 0.5f);
         }
     }
     private void Touch_OnFingerUp(Finger TouchedFinger)
@@ -87,7 +87,9 @@ public class PlayerJoystick : MonoBehaviour
             Vector2 backgroundPosition = new Vector2(_background.position.x, _background.position.y);
             knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
 
-            _handle.anchoredPosition = knobPosition;
+            Debug.Log(knobPosition);
+
+            _handle.anchoredPosition = knobPosition / movementRadius;
             _MovementAmount = knobPosition / movementRadius;
         }
     }
