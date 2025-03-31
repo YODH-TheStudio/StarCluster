@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PhasableObject : Interactable
 {
@@ -72,6 +73,11 @@ public class PhasableObject : Interactable
         Debug.Log("PhaseAnimation started.");
         Debug.Log("Start position: " + start + ", End position: " + end);
 
+ 
+
+        PlayerScript playerScript = _userTransform.GetComponent<PlayerScript>();
+        playerScript.SetIsAnimating(true); 
+
         float elapsed = 0f;
 
         while (elapsed < phaseDuration)
@@ -92,6 +98,8 @@ public class PhasableObject : Interactable
             objectCollider.enabled = true;
             Debug.Log("Collider re-enabled.");
         }
+
+        playerScript.SetIsAnimating(false);
 
         Debug.Log("Phase transition complete.");
 

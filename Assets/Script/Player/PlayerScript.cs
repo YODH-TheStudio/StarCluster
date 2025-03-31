@@ -22,6 +22,13 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     private bool _isGrabbing = false;
     private GameObject _objectGrabbed;
 
+    private bool isAnimating = false;
+
+    public void SetIsAnimating(bool animating)
+    {
+        isAnimating = animating;
+    }
+
     // Set the variable
     private void Awake()
     {
@@ -98,7 +105,10 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     // Update is called once per frame
     void FixedUpdate()
     {
-        _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+        if (!isAnimating)
+        {
+            _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+        }
         Look();
 
         if (IsGrabbing())
