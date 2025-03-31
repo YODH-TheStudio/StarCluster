@@ -33,9 +33,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = FindObjectOfType<PlayerScript>();
+        if (_player == null)
+        {
+            _player = FindObjectOfType<PlayerScript>();
+        }
     }
 
+    void FindPlayer()
+    {
+        _player = FindObjectOfType<PlayerScript>();
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +52,10 @@ public class GameManager : MonoBehaviour
     
     public PlayerScript GetPlayer()
     {
+        if (_player == null)
+        {
+            FindPlayer();
+        }
         return _player;
     }
 }
