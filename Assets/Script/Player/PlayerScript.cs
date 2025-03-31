@@ -59,9 +59,22 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 RaycastHit hit;
                 // Does the ray intersect any objects excluding the player layer
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+
                 {
-                    _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
+                    //_interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
+
+                    // Is interactable object
+                    Interactable interactable = hit.transform.GetComponent<Interactable>();
+
+
+                    if (interactable != null)
+                    {
+                        interactable.SetUserTransform(this.transform);
+                        interactable.Interact();
+                    }
                 }
+
+
 
                 return;
             }
