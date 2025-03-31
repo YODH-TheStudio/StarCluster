@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.OnScreen;
-
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public enum AxisOptions { Both, Horizontal, Vertical }
@@ -14,8 +13,9 @@ public class PlayerJoystick : MonoBehaviour
 
     [SerializeField] protected RectTransform _background = null;
     [SerializeField] private RectTransform _handle = null;
-    private PlayerScript _player = null;
+    [SerializeField] private float _movementRange;
 
+    private PlayerScript _player = null;
     private Finger _MovementFinger;
     private Vector2 _MovementAmount;
     private RectTransform _baseRect = null;
@@ -82,6 +82,7 @@ public class PlayerJoystick : MonoBehaviour
     {
         if (TouchedFinger == _MovementFinger)
         {
+            
             Vector2 knobPosition;
             float movementRadius = _background.sizeDelta.x / 2f;
             ETouch.Touch currentTouche = TouchedFinger.currentTouch;
@@ -89,9 +90,9 @@ public class PlayerJoystick : MonoBehaviour
             Vector2 backgroundPosition = new Vector2(_background.position.x, _background.position.y);
             knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
 
-            Debug.Log(knobPosition);
+            Debug.Log((knobPosition / movementRadius) * _movementRange);
 
-            _handle.anchoredPosition = knobPosition / movementRadius;
+            _handle.anchoredPosition = (knobPosition / movementRadius) * _movementRange;
             _MovementAmount = knobPosition / movementRadius;
         }
     }
