@@ -19,11 +19,21 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     [SerializeField]
     private InteractionSwitch _interactionSwitch;
 
+    // Grab
     private bool _isGrabbing = false;
     private GameObject _objectGrabbed;
 
-    private bool isAnimating = false;
+    // Pushing Pulling
+    private bool _isPushingPulling = false; // set by object on interact
+    private Vector3 _lastMoveDirection; // Get normalized player direction each frame
 
+    public void TogglePushingPulling(){ _isPushingPulling = !_isPushingPulling; }
+    public Vector3 GetMoveDirection()
+    {
+        return _lastMoveDirection;
+    }
+
+    private bool isAnimating = false;
     public void SetIsAnimating(bool animating)
     {
         isAnimating = animating;
@@ -45,6 +55,9 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
 
         _direction = isoMatrix.MultiplyPoint3x4(position);
+
+        // store last move position to inform component about user movement direction
+        _lastMoveDirection = _direction.normalized; 
     }
 
     // Allow the player to interact with objetc, Is called by the character controler component in player
@@ -52,6 +65,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         if (context.started)
         {
+            // Hold object
             if (IsGrabbing())
             {
                 SetGrabbing(false);
@@ -61,6 +75,8 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 return;
             }
 
+
+            // Interact with object
             else
             {
                 RaycastHit hit;
@@ -68,20 +84,18 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
 
                 {
+                    // Old
                     //_interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
 
                     // Is interactable object
                     Interactable interactable = hit.transform.GetComponent<Interactable>();
-
-
                     if (interactable != null)
                     {
                         interactable.SetUserTransform(this.transform);
+                        interactable.SetUserInteractionNormal(hit.normal);
                         interactable.Interact();
                     }
                 }
-
-
 
                 return;
             }
@@ -107,9 +121,23 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         if (!isAnimating)
         {
-            _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+            if (_isPushingPulling)
+            {
+                // Limit movement only on object direction and object inverse direction
+                float forwardMove = _direction.z;
+                _direction = new Vector3(1, 1, 1) * forwardMove;
+            }
+            else
+            {
+                _controller.SimpleMove(_direction * _speed * Time.deltaTime); 
+            }
         }
-        Look();
+
+        if (!_isPushingPulling)
+        {
+            Look();
+        }
+
 
         if (IsGrabbing())
         {
@@ -117,24 +145,10 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         }
     }
 
-    // Code to interact with object
-    public bool IsGrabbing()
-    {
-        return _isGrabbing;
-    }
 
-    public void SetGrabbing(bool isGrabbing)
-    {
-        _isGrabbing = isGrabbing;
-    }
-
-    public GameObject GetObjectGrabbed()
-    {
-        return _objectGrabbed;
-    }
-
-    public void SetObjectGrabbed(GameObject objectGrabbed)
-    {
-        _objectGrabbed = objectGrabbed;
-    }
+    // Grabbed
+    public bool IsGrabbing(){ return _isGrabbing; }
+    public void SetGrabbing(bool isGrabbing){ _isGrabbing = isGrabbing; }
+    public GameObject GetObjectGrabbed(){ return _objectGrabbed; }
+    public void SetObjectGrabbed(GameObject objectGrabbed){ _objectGrabbed = objectGrabbed; }
 }
