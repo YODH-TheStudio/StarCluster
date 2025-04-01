@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MéropeFollow : MonoBehaviour
@@ -31,7 +29,7 @@ public class MéropeFollow : MonoBehaviour
             float dist = (_player.transform.position - transform.position).magnitude;
             if(dist > maxDistance)
             {
-                transform.position += direction.normalized * speed * Time.deltaTime;
+                transform.position += direction.normalized * speed * dist/5 * Time.deltaTime;
             } else if (dist < minDistance)
             {
                 // If too close to the player, move away from the player
