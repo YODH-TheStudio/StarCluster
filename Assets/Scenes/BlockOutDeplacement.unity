@@ -189,7 +189,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.62, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1286083787}
@@ -207,9 +207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41426ba83eba39d4b8137328ca80e7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  maxDistance: 5.5
-  minDistance: 2.5
+  speed: 3
+  maxDistance: 5
+  minDistance: 3
+  floatHeight: 1.5
+  floatSpeed: 0.15
 --- !u!54 &223924131
 Rigidbody:
   m_ObjectHideFlags: 0

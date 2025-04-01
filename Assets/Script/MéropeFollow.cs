@@ -7,6 +7,8 @@ public class MéropeFollow : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float maxDistance = 5.5f;
     [SerializeField] private float minDistance = 2.5f;
+    [SerializeField] private float floatHeight = 1.5f;
+    [SerializeField] private float floatSpeed = 0.1f;
     private Rigidbody _rb;
     
     // Start is called before the first frame update
@@ -40,5 +42,10 @@ public class MéropeFollow : MonoBehaviour
         {
             Debug.LogWarning("Player not found");
         }
+        
+        // Move up and down
+        Vector3 newPosition = transform.position;
+        newPosition.y = Mathf.Sin(Time.time * speed) * floatSpeed + floatHeight; // Adjust the amplitude and offset as needed
+        transform.position = newPosition;
     }
 }
