@@ -1,0 +1,350 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: Advance Nodes
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 0
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 0
+  NodeLinkDatas:
+  - BaseNodeGuid: ca51cde5-6e99-46c9-a0b7-daf7e4b018ab
+    TargetNodeGuid: 520eca62-206a-4365-981c-759bb086339c
+  - BaseNodeGuid: f9d0e9af-eb65-47ed-b65f-d7f20d9ef1c5
+    TargetNodeGuid: c7cd328b-ed87-4341-af82-5d408776b313
+  - BaseNodeGuid: c7cd328b-ed87-4341-af82-5d408776b313
+    TargetNodeGuid: 6cf1c2e5-2e0a-4f9d-a17f-122c46553aef
+  - BaseNodeGuid: d2909f62-b8b3-426d-9ad6-fae0015d792f
+    TargetNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+  - BaseNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+    TargetNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+  - BaseNodeGuid: cfd016c0-c4db-448c-9176-092ddf6ace15
+    TargetNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+  - BaseNodeGuid: e86a42b6-6f2a-408b-a2a2-d6bd87a509b9
+    TargetNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+  - BaseNodeGuid: 406bb9de-46e3-4a3c-b4d1-73ec9955b511
+    TargetNodeGuid: d2909f62-b8b3-426d-9ad6-fae0015d792f
+  - BaseNodeGuid: 6cf1c2e5-2e0a-4f9d-a17f-122c46553aef
+    TargetNodeGuid: d2909f62-b8b3-426d-9ad6-fae0015d792f
+  - BaseNodeGuid: 1544c64e-9686-4c05-b284-1041ccef7903
+    TargetNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+  - BaseNodeGuid: 719276ef-bbc0-4981-b4dd-f99c121c588e
+    TargetNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+  - BaseNodeGuid: 8fae5b53-6eef-4511-9640-f9b27dfec466
+    TargetNodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+  - BaseNodeGuid: 1193aa1c-a68f-453e-90b9-011248d279de
+    TargetNodeGuid: e86a42b6-6f2a-408b-a2a2-d6bd87a509b9
+  - BaseNodeGuid: 520eca62-206a-4365-981c-759bb086339c
+    TargetNodeGuid: f9d0e9af-eb65-47ed-b65f-d7f20d9ef1c5
+  - BaseNodeGuid: 520eca62-206a-4365-981c-759bb086339c
+    TargetNodeGuid: 406bb9de-46e3-4a3c-b4d1-73ec9955b511
+  - BaseNodeGuid: eb2c7375-f735-4d9f-ae41-f4703ebf0252
+    TargetNodeGuid: 1193aa1c-a68f-453e-90b9-011248d279de
+  - BaseNodeGuid: eb2c7375-f735-4d9f-ae41-f4703ebf0252
+    TargetNodeGuid: cfd016c0-c4db-448c-9176-092ddf6ace15
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: 8fae5b53-6eef-4511-9640-f9b27dfec466
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: 1544c64e-9686-4c05-b284-1041ccef7903
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: 719276ef-bbc0-4981-b4dd-f99c121c588e
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: eb2c7375-f735-4d9f-ae41-f4703ebf0252
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: b2db910c-7e46-4f3c-a91f-c38d6a4fae26
+  - BaseNodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    TargetNodeGuid: 8fae5b53-6eef-4511-9640-f9b27dfec466
+  StartNodeDatas:
+  - NodeGuid: ca51cde5-6e99-46c9-a0b7-daf7e4b018ab
+    Position: {x: 1, y: 207}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: f9d0e9af-eb65-47ed-b65f-d7f20d9ef1c5
+    Position: {x: 401, y: 295}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: Witaj w moim sklepie Graczu
+    Duration: 2.5
+  - NodeGuid: c7cd328b-ed87-4341-af82-5d408776b313
+    Position: {x: 620, y: 295}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: "Mo\u017Cesz u mnie kupi\u0107 przedmioty."
+    Duration: 2
+  - NodeGuid: d2909f62-b8b3-426d-9ad6-fae0015d792f
+    Position: {x: 1167, y: 55}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: Co chcesz kupic?
+    Duration: 1
+  - NodeGuid: dbadba2e-8ae3-42d7-94b6-5b340b6f1906
+    Position: {x: 1167, y: 313}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: Co chcesz kupic?
+    Duration: 0.00000001
+  - NodeGuid: cfd016c0-c4db-448c-9176-092ddf6ace15
+    Position: {x: 2159, y: 643}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: "Niestety brakuje ci niekt\xF3rych sk\u0142adnik\xF3w"
+    Duration: 2.5
+  - NodeGuid: e86a42b6-6f2a-408b-a2a2-d6bd87a509b9
+    Position: {x: 2477, y: 55}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: Gratulacje Stworzenia Piekielnej Gwiazdy
+    Duration: 3
+  - NodeGuid: 406bb9de-46e3-4a3c-b4d1-73ec9955b511
+    Position: {x: 401, y: 55}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 
+    - languageEnum: 1
+      LanguageGenericType: WItaj ponownie w moim sklepie
+    Duration: 2.5
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas:
+  - NodeGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+    Position: {x: 1384, y: 55}
+    DialogueNodePorts:
+    - PortGuid: bdf1d32e-683c-4140-a79f-a6ad64968aa0
+      InputGuid: 8fae5b53-6eef-4511-9640-f9b27dfec466
+      OutputGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Choice 03
+      - languageEnum: 1
+        LanguageGenericType: Kup 2x Crystal [200<sprite name="Gold">]
+      ChoiceType: 0
+      Condition:
+        ValueName: DEMO_GOLD
+        Operator: '>='
+        Value: 200
+    - PortGuid: c671c559-7562-45ec-a367-ce39828a13d5
+      InputGuid: 1544c64e-9686-4c05-b284-1041ccef7903
+      OutputGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Choice 04
+      - languageEnum: 1
+        LanguageGenericType: Kup 4x Gem [500<sprite name="Gold">]
+      ChoiceType: 0
+      Condition:
+        ValueName: DEMO_GOLD
+        Operator: '>='
+        Value: 500
+    - PortGuid: 56349d49-656f-4c3b-9558-69af02833c21
+      InputGuid: 719276ef-bbc0-4981-b4dd-f99c121c588e
+      OutputGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Choice 05
+      - languageEnum: 1
+        LanguageGenericType: Kup 8x Metal [100<sprite name="Gold">]
+      ChoiceType: 0
+      Condition:
+        ValueName: DEMO_GOLD
+        Operator: '>='
+        Value: 100
+    - PortGuid: 41f0d6f5-c838-48f5-b81f-9cb765711df3
+      InputGuid: eb2c7375-f735-4d9f-ae41-f4703ebf0252
+      OutputGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Choice 06
+      - languageEnum: 1
+        LanguageGenericType: "Stw\xF3rz Hellish Star [16x<sprite name=\"Crystal\">
+          16x<sprite name=\"Gem\"> 16x<sprite name=\"Metal\">]"
+      ChoiceType: 1
+      Condition:
+        ValueName: Always True
+        Operator: 
+        Value: 
+    - PortGuid: d65f4ae1-47b9-4268-9833-6648e17bf8d5
+      InputGuid: b2db910c-7e46-4f3c-a91f-c38d6a4fae26
+      OutputGuid: 564335ef-1bf7-4e6e-a555-4574ad062db8
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Choice 06
+      - languageEnum: 1
+        LanguageGenericType: "Wyjd\u017A ze sklepu"
+      ChoiceType: 0
+      Condition:
+        ValueName: Always True
+        Operator: 
+        Value: 
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: b2db910c-7e46-4f3c-a91f-c38d6a4fae26
+    Position: {x: 1820, y: 999}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas:
+  - NodeGuid: 6cf1c2e5-2e0a-4f9d-a17f-122c46553aef
+    Position: {x: 840, y: 295}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: 4f4133306f3de7b4baf80ab0900981f2, type: 2}
+  - NodeGuid: 1544c64e-9686-4c05-b284-1041ccef7903
+    Position: {x: 1820, y: 55}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: 8dce0e3f6eed5584b80fbb45f2566eb7, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: 09f514882a8c53c40ad2759a1b0b647e, type: 2}
+  - NodeGuid: 719276ef-bbc0-4981-b4dd-f99c121c588e
+    Position: {x: 1820, y: 334}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: b5407072c5720a541a589e685469540e, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: 278dffeb08cb8c84297020d7b4abc210, type: 2}
+  - NodeGuid: 8fae5b53-6eef-4511-9640-f9b27dfec466
+    Position: {x: 1820, y: -224}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: 7458819622a94ac429995446f33b682d, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: 6a073a97bf57bd3468c6cebb6ccc9067, type: 2}
+  - NodeGuid: 1193aa1c-a68f-453e-90b9-011248d279de
+    Position: {x: 2158, y: 55}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: 76ecf1df75c6fef40a6e353a190a4461, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: 77b5d9be68f5cfb4c826fbb3882c45ae, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: ca292d24840de984ea44e0d02d875b45, type: 2}
+    - DialogueEventSO: {fileID: 11400000, guid: 16c2566905c402a47823fc395efcab27, type: 2}
+  RandomNodeDatas: []
+  IfNodeDatas:
+  - NodeGuid: 520eca62-206a-4365-981c-759bb086339c
+    Position: {x: 173, y: 207}
+    ValueName: Demo/AdvanceNodes/Unlocked
+    Operations: 0
+    OperationValue: 
+    TrueGUID: f9d0e9af-eb65-47ed-b65f-d7f20d9ef1c5
+    FalseGUID: 406bb9de-46e3-4a3c-b4d1-73ec9955b511
+  AdvancedIFNodeDatas:
+  - NodeGuid: eb2c7375-f735-4d9f-ae41-f4703ebf0252
+    Position: {x: 1820, y: 622}
+    TrueGUID: 1193aa1c-a68f-453e-90b9-011248d279de
+    FalseGUID: cfd016c0-c4db-448c-9176-092ddf6ace15
+    TrueWhenAllCondition: 1
+    Conditions:
+    - PortGuid: a6ba6039-09ab-40d5-bf1c-ab59d17e5bb4
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: Demo/AdvanceNodes/Gem
+        Operator: '>='
+        Value: 16
+    - PortGuid: a5a4561f-5973-4247-a0b5-5ea07566a62a
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: Demo/AdvanceNodes/Crystal
+        Operator: '>='
+        Value: 16
+    - PortGuid: f02f24d8-b9ea-435b-8c76-39c9a04d54ff
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: Demo/AdvanceNodes/Metal
+        Operator: '>='
+        Value: 16
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

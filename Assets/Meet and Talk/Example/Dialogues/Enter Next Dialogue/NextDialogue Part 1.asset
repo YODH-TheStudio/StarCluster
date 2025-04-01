@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: NextDialogue Part 1
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 3660cc25-dce8-4913-877f-8ac1ad933b6a
+    TargetNodeGuid: 1216322b-b38f-409d-92c8-f34924265fc4
+  - BaseNodeGuid: 1216322b-b38f-409d-92c8-f34924265fc4
+    TargetNodeGuid: 0e475889-f3fe-4597-8812-165bd395fa93
+  - BaseNodeGuid: 0e475889-f3fe-4597-8812-165bd395fa93
+    TargetNodeGuid: 858976ec-aa59-42ab-8a13-75bf3bb68a00
+  StartNodeDatas:
+  - NodeGuid: 3660cc25-dce8-4913-877f-8ac1ad933b6a
+    Position: {x: 700, y: 298}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 1216322b-b38f-409d-92c8-f34924265fc4
+    Position: {x: 886, y: 298}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: From now on, you can move on to the next dialogue after
+        finishing the current one
+    - languageEnum: 1
+      LanguageGenericType: "Od teraz mo\u017Cesz przej\u015B\u0107 do nast\u0119pnego
+        dialogu po zako\u0144czeniu aktualnego"
+    Duration: 3
+  - NodeGuid: 0e475889-f3fe-4597-8812-165bd395fa93
+    Position: {x: 1106, y: 298}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Here is Dialogue 1
+    - languageEnum: 1
+      LanguageGenericType: Oto Dialog 1
+    Duration: 10
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 858976ec-aa59-42ab-8a13-75bf3bb68a00
+    Position: {x: 1324, y: 298}
+    EndNodeType: 4
+    Dialogue: {fileID: 11400000, guid: 50581cc86d40e2b48bbfcd97749722a7, type: 2}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

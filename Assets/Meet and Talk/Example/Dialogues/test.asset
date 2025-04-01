@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: test
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 1
+  MaxChoiceOptionPerNode: 89
+  NodeLinkDatas: []
+  StartNodeDatas: []
+  DialogueNodeDatas:
+  - NodeGuid: aa0195ff-a128-4108-9b2d-d854558c4f79
+    Position: {x: 300.80002, y: 70.399994}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: The cat jumped onto the windowsill and stared outside.
+    - languageEnum: 1
+      LanguageGenericType: "Kot wskoczy\u0142 na parapet i wyjrza\u0142 na zewn\u0105trz."
+    Duration: 10
+  DialogueChoiceNodeDatas:
+  - NodeGuid: 671dad45-27fe-445f-9165-c6859228aa99
+    Position: {x: 500.80002, y: 69.600006}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: I forgot my umbrella, and now I'm soaking wet.
+    - languageEnum: 1
+      LanguageGenericType: "Zapomnia\u0142em parasola i teraz jestem przemoczony."
+    Duration: 5
+    DialogueNodePorts:
+    - PortGuid: 5f859d7f-374d-45a8-b8c6-9e3b6f2be508
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: She loves reading mystery novels before bed.
+      - languageEnum: 1
+        LanguageGenericType: "Uwielbia czyta\u0107 tajemnicze powie\u015Bci przed
+          snem."
+    - PortGuid: 46c715d1-a5e7-4cba-8893-24d9cfec3d56
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: The phone rang, but nobody answered.
+      - languageEnum: 1
+        LanguageGenericType: "Zadzwoni\u0142 telefon, ale nikt nie odebra\u0142."
+  AdvancedChoiceNodeDatas:
+  - NodeGuid: 0c4688a0-bee3-4acc-b936-543670f3e590
+    Position: {x: 300.80002, y: 403.19998}
+    DialogueNodePorts:
+    - PortGuid: cde1a0e0-330a-48f2-ace5-c06efd0c8398
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: The sun was setting behind the mountains.
+      - languageEnum: 1
+        LanguageGenericType: "S\u0142o\u0144ce zachodzi\u0142o za g\xF3rami."
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    - PortGuid: 1159801a-300f-4635-9b9b-98c96417a756
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: I need to finish this report by tomorrow.
+      - languageEnum: 1
+        LanguageGenericType: "Musz\u0119 sko\u0144czy\u0107 ten raport do jutra."
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+  TimerChoiceNodeDatas:
+  - NodeGuid: 136de9c9-a71a-4549-ad42-02d43eb72d39
+    Position: {x: 800.8, y: 70.399994}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: A strange noise came from the basement last night.
+    - languageEnum: 1
+      LanguageGenericType: "Zesz\u0142ej nocy z piwnicy dochodzi\u0142 dziwny ha\u0142as."
+    Duration: 5
+    ShowTimer: 1
+    time: 10
+    DialogueNodePorts:
+    - PortGuid: 33bb36b3-f151-40cf-89bb-370049927bc2
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: He always drinks his coffee without sugar.
+      - languageEnum: 1
+        LanguageGenericType: "Zawsze pije kaw\u0119 bez cukru."
+    - PortGuid: 81ca3ce7-13cd-49c5-9126-f2267ccc0487
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: They traveled to Japan for their honeymoon.
+      - languageEnum: 1
+        LanguageGenericType: "W podr\xF3\u017C po\u015Blubn\u0105 wybrali si\u0119
+          do Japonii."
+  AdvancedTimeChoiceNodeDatas:
+  - NodeGuid: 865ab54f-6a77-4bea-8a5e-9bff8e69faff
+    Position: {x: 700.8, y: 403.19998}
+    DialogueNodePorts:
+    - PortGuid: 35677b05-baf1-41c6-b37d-857b5bc90816
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: The bakery on the corner sells the best croissants.
+      - languageEnum: 1
+        LanguageGenericType: Piekarnia na rogu sprzedaje najlepsze rogaliki.
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    - PortGuid: ea2d9b14-662a-4f87-b414-39d1db046c8f
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: She found an old diary hidden in the attic.
+      - languageEnum: 1
+        LanguageGenericType: "Znalaz\u0142a stary pami\u0119tnik ukryty na strychu."
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    ShowTimer: 1
+    time: 10
+  EndNodeDatas: []
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []
