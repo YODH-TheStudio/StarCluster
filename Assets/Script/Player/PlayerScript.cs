@@ -45,6 +45,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         if (context.started)
         {
+
             if (IsGrabbing())
             {
                 SetGrabbing(false);
@@ -61,6 +62,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
                 {
                     _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
+                    SoundManager.PlaySound(SoundType.None,1);
                 }
 
                 return;
