@@ -26,6 +26,38 @@ MonoBehaviour:
     m_Localized: "Param\xE8tres"
     m_Metadata:
       m_Items: []
+  - m_Id: 434971340251136
+    m_Localized: Quitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435027137077248
+    m_Localized: Charger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435145718439936
+    m_Localized: Continuer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435713501372416
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435804698124288
+    m_Localized: Volume de la musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435942510370816
+    m_Localized: Volume principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436113377927168
+    m_Localized: Volume des effets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436185981329408
+    m_Localized: Vibrations
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -26,6 +26,38 @@ MonoBehaviour:
     m_Localized: Settings
     m_Metadata:
       m_Items: []
+  - m_Id: 434971340251136
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435027137077248
+    m_Localized: Load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435145718439936
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435713501372416
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435804698124288
+    m_Localized: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435942510370816
+    m_Localized: Master Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436113377927168
+    m_Localized: Effects Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436185981329408
+    m_Localized: Vibration
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

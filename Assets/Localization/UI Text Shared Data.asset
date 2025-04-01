@@ -23,6 +23,38 @@ MonoBehaviour:
     m_Key: SETTINGS_BTN
     m_Metadata:
       m_Items: []
+  - m_Id: 434971340251136
+    m_Key: QUIT_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435027137077248
+    m_Key: LOAD_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435145718439936
+    m_Key: CONTINUE_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435713501372416
+    m_Key: LANG_DRPDWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435804698124288
+    m_Key: MUSIC__VOLUME_SLIDER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 435942510370816
+    m_Key: MASTER__VOLUME_SLIDER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436113377927168
+    m_Key: SFX__VOLUME_SLIDER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436185981329408
+    m_Key: VIBRATIONS_TOGGLE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
