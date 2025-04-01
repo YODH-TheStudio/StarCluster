@@ -14,7 +14,7 @@ public class MéropeFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameManager.Instance.GetPlayer();//GameObject.FindGameObjectWithTag("Player"); 
+        _player = GameManager.Instance.GetPlayer();
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -31,10 +31,11 @@ public class MéropeFollow : MonoBehaviour
             float dist = (_player.transform.position - transform.position).magnitude;
             if(dist > maxDistance)
             {
+                // If too far from the player, move towards them
                 transform.position += direction.normalized * speed * dist/5 * Time.deltaTime;
             } else if (dist < minDistance)
             {
-                // If too close to the player, move away from the player
+                // If too close to the player, move away
                 transform.position -= direction.normalized * speed * Time.deltaTime;
             }
         }
@@ -45,7 +46,7 @@ public class MéropeFollow : MonoBehaviour
         
         // Move up and down
         Vector3 newPosition = transform.position;
-        newPosition.y = Mathf.Sin(Time.time * speed) * floatSpeed + floatHeight; // Adjust the amplitude and offset as needed
+        newPosition.y = Mathf.Sin(Time.time * speed) * floatSpeed + floatHeight;
         transform.position = newPosition;
     }
 }
