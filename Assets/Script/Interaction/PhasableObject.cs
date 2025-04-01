@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Serialization;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PhasableObject : Interactable
@@ -9,18 +10,18 @@ public class PhasableObject : Interactable
     public PhaseState currentPhase = PhaseState.Solid;
 
     // Animation
-    public Transform _objectBasePosition;
-    [SerializeField] private Vector3 startOffset = Vector3.zero;     // Offset pour la position de départ
-    [SerializeField] private Vector3 endOffset = Vector3.zero;       // Offset pour la position d'arrivée
+    public Transform objectBasePosition;
+    [SerializeField] private Vector3 _startOffset = Vector3.zero;     // Offset pour la position de dÃ©part
+    [SerializeField] private Vector3 _endOffset = Vector3.zero;       // Offset pour la position d'arrivÃ©e
     public float phaseDuration = 1.0f;
 
     // Base component
-    private Collider objectCollider;
+    private Collider _objectCollider;
 
     private void Awake()
     {
-        objectCollider = GetComponent<Collider>();
-        Debug.Log("Awake called. Collider found: " + (objectCollider != null));
+        _objectCollider = GetComponent<Collider>();
+        Debug.Log("Awake called. Collider found: " + (_objectCollider != null));
     }
 
     public override void Interact()
@@ -48,16 +49,16 @@ public class PhasableObject : Interactable
         Debug.Log("New phase: " + currentPhase);
 
         // Switch enter/exit start/end position
-        Vector3 start = (currentPhase == PhaseState.Solid) ? _objectBasePosition.position + endOffset : _objectBasePosition.position + startOffset;
-        Vector3 end = (currentPhase == PhaseState.Solid) ? _objectBasePosition.position + startOffset : _objectBasePosition.position + endOffset;
+        Vector3 start = (currentPhase == PhaseState.Solid) ? objectBasePosition.position + _endOffset : objectBasePosition.position + _startOffset;
+        Vector3 end = (currentPhase == PhaseState.Solid) ? objectBasePosition.position + _startOffset : objectBasePosition.position + _endOffset;
 
         Debug.Log("Start position: " + start);
         Debug.Log("End position: " + end);
 
         // Disable collision during phase only
-        if (objectCollider != null)
+        if (_objectCollider != null)
         {
-            objectCollider.enabled = false;
+            _objectCollider.enabled = false;
             Debug.Log("Collider disabled.");
         }
         else
@@ -93,9 +94,9 @@ public class PhasableObject : Interactable
         Debug.Log("Final position: " + _userTransform.position);
 
         // Reactivate the collider
-        if (objectCollider != null)
+        if (_objectCollider != null)
         {
-            objectCollider.enabled = true;
+            _objectCollider.enabled = true;
             Debug.Log("Collider re-enabled.");
         }
 
@@ -107,14 +108,14 @@ public class PhasableObject : Interactable
 
     private void OnDrawGizmos()
     {
-        if (_objectBasePosition != null)
+        if (objectBasePosition != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(_objectBasePosition.position + startOffset, 0.5f);
-            Gizmos.DrawSphere(_objectBasePosition.position + endOffset, 0.5f);
+            Gizmos.DrawSphere(objectBasePosition.position + _startOffset, 0.5f);
+            Gizmos.DrawSphere(objectBasePosition.position + _endOffset, 0.5f);
 
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(_objectBasePosition.position + startOffset, _objectBasePosition.position + endOffset);
+            Gizmos.DrawLine(objectBasePosition.position + _startOffset, objectBasePosition.position + _endOffset);
             Debug.Log("Gizmos drawn: Start and End positions with offsets.");
         }
         else
