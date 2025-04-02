@@ -188,25 +188,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 322467133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &67255945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67255943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 667f80bb95bb2054f86ec1ab2cbdaf1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundList:
-  - _name: None
-    _sounds:
-    - {fileID: 8300000, guid: 60b0013e69900ba47b9388c797a4930f, type: 3}
-  - _name: Woaw
-    _sounds: []
---- !u!82 &67255946
+--- !u!82 &67255945
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,7 +206,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 0
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -302,6 +284,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &67255946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67255943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5bf6f39f818ff44dbc0151090c06753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFXFolderPath: SFX
+  musicFolderPath: Music
+  ambianceFolderPath: Ambiance
+  _musicMixerGroup: {fileID: 0}
+  _ambianceMixerGroup: {fileID: 0}
+  _startingMusic: {fileID: 0}
+  _startingAmbianceSound: {fileID: 0}
+  _fadeInDuration: 0
+  _fadeOutDuration: 0
+  soundFXObject: {fileID: 0}
 --- !u!224 &76751849 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18,

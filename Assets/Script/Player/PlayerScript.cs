@@ -62,7 +62,8 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
                 {
                     _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
-                    SoundManager.PlaySound(SoundType.None,1);
+                    //SoundManager.PlaySound(SoundType.None,1);
+                    GameManager.Instance._soundSystem.PlaySoundFXClipByKey("SFX_violin"); 
                 }
 
                 return;

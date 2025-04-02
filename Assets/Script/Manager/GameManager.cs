@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     
     public PlayerScript _player {get; private set;}
-    
+    public SoundSystem _soundSystem { get; private set; }
+
     // Singleton
     private static GameManager _instance;
     
@@ -37,11 +38,17 @@ public class GameManager : MonoBehaviour
         {
             _player = FindObjectOfType<PlayerScript>();
         }
+
+        if (_soundSystem == null)
+        {
+            _soundSystem = FindObjectOfType<SoundSystem>();
+        }
     }
 
     void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
+        
     }
     
     // Update is called once per frame

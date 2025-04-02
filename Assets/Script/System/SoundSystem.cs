@@ -46,7 +46,7 @@ public class SoundSystem : MonoBehaviour
 
     [SerializeField] private AudioSource soundFXObject;
 
-    private GameObject _player;
+    private PlayerScript _player => GameManager.Instance._player;
 
 
 
@@ -62,30 +62,28 @@ public class SoundSystem : MonoBehaviour
     //{
     //    GameManager.Instance.OnChangeSceneEvent += SetAudioScene;
     //}
+    private void SetAudioScene()
+    {
+        SetAudioListener(Camera.main.GetComponent<AudioListener>());
+    }
 
-    //private void SetAudioScene()
-    //{
-    //    SetAudioListener(Helpers.Camera.GetComponent<AudioListener>());
-    //}
-    //protected override void Awake()
-    //{
-    //    base.Awake();
+    protected  void Awake()
+    {
+        //base.Awake();
 
-    //    GenerateKeys();
-    //    _audioSources = new List<AudioSource>();
-    //    _currentMusicSource = null;
-    //    _currentAmbianceSources = new List<AudioSource>();
-    //    _numberOfChannels = GetComponents<AudioSource>().Length;
+        GenerateKeys();
+        _audioSources = new List<AudioSource>();
+        _currentMusicSource = null;
+        _currentAmbianceSources = new List<AudioSource>();
+        _numberOfChannels = GetComponents<AudioSource>().Length;
 
-    //    AudioSource[] attachedAudioSources = GetComponents<AudioSource>();
+        AudioSource[] attachedAudioSources = GetComponents<AudioSource>();
 
-    //    for (int i = 0; i < _numberOfChannels; i++)
-    //    {
-    //        _audioSources.Add(attachedAudioSources[i]);
-    //    }
-
-    //    _player = GameObject.FindGameObjectWithTag("Player");
-    //}
+        for (int i = 0; i < _numberOfChannels; i++)
+        {
+            _audioSources.Add(attachedAudioSources[i]);
+        }
+    }
 
     private void GenerateKeys()
     {
@@ -226,10 +224,6 @@ public class SoundSystem : MonoBehaviour
         _audioListener = audioListener;
     }
 
-    public void SetPlayer(GameObject player)
-    {
-        _player = player;
-    }
 
     private AudioSource GetAvailableAudioSource()
     {
@@ -359,6 +353,7 @@ public class SoundSystem : MonoBehaviour
         var audioClip = GetSFXByKey(key);
         if (audioClip != null)
         {
+            Debug.Log($"Playing sound: {key}");
             PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
