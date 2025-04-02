@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    
-    public PlayerScript _player {get; private set;}
+
+    private PlayerScript _player;
     
     // Singleton
     private static GameManager _instance;
