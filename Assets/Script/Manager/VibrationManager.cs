@@ -5,19 +5,10 @@ using UnityEngine;
 
 public class VibrationManager : MonoBehaviour
 {
-    enum VibrationType
-    {
-        Light,
-        Medium,
-        Heavy
-    }
-
-    VibrationType vibrationType = VibrationType.Light;
-
     // Start is called before the first frame update
     void Start()
     {
-        Handheld.Vibrate();
+
     }
 
     // Update is called once per frame
@@ -26,28 +17,7 @@ public class VibrationManager : MonoBehaviour
         
     }
 
-    public void SetVibrationType(int type)
-    {
-        vibrationType = (VibrationType)type;
-
-        if (vibrationType == VibrationType.Light)
-        {
-            Debug.Log("Light");
-            AndroidVibrate(1f, 0.1f);
-        }
-        else if (vibrationType == VibrationType.Medium)
-        {
-            Debug.Log("Medium");
-            AndroidVibrate(100f, 0.25f);
-        }
-        else if (vibrationType == VibrationType.Heavy)
-        {
-            Debug.Log("Heavy");
-            AndroidVibrate(255f, 0.5f);
-        }
-    }
-
-    private void AndroidVibrate(float strength, float duration)
+    public void Vibrate(float strength, float duration)
     {
 
         if (Application.platform == RuntimePlatform.Android)

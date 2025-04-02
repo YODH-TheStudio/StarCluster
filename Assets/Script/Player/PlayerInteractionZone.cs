@@ -12,10 +12,13 @@ public class PlayerInteractionZone : MonoBehaviour
 
     private PlayerScript _player = null;
 
+    private VibrationManager _vibrationManager = null;
+
     // Start is called before the first frame update
     void Start()
     {
         _player = GameManager.Instance.GetPlayer();
+        _vibrationManager = GameManager.Instance.GetVibrationManager();
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class PlayerInteractionZone : MonoBehaviour
         {
             if(hit.transform.gameObject.tag == "Interactable")
             {
+                _vibrationManager.Vibrate(100f, 0.2f); 
                 _interactionButton.SetActive(true);
             }
             else
