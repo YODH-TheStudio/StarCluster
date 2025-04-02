@@ -538,6 +538,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1867283241}
+  - {fileID: 721359889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521115253
@@ -1259,7 +1260,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1060942633}
+    m_TransformParent: {fileID: 506432311}
     m_Modifications:
     - target: {fileID: 394747373939702018, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
@@ -1274,17 +1275,17 @@ PrefabInstance:
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.22762
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 12.008966
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -23.174006
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
@@ -1294,17 +1295,17 @@ PrefabInstance:
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3725379852982773053, guid: 519a7a2455505124ba913f8e9fad7cff,
         type: 3}
@@ -1892,7 +1893,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1694835723}
-  - {fileID: 721359889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1130800100
