@@ -10,7 +10,7 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        Debug.Log($"{gameObject.name} a été interagi.");
+        //Debug.Log($"{gameObject.name} a été interagi.");
     }
 
     //
@@ -21,6 +21,5 @@ public abstract class Interactable : MonoBehaviour
     public void SetUserInteractionNormal(Vector3 interactionNormal)
     {
         _userInteractionNormal = interactionNormal;
-        Debug.Log($"Le Transform de l'utilisateur a été défini sur : {_userTransform.position}");
     }
 }
