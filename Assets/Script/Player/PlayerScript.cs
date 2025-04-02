@@ -33,7 +33,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     // Allow the player to move, Is called by the character controler component in player
     public void OnMove(Vector2 readVector)
     {
-        // Calculated the movement of the player with the 45° change due to isometric view
+        // Calculated the movement of the player with the 45ï¿½ change due to isometric view
         Vector3 position = new Vector3(readVector.x, 0, readVector.y);
         Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
 
@@ -114,5 +114,10 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     public void SetObjectGrabbed(GameObject objectGrabbed)
     {
         _objectGrabbed = objectGrabbed;
+    }
+
+    public bool IsMoving()
+    {
+        return _direction != Vector3.zero;
     }
 }

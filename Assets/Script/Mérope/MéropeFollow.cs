@@ -22,7 +22,7 @@ public class MéropeFollow : MonoBehaviour
     
     private List<Vector3> _path;
 
-    private Transform companionAnchor;
+    private Transform _companionAnchor;
     
     // Start is called before the first frame update
     void Start()
@@ -30,14 +30,13 @@ public class MéropeFollow : MonoBehaviour
         _player = GameManager.Instance.GetPlayer();
         _agent = GetComponent<NavMeshAgent>();
         
-        companionAnchor = _player.transform.Find("CompanionAnchor");
-        Debug.Log("CompanionAnchor: " + companionAnchor);
+        _companionAnchor = _player.transform.Find("CompanionAnchor");
         
         _path = new List<Vector3>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         // Update the offset
@@ -47,7 +46,7 @@ public class MéropeFollow : MonoBehaviour
         // follow the player
         if (_player != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, companionAnchor.position /*+ currentOffset*/, ref velocity, floatCatchupSpeed);
+            transform.position = Vector3.SmoothDamp(transform.position, _companionAnchor.position /*+ currentOffset*/, ref velocity, floatCatchupSpeed);
  
             // if ((transform.position - _player.transform.position).magnitude < minDistance)
             // {
