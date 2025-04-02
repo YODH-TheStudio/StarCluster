@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using static PlayerScript;
 
 public class PhasableObject : Interactable
 {
@@ -53,9 +54,7 @@ public class PhasableObject : Interactable
             return;
         }
 
-
-
-        // Switch state 
+        // Switch state
         _currentPhase = (_currentPhase == PhaseState.Solid) ? PhaseState.Phase : PhaseState.Solid;
 
         // Define current start and end positions
@@ -83,46 +82,25 @@ public class PhasableObject : Interactable
     private IEnumerator PhaseAnimation()
     {
         PlayerScript playerScript = _userTransform.GetComponent<PlayerScript>();
-        playerScript.SetIsAnimating(true);
 
-        float elapsed = 0f;
+        playerScript.MoveTo(_currentStartPosition, _phaseDuration);
+        yield return new WaitForSeconds(_phaseDuration);
 
-        // current to start position
-        Vector3 currentPosition = _userTransform.position;
-        while (elapsed < _phaseDuration)
-        {
-            _userTransform.position = Vector3.Lerp(currentPosition, _currentStartPosition, elapsed / _phaseDuration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
 
-        _userTransform.position = _currentStartPosition;
+        playerScript.MoveTo(_currentEndPosition, _phaseDuration);
+        yield return new WaitForSeconds(_phaseDuration);
 
-        // start to end position
-        elapsed = 0f;
-        while (elapsed < _phaseDuration)
-        {
-            _userTransform.position = Vector3.Lerp(_currentStartPosition, _currentEndPosition, elapsed / _phaseDuration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
 
-        _userTransform.position = _currentEndPosition;
-
-        // stop anim -> active collider
         if (_objectCollider != null)
         {
             _objectCollider.enabled = true;
         }
-        playerScript.SetIsAnimating(false);
     }
 
     private void Update()
     {
         if (_userTransform == null)
             return;
-
-
 
         _lineRenderer.SetPosition(0, _userTransform.position); 
         _lineRenderer.SetPosition(1, _currentStartPosition); 
@@ -149,4 +127,5 @@ public class PhasableObject : Interactable
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(_objectBasePosition.position + _startOffset, _objectBasePosition.position + _endOffset);
     }
+
 }

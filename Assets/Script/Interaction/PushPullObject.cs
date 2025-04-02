@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PushPullObject : Interactable
 {
@@ -15,7 +16,18 @@ public class PushPullObject : Interactable
     private void TogglePushPull()
     {
         _isActive = !_isActive;
-        _userTransform.GetComponent<PlayerScript>().TogglePushingPulling();
+        PlayerScript playerScriptComponent = _userTransform.GetComponent<PlayerScript>();
+        playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
+
+        if (_isActive)
+        {
+            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
+        }
+        else
+        {
+
+            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+        }
     }
 
     private void Update()

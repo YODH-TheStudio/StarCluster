@@ -1,28 +1,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
-    // Player Controller Variables 
-    [SerializeField] private float _speed = 250.0f;
-    [SerializeField] private float _raycastDistance = 1.25f;
-    [SerializeField] private float _turnSpeed = 360.0f;
-
+    // Player Controler Variable 
+    [SerializeField]
+    private float _speed = 250.0f;
+    [SerializeField]
+    private float _raycastDistance = 1.25f;
+    [SerializeField]
+    private float _turnSpeed = 360.0f;
     private CharacterController _controller;
     private Vector3 _direction;
 
-    [SerializeField] private InteractionSwitch _interactionSwitch;
+    // Interact
+    private GameObject _currentInteractObject;
 
-    // Grab
-    private bool _isGrabbing = false;
-    private GameObject _objectGrabbed;
+    // Limited Movement
+    public enum MovementLimitType
+    {
+        None,             // No restrict
+        ForwardBackwardNoLook,  // Only forward backward move / No look possible
+        FullRestriction   //
+    }
+    private MovementLimitType _movementLimit = MovementLimitType.None;
+    public MovementLimitType MovementLimit
+    {
+        get { return _movementLimit; }
+        set{ _movementLimit = value; }
+    }
+    public GameObject CurrentInteractObject
+    {
+        get => _currentInteractObject;
+        set => _currentInteractObject = value;
+    }
 
-    // Pushing/Pulling
-    private bool _isPushingPulling = false; // Set by object on interact
-    private Vector3 _lastMoveDirection; // Store normalized player direction each frame
-
-    // Animation Flag
-    private bool isAnimating = false;
+    private Vector3 _lastMoveDirection; // Get normalized player direction each frame
+    public Vector3 GetMoveDirection()
+    {
+        return _lastMoveDirection;
+    }
 
     private void Awake()
     {
@@ -31,31 +49,67 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         playerControls.Player.SetCallbacks(this);
     }
 
+    // Allow the player to move, Is called by the character controler component in player
     public void OnMove(Vector2 readVector)
     {
+        // Calculated the movement of the player with the 45° change due to isometric view
         Vector3 position = new Vector3(readVector.x, 0, readVector.y);
-        _direction = Quaternion.Euler(0, 45f, 0) * position;
-        _lastMoveDirection = _direction.normalized;
+        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
+
+        _direction = isoMatrix.MultiplyPoint3x4(position);
+
+        // store last move position to inform component about user movement direction
+        _lastMoveDirection = _direction.normalized; 
+    }
+    // Rotate the player in the direction he is walking
+    void Look()
+    {
+        // Don't go back to the starting rotation when the player don't move
+        if (_direction != Vector3.zero)
+        {
+            // Calculated the rotation and set it
+            var relative = (transform.position + _direction) - transform.position;
+            var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
+        }  
     }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (MovementLimit != MovementLimitType.FullRestriction)
+        {
+            if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
+            {
+                // Limit movement only on object direction and object inverse direction
+                float forwardMove = _direction.z;
+                _direction = new Vector3(1, 1, 1) * forwardMove;
+            }
+            else
+            {
+                _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+            }
+
+            if (MovementLimit != MovementLimitType.ForwardBackwardNoLook)
+            {
+                Look();
+            }
+        }
+    }
+
+
+    // Allow the player to interact with objetc, Is called by the character controler component in player
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            if (IsGrabbing())
-            {
-                SetGrabbing(false);
-                if (_objectGrabbed != null)
-                {
-                    _objectGrabbed.GetComponent<BoxCollider>().enabled = true;
-                    _objectGrabbed.GetComponent<Rigidbody>().useGravity = true;
-                    _objectGrabbed = null;
-                }
-                return;
-            }
+            // Interact with object
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
 
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _raycastDistance))
             {
+                // Is interactable object
                 Interactable interactable = hit.transform.GetComponent<Interactable>();
                 if (interactable != null)
                 {
@@ -64,77 +118,40 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                     interactable.Interact();
                 }
             }
+
+            return;
         }
     }
 
-    private void Look()
+    // Move the player to the target position in a given duration, with movement restriction
+    public void MoveTo(Vector3 targetPosition, float duration)
     {
-        if (_direction != Vector3.zero)
+        StartCoroutine(MoveToCoroutine(targetPosition, duration));
+    }
+
+    private IEnumerator MoveToCoroutine(Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.position;
+
+        // Restrict player movement during this period
+        MovementLimit = MovementLimitType.FullRestriction;
+
+        while (elapsedTime < duration)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(_direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            // Interpolating position between the initial position and the target position
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+
+            yield return null; // Wait for the next frame
         }
-    }
+        transform.position = targetPosition;
 
-    private void FixedUpdate()
-    {
-        if (!isAnimating)
-        {
-            if (_isPushingPulling)
-            {
-                _direction = new Vector3(1, 1, 1) * _direction.z;
-            }
-            else
-            {
-                _controller.SimpleMove(_direction * _speed * Time.deltaTime);
-            }
-        }
+        // Movement is complete, reset the movement restriction
+        MovementLimit = MovementLimitType.None;
 
-        if (!_isPushingPulling) Look();
-
-        if (IsGrabbing() && _objectGrabbed != null)
-        {
-            _objectGrabbed.transform.position = transform.position + (Vector3.forward * 2);
-        }
-    }
-
-    public bool IsGrabbing()
-    {
-        return _isGrabbing;
-    }
-
-    public void SetGrabbing(bool isGrabbing)
-    {
-        _isGrabbing = isGrabbing;
-    }
-
-    public GameObject GetObjectGrabbed()
-    {
-        return _objectGrabbed;
-    }
-
-    public void SetObjectGrabbed(GameObject objectGrabbed)
-    {
-        _objectGrabbed = objectGrabbed;
-    }
-
-    public void TogglePushingPulling()
-    {
-        _isPushingPulling = !_isPushingPulling;
-    }
-
-    public Vector3 GetMoveDirection()
-    {
-        return _lastMoveDirection;
-    }
-
-    public void SetMoveDirection(Vector3 direction)
-    {
-        _lastMoveDirection = direction;
-    }
-
-    public void SetIsAnimating(bool animating)
-    {
-        isAnimating = animating;
+        Debug.Log("Movement complete!");
     }
 }
