@@ -1,19 +1,25 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Serialization;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using Unity.VisualScripting;
 
 public class PhasableObject : Interactable
 {
     // States
     public enum PhaseState { Solid, Phase }
-    public PhaseState currentPhase = PhaseState.Solid;
+    public PhaseState _currentPhase = PhaseState.Solid;
 
     // Animation
-    public Transform objectBasePosition;
-    [SerializeField] private Vector3 _startOffset = Vector3.zero;     // Offset pour la position de départ
-    [SerializeField] private Vector3 _endOffset = Vector3.zero;       // Offset pour la position d'arrivée
-    public float phaseDuration = 1.0f;
+    public Transform _objectBasePosition;
+    [SerializeField] private Vector3 _startOffset = Vector3.zero;
+    [SerializeField] private Vector3 _endOffset = Vector3.zero;
+    public float _phaseDuration = 1.0f;
+    [SerializeField] private float _phaseRadius = 5.0f; // Restriction radius
+
+    private Vector3 _currentStartPosition;
+    private Vector3 _currentEndPosition;
+
+    // LineRenderer to draw the radius in the game
+    private LineRenderer _lineRenderer;
 
     // Base component
     private Collider _objectCollider;
@@ -21,106 +27,126 @@ public class PhasableObject : Interactable
     private void Awake()
     {
         _objectCollider = GetComponent<Collider>();
-        Debug.Log("Awake called. Collider found: " + (_objectCollider != null));
+        _lineRenderer = gameObject.AddComponent<LineRenderer>();
+
+        _lineRenderer.startWidth = 0.2f; 
+        _lineRenderer.endWidth = 0.2f;
+        _lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        _lineRenderer.startColor = Color.red; 
+        _lineRenderer.endColor = Color.red;
+        _lineRenderer.positionCount = 2; 
+
+        _currentStartPosition = _objectBasePosition.position + _startOffset;
     }
 
     public override void Interact()
     {
-        Debug.Log("Interact called.");
         base.Interact();
         TogglePhase();
     }
 
-    // Toggle phase in enter phase/exit phase
     private void TogglePhase()
     {
-        Debug.Log("TogglePhase called.");
-
         if (_userTransform == null)
         {
             Debug.LogError("_userTransform is null!");
             return;
         }
 
-        Debug.Log("Current phase: " + currentPhase);
+
 
         // Switch state 
-        currentPhase = (currentPhase == PhaseState.Solid) ? PhaseState.Phase : PhaseState.Solid;
-        Debug.Log("New phase: " + currentPhase);
+        _currentPhase = (_currentPhase == PhaseState.Solid) ? PhaseState.Phase : PhaseState.Solid;
 
-        // Switch enter/exit start/end position
-        Vector3 start = (currentPhase == PhaseState.Solid) ? objectBasePosition.position + _endOffset : objectBasePosition.position + _startOffset;
-        Vector3 end = (currentPhase == PhaseState.Solid) ? objectBasePosition.position + _startOffset : objectBasePosition.position + _endOffset;
+        // Define current start and end positions
+        _currentStartPosition = (_currentPhase == PhaseState.Solid) ? _objectBasePosition.position + _endOffset : _objectBasePosition.position + _startOffset;
+        _currentEndPosition = (_currentPhase == PhaseState.Solid) ? _objectBasePosition.position + _startOffset : _objectBasePosition.position + _endOffset;
 
-        Debug.Log("Start position: " + start);
-        Debug.Log("End position: " + end);
+        float distance = Vector3.Distance(_userTransform.position, _currentStartPosition);
 
-        // Disable collision during phase only
+        // Ensure player is within the phase radius
+        if (distance > _phaseRadius)
+        {
+            Debug.Log("Player is out of phase radius. Phase transition denied.");
+            return;
+        }
+
+        // Prepare anim
         if (_objectCollider != null)
         {
             _objectCollider.enabled = false;
-            Debug.Log("Collider disabled.");
-        }
-        else
-        {
-            Debug.LogError("Collider is null!");
         }
 
-        StartCoroutine(PhaseAnimation(start, end));
+        StartCoroutine(PhaseAnimation());
     }
 
-    private IEnumerator PhaseAnimation(Vector3 start, Vector3 end)
+    private IEnumerator PhaseAnimation()
     {
-        Debug.Log("PhaseAnimation started.");
-        Debug.Log("Start position: " + start + ", End position: " + end);
-
- 
-
         PlayerScript playerScript = _userTransform.GetComponent<PlayerScript>();
-        playerScript.SetIsAnimating(true); 
+        playerScript.SetIsAnimating(true);
 
         float elapsed = 0f;
 
-        while (elapsed < phaseDuration)
+        // current to start position
+        Vector3 currentPosition = _userTransform.position;
+        while (elapsed < _phaseDuration)
         {
-            _userTransform.position = Vector3.Lerp(start, end, elapsed / phaseDuration);
-            //Debug.Log("Lerp progress: " + (elapsed / phaseDuration) + " | Current position: " + _userTransform.position);
+            _userTransform.position = Vector3.Lerp(currentPosition, _currentStartPosition, elapsed / _phaseDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // Ensure that the user is correctly positioned at the end
-        //_userTransform.position = end;
-        Debug.Log("Final position: " + _userTransform.position);
+        _userTransform.position = _currentStartPosition;
 
-        // Reactivate the collider
+        // start to end position
+        elapsed = 0f;
+        while (elapsed < _phaseDuration)
+        {
+            _userTransform.position = Vector3.Lerp(_currentStartPosition, _currentEndPosition, elapsed / _phaseDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _userTransform.position = _currentEndPosition;
+
+        // stop anim -> active collider
         if (_objectCollider != null)
         {
             _objectCollider.enabled = true;
-            Debug.Log("Collider re-enabled.");
         }
-
         playerScript.SetIsAnimating(false);
+    }
 
-        Debug.Log("Phase transition complete.");
+    private void Update()
+    {
+        if (_userTransform == null)
+            return;
+
+
+
+        _lineRenderer.SetPosition(0, _userTransform.position); 
+        _lineRenderer.SetPosition(1, _currentStartPosition); 
 
     }
 
     private void OnDrawGizmos()
     {
-        if (objectBasePosition != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(objectBasePosition.position + _startOffset, 0.5f);
-            Gizmos.DrawSphere(objectBasePosition.position + _endOffset, 0.5f);
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(objectBasePosition.position + _startOffset, objectBasePosition.position + _endOffset);
-            Debug.Log("Gizmos drawn: Start and End positions with offsets.");
-        }
-        else
+        if (_objectBasePosition == null)
         {
             Debug.LogError("_objectBasePosition is null in OnDrawGizmos!");
+            return;
         }
+
+        Vector3 currentStartPosition = (_currentPhase == PhaseState.Solid) ? _objectBasePosition.position + _endOffset : _objectBasePosition.position + _startOffset;
+        Vector3 currentEndPosition = (_currentPhase == PhaseState.Solid) ? _objectBasePosition.position + _startOffset : _objectBasePosition.position + _endOffset;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(_objectBasePosition.position + _startOffset, 0.5f);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(_objectBasePosition.position + _endOffset, 0.5f);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(_objectBasePosition.position + _startOffset, _objectBasePosition.position + _endOffset);
     }
 }
