@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,11 +9,7 @@ public class MéropeFollow : MonoBehaviour
 {
     private PlayerScript _player;
     
-    [SerializeField] private float speed = 1.0f;
-    [SerializeField] private float maxDistance = 5.5f;
-    [SerializeField] private float minDistance = 2.5f;
-    [SerializeField] private float floatHeight = 1.5f;
-    [SerializeField] private float floatCatchupSpeed = 0.3f;
+    [SerializeField] private float catchupSpeed = 0.3f;
     [SerializeField] Vector3 maxOffset;
     
     private NavMeshAgent _agent;
@@ -38,30 +35,19 @@ public class MéropeFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        // Update the offset
-        float variance = (float)Math.Sin(Time.time);
-        Vector3 currentOffset = new Vector3(variance * maxOffset.x, variance * maxOffset.y, variance * maxOffset.z);
-        
         // follow the player
         if (_player != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, _companionAnchor.position /*+ currentOffset*/, ref velocity, floatCatchupSpeed);
- 
-            // if ((transform.position - _player.transform.position).magnitude < minDistance)
-            // {
-            //     // If too close to the player, move away
-            //     transform.position -= (transform.position - _player.transform.position).normalized * speed * Time.deltaTime;
-            // }
+            transform.position = Vector3.SmoothDamp(transform.position, _companionAnchor.position, ref velocity, catchupSpeed);
         }
         else
         {
             Debug.LogWarning("Player not found");
         }
-
-        // // Move up and down
-        // Vector3 newPosition = transform.position;
-        // newPosition.y = Mathf.Sin(Time.time * speed) * floatSpeed + floatHeight;
-        // transform.position = newPosition;
+    }
+    
+    public void SetSpeed(float speed)
+    {
+        catchupSpeed = speed;
     }
 }

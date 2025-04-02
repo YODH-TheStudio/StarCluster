@@ -1529,17 +1529,17 @@ PrefabInstance:
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: maxOffset.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: maxOffset.y
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: maxOffset.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -1959,7 +1959,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9198aca4f3da98b45913f4966e8ac4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runPosition: {x: 0, y: 1, z: -1.5}
+  runPosition: {x: 0, y: 1.5, z: -1.5}
+  bounceSpeed: 0.5
+  floatBounce: 0.3
+  companionRunTime: 0.8
+  companionOrbitTime: 3
+  orbitOffset: 1.5
+  orbitRadius: {x: 2.5, y: 3.5}
 --- !u!1 &1238707294
 GameObject:
   m_ObjectHideFlags: 0
