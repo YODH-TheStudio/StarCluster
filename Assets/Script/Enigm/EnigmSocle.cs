@@ -70,11 +70,9 @@ public class EnigmeSocle : MonoBehaviour
             }
         }
 
-        // Vérification de la résolution de l'énigme
         CheckEnigmeResolution();
     }
 
-    // Vérifie si tous les objets sont placés correctement
     private void CheckEnigmeResolution()
     {
         IsSolved = true;
