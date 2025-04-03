@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
@@ -12,16 +13,18 @@ using UnityEngine.UIElements;
 public class ObjectFade: MonoBehaviour
 {
     [SerializeField]
-    private float _fadeSpeed = 0.5f;
+    private float _fadeSpeed = 2f;
 
     [SerializeField]
-    private float _fadeAmount = 0.5f;
+    private float _fadeAmount = 0.25f;
 
     private PlayerScript _player;
     private Camera _mainCamera;
     private float _distanceCamToPlayer;
     private Vector3 _directionCamToPlayer;
-    private List<RaycastHit> _hits;
+
+    private List<GameObject> _hits;
+    private List<GameObject> _toRemove;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +32,8 @@ public class ObjectFade: MonoBehaviour
         _player = GameManager.Instance.GetPlayer();
         _mainCamera = Camera.main;
 
-        _hits = new List<RaycastHit>();
+        _hits = new List<GameObject>();
+        _toRemove = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -44,11 +48,18 @@ public class ObjectFade: MonoBehaviour
             if (hit.transform.gameObject.tag != "Player")
             {
                 SendRaycast();
-                //FadeObject(_hits);
+                FadeObject(_hits);
             }
             else
             {
-                //UnfadeObject(_hits);
+                UnfadeObject(_hits);
+
+                foreach (GameObject obj in _toRemove)
+                {
+                    _hits.Remove(obj);
+                }
+
+                _toRemove.Clear();
             }
         }
     }
@@ -60,46 +71,51 @@ public class ObjectFade: MonoBehaviour
         {
             foreach(RaycastHit hit in hits)
             {
-                _hits.Add(hit);
+                if(hit.transform.gameObject.tag != "Player")
+                {
+                    if (!_hits.Contains(hit.transform.gameObject))
+                    {
+                        _hits.Add(hit.transform.gameObject);
+                    }
+                }
             }
         } 
     }
 
-    private void ResetHits()
+    private void FadeObject(List<GameObject> hits)
     {
-
-    }
-
-    /*
-    private void FadeObject(List<RaycastHit> hits)
-    {
-        foreach (RaycastHit hit in hits)
+        foreach (GameObject hit in hits)
         {
-
-            if (hit.transform.gameObject.tag != "Player")
+            if (hit.tag != "Player")
             {
-                Material hitMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().material;
+                Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
                 ToFadeMode(hitMaterial);
                 hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
-                hit.transform.gameObject.GetComponent<MeshRenderer>().material = hitMaterial;
+                hit.GetComponent<MeshRenderer>().material = hitMaterial;
             }
         }
     }
 
-    private void UnfadeObject(List<RaycastHit> hits)
+    private void UnfadeObject(List<GameObject> hits)
     {
-        foreach (RaycastHit hit in hits)
+        foreach (GameObject hit in hits)
         {
-            if (hit.transform.gameObject.tag != "Player")
+            if (hit.tag != "Player")
             {
-                Material hitMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().material;
+                Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
                 hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));
-                hit.transform.gameObject.GetComponent<MeshRenderer>().material = hitMaterial;
-                //ToOpaqueMode(hitMaterial);
+                hit.GetComponent<MeshRenderer>().material = hitMaterial;
+
+                if (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) >= 0.999f )
+                {
+                    ToOpaqueMode(hitMaterial);
+                    _toRemove.Add(hit);
+                }
             }
         }
     }
-    */
+
+
     private void ToOpaqueMode(Material material)
     {
         material.SetOverrideTag("RenderType", "");
@@ -122,29 +138,5 @@ public class ObjectFade: MonoBehaviour
         material.EnableKeyword("_ALPHABLEND_ON");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-    }
-
-    private IEnumerator CoroutineFadeObject(RaycastHit hit)
-    {
-        Material hitMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().material;
-
-        while (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) > _fadeAmount)
-        {
-            hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
-            hit.transform.gameObject.GetComponent<MeshRenderer>().material = hitMaterial;
-        }
-        yield return null;
-    }
-
-    private IEnumerator CoroutineUnfadeObject(RaycastHit hit)
-    {
-        Material hitMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().material;
-
-        while (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) < 1f)
-        {
-            hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));
-            hit.transform.gameObject.GetComponent<MeshRenderer>().material = hitMaterial;
-        }
-        yield return null;
     }
 }
