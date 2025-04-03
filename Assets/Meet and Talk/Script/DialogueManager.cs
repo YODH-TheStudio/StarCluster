@@ -19,6 +19,7 @@ namespace MeetAndTalk
 
         public UnityEvent StartDialogueEvent;
         public UnityEvent EndDialogueEvent;
+        public bool isSkippeable = true;
 
         // Private Value
         [HideInInspector] public DialogueUIManager dialogueUIManager;
@@ -215,7 +216,7 @@ namespace MeetAndTalk
                     RunNode(nodeData);
                     break;
                 default:
-                    Debug.LogError("!!! NIE PRAWID£OWY TYP DANYCH ZNALAZ£ SIÊ W DIALOGUE CONTAINER !!!");
+                    Debug.LogError("!!! NIE PRAWIDÂ£OWY TYP DANYCH ZNALAZÂ£ SIÃŠ W DIALOGUE CONTAINER !!!");
                     break;
             }
         }
@@ -303,11 +304,12 @@ namespace MeetAndTalk
             // Display Dialogue Text
             dialogueUIManager.DisplayText(_nodeData.Character, _nodeData.TextType.Find(text => text.languageEnum == localizationManager.SelectedLang()).LanguageGenericType);
             dialogueUIManager.SkipButton.SetActive(true);
+            isSkippeable = true;
 
             // Display Portraits 
             dialogueUIManager.SetupPortraits(_nodeData.Character, _nodeData.PortraitPosition, _nodeData.Emotion,
                 _nodeData.SecoundCharacter, _nodeData.SecoundPortraitPosition, _nodeData.SecoundEmotion);
-
+            
             // Doesn't generate buttons
             MakeButtons(new List<DialogueNodePort>());
 
@@ -340,6 +342,7 @@ namespace MeetAndTalk
             // Generate Buttons
             MakeAdvancedButtons(_nodeData, _nodeData.DialogueNodePorts, false);
             dialogueUIManager.SkipButton.SetActive(false);
+            isSkippeable = false;
         }
         private void RunNode(AdvancedTimeChoiceNodeData _nodeData)
         {
@@ -392,6 +395,7 @@ namespace MeetAndTalk
             //else dialogueUIManager.UpdateAvatars(null, null, _nodeData.AvatarType);
 
             dialogueUIManager.SkipButton.SetActive(true);
+            isSkippeable = true;
             MakeButtons(new List<DialogueNodePort>());
 
             tmpSavedChoice = _nodeData;
@@ -475,6 +479,7 @@ namespace MeetAndTalk
             //else dialogueUIManager.UpdateAvatars(null, null, _nodeData.AvatarType);
 
             dialogueUIManager.SkipButton.SetActive(true);
+            isSkippeable = true;
             MakeButtons(new List<DialogueNodePort>());
 
             tmpSavedTimeChoice = _nodeData;
@@ -619,9 +624,11 @@ StopAllTrackedCoroutines();
         void DialogueNode_NextNode() { CheckNodeType(GetNextNode(tmpSavedDialogue)); }
         void ChoiceNode_GenerateChoice() { MakeButtons(tmpSavedChoice.DialogueNodePorts);
             dialogueUIManager.SkipButton.SetActive(false);
+            isSkippeable = false;
         }
         void TimerNode_GenerateChoice() { MakeTimerButtons(tmpSavedTimeChoice.DialogueNodePorts, tmpSavedTimeChoice.Duration, tmpSavedTimeChoice.time);
             dialogueUIManager.SkipButton.SetActive(false);
+            isSkippeable = false;
         }
         void TimerNode_NextNode() { CheckNodeType(GetNextNode(tmpSavedTimeChoice)); }
         void AdvancedTimerNode_NextNode() { CheckNodeType(GetNextNode(tmpSavedAdvancedTimeChoice)); }
@@ -656,7 +663,7 @@ StopAllTrackedCoroutines();
             {
                 float time = 0f;
 
-                // Zmniejsz g³oœnoœæ do zera
+                // Zmniejsz gÂ³oÅ“noÅ“Ã¦ do zera
                 while (time < crossfadeDuration / 2)
                 {
                     if (musicAudioSource.clip == null) { time = 999; }
@@ -665,13 +672,13 @@ StopAllTrackedCoroutines();
                     yield return null;
                 }
 
-                // Podmieñ klip i odtwórz nowy
+                // PodmieÃ± klip i odtwÃ³rz nowy
                 musicAudioSource.clip = nextClip;
                 musicAudioSource.Play();
 
                 time = 0f;
 
-                // Zwiêksz g³oœnoœæ do maksymalnej
+                // ZwiÃªksz gÂ³oÅ“noÅ“Ã¦ do maksymalnej
                 while (time < crossfadeDuration / 2)
                 {
                     if (musicAudioSource.clip == null) { time = 999; }
@@ -680,7 +687,7 @@ StopAllTrackedCoroutines();
                     yield return null;
                 }
 
-                // Upewnij siê, ¿e g³oœnoœæ jest ustawiona na maksymaln¹
+                // Upewnij siÃª, Â¿e gÂ³oÅ“noÅ“Ã¦ jest ustawiona na maksymalnÂ¹
                 musicAudioSource.volume = 1f;
             }
         }

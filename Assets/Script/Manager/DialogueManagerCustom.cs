@@ -2,8 +2,10 @@ using MeetAndTalk;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine;
 using UnityEngine.Events;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public delegate void Notify();
 
@@ -18,25 +20,32 @@ public class DialogueManagerCustom : MonoBehaviour
     public event Notify ProcessSkipDialogue;
 
     public DialogueContainerSO test;
+
+    private bool _isDialogue;
     
     [Header("Script References")]
-    public DialogueUIManager dialogueUIManager;
-    public DialogueManager dialogueManager;
-    public MeetAndTalk.Localization.LocalizationManager localizationManager;
-    
+    [SerializeField]
+    private DialogueUIManager dialogueUIManager;
+    [SerializeField]
+    private DialogueManager dialogueManager;
+    private MeetAndTalk.Localization.LocalizationManager localizationManager;
+
+    private void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         StartDialogue(test);
     }
 
-    // Update is called once per frame
-
-
     public void OnStartDialogue()
     {
         // stateMachine.currentState = StateMachine.State.InDialogue;
-        // isDialogue = true;
+        _isDialogue = true;
     }
 
     public void OnEndDialogue()
@@ -45,7 +54,7 @@ public class DialogueManagerCustom : MonoBehaviour
 
         // dialogueManager.audioSource.Stop();
         // stateMachine.currentState = StateMachine.State.Walking;
-        // isDialogue = false;
+        _isDialogue = false;
         StartProcessEnd();
     }
     
@@ -115,5 +124,22 @@ public class DialogueManagerCustom : MonoBehaviour
     public void bl_ProcessSkipDialogue()
     {
         // GameManager.instance.dialogueManager.SkipDialogue();
+    }
+    
+    private void Touch_OnFingerDown(Finger TouchedFinger)
+    {
+        if (_isDialogue && dialogueManager.isSkippeable)
+        {
+            //if dialogueUIManager.lastTypingTime is less than Time.time + 0.1s then skip the dialogue
+            if (dialogueUIManager.lastTypingTime < Time.time - 0.1f)
+            {
+                StartProcessSkip();
+            }
+            else
+            {
+                dialogueUIManager.SetFullText(dialogueUIManager.fullText);
+                dialogueUIManager.characterIndex = dialogueUIManager.fullText.Length;
+            }
+        }
     }
 }

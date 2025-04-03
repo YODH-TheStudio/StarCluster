@@ -46,8 +46,8 @@ namespace MeetAndTalk
         [HideInInspector] public string prefixText;
         [HideInInspector] public string fullText;
         private string currentText = "";
-        private int characterIndex = 0;
-        private float lastTypingTime;
+        public int characterIndex = 0;
+        public float lastTypingTime { private set; get; }
 
         private List<Button> buttons = new List<Button>();
         private List<TextMeshProUGUI> buttonsTexts = new List<TextMeshProUGUI>();
@@ -181,6 +181,7 @@ namespace MeetAndTalk
             {
                 if (Position != PortraitPosition.None)
                 {
+                    Debug.Log(Position);
                     PortraitUIClass ui = Portraits.Find(d => d.Position == Position);
                     if (ui != null)
                     {

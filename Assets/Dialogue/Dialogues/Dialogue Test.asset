@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: Dialogue Test
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 1e44b7a7-ccf4-4f64-acc2-8840f5843dfc
+    TargetNodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+  - BaseNodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+    TargetNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
+  - BaseNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
+    TargetNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
+  - BaseNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
+    TargetNodeGuid: ffa96b15-e2ae-4524-b8e5-34b1bdbe2710
+  - BaseNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
+    TargetNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
+  StartNodeDatas:
+  - NodeGuid: 1e44b7a7-ccf4-4f64-acc2-8840f5843dfc
+    Position: {x: -350, y: 299}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+    Position: {x: -124, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 1
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
+    Position: {x: 152, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Smile
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 2
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
+    Position: {x: 654, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Right/Smile
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 4
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 10
+  - NodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
+    Position: {x: 407, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 3
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 10
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: ffa96b15-e2ae-4524-b8e5-34b1bdbe2710
+    Position: {x: 915, y: 299}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []
