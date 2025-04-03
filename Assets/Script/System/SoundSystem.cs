@@ -183,9 +183,6 @@ public class SoundSystem : MonoBehaviour
 
     private void GenerateAmbianceKeys()
     {
-
-        Debug.LogWarning("Yo wats up"); 
-
         AudioClip[] audioClips = Resources.LoadAll<AudioClip>(ambianceFolderPath);
 
         foreach (AudioClip audioClip in audioClips)

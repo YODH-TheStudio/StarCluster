@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
         {
             _soundSystem = FindObjectOfType<SoundSystem>();
         }
+
+        Instance._soundSystem.ChangeMusicByKey("Main");
+
+        //Instance._soundSystem.AddAmbianceSoundByKey("Jungle"); 
+
+
     }
 
     void FindPlayer()
