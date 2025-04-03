@@ -100,9 +100,9 @@ public class SoundSystem : MonoBehaviour
         {
             string[] words = _audioClip.name.Split('_');
 
-            if (words[0] != "SFX" || words.Length < 3)
+            if (words[0] != "SFX" || words.Length < 2)
             {
-                Debug.LogWarning($"The audio clip {_audioClip.name} has not the SFX_xxx_xxx format.");
+                Debug.LogWarning($"The audio clip {_audioClip.name} has not the SFX_xxx format.");
             }
 
             string key = "";
@@ -122,6 +122,8 @@ public class SoundSystem : MonoBehaviour
             key = key.Substring(0, index + 1);
 
             SoundFX existingSound = _SFXList.Find(sound => sound.key == key);
+
+            Debug.LogWarning(key);
 
             if (existingSound != null)
             {
@@ -181,6 +183,9 @@ public class SoundSystem : MonoBehaviour
 
     private void GenerateAmbianceKeys()
     {
+
+        Debug.LogWarning("Yo wats up"); 
+
         AudioClip[] audioClips = Resources.LoadAll<AudioClip>(ambianceFolderPath);
 
         foreach (AudioClip audioClip in audioClips)
@@ -198,8 +203,10 @@ public class SoundSystem : MonoBehaviour
             {
                 key += char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower() + " ";
             }
+            
 
             key = key.Trim();
+
 
             int index = key.Length - 1;
 
