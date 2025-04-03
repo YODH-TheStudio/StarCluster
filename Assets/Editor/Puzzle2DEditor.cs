@@ -7,20 +7,20 @@ using TMPro;
 [CustomEditor(typeof(LevelData))]
 public class Puzzle2DEditor : Editor
 {
-    private LevelData levelData;
-    private Canvas canvas;
-    private RectTransform playArea;
-    private GameObject editorParent;
-    private List<GameObject> pointObjects = new List<GameObject>();
-    private List<GameObject> segmentObjects = new List<GameObject>(); // Stocke les objets segments
-    private int selectedPointA = -1, selectedPointB = -1;
+    private LevelData _levelData;
+    private Canvas _canvas;
+    private RectTransform _playArea;
+    private GameObject _editorParent;
+    private List<GameObject> _pointObjects = new List<GameObject>();
+    private List<GameObject> _segmentObjects = new List<GameObject>();
+    private int _selectedPointA = -1, _selectedPointB = -1;
 
     private void OnEnable()
     {
-        levelData = (LevelData)target;
-        canvas = GameObject.FindObjectOfType<Canvas>();
+        _levelData = (LevelData)target;
+        _canvas = GameObject.FindObjectOfType<Canvas>();
 
-        if (canvas != null)
+        if (_canvas != null)
         {
             CreateEditorParent();
             CreateBackground();
@@ -29,97 +29,95 @@ public class Puzzle2DEditor : Editor
         }
 
         EditorApplication.update += Repaint;
+        SceneView.duringSceneGui += OnSceneGUI;
     }
 
     private void OnDisable()
     {
         EditorApplication.update -= Repaint;
+        SceneView.duringSceneGui -= OnSceneGUI;
+    }
+
+    private void OnSceneGUI(SceneView sceneView)
+    {
+        Event _e = Event.current;
+        if (_e.type == EventType.KeyDown && _e.keyCode == KeyCode.P)
+        {
+            AddRandomPoint();
+            _e.Use();
+        }
     }
 
     private void CreateEditorParent()
     {
-        editorParent = new GameObject("Editor");
-        editorParent.transform.SetParent(canvas.transform);
-        RectTransform rectTransform = editorParent.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-        rectTransform.anchoredPosition = Vector2.zero;
+        _editorParent = new GameObject("Editor");
+        _editorParent.transform.SetParent(_canvas.transform);
+        RectTransform _rectTransform = _editorParent.AddComponent<RectTransform>();
+        _rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+        _rectTransform.anchoredPosition = Vector2.zero;
     }
 
     private void CreateBackground()
     {
-        GameObject background = new GameObject("Background", typeof(Image));
-        background.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.8f);
-        playArea = background.GetComponent<RectTransform>();
-        playArea.SetParent(editorParent.transform);
-        playArea.sizeDelta = new Vector2(Screen.width * 0.6f, Screen.height * 0.8f);
-        playArea.anchorMin = playArea.anchorMax = new Vector2(0.5f, 0.5f);
-        playArea.anchoredPosition = Vector2.zero;
+        GameObject _background = new GameObject("Background", typeof(Image));
+        _background.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.8f);
+        _playArea = _background.GetComponent<RectTransform>();
+        _playArea.SetParent(_editorParent.transform);
+        _playArea.sizeDelta = new Vector2(Screen.width * 0.6f, Screen.height * 0.8f);
+        _playArea.anchorMin = _playArea.anchorMax = new Vector2(0.5f, 0.5f);
+        _playArea.anchoredPosition = Vector2.zero;
     }
 
-    private void AddPointToUI(Vector2 point, int index)
+    private void AddPointToUI(Vector2 _point, int _index)
     {
-        GameObject pointObject = new GameObject("Point" + index, typeof(Image));
-        pointObject.transform.SetParent(playArea.transform);
-        pointObject.GetComponent<Image>().color = Color.green;
+        GameObject _pointObject = new GameObject("Point" + _index, typeof(Image));
+        _pointObject.transform.SetParent(_playArea.transform);
+        _pointObject.GetComponent<Image>().color = Color.green;
 
-        RectTransform rectTransform = pointObject.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(10, 10);
-        rectTransform.anchoredPosition = point;
+        RectTransform _rectTransform = _pointObject.GetComponent<RectTransform>();
+        _rectTransform.sizeDelta = new Vector2(10, 10);
+        _rectTransform.anchoredPosition = _point;
 
-        // Ajouter un label avec TextMeshPro
-        GameObject labelObject = new GameObject("Label" + index, typeof(TextMeshProUGUI));
-        labelObject.transform.SetParent(pointObject.transform);
-        TextMeshProUGUI labelText = labelObject.GetComponent<TextMeshProUGUI>();
-        labelText.text = "P" + index;
-        labelText.fontSize = 10; // Ajustez la taille de la police selon vos besoins
-        labelText.alignment = TextAlignmentOptions.Center;
+        GameObject _labelObject = new GameObject("Label" + _index, typeof(TextMeshProUGUI));
+        _labelObject.transform.SetParent(_pointObject.transform);
+        TextMeshProUGUI _labelText = _labelObject.GetComponent<TextMeshProUGUI>();
+        _labelText.text = "P" + _index;
+        _labelText.fontSize = 10;
+        _labelText.alignment = TextAlignmentOptions.Center;
 
-        // Positionner le label au-dessus du point
-        RectTransform labelRect = labelObject.GetComponent<RectTransform>();
-        labelRect.sizeDelta = new Vector2(50, 20); // Ajuster la taille du label
-        labelRect.anchoredPosition = new Vector2(0, 15); // Positionner au-dessus du point
+        RectTransform _labelRect = _labelObject.GetComponent<RectTransform>();
+        _labelRect.sizeDelta = new Vector2(50, 20);
+        _labelRect.anchoredPosition = new Vector2(0, 15);
 
-        pointObjects.Add(pointObject);
+        _pointObjects.Add(_pointObject);
         Canvas.ForceUpdateCanvases();
     }
 
-    private GameObject CreateSimpleLine(Vector2 pointA, Vector2 pointB)
+    private GameObject CreateSimpleLine(Vector2 _pointA, Vector2 _pointB)
     {
-        GameObject lineObject = new GameObject("Line", typeof(Image));
-        lineObject.transform.SetParent(playArea.transform);
+        GameObject _lineObject = new GameObject("Line", typeof(Image));
+        _lineObject.transform.SetParent(_playArea.transform);
 
-        Image lineImage = lineObject.GetComponent<Image>();
-        lineImage.color = Color.red;
+        Image _lineImage = _lineObject.GetComponent<Image>();
+        _lineImage.color = Color.red;
 
-        RectTransform rectTransform = lineObject.GetComponent<RectTransform>();
-        float distance = Vector2.Distance(pointA, pointB);
-        float angle = Mathf.Atan2(pointB.y - pointA.y, pointB.x - pointA.x) * Mathf.Rad2Deg;
+        RectTransform _rectTransform = _lineObject.GetComponent<RectTransform>();
+        float _distance = Vector2.Distance(_pointA, _pointB);
+        float _angle = Mathf.Atan2(_pointB.y - _pointA.y, _pointB.x - _pointA.x) * Mathf.Rad2Deg;
 
-        rectTransform.sizeDelta = new Vector2(distance, 10f);
-        rectTransform.rotation = Quaternion.Euler(0, 0, angle);
-        rectTransform.anchoredPosition = (pointA + pointB) / 2f;
+        _rectTransform.sizeDelta = new Vector2(_distance, 10f);
+        _rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
+        _rectTransform.anchoredPosition = (_pointA + _pointB) / 2f;
 
-        GameObject labelObject = new GameObject("SegmentLabel", typeof(TextMeshProUGUI));
-        labelObject.transform.SetParent(lineObject.transform);
-        TextMeshProUGUI labelText = labelObject.GetComponent<TextMeshProUGUI>();
-        labelText.text = "S" + segmentObjects.Count; // Affiche le numéro du segment
-        labelText.fontSize = 14; // Taille de la police
-        labelText.alignment = TextAlignmentOptions.Center;
-
-        // Positionner le label au-dessus de la ligne
-        RectTransform labelRect = labelObject.GetComponent<RectTransform>();
-        labelRect.sizeDelta = new Vector2(60, 20); // Ajuster la taille du label
-        labelRect.anchoredPosition = new Vector2(0, 20); // Positionner le label au-dessus de la ligne
-
-        segmentObjects.Add(lineObject);
-        return lineObject;
+        _segmentObjects.Add(_lineObject);
+        return _lineObject;
     }
 
     private void CreateSegmentsUI()
     {
-        foreach (var segment in levelData.segments)
+        foreach (var _segment in _levelData._segments)
         {
-            CreateSimpleLine(segment.Item1, segment.Item2);
+            CreateSimpleLine(_segment.Item1, _segment.Item2);
         }
     }
 
@@ -129,33 +127,38 @@ public class Puzzle2DEditor : Editor
 
         if (GUILayout.Button("Ajouter un Point"))
         {
-            Vector2 newPoint = GenerateRandomPointInsidePlayArea();
-            levelData.AddPoint(newPoint);
-            EditorUtility.SetDirty(levelData);
-            AddPointToUI(newPoint, levelData.points.Count - 1);
+            AddRandomPoint();
         }
 
         EditorGUILayout.LabelField("Points dans le Niveau:");
-        for (int i = 0; i < levelData.points.Count; i++)
+        for (int _i = 0; _i < _levelData._points.Count; _i++)
         {
-            levelData.points[i] = EditorGUILayout.Vector2Field("Point " + i, levelData.points[i]);
-            UpdatePointPositionInUI(i);
+            EditorGUILayout.BeginHorizontal();
+            _levelData._points[_i] = EditorGUILayout.Vector2Field("Point " + _i, _levelData._points[_i]);
+
+            if (GUILayout.Button("X", GUILayout.Width(20)))
+            {
+                RemovePoint(_i);
+            }
+
+            EditorGUILayout.EndHorizontal();
+            UpdatePointPositionInUI(_i);
         }
 
         EditorGUILayout.LabelField("Créer un Segment entre deux points:");
-        selectedPointA = EditorGUILayout.Popup("Point A", selectedPointA, GetPointNames());
-        selectedPointB = EditorGUILayout.Popup("Point B", selectedPointB, GetPointNames());
+        _selectedPointA = EditorGUILayout.Popup("Point A", _selectedPointA, GetPointNames());
+        _selectedPointB = EditorGUILayout.Popup("Point B", _selectedPointB, GetPointNames());
 
         if (GUILayout.Button("Ajouter Segment"))
         {
-            if (selectedPointA != selectedPointB && selectedPointA >= 0 && selectedPointB >= 0)
+            if (_selectedPointA != _selectedPointB && _selectedPointA >= 0 && _selectedPointB >= 0)
             {
-                Vector2 pointA = levelData.points[selectedPointA];
-                Vector2 pointB = levelData.points[selectedPointB];
+                Vector2 _pointA = _levelData._points[_selectedPointA];
+                Vector2 _pointB = _levelData._points[_selectedPointB];
 
-                levelData.AddSegment(pointA, pointB);
-                EditorUtility.SetDirty(levelData);
-                CreateSimpleLine(pointA, pointB);
+                _levelData.AddSegment(_pointA, _pointB);
+                EditorUtility.SetDirty(_levelData);
+                CreateSimpleLine(_pointA, _pointB);
             }
             else
             {
@@ -164,15 +167,15 @@ public class Puzzle2DEditor : Editor
         }
 
         EditorGUILayout.LabelField("Segments du Niveau:");
-        for (int i = 0; i < levelData.segments.Count; i++)
+        for (int _i = 0; _i < _levelData._segments.Count; _i++)
         {
-            var segment = levelData.segments[i];
+            var _segment = _levelData._segments[_i];
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField($"Segment {i}: {segment.Item1} -> {segment.Item2}");
+            EditorGUILayout.LabelField($"Segment {_i}: {_segment.Item1} -> {_segment.Item2}");
 
             if (GUILayout.Button("Supprimer"))
             {
-                RemoveSegment(segment.Item1, segment.Item2);
+                RemoveSegment(_segment.Item1, _segment.Item2);
             }
 
             EditorGUILayout.EndHorizontal();
@@ -186,10 +189,18 @@ public class Puzzle2DEditor : Editor
 
     private void CreatePointsUI()
     {
-        for (int i = 0; i < levelData.points.Count; i++)
+        for (int _i = 0; _i < _levelData._points.Count; _i++)
         {
-            AddPointToUI(levelData.points[i], i);
+            AddPointToUI(_levelData._points[_i], _i);
         }
+    }
+
+    private void AddRandomPoint()
+    {
+        Vector2 _newPoint = GenerateRandomPointInsidePlayArea();
+        _levelData.AddPoint(_newPoint);
+        EditorUtility.SetDirty(_levelData);
+        AddPointToUI(_newPoint, _levelData._points.Count - 1);
     }
 
     private Vector2 GenerateRandomPointInsidePlayArea()
@@ -197,46 +208,57 @@ public class Puzzle2DEditor : Editor
         return new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
-    private void UpdatePointPositionInUI(int index)
+    private void UpdatePointPositionInUI(int _index)
     {
-        if (index < pointObjects.Count)
+        if (_index < _pointObjects.Count)
         {
-            GameObject pointObject = pointObjects[index];
-            pointObject.GetComponent<RectTransform>().anchoredPosition = levelData.points[index];
+            GameObject _pointObject = _pointObjects[_index];
+            _pointObject.GetComponent<RectTransform>().anchoredPosition = _levelData._points[_index];
         }
+    }
+
+    private void RemovePoint(int _index)
+    {
+        Vector2 _point = _levelData._points[_index];
+
+        _levelData.RemovePoint(_point);
+        DestroyImmediate(_pointObjects[_index]);
+        _pointObjects.RemoveAt(_index);
+
+        _levelData._segments.RemoveAll(s => s.Item1 == _point || s.Item2 == _point);
+        ResetSegments();
+        EditorUtility.SetDirty(_levelData);
     }
 
     private void ResetSegments()
     {
-        levelData.ClearSegments();
-
-        foreach (var segmentObject in segmentObjects)
+        foreach (var _segmentObject in _segmentObjects)
         {
-            DestroyImmediate(segmentObject);
+            DestroyImmediate(_segmentObject);
         }
 
-        segmentObjects.Clear();
-        EditorUtility.SetDirty(levelData);
+        _segmentObjects.Clear();
+        CreateSegmentsUI();
     }
 
-    private void RemoveSegment(Vector2 pointA, Vector2 pointB)
+    private void RemoveSegment(Vector2 _pointA, Vector2 _pointB)
     {
-        int index = levelData.segments.FindIndex(seg => seg.Item1 == pointA && seg.Item2 == pointB);
-        if (index >= 0)
+        int _index = _levelData._segments.FindIndex(seg => seg.Item1 == _pointA && seg.Item2 == _pointB);
+        if (_index >= 0)
         {
-            levelData.RemoveSegment(pointA, pointB);
-            DestroyImmediate(segmentObjects[index]);
-            segmentObjects.RemoveAt(index);
-            EditorUtility.SetDirty(levelData);
+            _levelData.RemoveSegment(_pointA, _pointB);
+            DestroyImmediate(_segmentObjects[_index]);
+            _segmentObjects.RemoveAt(_index);
+            EditorUtility.SetDirty(_levelData);
         }
     }
 
     private string[] GetPointNames()
     {
-        string[] pointNames = new string[levelData.points.Count];
-        for (int i = 0; i < levelData.points.Count; i++)
-            pointNames[i] = "Point " + i;
+        string[] _pointNames = new string[_levelData._points.Count];
+        for (int _i = 0; _i < _levelData._points.Count; _i++)
+            _pointNames[_i] = "Point " + _i;
 
-        return pointNames;
+        return _pointNames;
     }
 }

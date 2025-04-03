@@ -37,9 +37,16 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     }
 
     private Vector3 _lastMoveDirection; // Get normalized player direction each frame
-    public Vector3 GetMoveDirection()
+
+    private Vector3 _limitedMoveDirection; // Get normalized player direction each frame
+    public Vector3 GetLastMoveDirection()
     {
         return _lastMoveDirection;
+    }
+
+    public void SetMoveDirection(Vector3 newDirection)
+    {
+        _limitedMoveDirection = newDirection;
     }
 
     private void Awake()
@@ -56,9 +63,11 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         Vector3 position = new Vector3(readVector.x, 0, readVector.y);
         Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
 
-        _direction = isoMatrix.MultiplyPoint3x4(position);
+
+         _direction = isoMatrix.MultiplyPoint3x4(position);
 
         // store last move position to inform component about user movement direction
+
         _lastMoveDirection = _direction.normalized; 
     }
     // Rotate the player in the direction he is walking
@@ -83,8 +92,10 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
             {
                 // Limit movement only on object direction and object inverse direction
-                float forwardMove = _direction.z;
-                _direction = new Vector3(1, 1, 1) * forwardMove;
+                float forwardMove = Vector3.Dot(_limitedMoveDirection, transform.forward);  // Calculer la composante "forward"
+                _limitedMoveDirection = transform.forward * forwardMove;  // Appliquer la direction en avant uniquement
+
+                _controller.SimpleMove(_limitedMoveDirection * _speed * Time.deltaTime);
             }
             else
             {
@@ -124,32 +135,23 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     }
 
     // Move the player to the target position in a given duration, with movement restriction
-    public void MoveTo(Vector3 targetPosition, float duration)
-    {
-        StartCoroutine(MoveToCoroutine(targetPosition, duration));
-    }
-
-    private IEnumerator MoveToCoroutine(Vector3 targetPosition, float duration)
+    public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
         float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
 
-        // Restrict player movement during this period
         MovementLimit = MovementLimitType.FullRestriction;
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
-
-            // Interpolating position between the initial position and the target position
             transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
 
-            yield return null; // Wait for the next frame
+            yield return null; // Attendre jusqu'au prochain frame
         }
-        transform.position = targetPosition;
 
-        // Movement is complete, reset the movement restriction
+        transform.position = targetPosition;
         MovementLimit = MovementLimitType.None;
 
         Debug.Log("Movement complete!");

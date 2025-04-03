@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ef91b698c0759478baa48aa4a841fe, type: 3}
   m_Name: NewLevelData
   m_EditorClassIdentifier: 
-  points:
-  - {x: 38.67, y: 0.17698395}
-  - {x: -186.4, y: 0.7477796}
-  - {x: -83.6, y: 0.055793166}
-  - {x: 213.3, y: 0.80346835}
+  _points:
+  - {x: -103.01, y: 0.55487996}
+  - {x: 98.11, y: 85.1}
+  - {x: 0.39432305, y: 0.5701433}
+  - {x: 0.24092805, y: 104.88}
+  - {x: 0.6981555, y: 0.40284175}
