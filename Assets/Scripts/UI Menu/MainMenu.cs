@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
     {
         //En attendant d'avoir la cinématique
         SceneManager.LoadScene("BlockOutDeplacement");
+        SceneManager.LoadScene("GameplayUI");
     }
 
     public void ContinueGame()
@@ -41,6 +42,7 @@ public class MainMenu : MonoBehaviour
 
         //En attendant d'avoir la sauvegarde
         SceneManager.LoadScene("BlockOutDeplacement");
+        SceneManager.LoadScene("GameplayUI");
     }
 
     public void SetSelectedSaveIndex()
