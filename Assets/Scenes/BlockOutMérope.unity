@@ -1970,7 +1970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runPosition: {x: 0, y: 1.5, z: -1.5}
-  catchupSpeed: {x: 0.5, y: 3}
+  catchupSpeed: {x: 1, y: 3}
   orbitOffset: 1.5
   orbitRadius: {x: 2.5, y: 3.5}
   bounceAmount: {x: 0.15, y: 0.1}
