@@ -29,7 +29,7 @@ public class CompanionAnchor : MonoBehaviour
         _player = GameManager.Instance.GetPlayer();
         _companion = GameObject.Find("Mérope").GetComponent<MéropeFollow>();
 
-        if (_player)
+        if (_player == null)
         {
             Debug.LogError("Player not found");
         }
