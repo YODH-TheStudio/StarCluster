@@ -9,8 +9,10 @@ public class MéropeFollow : MonoBehaviour
 {
     private PlayerScript _player;
     
-    [SerializeField] private float catchupSpeed = 0.3f;
-    [SerializeField] Vector3 maxOffset;
+    public float catchupSpeed = 0.3f;
+    
+    public float bounceAmount = 0.1f;
+    public float bounceSpeed = 0.5f;
     
     private NavMeshAgent _agent;
     private Rigidbody _rb;
@@ -20,6 +22,7 @@ public class MéropeFollow : MonoBehaviour
     private List<Vector3> _path;
 
     private Transform _companionAnchor;
+    private GameObject _model;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,7 @@ public class MéropeFollow : MonoBehaviour
         _companionAnchor = _player.transform.Find("CompanionAnchor");
         
         _path = new List<Vector3>();
+        _model = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -44,10 +48,17 @@ public class MéropeFollow : MonoBehaviour
         {
             Debug.LogWarning("Player not found");
         }
-    }
-    
-    public void SetSpeed(float speed)
-    {
-        catchupSpeed = speed;
+        
+        // bounce
+        if (_model != null)
+        {
+            float newY = Mathf.Sin(Time.time * bounceSpeed) * bounceAmount;
+            
+            _model.transform.localPosition = new Vector3(_model.transform.localPosition.x, Mathf.Lerp(_model.transform.localPosition.y, newY, 0.1f), _model.transform.localPosition.z);
+        }
+        else
+        {
+            Debug.LogWarning("Model not found");
+        }
     }
 }

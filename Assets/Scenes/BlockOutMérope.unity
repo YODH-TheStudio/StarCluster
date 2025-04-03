@@ -1528,6 +1528,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
+      propertyPath: bounceSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
       propertyPath: maxOffset.x
       value: 0
       objectReference: {fileID: 0}
@@ -1540,6 +1545,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxOffset.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: bounceAmmount
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2284230764414734287, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -1960,12 +1970,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runPosition: {x: 0, y: 1.5, z: -1.5}
-  bounceSpeed: 0.5
-  floatBounce: 0.3
-  companionRunTime: 0.8
-  companionOrbitTime: 3
+  catchupSpeed: {x: 0.5, y: 3}
   orbitOffset: 1.5
   orbitRadius: {x: 2.5, y: 3.5}
+  bounceAmount: {x: 0.15, y: 0.1}
+  bounceSpeed: {x: 5, y: 2}
 --- !u!1 &1238707294
 GameObject:
   m_ObjectHideFlags: 0
