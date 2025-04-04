@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: NextDialogue Part 2
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 35d28cf1-d3af-4dd6-8682-dba2651fdc7d
+    TargetNodeGuid: bc15c400-80bd-4a45-a0e4-69bab1371290
+  - BaseNodeGuid: bc15c400-80bd-4a45-a0e4-69bab1371290
+    TargetNodeGuid: 41220b3a-b95f-46f3-8017-4b5d09faaa8a
+  - BaseNodeGuid: 41220b3a-b95f-46f3-8017-4b5d09faaa8a
+    TargetNodeGuid: 501c5ae0-549e-47c8-b5f3-2ea36b1300bd
+  StartNodeDatas:
+  - NodeGuid: 35d28cf1-d3af-4dd6-8682-dba2651fdc7d
+    Position: {x: 499, y: 200}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 41220b3a-b95f-46f3-8017-4b5d09faaa8a
+    Position: {x: 890, y: 200}
+    Character: {fileID: 11400000, guid: e916db5d586e8314d8bf677855d54ea6, type: 2}
+    PortraitPosition: 0
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "of course, you can start the next dialogue with a comical
+        \u201CDialogue Start\u201D"
+    - languageEnum: 1
+      LanguageGenericType: "oczywi\u015Bcie mo\u017Cna rozpocz\u0105\u0107 nast\u0119pny
+        dialog od komkretnego \"Dialogue Start\""
+    Duration: 3
+  - NodeGuid: bc15c400-80bd-4a45-a0e4-69bab1371290
+    Position: {x: 667, y: 200}
+    Character: {fileID: 11400000, guid: e916db5d586e8314d8bf677855d54ea6, type: 2}
+    PortraitPosition: 0
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: And here is the 2nd dialogue
+    - languageEnum: 1
+      LanguageGenericType: A oto 2 dialog
+    Duration: 1.5
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 501c5ae0-549e-47c8-b5f3-2ea36b1300bd
+    Position: {x: 1110, y: 200}
+    EndNodeType: 4
+    Dialogue: {fileID: 11400000, guid: 31807c3863cf9064dab4ee14de9abd2a, type: 2}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

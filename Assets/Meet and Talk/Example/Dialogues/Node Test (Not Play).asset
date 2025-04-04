@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: Node Test (Not Play)
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 0
+  LimitChoiceOptionPerNode: 1
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas: []
+  StartNodeDatas:
+  - NodeGuid: 57b9c287-178e-401b-a149-5ef79104e6a4
+    Position: {x: -1103.2, y: -168.8}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 1c13e8b4-c831-4a8c-9b1f-33b7a8ee6b90
+    Position: {x: -598.4, y: -168.8}
+    Character: {fileID: 0}
+    PortraitPosition: 1
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 1
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Dialogue EN
+    - languageEnum: 1
+      LanguageGenericType: Dialogue PL
+    Duration: 10
+  DialogueChoiceNodeDatas:
+  - NodeGuid: ba35f36e-65d7-488d-9dea-364b80238d26
+    Position: {x: -1103.2, y: 51.2}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 8300000, guid: 5dda1ead42fd2714395cadd0b9374915, type: 3}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Dialogue Choice EN
+    - languageEnum: 1
+      LanguageGenericType: Dialogue Choice PL
+    Duration: 3
+    DialogueNodePorts:
+    - PortGuid: fa98a1b3-7263-4049-b044-26792bff70cd
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Dialogue Choice 01 EN
+      - languageEnum: 1
+        LanguageGenericType: Dialogue Choice 01 PL
+    - PortGuid: 3d0ae40b-49d5-4bed-aa54-39de5efdf200
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Dialogue Choice 02 EN
+      - languageEnum: 1
+        LanguageGenericType: Dialogue Choice 02 PL
+    - PortGuid: fe60bdc4-a5a8-4480-b371-b1360ea9c0d1
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Dialogue Choice 03 EN
+      - languageEnum: 1
+        LanguageGenericType: Dialogue Choice 03 PL
+  AdvancedChoiceNodeDatas:
+  - NodeGuid: 867ec1c9-a346-4699-9ca6-89cd5f3913ce
+    Position: {x: -368, y: -176.8}
+    DialogueNodePorts:
+    - PortGuid: 952ad866-79cf-4323-8498-ff459ef9e8e9
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Advanced Choice 01 EN
+      - languageEnum: 1
+        LanguageGenericType: Advanced Choice 01 PL
+      ChoiceType: 1
+      Condition:
+        ValueName: DEMO_Level
+        Operator: ==
+        Value: 00
+    - PortGuid: d3728ecc-5be2-4ffa-95fa-8d74a0c5b4c8
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Advanced Choice 02 EN
+      - languageEnum: 1
+        LanguageGenericType: Advanced Choice 02 PL
+      ChoiceType: 0
+      Condition:
+        ValueName: DEMO_GOLD
+        Operator: '>'
+        Value: 25
+    - PortGuid: 1eeeb33c-f8ba-4aee-b787-011b549d955d
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Advanced Choice 03 EN
+      - languageEnum: 1
+        LanguageGenericType: Advanced Choice 03 PL
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+  TimerChoiceNodeDatas:
+  - NodeGuid: c9af7116-7b71-4217-a575-e7d29a83ca2d
+    Position: {x: 96, y: -278.40002}
+    Character: {fileID: 0}
+    PortraitPosition: 0
+    Emotion: 
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Dialogue Time Choice EN
+    - languageEnum: 1
+      LanguageGenericType: Dialogue Time Choice PL
+    Duration: 5
+    ShowTimer: 1
+    time: 10
+    DialogueNodePorts:
+    - PortGuid: a3002079-8ec0-4ade-a09e-38f31f7d7428
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Dialogue Time Choice 01 EN
+      - languageEnum: 1
+        LanguageGenericType: Dialogue Time Choice 01 PL
+    - PortGuid: 5689d378-9909-4a37-8d1e-fc95937e5dc6
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Dialogue Time Choice 02 EN
+      - languageEnum: 1
+        LanguageGenericType: Dialogue Time Choice 02 PL
+  AdvancedTimeChoiceNodeDatas:
+  - NodeGuid: be0a6391-5f15-4cc9-8492-d33d669266d8
+    Position: {x: -4, y: 51.2}
+    DialogueNodePorts:
+    - PortGuid: 4bd7db09-30e3-460b-b51e-d3c1d96e86b5
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Advanced Time Choice 01 EN
+      - languageEnum: 1
+        LanguageGenericType: Advanced Time Choice 01 PL
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    - PortGuid: 346aa045-69c0-4e7e-88b7-e044087a2db7
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: 435
+      - languageEnum: 1
+        LanguageGenericType: Advanced Time Choice 02 PL
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    - PortGuid: cca12a0a-7b73-4261-b3e4-bb74a9397caa
+      InputGuid: 
+      OutputGuid: 
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: Advanced Time Choice 03 EN
+      - languageEnum: 1
+        LanguageGenericType: Advanced Time Choice 03 PL
+      ChoiceType: 0
+      Condition:
+        ValueName: 
+        Operator: 
+        Value: 
+    ShowTimer: 1
+    time: 10
+  EndNodeDatas:
+  - NodeGuid: 99370ade-0484-4c83-a84b-64ecf0ebf5c1
+    Position: {x: -4, y: 308.8}
+    EndNodeType: 4
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas:
+  - NodeGuid: e9346e2b-6ab0-4fff-a105-4e44650950e1
+    Position: {x: -936, y: -168.8}
+    EventScriptableObjects:
+    - DialogueEventSO: {fileID: 11400000, guid: 7ac8d6c29f4beb34ab2719c7abc3c534, type: 2}
+    - DialogueEventSO: {fileID: 0}
+  RandomNodeDatas:
+  - NodeGuid: 8a27c565-684f-45f4-a474-886d940b85ac
+    Position: {x: -764, y: 51.2}
+  IfNodeDatas:
+  - NodeGuid: 37d7e035-c1ab-423c-84b4-ce2965551c19
+    Position: {x: -776.8, y: 170.40001}
+    ValueName: DEMO_GOLD
+    Operations: 0
+    OperationValue: 55
+    TrueGUID: 
+    FalseGUID: 
+  AdvancedIFNodeDatas:
+  - NodeGuid: 82cf854e-5287-42c2-8715-3be5b3b92225
+    Position: {x: -368, y: 41.6}
+    TrueGUID: 
+    FalseGUID: 
+    TrueWhenAllCondition: 0
+    Conditions:
+    - PortGuid: 0645b828-a632-4a45-a067-7fb0deff6dd1
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: Demo_PI
+        Operator: ==
+        Value: 
+    - PortGuid: b5806860-d070-48d7-8433-5dcf8460c0aa
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: DEMO_GOLD
+        Operator: '>='
+        Value: okimokjm
+    - PortGuid: 2c7ba9e5-2d14-41a3-9ce4-69e75bd52081
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: 
+        Operator: 
+        Value: 
+    - PortGuid: 7430c5fa-6815-4f75-a084-53550de1740b
+      InputGuid: 
+      OutputGuid: 
+      Operation:
+        ValueName: 
+        Operator: 
+        Value: 
+  ResetSavedNodeDatas:
+  - NodeGuid: 7729deb4-5e4f-4143-ab0b-466211cbfd82
+    Position: {x: -548.8, y: 170.40001}
+  MusicNodeDatas:
+  - NodeGuid: 12f97ccf-51da-4b61-8539-83cae3e61cb7
+    Position: {x: 213.6, y: 308.8}
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    SwitchTime: 0
+  CommandNodeDatas:
+  - NodeGuid: bc58ee2c-8cb0-43c2-9c09-9d4bc8008209
+    Position: {x: -368, y: 296}
+    commmand: Test

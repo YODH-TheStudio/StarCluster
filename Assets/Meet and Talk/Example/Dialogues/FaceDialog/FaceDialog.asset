@@ -1,0 +1,425 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: FaceDialog
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 1
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 691a51a1-6684-41e4-b495-c7dd67a945d3
+    TargetNodeGuid: 9d5a6736-03cb-486d-b422-6253bb9de288
+  - BaseNodeGuid: 0fa9f748-000f-46ee-9427-b2bb93bee320
+    TargetNodeGuid: 702726b7-4afc-4703-9316-4a5a4804e5c0
+  - BaseNodeGuid: 5f4b0d1e-866c-4d5a-987e-85f3260fc0f8
+    TargetNodeGuid: 44a457ab-84a3-4531-9312-15dc5cd1a047
+  - BaseNodeGuid: 44a457ab-84a3-4531-9312-15dc5cd1a047
+    TargetNodeGuid: 0186faa6-302e-4653-8ce7-c7afc2b93b27
+  - BaseNodeGuid: 99965b48-19c5-487d-915e-668e4bad2382
+    TargetNodeGuid: 7e244afc-33a2-4523-9abc-02241e71c012
+  - BaseNodeGuid: 9d5a6736-03cb-486d-b422-6253bb9de288
+    TargetNodeGuid: 060b698b-3d61-447d-8984-62eb82ad59fd
+  - BaseNodeGuid: a9923384-4660-4816-bc16-c4230dc677b7
+    TargetNodeGuid: 9b8a9a81-8f98-4656-8911-f1e6bfc2668e
+  - BaseNodeGuid: 060b698b-3d61-447d-8984-62eb82ad59fd
+    TargetNodeGuid: 5f4b0d1e-866c-4d5a-987e-85f3260fc0f8
+  - BaseNodeGuid: c474f21f-9cc6-4487-9a33-055992c7168d
+    TargetNodeGuid: 99965b48-19c5-487d-915e-668e4bad2382
+  - BaseNodeGuid: 04e0ec48-86e0-472a-84b9-acc993e3e034
+    TargetNodeGuid: c474f21f-9cc6-4487-9a33-055992c7168d
+  - BaseNodeGuid: 0186faa6-302e-4653-8ce7-c7afc2b93b27
+    TargetNodeGuid: 04e0ec48-86e0-472a-84b9-acc993e3e034
+  - BaseNodeGuid: a724e7b8-e797-4221-8459-921396b9a0d8
+    TargetNodeGuid: 1327adfb-42a4-459a-9b53-6dd6ff348398
+  - BaseNodeGuid: 9b8a9a81-8f98-4656-8911-f1e6bfc2668e
+    TargetNodeGuid: 0fa9f748-000f-46ee-9427-b2bb93bee320
+  - BaseNodeGuid: 702726b7-4afc-4703-9316-4a5a4804e5c0
+    TargetNodeGuid: 022a6b4c-09aa-4e03-847c-935958476ca1
+  - BaseNodeGuid: 022a6b4c-09aa-4e03-847c-935958476ca1
+    TargetNodeGuid: a724e7b8-e797-4221-8459-921396b9a0d8
+  - BaseNodeGuid: 7e244afc-33a2-4523-9abc-02241e71c012
+    TargetNodeGuid: a9923384-4660-4816-bc16-c4230dc677b7
+  - BaseNodeGuid: 1327adfb-42a4-459a-9b53-6dd6ff348398
+    TargetNodeGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+  - BaseNodeGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+    TargetNodeGuid: 5db23a8e-9812-4659-a642-82a4e7ad6797
+  - BaseNodeGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+    TargetNodeGuid: 5db23a8e-9812-4659-a642-82a4e7ad6797
+  DialogueChoiceNodeDatas:
+  - NodeGuid: 1327adfb-42a4-459a-9b53-6dd6ff348398
+    Position: {x: 5240, y: 600.8}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Defualt
+    SecoundCharacter: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    SecoundPortraitPosition: 2
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Avatars also work in Choice Node
+    - languageEnum: 1
+      LanguageGenericType: "Awatary dzia\u0142aj\u0105 r\xF3wnie\u017C w Choice Node"
+    Duration: 2
+    DialogueNodePorts:
+    - PortGuid: fefc1086-0369-4b4d-97c1-19621509c4bb
+      InputGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+      OutputGuid: 1327adfb-42a4-459a-9b53-6dd6ff348398
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: I understand
+      - languageEnum: 1
+        LanguageGenericType: Rozumiem
+  DialogueNodeDatas:
+  - NodeGuid: 0fa9f748-000f-46ee-9427-b2bb93bee320
+    Position: {x: 4440, y: 600.8}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Suprized
+    SecoundCharacter: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    SecoundPortraitPosition: 2
+    SecoundEmotion: Left/Suprized
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Suprized
+    - languageEnum: 1
+      LanguageGenericType: Zaskoczony
+    Duration: 3
+  - NodeGuid: 5f4b0d1e-866c-4d5a-987e-85f3260fc0f8
+    Position: {x: 2600, y: 300}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Now how about some sample emotions
+    - languageEnum: 1
+      LanguageGenericType: "To teraz mo\u017Ce kilka przyk\u0142adowych emocji"
+    Duration: 2
+  - NodeGuid: 44a457ab-84a3-4531-9312-15dc5cd1a047
+    Position: {x: 2800, y: 300}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Smile
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Smile
+    - languageEnum: 1
+      LanguageGenericType: "U\u015Bmiech"
+    Duration: 3
+  - NodeGuid: 99965b48-19c5-487d-915e-668e4bad2382
+    Position: {x: 3600, y: 300}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Angry
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Anger
+    - languageEnum: 1
+      LanguageGenericType: "Z\u0142o\u015B\u0107"
+    Duration: 3
+  - NodeGuid: 9d5a6736-03cb-486d-b422-6253bb9de288
+    Position: {x: 2200, y: 300}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: This Dialog shows an example use of Avatar Sprite
+    - languageEnum: 1
+      LanguageGenericType: "Ten Dialog pokazuje przyk\u0142adowe u\u017Cycie Avatar
+        Sprite"
+    Duration: 3
+  - NodeGuid: a9923384-4660-4816-bc16-c4230dc677b7
+    Position: {x: 4040, y: 600.8}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Defualt
+    SecoundCharacter: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    SecoundPortraitPosition: 2
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Normal
+    - languageEnum: 1
+      LanguageGenericType: "Normalny\t"
+    Duration: 3
+  - NodeGuid: 060b698b-3d61-447d-8984-62eb82ad59fd
+    Position: {x: 2400, y: 300}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Supports various positions of the Avatar
+    - languageEnum: 1
+      LanguageGenericType: "Obs\u0142uguje r\xF3\u017Cne pozycje Awatara"
+    Duration: 2
+  - NodeGuid: c474f21f-9cc6-4487-9a33-055992c7168d
+    Position: {x: 3400, y: 300}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Crying
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Cry
+    - languageEnum: 1
+      LanguageGenericType: "P\u0142acz"
+    Duration: 3
+  - NodeGuid: 04e0ec48-86e0-472a-84b9-acc993e3e034
+    Position: {x: 3200, y: 300}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Suprized
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Disgusted
+    - languageEnum: 1
+      LanguageGenericType: Zniesmaczony
+    Duration: 3
+  - NodeGuid: 0186faa6-302e-4653-8ce7-c7afc2b93b27
+    Position: {x: 3000, y: 300}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Suprized
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: Left/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Surprised
+    - languageEnum: 1
+      LanguageGenericType: Zaskoczony
+    Duration: 3
+  - NodeGuid: a724e7b8-e797-4221-8459-921396b9a0d8
+    Position: {x: 5040, y: 600.8}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Angry
+    SecoundCharacter: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    SecoundPortraitPosition: 4
+    SecoundEmotion: Right/Angry
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Anger
+    - languageEnum: 1
+      LanguageGenericType: "Z\u0142o\u015B\u0107"
+    Duration: 3
+  - NodeGuid: 9b8a9a81-8f98-4656-8911-f1e6bfc2668e
+    Position: {x: 4240, y: 600.8}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Smile
+    SecoundCharacter: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    SecoundPortraitPosition: 4
+    SecoundEmotion: Right/Smile
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Smile
+    - languageEnum: 1
+      LanguageGenericType: "U\u015Bmiech"
+    Duration: 3
+  - NodeGuid: 702726b7-4afc-4703-9316-4a5a4804e5c0
+    Position: {x: 4640, y: 600.8}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Disgust
+    SecoundCharacter: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    SecoundPortraitPosition: 4
+    SecoundEmotion: Right/Disgust
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Disgust
+    - languageEnum: 1
+      LanguageGenericType: Zniesmaczony
+    Duration: 3
+  - NodeGuid: 022a6b4c-09aa-4e03-847c-935958476ca1
+    Position: {x: 4840, y: 600.8}
+    Character: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    PortraitPosition: 3
+    Emotion: Right/Crying
+    SecoundCharacter: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    SecoundPortraitPosition: 2
+    SecoundEmotion: Left/Crying
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Crying
+    - languageEnum: 1
+      LanguageGenericType: "P\u0142acz"
+    Duration: 3
+  - NodeGuid: 7e244afc-33a2-4523-9abc-02241e71c012
+    Position: {x: 3840, y: 600.8}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    SecoundPortraitPosition: 4
+    SecoundEmotion: Right/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: And now an example using Alternative Character
+    - languageEnum: 1
+      LanguageGenericType: "A teraz przyk\u0142ad z u\u017Cyciem Alternative Character"
+    Duration: 2
+  TimerChoiceNodeDatas:
+  - NodeGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+    Position: {x: 5540, y: 600.8}
+    Character: {fileID: 11400000, guid: 6c7c2303cba66254eb2469508683ee61, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 11400000, guid: 52bf713ca2c3ac34995eb97495258ba0, type: 2}
+    SecoundPortraitPosition: 4
+    SecoundEmotion: Right/Defualt
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Avatars also work in Timer Choice Node
+    - languageEnum: 1
+      LanguageGenericType: "Awatary r\xF3wnie\u017C dzia\u0142aj\u0105 w Timer Choice
+        Node"
+    Duration: 2
+    ShowTimer: 1
+    time: 4
+    DialogueNodePorts:
+    - PortGuid: e49be720-e4c2-48c0-a176-05720486573d
+      InputGuid: 5db23a8e-9812-4659-a642-82a4e7ad6797
+      OutputGuid: 5f38d0e2-89c3-43b6-bd10-713200f73bc6
+      TextLanguage:
+      - languageEnum: 0
+        LanguageGenericType: I understand
+      - languageEnum: 1
+        LanguageGenericType: Rozumiem
+  EndNodeDatas:
+  - NodeGuid: 5db23a8e-9812-4659-a642-82a4e7ad6797
+    Position: {x: 5840, y: 600.8}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  StartNodeDatas:
+  - NodeGuid: 691a51a1-6684-41e4-b495-c7dd67a945d3
+    Position: {x: 2049.5999, y: 300}
+    startID: 
+  RandomNodeDatas: []
+  CommandNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
