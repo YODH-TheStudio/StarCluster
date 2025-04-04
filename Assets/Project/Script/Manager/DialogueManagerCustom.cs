@@ -41,8 +41,8 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         if (test != null)
         {
-        }
             StartDialogue(test);
+        }
     }
 
     public void OnStartDialogue()

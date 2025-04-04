@@ -2065,8 +2065,7 @@ PrefabInstance:
         type: 3}
       propertyPath: test
       value: 
-      objectReference: {fileID: 11400000, guid: 9a0acb52939db274385d5eb5a6948de3,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5357678812690958916, guid: e80489474f8420141876a823c8c95468,
         type: 3}
       propertyPath: dialogueManager
