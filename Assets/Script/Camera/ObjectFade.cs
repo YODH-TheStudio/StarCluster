@@ -24,6 +24,7 @@ public class ObjectFade: MonoBehaviour
     private Vector3 _directionCamToPlayer;
 
     private List<GameObject> _hits;
+    private List<GameObject> _oldHits;
     private List<GameObject> _toRemove;
 
     // Start is called before the first frame update
@@ -33,6 +34,7 @@ public class ObjectFade: MonoBehaviour
         _mainCamera = Camera.main;
 
         _hits = new List<GameObject>();
+        _oldHits = new List<GameObject>();
         _toRemove = new List<GameObject>();
     }
 
@@ -48,7 +50,30 @@ public class ObjectFade: MonoBehaviour
             if (hit.transform.gameObject.tag != "Player")
             {
                 SendRaycast();
+
+                List<GameObject> toUnfade = new List<GameObject>();
+                foreach (GameObject value in _oldHits)
+                {
+                    if(value.transform.gameObject.tag != "Player")
+                    {
+                        if (!_hits.Contains(value))
+                        {
+                            toUnfade.Add(value);
+                        }
+                    }
+                    
+                }
+
+                UnfadeObject(toUnfade);
+
+                foreach (GameObject obj in _toRemove)
+                {
+                    _hits.Remove(obj);
+                }
+
                 FadeObject(_hits);
+
+                _toRemove.Clear();
             }
             else
             {
@@ -66,6 +91,7 @@ public class ObjectFade: MonoBehaviour
 
     private void SendRaycast()
     {
+        _hits.Clear();
         RaycastHit[] hits = Physics.RaycastAll(_mainCamera.transform.position, _directionCamToPlayer, _distanceCamToPlayer);
         if (hits != null && _hits != null) 
         {
@@ -76,10 +102,16 @@ public class ObjectFade: MonoBehaviour
                     if (!_hits.Contains(hit.transform.gameObject))
                     {
                         _hits.Add(hit.transform.gameObject);
+
+                        if (!_oldHits.Contains(hit.transform.gameObject))
+                        {
+                            _oldHits.Add(hit.transform.gameObject);
+                        }
+                        
                     }
                 }
             }
-        } 
+        }
     }
 
     private void FadeObject(List<GameObject> hits)
