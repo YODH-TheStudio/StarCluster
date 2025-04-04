@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     private PlayerScript _player;
     
+    
+    private VibrationManager _vibrationManager { get; set; }
+
     // Singleton
     private static GameManager _instance;
     
@@ -28,22 +31,31 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (_player == null)
-        {
-            _player = FindObjectOfType<PlayerScript>();
-        }
-    }
 
     void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
     }
-    
+
+    void FindVibrationManager()
+    {
+        _vibrationManager = FindObjectOfType<VibrationManager>();
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        if (_player == null)
+        {
+            FindPlayer();
+        }
+
+        if (_vibrationManager == null)
+        {
+            FindVibrationManager();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,5 +69,14 @@ public class GameManager : MonoBehaviour
             FindPlayer();
         }
         return _player;
+    }
+
+    public VibrationManager GetVibrationManager()
+    {
+        if (_vibrationManager == null)
+        {
+            FindVibrationManager();
+        }
+        return _vibrationManager;
     }
 }
