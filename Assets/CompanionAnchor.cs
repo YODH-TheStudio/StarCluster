@@ -9,12 +9,16 @@ public class CompanionAnchor : MonoBehaviour
 {
     [SerializeField] private Vector3 runPosition = new Vector3(0, 1, -1.5f);
     
-    [SerializeField] private float bounceSpeed = 0.5f;
-    [SerializeField] private float floatBounce = 0.1f;
-    [SerializeField] private float companionRunTime = 0.3f;
-    [SerializeField] private float companionOrbitTime = 1.0f;
+    /* Companion catchup speed, while running and orbiting */
+    [SerializeField] private Vector2 catchupSpeed =  new Vector2(0.3f, 1.0f);
+
     [SerializeField] private float orbitOffset = 0.5f;
     [SerializeField] private Vector2 orbitRadius = new Vector2(2.5f, 3.5f);
+
+    /* Bounce magnitude, while running and orbiting */
+    [SerializeField] private Vector2 bounceAmount = new Vector2(0.1f, 0.1f);
+    /* Bounce speed, while running and orbiting */
+    [SerializeField] private Vector2 bounceSpeed = new Vector2(0.5f, 0.1f);
     
     private MéropeFollow _companion;
     private PlayerScript _player;
@@ -25,7 +29,7 @@ public class CompanionAnchor : MonoBehaviour
         _player = GameManager.Instance.GetPlayer();
         _companion = GameObject.Find("Mérope").GetComponent<MéropeFollow>();
 
-        if (_player)
+        if (_player == null)
         {
             Debug.LogError("Player not found");
         }
@@ -44,23 +48,22 @@ public class CompanionAnchor : MonoBehaviour
         // Check if the player is running
         if (_player.IsMoving())
         {
-            _companion.SetSpeed(companionRunTime);
+            _companion.catchupSpeed = catchupSpeed.x;
+            _companion.bounceAmount = bounceAmount.x;
+            _companion.bounceSpeed = bounceSpeed.x;
             transform.localPosition = runPosition;
         }
         else if((transform.position - _companion.transform.position).magnitude < 0.5f)
         {
-            _companion.SetSpeed(companionOrbitTime);
-            //Debug.Log("Moving to another position");
+            _companion.catchupSpeed = catchupSpeed.y;
+            _companion.bounceAmount = bounceAmount.y;
+            _companion.bounceSpeed = bounceSpeed.y;
+            
             // move to another position
             int angle = Random.Range(0, 360);
             float distance = Random.Range(orbitRadius.x, orbitRadius.y);
             Vector3 newPosition = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
             transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
         }
-        
-        // Move up and down
-        float variance = (float)Math.Sin(Time.time * bounceSpeed);
-        Vector3 currentOffset = new Vector3(0, variance * floatBounce * 0.001f, 0);
-        transform.position += currentOffset;
     }
 }
