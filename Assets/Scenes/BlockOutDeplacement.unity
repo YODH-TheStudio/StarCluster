@@ -305,8 +305,8 @@ MonoBehaviour:
   _ambianceMixerGroup: {fileID: 0}
   _startingMusic: {fileID: 0}
   _startingAmbianceSound: {fileID: 0}
-  _fadeInDuration: 0
-  _fadeOutDuration: 0
+  _fadeInDuration: 2
+  _fadeOutDuration: 2
   soundFXObject: {fileID: 0}
 --- !u!82 &67255947
 AudioSource:

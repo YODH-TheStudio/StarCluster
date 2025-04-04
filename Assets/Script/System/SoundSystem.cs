@@ -123,7 +123,7 @@ public class SoundSystem : MonoBehaviour
 
             SoundFX existingSound = _SFXList.Find(sound => sound.key == key);
 
-            Debug.LogWarning(key);
+           
 
             if (existingSound != null)
             {
