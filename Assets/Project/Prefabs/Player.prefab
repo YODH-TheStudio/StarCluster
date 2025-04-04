@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4394463973321477472}
   - component: {fileID: 1073763382287237401}
   - component: {fileID: 3459468985038398683}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7132392145672990566}
   - component: {fileID: 3199749802993010078}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CompanionAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8092829088753426579}
   - component: {fileID: 9220612183794722723}
   - component: {fileID: 3383219478759058757}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -330,7 +330,6 @@ MonoBehaviour:
   _speed: 250
   _raycastDistance: 1.25
   _turnSpeed: 540
-  _interactionSwitch: {fileID: 0}
 --- !u!143 &9220612183794722723
 CharacterController:
   m_ObjectHideFlags: 0
