@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     
     
     private VibrationManager _vibrationManager { get; set; }
+    public SoundSystem _soundSystem { get; private set; }
 
     // Singleton
     private static GameManager _instance;
@@ -32,16 +33,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void FindPlayer()
-    {
-        _player = FindObjectOfType<PlayerScript>();
-    }
-
-    void FindVibrationManager()
-    {
-        _vibrationManager = FindObjectOfType<VibrationManager>();
-    }
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,6 +45,28 @@ public class GameManager : MonoBehaviour
         {
             FindVibrationManager();
         }
+
+        if (_soundSystem == null)
+        {
+            _soundSystem = FindObjectOfType<SoundSystem>();
+        }
+    }
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        Instance._soundSystem.ChangeMusicByKey("Main");
+    }
+
+    void FindPlayer()
+    {
+        _player = FindObjectOfType<PlayerScript>();
+        
+    }
+
+    void FindVibrationManager()
+    {
+        _vibrationManager = FindObjectOfType<VibrationManager>();
     }
 
     // Update is called once per frame

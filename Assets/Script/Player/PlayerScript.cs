@@ -45,6 +45,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         if (context.started)
         {
+
             if (IsGrabbing())
             {
                 SetGrabbing(false);
@@ -60,7 +61,10 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 // Does the ray intersect any objects excluding the player layer
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
                 {
+                    GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Violon");
+                    GameManager.Instance._soundSystem.ChangeMusicByKey("Doce"); 
                     _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
+                    //SoundManager.PlaySound(SoundType.None,1);
                 }
 
                 return;
