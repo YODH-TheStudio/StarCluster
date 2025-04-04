@@ -77,7 +77,7 @@ public class ObjectFade: MonoBehaviour
             }
             else
             {
-                UnfadeObject(_hits);
+                UnfadeObject(_oldHits);
 
                 foreach (GameObject obj in _toRemove)
                 {
