@@ -46,7 +46,7 @@ public class SoundSystem : MonoBehaviour
 
     [SerializeField] private AudioSource soundFXObject;
 
-    private PlayerScript _player => GameManager.Instance._player;
+    private PlayerScript _player => GameManager.Instance.GetPlayer();
 
 
 

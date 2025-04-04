@@ -35,7 +35,7 @@ public class PlayerInteractionZone : MonoBehaviour
         {
             if(hit.transform.gameObject.tag == "Interactable")
             {
-                _vibrationManager.Vibrate(100f, 0.2f); 
+                _vibrationManager.Vibrate(100f, 0.2f);
                 _interactionButton.SetActive(true);
             }
             else
