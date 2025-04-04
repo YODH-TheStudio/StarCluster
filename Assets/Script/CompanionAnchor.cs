@@ -38,7 +38,6 @@ public class CompanionAnchor : MonoBehaviour
             Debug.LogError("Companion not found");
         }
         
-        Debug.Log("CompanionAnchor Start: " + runPosition);
         transform.position = runPosition;
     }
 
