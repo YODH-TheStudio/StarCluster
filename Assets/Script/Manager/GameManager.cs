@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     private PlayerScript _player;
     
-    
     private VibrationManager _vibrationManager { get; set; }
     public SoundSystem _soundSystem { get; private set; }
 

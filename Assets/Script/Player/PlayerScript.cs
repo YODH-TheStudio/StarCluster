@@ -16,9 +16,6 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     private CharacterController _controller;
     private Vector3 _direction;
 
-    [SerializeField]
-    private InteractionSwitch _interactionSwitch;
-
     private bool _isGrabbing = false;
     private GameObject _objectGrabbed;
 
@@ -63,7 +60,6 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
                 {
                     GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Violon");
                     GameManager.Instance._soundSystem.ChangeMusicByKey("Doce"); 
-                    _interactionSwitch.InteractSwitch(this, hit.transform.gameObject);
                     //SoundManager.PlaySound(SoundType.None,1);
                 }
 
