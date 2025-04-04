@@ -20,7 +20,7 @@ MonoBehaviour:
   CustomizedName:
     ValueName: PlayerName
   UseGlobalValue: 0
-  textColor: {r: 0.21787111, g: 0.9056604, b: 0.67370003, a: 1}
+  textColor: {r: 0.6886792, g: 0.13318795, b: 0.2985044, a: 1}
   Avatars:
   - EmotionName: Left/Defualt
     Portrait:

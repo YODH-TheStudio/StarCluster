@@ -24,22 +24,25 @@ public class DialogueManagerCustom : MonoBehaviour
     private bool _isDialogue;
     
     [Header("Script References")]
-    [SerializeField]
-    private DialogueUIManager dialogueUIManager;
-    [SerializeField]
-    private DialogueManager dialogueManager;
-    private MeetAndTalk.Localization.LocalizationManager localizationManager;
+    private DialogueUIManager _dialogueUIManager;
+    private DialogueManager _dialogueManager;
+    private MeetAndTalk.Localization.LocalizationManager _localizationManager;
 
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        _dialogueManager = FindObjectOfType<DialogueManager>();
+        _dialogueUIManager = _dialogueManager.MainUI;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        StartDialogue(test);
+        if (test != null)
+        {
+        }
+            StartDialogue(test);
     }
 
     public void OnStartDialogue()
@@ -77,7 +80,7 @@ public class DialogueManagerCustom : MonoBehaviour
 
     protected virtual void OnProcessSkipDialogue() //protected virtual method
     {
-        dialogueManager.SkipDialogue();
+        _dialogueManager.SkipDialogue();
     }
     
     public void StartDialogue(DialogueContainerSO dialogueContainerParam)
@@ -96,8 +99,15 @@ public class DialogueManagerCustom : MonoBehaviour
         //
         // Move move = GameObject.FindGameObjectWithTag("Player").GetComponent<Move>();
         // move.StopMovement();
-        
-        dialogueManager.StartDialogue(dialogueContainerParam);
+
+        if (_dialogueManager != null)
+        {
+            _dialogueManager.StartDialogue(dialogueContainerParam);
+        }
+        else
+        {
+            Debug.LogError("DialogueManager is not found");
+        }
         
         //subscribe to the event
         // ProcessSkipDialogue += StartProcessSkip;
@@ -128,17 +138,17 @@ public class DialogueManagerCustom : MonoBehaviour
     
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
-        if (_isDialogue && dialogueManager.isSkippeable)
+        if (_isDialogue && _dialogueManager.isSkippeable)
         {
             //if dialogueUIManager.lastTypingTime is less than Time.time + 0.1s then skip the dialogue
-            if (dialogueUIManager.lastTypingTime < Time.time - 0.1f)
+            if (_dialogueUIManager.lastTypingTime < Time.time - 0.1f)
             {
                 StartProcessSkip();
             }
             else
             {
-                dialogueUIManager.SetFullText(dialogueUIManager.fullText);
-                dialogueUIManager.characterIndex = dialogueUIManager.fullText.Length;
+                _dialogueUIManager.SetFullText(_dialogueUIManager.fullText);
+                _dialogueUIManager.characterIndex = _dialogueUIManager.fullText.Length;
             }
         }
     }

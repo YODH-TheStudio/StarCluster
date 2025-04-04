@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866af43f4336d64419717ac521f5ed7e, type: 3}
   m_Name: MeetAndTalkSettings
   m_EditorClassIdentifier: 
-  DialoguePrefab: {fileID: 621406110542854864, guid: 519a7a2455505124ba913f8e9fad7cff, type: 3}
+  DialoguePrefab: {fileID: 5873960257087372316, guid: 07e51cc628615de4f8223102834b6578,
+    type: 3}
   Theme: 0
   AutoSave: 0
   AutoSaveInterval: 15
