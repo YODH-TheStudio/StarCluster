@@ -46,8 +46,9 @@ public class SoundSystem : MonoBehaviour
 
     [SerializeField] private AudioSource soundFXObject;
 
-    private PlayerScript _player => GameManager.Instance.GetPlayer();
+    [SerializeField] private SFXPoolManager sfxPoolManager;
 
+    private PlayerScript _player => GameManager.Instance.GetPlayer();
 
 
     private List<SoundFX> _SFXList = new List<SoundFX>();
@@ -67,7 +68,7 @@ public class SoundSystem : MonoBehaviour
         SetAudioListener(Camera.main.GetComponent<AudioListener>());
     }
 
-    protected  void Awake()
+    protected void Awake()
     {
         //base.Awake();
 
@@ -123,7 +124,7 @@ public class SoundSystem : MonoBehaviour
 
             SoundFX existingSound = _SFXList.Find(sound => sound.key == key);
 
-           
+
 
             if (existingSound != null)
             {
@@ -200,7 +201,7 @@ public class SoundSystem : MonoBehaviour
             {
                 key += char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower() + " ";
             }
-            
+
 
             key = key.Trim();
 
@@ -358,7 +359,8 @@ public class SoundSystem : MonoBehaviour
         if (audioClip != null)
         {
             Debug.Log($"Playing sound: {key}");
-            PlaySoundFXClip(audioClip, spawnPosition, volume);
+            sfxPoolManager.PlayClip(audioClip, spawnPosition, volume);
+            //PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
 
@@ -456,4 +458,5 @@ public class SoundSystem : MonoBehaviour
         audioSource.volume = volume;
     }
     #endregion
+
 }
