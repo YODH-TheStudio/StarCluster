@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -109,15 +109,32 @@ public class Puzzle2DEditor : Editor
         _rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
         _rectTransform.anchoredPosition = (_pointA + _pointB) / 2f;
 
+        // Ajout du label "Sx"
+        GameObject _labelObject = new GameObject("SegmentLabel", typeof(TextMeshProUGUI));
+        _labelObject.transform.SetParent(_lineObject.transform);
+        TextMeshProUGUI _labelText = _labelObject.GetComponent<TextMeshProUGUI>();
+
+        int segmentIndex = _segmentObjects.Count; // index du segment actuel
+        _labelText.text = "S" + segmentIndex;
+        _labelText.fontSize = 10;
+        _labelText.alignment = TextAlignmentOptions.Center;
+        _labelText.color = Color.white;
+
+        RectTransform _labelRect = _labelObject.GetComponent<RectTransform>();
+        _labelRect.sizeDelta = new Vector2(30, 20);
+        _labelRect.anchoredPosition = new Vector2(0, -10); // Sous la ligne
+
         _segmentObjects.Add(_lineObject);
         return _lineObject;
     }
+
+
 
     private void CreateSegmentsUI()
     {
         foreach (var _segment in _levelData._segments)
         {
-            CreateSimpleLine(_segment.Item1, _segment.Item2);
+            CreateSimpleLine(_segment.pointA, _segment.pointB);
         }
     }
 
@@ -145,7 +162,7 @@ public class Puzzle2DEditor : Editor
             UpdatePointPositionInUI(_i);
         }
 
-        EditorGUILayout.LabelField("Créer un Segment entre deux points:");
+        EditorGUILayout.LabelField("CrÃ©er un Segment entre deux points:");
         _selectedPointA = EditorGUILayout.Popup("Point A", _selectedPointA, GetPointNames());
         _selectedPointB = EditorGUILayout.Popup("Point B", _selectedPointB, GetPointNames());
 
@@ -162,7 +179,7 @@ public class Puzzle2DEditor : Editor
             }
             else
             {
-                Debug.LogWarning("Sélectionner deux points différents.");
+                Debug.LogWarning("SÃ©lectionner deux points diffÃ©rents.");
             }
         }
 
@@ -171,17 +188,17 @@ public class Puzzle2DEditor : Editor
         {
             var _segment = _levelData._segments[_i];
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField($"Segment {_i}: {_segment.Item1} -> {_segment.Item2}");
+            EditorGUILayout.LabelField($"Segment {_i}: {_segment.pointA} -> {_segment.pointB}");
 
             if (GUILayout.Button("Supprimer"))
             {
-                RemoveSegment(_segment.Item1, _segment.Item2);
+                RemoveSegment(_segment.pointA, _segment.pointB);
             }
 
             EditorGUILayout.EndHorizontal();
         }
 
-        if (GUILayout.Button("Réinitialiser les Segments"))
+        if (GUILayout.Button("RÃ©initialiser les Segments"))
         {
             ResetSegments();
         }
@@ -224,26 +241,23 @@ public class Puzzle2DEditor : Editor
         _levelData.RemovePoint(_point);
         DestroyImmediate(_pointObjects[_index]);
         _pointObjects.RemoveAt(_index);
-
-        _levelData._segments.RemoveAll(s => s.Item1 == _point || s.Item2 == _point);
-        ResetSegments();
         EditorUtility.SetDirty(_levelData);
     }
 
     private void ResetSegments()
     {
-        foreach (var _segmentObject in _segmentObjects)
-        {
-            DestroyImmediate(_segmentObject);
-        }
+        //foreach (var _segmentObject in _segmentObjects)
+        //{
+        //    DestroyImmediate(_segmentObject);
+        //}
 
-        _segmentObjects.Clear();
-        CreateSegmentsUI();
+        //_segmentObjects.Clear();
+        //CreateSegmentsUI();
     }
 
     private void RemoveSegment(Vector2 _pointA, Vector2 _pointB)
     {
-        int _index = _levelData._segments.FindIndex(seg => seg.Item1 == _pointA && seg.Item2 == _pointB);
+        int _index = _levelData._segments.FindIndex(seg => seg.pointA == _pointA && seg.pointB == _pointB);
         if (_index >= 0)
         {
             _levelData.RemoveSegment(_pointA, _pointB);

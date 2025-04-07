@@ -66,7 +66,7 @@ public class EnigmeSocle : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Objet non assigné pour le socle à {socleGlobalPosition}.");
+                //Debug.LogWarning($"Objet non assigné pour le socle à {socleGlobalPosition}.");
             }
         }
 
@@ -93,7 +93,7 @@ public class EnigmeSocle : MonoBehaviour
 
     protected virtual void OnEnigmeSolved()
     {
-        Debug.Log("L'énigme est résolue!");
+        //Debug.Log("L'énigme est résolue!");
     }
 
     private void OnDrawGizmos()

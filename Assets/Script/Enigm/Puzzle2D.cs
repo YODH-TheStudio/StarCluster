@@ -1,186 +1,292 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class Puzzle2D : MonoBehaviour
 {
-    public Canvas canvas;
-    public Color pointColor = Color.green;
-    public Color lineColor = Color.red;
-    public int numberOfPoints = 100;
+    public Canvas _canvas;
+    public LevelData _levelData;
+    public Color _pointColor = Color.green;
+    public Color _lineColor = Color.red;
+    public Color _coloredLineColor = Color.blue; // Lignes colorées supplémentaires (par exemple, bleu)
 
-    private RectTransform playArea;
-    private List<RectTransform> points = new List<RectTransform>();
-    private RectTransform currentPoint;
-    private Dictionary<(RectTransform, RectTransform), GameObject> connections = new Dictionary<(RectTransform, RectTransform), GameObject>();
+    private RectTransform _playArea;
+    private List<RectTransform> _pointObjects = new List<RectTransform>();
+    private Dictionary<Vector2, RectTransform> _pointMap = new Dictionary<Vector2, RectTransform>();
+    private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines = new Dictionary<(Vector2, Vector2), GameObject>();  // Lignes rouges existantes
+    private Dictionary<(Vector2, Vector2), GameObject> _activeColoredLines = new Dictionary<(Vector2, Vector2), GameObject>();  // Lignes colorées supplémentaires
 
-    private void Start()
+    private Vector2? _currentSelected = null;
+
+    // Tableaux locaux pour gérer les segments et points actuels
+    private List<Vector2> _currentPoints = new List<Vector2>();
+    private List<(Vector2, Vector2)> _currentSegments = new List<(Vector2, Vector2)>();
+
+    private float _pointRadius = 7.5f;
+    private GameObject _menuContainer;
+
+    // Circuit
+    private int _currentCircuitSelected;
+
+
+    void Start()
     {
-        CreateBackground();
-        GeneratePoints();
-    }
-
-    private void CreateBackground()
-    {
-        GameObject background = new GameObject("Background", typeof(Image));
-        Image backgroundImage = background.GetComponent<Image>();
-        backgroundImage.color = new Color(0f, 0f, 0f, 0.8f);
-
-        playArea = background.GetComponent<RectTransform>();
-        playArea.SetParent(canvas.transform);
-        playArea.sizeDelta = new Vector2(Screen.width * 0.6f, Screen.height * 0.6f);
-        playArea.anchorMin = new Vector2(0.5f, 0.5f);
-        playArea.anchorMax = new Vector2(0.5f, 0.5f);
-        playArea.anchoredPosition = Vector2.zero;
-    }
-
-    private void GeneratePoints()
-    {
-        int rows = Mathf.CeilToInt(Mathf.Sqrt(numberOfPoints));
-        int cols = Mathf.CeilToInt(Mathf.Sqrt(numberOfPoints));
-        float spacingX = playArea.sizeDelta.x / cols;
-        float spacingY = playArea.sizeDelta.y / rows;
-
-        for (int i = 0; i < numberOfPoints; i++)
+        Debug.Log($"[Puzzle2D] Points trouvés dans LevelData: {_levelData._points.Count}");
+        foreach (var _p in _levelData._points)
         {
-            int row = i / cols;
-            int col = i % cols;
-            float x = (col + 0.5f) * spacingX - (playArea.sizeDelta.x / 2);
-            float y = (row + 0.5f) * spacingY - (playArea.sizeDelta.y / 2);
-            CreatePoint(x, y);
+            Debug.Log($"Point: {_p}");
+        }
+
+        Debug.Log($"[Puzzle2D] Segments trouvés dans LevelData: {_levelData._segments.Count}");
+        foreach (var _seg in _levelData._segments)
+        {
+            Debug.Log($"Segment: ({_seg.pointA}, {_seg.pointB})");
+        }
+
+        CreatePlayArea();
+        CreateMenu(); // Créer le menu
+        InstantiatePoints();
+        InstantiateSegments();
+    }
+
+    private void CreatePlayArea()
+    {
+        GameObject _bg = new GameObject("PlayArea", typeof(Image));
+        _bg.transform.SetParent(_canvas.transform);
+        RectTransform _rect = _bg.GetComponent<RectTransform>();
+        _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
+        _rect.pivot = new Vector2(0.5f, 0.5f);
+        _rect.anchoredPosition = Vector2.zero;
+        _rect.sizeDelta = new Vector2(600, 600); // fixe, ou dynamique
+
+        Image _img = _bg.GetComponent<Image>();
+        _img.color = new Color(0, 0, 0, 0.8f);
+
+        _playArea = _rect;
+    }
+
+    // Méthode pour créer le menu horizontal
+    private void CreateMenu()
+    {
+        // Créer un container pour le menu
+        _menuContainer = new GameObject("MenuContainer");
+        _menuContainer.transform.SetParent(_canvas.transform);
+        RectTransform _menuRect = _menuContainer.AddComponent<RectTransform>();
+        _menuRect.anchorMin = _menuRect.anchorMax = new Vector2(0.5f, 1);
+        _menuRect.pivot = new Vector2(0.5f, 1);
+        _menuRect.anchoredPosition = new Vector2(0, -50); // Placer le menu un peu plus bas
+        _menuRect.sizeDelta = new Vector2(600, 50); // Taille du menu
+
+        // Ajouter un layout horizontal pour organiser les boutons
+        HorizontalLayoutGroup _layoutGroup = _menuContainer.AddComponent<HorizontalLayoutGroup>();
+        _layoutGroup.spacing = 10; // Espacement entre les boutons
+        _layoutGroup.childAlignment = TextAnchor.MiddleCenter;
+        _layoutGroup.childForceExpandWidth = false;
+
+        // Ajouter 5 boutons
+        for (int _i = 0; _i < 5; _i++)
+        {
+            CreateMenuButton(_i);
         }
     }
 
-    private void CreatePoint(float x, float y)
+    // Méthode pour créer un bouton du menu
+    private void CreateMenuButton(int _index)
     {
-        GameObject newPoint = new GameObject("Point", typeof(Image));
-        Image pointImage = newPoint.GetComponent<Image>();
-        pointImage.color = pointColor;
+        // Créer un bouton
+        GameObject _buttonObj = new GameObject($"CircuitButton_{_index}", typeof(Button), typeof(RectTransform), typeof(Text));
+        _buttonObj.transform.SetParent(_menuContainer.transform);
 
-        RectTransform pointRect = newPoint.GetComponent<RectTransform>();
-        pointRect.SetParent(playArea);
-        pointRect.sizeDelta = new Vector2(15, 15);
-        pointRect.anchoredPosition = new Vector2(x, y);
-        points.Add(pointRect);
+        Button _button = _buttonObj.GetComponent<Button>();
+        Text _buttonText = _buttonObj.GetComponent<Text>();
+        _buttonText.text = $"Circuit {_index + 1}";
+        _buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // Police par défaut
+
+        _button.onClick.AddListener(() => OnCircuitButtonClicked(_index));
     }
 
-    private void Update()
+    // Méthode pour gérer le clic sur un bouton de circuit
+    private void OnCircuitButtonClicked(int _index)
     {
-        if (Input.GetMouseButtonDown(0))
+        Debug.Log($"Circuit {_index + 1} sélectionné");
+        _currentCircuitSelected = _index;
+    }
+
+    private void InstantiatePoints()
+    {
+        foreach (Vector2 _pos in _levelData._points)
         {
-            Vector2 mousePosition = Input.mousePosition;
-            foreach (var point in points)
+            GameObject _pointGO = new GameObject("Point", typeof(Image), typeof(Button));
+            _pointGO.transform.SetParent(_playArea);
+            RectTransform _rt = _pointGO.GetComponent<RectTransform>();
+            _rt.anchorMin = _rt.anchorMax = new Vector2(0.5f, 0.5f);
+            _rt.sizeDelta = new Vector2(15, 15);
+            _rt.anchoredPosition = _pos;
+
+            _pointGO.GetComponent<Image>().color = _pointColor;
+
+            Button _btn = _pointGO.GetComponent<Button>();
+            Vector2 _capturedPos = _pos;
+            _btn.onClick.AddListener(() => OnPointClicked(_capturedPos));
+
+            _pointObjects.Add(_rt);
+            _pointMap[_pos] = _rt;
+        }
+
+        // Ajouter les points au tableau local
+        _currentPoints.AddRange(_levelData._points);
+    }
+
+    private void InstantiateSegments()
+    {
+        foreach (var _segment in _levelData._segments)
+        {
+            Vector2 _a = _segment.pointA;
+            Vector2 _b = _segment.pointB;
+
+            if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b))
             {
-                if (RectTransformUtility.RectangleContainsScreenPoint(point, mousePosition))
-                {
-                    OnPointClicked(point);
-                    return;
-                }
+                Debug.LogWarning($"Un des points du segment ({_a}, {_b}) n'existe pas dans _pointMap.");
+                continue;
             }
-        }
 
-        CheckLineIntersections();
+            DrawLine(_a, _b);
+            _currentSegments.Add((_a, _b));
+        }
     }
 
-    private void OnPointClicked(RectTransform clickedPoint)
+    private void OnPointClicked(Vector2 _point)
     {
-        if (currentPoint == null)
+        Debug.Log($"[OnPointClicked] Point cliqué : {_point}");
+
+        if (_currentSelected == null)
         {
-            currentPoint = clickedPoint;
+            Debug.Log("[OnPointClicked] Aucun point sélectionné, sélection du point actuel.");
+            _currentSelected = _point;
         }
         else
         {
-            if (ArePointsConnected(currentPoint, clickedPoint))
+            if (_currentSelected == _point)
             {
-                UnlinkPoints(currentPoint, clickedPoint);
+                Debug.Log("[OnPointClicked] Le point cliqué est le même que le point sélectionné, désélection.");
+                _currentSelected = null;
+                return;
             }
-            else
+
+            Debug.Log($"[OnPointClicked] Sélection d'un segment entre {_currentSelected.Value} et {_point}");
+
+            // Vérifier si le segment existe dans _levelData._segments (lignes rouges)
+            bool _isSegmentRed = _levelData._segments.Exists(_segment =>
+                (_segment.pointA == _currentSelected.Value && _segment.pointB == _point) ||
+                (_segment.pointA == _point && _segment.pointB == _currentSelected.Value)
+            );
+
+            Debug.Log($"[OnPointClicked] Segment rouge trouvé ? {_isSegmentRed}");
+
+            // Si le segment est rouge, superposer une ligne colorée sans modifier la ligne rouge existante
+            if (_isSegmentRed)
             {
-                LinkPoints(currentPoint, clickedPoint);
-            }
-            currentPoint = null;
-        }
-    }
-
-    private void LinkPoints(RectTransform start, RectTransform end)
-    {
-        GameObject newLine = new GameObject("Line", typeof(Image));
-        Image lineImage = newLine.GetComponent<Image>();
-        lineImage.color = lineColor;
-        RectTransform lineRect = newLine.GetComponent<RectTransform>();
-
-        Vector2 startPos = start.anchoredPosition;
-        Vector2 endPos = end.anchoredPosition;
-        Vector2 direction = endPos - startPos;
-        float distance = direction.magnitude;
-
-        lineRect.SetParent(playArea);
-        lineRect.anchoredPosition = startPos + direction / 2;
-        lineRect.sizeDelta = new Vector2(distance, 5);
-        lineRect.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-
-        connections[(start, end)] = newLine;
-        connections[(end, start)] = newLine;
-    }
-
-    private void UnlinkPoints(RectTransform start, RectTransform end)
-    {
-        if (connections.TryGetValue((start, end), out GameObject line))
-        {
-            Destroy(line);
-            connections.Remove((start, end));
-            connections.Remove((end, start));
-        }
-    }
-
-    private bool ArePointsConnected(RectTransform start, RectTransform end)
-    {
-        return connections.ContainsKey((start, end));
-    }
-
-
-    private void CheckLineIntersections()
-    {
-        List<(RectTransform, RectTransform)> linePairs = new List<(RectTransform, RectTransform)>(connections.Keys);
-        for (int i = 0; i < linePairs.Count; i++)
-        {
-            for (int j = i + 1; j < linePairs.Count; j++)
-            {
-                if (DoLinesIntersect(linePairs[i], linePairs[j]))
+                if (_activeColoredLines.ContainsKey((_currentSelected.Value, _point)) || _activeColoredLines.ContainsKey((_point, _currentSelected.Value)))
                 {
-                    Debug.Log("Intersection détectée entre " + linePairs[i] + " et " + linePairs[j]);
+                    Debug.Log($"[OnPointClicked] Le segment entre {_currentSelected.Value} et {_point} existe déjà. Suppression de la ligne colorée.");
+                    // Si la ligne colorée existe déjà, on la supprime
+                    RemoveLine(_currentSelected.Value, _point);
+                    _currentSegments.Remove((_currentSelected.Value, _point));
+                }
+                else
+                {
+                    Debug.Log($"[OnPointClicked] Le segment entre {_currentSelected.Value} et {_point} n'est pas encore dessiné. Ajout de la ligne colorée.");
+                    // Si le segment existe mais n'est pas encore dessiné, on l'ajoute
+                    DrawColoredLine(_currentSelected.Value, _point);
+                    _currentSegments.Add((_currentSelected.Value, _point));
                 }
             }
+
+            // Réinitialiser la sélection après l'ajout ou la suppression de ligne
+            _currentSelected = null;
         }
     }
 
-    private bool DoLinesIntersect((RectTransform, RectTransform) line1, (RectTransform, RectTransform) line2)
+    private void DrawColoredLine(Vector2 _a, Vector2 _b)
     {
-        Vector2 A = line1.Item1.anchoredPosition;
-        Vector2 B = line1.Item2.anchoredPosition;
-        Vector2 C = line2.Item1.anchoredPosition;
-        Vector2 D = line2.Item2.anchoredPosition;
+        if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b)) return;
 
-        // Appel de la fonction pour vérifier les intersections, en excluant les cas où les segments partagent un point.
-        return LineSegmentsIntersect(A, B, C, D) && !SegmentsSharePoint(A, B, C, D);
+        // Calculer l'extrémité des points en prenant en compte le rayon
+        Vector2 _aExtremity = GetPointExtremity(_a, _b);
+        Vector2 _bExtremity = GetPointExtremity(_b, _a);
+
+        GameObject _line = new GameObject("ColoredLine", typeof(Image));
+        _line.transform.SetParent(_playArea);
+        RectTransform _rt = _line.GetComponent<RectTransform>();
+
+        Vector2 _dir = _bExtremity - _aExtremity;
+
+        _rt.sizeDelta = new Vector2(_dir.magnitude, 5);
+        _rt.anchoredPosition = _aExtremity + _dir / 2;
+        _rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg);
+
+        // Appliquer la couleur spécifique du circuit sélectionné
+        _line.GetComponent<Image>().color = GetCircuitColor();
+
+        _activeColoredLines[(_a, _b)] = _line;
+        _activeColoredLines[(_b, _a)] = _line;
     }
 
-    private bool LineSegmentsIntersect(Vector2 A, Vector2 B, Vector2 C, Vector2 D)
+    private void DrawLine(Vector2 _a, Vector2 _b)
     {
-        float denominator = (B.x - A.x) * (D.y - C.y) - (B.y - A.y) * (D.x - C.x);
-        if (denominator == 0) return false; // Les segments sont parallèles
+        if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b)) return;
 
-        float numerator1 = (A.y - C.y) * (D.x - C.x) - (A.x - C.x) * (D.y - C.y);
-        float numerator2 = (A.y - C.y) * (B.x - A.x) - (A.x - C.x) * (B.y - A.y);
+        // Calculer l'extrémité des points en prenant en compte le rayon
+        Vector2 _aExtremity = GetPointExtremity(_a, _b);
+        Vector2 _bExtremity = GetPointExtremity(_b, _a);
 
-        float r = numerator1 / denominator;
-        float s = numerator2 / denominator;
+        GameObject _line = new GameObject("Line", typeof(Image));
+        _line.transform.SetParent(_playArea);
+        RectTransform _rt = _line.GetComponent<RectTransform>();
 
-        return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+        Vector2 _dir = _bExtremity - _aExtremity;
+
+        _rt.sizeDelta = new Vector2(_dir.magnitude, 5);
+        _rt.anchoredPosition = _aExtremity + _dir / 2;
+        _rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg);
+
+        _line.GetComponent<Image>().color = _lineColor;
+
+        _activeRedLines[(_a, _b)] = _line;
+        _activeRedLines[(_b, _a)] = _line;
     }
 
-    private bool SegmentsSharePoint(Vector2 A, Vector2 B, Vector2 C, Vector2 D)
+    private Vector2 GetPointExtremity(Vector2 _point, Vector2 _direction)
     {
-        return (A == C || A == D || B == C || B == D);
+        // Trouver le vecteur direction normalisé
+        Vector2 _dir = _direction - _point;
+        _dir.Normalize();
+
+        // Appliquer le rayon pour obtenir l'extrémité du point
+        return _point + _dir * _pointRadius;
+    }
+
+    private void RemoveLine(Vector2 _a, Vector2 _b)
+    {
+        if (_activeColoredLines.TryGetValue((_a, _b), out GameObject _line))
+        {
+            Destroy(_line);
+            _activeColoredLines.Remove((_a, _b));
+            _activeColoredLines.Remove((_b, _a));
+        }
+    }
+
+    private Color GetCircuitColor()
+    {
+        switch (_currentCircuitSelected)
+        {
+            case 0: return Color.green;  // Circuit 1 - vert
+            case 1: return Color.blue;   // Circuit 2 - bleu
+            case 2: return Color.yellow; // Circuit 3 - jaune
+            case 3: return Color.cyan;   // Circuit 4 - cyan
+            case 4: return Color.magenta; // Circuit 5 - magenta
+            default: return Color.white; // Par défaut
+        }
     }
 }
