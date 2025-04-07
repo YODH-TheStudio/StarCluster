@@ -31,6 +31,10 @@ namespace MeetAndTalk
         public Slider TimerSlider;
         public GameObject SkipButton;
         public GameObject GoBackButton;
+        public GameObject DialogueBoxLeft;
+        public GameObject DialogueBoxRight;
+        public GameObject NameLeft;
+        public GameObject NameRight;
 
         [Header("Dynamic Dialogue UI")]
         public List<ChoiceTypeButton> BtnPrefabs = new List<ChoiceTypeButton>();
@@ -181,7 +185,20 @@ namespace MeetAndTalk
             {
                 if (Position != PortraitPosition.None)
                 {
-                    Debug.Log(Position);
+                    if (Position == PortraitPosition.Primary || Position == PortraitPosition.PrimaryDist)
+                    {
+                        DialogueBoxLeft.SetActive(true);
+                        DialogueBoxRight.SetActive(false);
+                        NameLeft.SetActive(true);
+                        NameRight.SetActive(false);
+                    }else if (Position == PortraitPosition.Secoundary || Position == PortraitPosition.SecoundaryDist)
+                    {
+                        DialogueBoxLeft.SetActive(false);
+                        DialogueBoxRight.SetActive(true);
+                        NameLeft.SetActive(false);
+                        NameRight.SetActive(true);
+                    }
+                    
                     PortraitUIClass ui = Portraits.Find(d => d.Position == Position);
                     if (ui != null)
                     {
