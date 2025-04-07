@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
@@ -12,6 +14,9 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 
     [SerializeField]
     private float _turnSpeed = 360.0f;
+
+    [SerializeField]
+    private List<PlayerParticle> _particle;
 
     private CharacterController _controller;
     private Vector3 _direction;
@@ -87,6 +92,15 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         Look();
+
+        if (_direction != Vector3.zero)
+        {
+            
+        }
+        else if (_direction == Vector3.zero) 
+        {
+            
+        }
 
         if (IsGrabbing())
         {
