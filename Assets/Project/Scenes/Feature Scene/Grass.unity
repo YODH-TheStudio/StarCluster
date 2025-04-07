@@ -2405,6 +2405,7 @@ GameObject:
   - component: {fileID: 1451818162}
   - component: {fileID: 1451818164}
   - component: {fileID: 1451818163}
+  - component: {fileID: 1451818165}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2487,6 +2488,20 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!182 &1451818165
+WindZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451818161}
+  m_Enabled: 1
+  m_Mode: 1
+  m_Radius: 48.02
+  m_WindMain: 1
+  m_WindTurbulence: 1
+  m_WindPulseMagnitude: 0.5
+  m_WindPulseFrequency: 0.01
 --- !u!1 &1481191094
 GameObject:
   m_ObjectHideFlags: 0
