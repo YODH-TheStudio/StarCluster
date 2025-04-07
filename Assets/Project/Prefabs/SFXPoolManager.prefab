@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676e27fd22f2510489353e37d221db64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundFXPrefab: {fileID: 3471805427384184271, guid: e9b6ef47231e65648bbfd883d8ab1d88,
+  sfxPrefab: {fileID: 8012898631253316200, guid: e9b6ef47231e65648bbfd883d8ab1d88,
     type: 3}
   poolSize: 10

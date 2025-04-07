@@ -4,54 +4,37 @@ using UnityEngine;
 
 public class SFXPoolManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource soundFXPrefab;
-    [SerializeField] private int poolSize = 10;
+    public GameObject sfxPrefab;
+    public int poolSize = 10;
 
-    private List<AudioSource> _pool = new List<AudioSource>();
+    private Queue<AudioSource> availableSources = new Queue<AudioSource>();
 
-    private void Awake()
+    void Awake()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            AudioSource source = Instantiate(soundFXPrefab, transform);
-            source.gameObject.SetActive(false);
-            _pool.Add(source);
+            GameObject obj = Instantiate(sfxPrefab, transform);
+            obj.SetActive(false);
+            AudioSource source = obj.GetComponent<AudioSource>();
+            if (source == null)
+            {
+                Debug.LogError("Le prefab ne contient pas d'AudioSource !");
+            }
+            availableSources.Enqueue(source);
         }
     }
 
-    private AudioSource GetAvailableSource()
+    public AudioSource GetAvailableSource()
     {
-        foreach (var source in _pool)
+        if (availableSources.Count > 0)
         {
-            if (!source.gameObject.activeInHierarchy)
-                return source;
+            return availableSources.Dequeue();
         }
-
-        Debug.LogWarning("[SoundFXPoolManager] Aucun AudioSource dispo dans le pool ! Son SFX ignoré.");
-        //return null;
-        AudioSource extra = Instantiate(soundFXPrefab, transform);
-        extra.gameObject.SetActive(false);
-        _pool.Add(extra);
-        return extra;
-    }
-
-    public void PlayClip(AudioClip clip, Vector3 position, float volume = 1.0f)
-    {
-        if (clip == null) return;
-
-        AudioSource source = GetAvailableSource();
-
-        //AudioSource source = GetAvailableSource();
-        //if (source == null) return; // On arrête ici si aucun n’est dispo
-
-
-        source.transform.position = position;
-        source.clip = clip;
-        source.volume = volume;
-        source.loop = false;
-        source.gameObject.SetActive(true);
-        source.Play();
-        StartCoroutine(DisableAfterPlay(source, clip.length));
+        else
+        {
+            Debug.LogWarning("SFXPoolManager: Pas de sources disponibles !");
+            return null;
+        }
     }
 
     private IEnumerator DisableAfterPlay(AudioSource source, float duration)
@@ -60,5 +43,27 @@ public class SFXPoolManager : MonoBehaviour
         source.Stop();
         source.clip = null;
         source.gameObject.SetActive(false);
+        availableSources.Enqueue(source); // IMPORTANT : On remet la source dans la pool
+    }
+
+    public void PlayClip(AudioClip clip, Vector3 position, float volume = 1.0f)
+    {
+        if (clip == null)
+        {
+            Debug.LogWarning("AudioClip is null!");
+            return;
+        }
+        Debug.Log("Clip à jouer : " + clip.name);
+
+        AudioSource source = GetAvailableSource();
+        if (source == null) return; // Sécurité au cas où la pool est vide
+
+        source.transform.position = position;
+        source.clip = clip;
+        source.volume = volume;
+        source.loop = false;
+        source.gameObject.SetActive(true);
+        source.Play();
+        StartCoroutine(DisableAfterPlay(source, clip.length));
     }
 }
