@@ -890,6 +890,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627802940}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &634840724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8994400159778986238, guid: f9aa99616444f83478f2aecd56ed730e,
+    type: 3}
+  m_PrefabInstance: {fileID: 972023340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1270,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 972023340}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &849489312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634840724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793fd5ab9c565e848bc3795a8560dd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassShader: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,7 +1546,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8994400159778986238, guid: f9aa99616444f83478f2aecd56ed730e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 849489312}
   m_SourcePrefab: {fileID: 100100000, guid: f9aa99616444f83478f2aecd56ed730e, type: 3}
 --- !u!1 &1278727935
 GameObject:
@@ -2450,7 +2473,6 @@ GameObject:
   - component: {fileID: 1451818162}
   - component: {fileID: 1451818164}
   - component: {fileID: 1451818163}
-  - component: {fileID: 1451818165}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2533,20 +2555,6 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
---- !u!182 &1451818165
-WindZone:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451818161}
-  m_Enabled: 0
-  m_Mode: 0
-  m_Radius: 20
-  m_WindMain: 1
-  m_WindTurbulence: 1
-  m_WindPulseMagnitude: 0.5
-  m_WindPulseFrequency: 0.01
 --- !u!1 &1481191094
 GameObject:
   m_ObjectHideFlags: 0
