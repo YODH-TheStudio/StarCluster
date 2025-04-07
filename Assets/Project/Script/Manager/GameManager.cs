@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     private PlayerScript _player;
+    private CompanionFollow _companion;
     
     private VibrationManager _vibrationManager { get; set; }
     public SoundSystem _soundSystem { get; private set; }
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             FindPlayer();
         }
+        if (_companion == null)
+        {
+            FindCompanion();
+        }
 
         if (_vibrationManager == null)
         {
@@ -60,7 +65,11 @@ public class GameManager : MonoBehaviour
     void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
-        
+    }
+    
+    void FindCompanion()
+    {
+        _companion = FindObjectOfType<CompanionFollow>();
     }
 
     void FindVibrationManager()
@@ -81,6 +90,15 @@ public class GameManager : MonoBehaviour
             FindPlayer();
         }
         return _player;
+    }
+    
+    public CompanionFollow GetCompanion()
+    {
+        if (_companion == null)
+        {
+            FindCompanion();
+        }
+        return _companion;
     }
 
     public VibrationManager GetVibrationManager()

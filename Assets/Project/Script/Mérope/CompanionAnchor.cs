@@ -19,14 +19,14 @@ public class CompanionAnchor : MonoBehaviour
     /* Bounce speed, while running and orbiting */
     [SerializeField] private Vector2 bounceSpeed = new Vector2(0.5f, 0.1f);
     
-    private MéropeFollow _companion;
+    private CompanionFollow _companion;
     private PlayerScript _player;
     
     // Start is called before the first frame update
     void Start()
     {
         _player = GameManager.Instance.GetPlayer();
-        _companion = GameObject.Find("Mérope").GetComponent<MéropeFollow>();
+        _companion = GameManager.Instance.GetCompanion();
 
         if (_player == null)
         {
