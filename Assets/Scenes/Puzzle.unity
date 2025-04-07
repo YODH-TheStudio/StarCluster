@@ -1648,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &844171756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2145,10 +2145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8746e015c0da5034d8d8bfa85892b2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1867283244}
-  levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
-  pointColor: {r: 0, g: 1, b: 0, a: 1}
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  _canvas: {fileID: 1867283244}
+  _levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
+  _pointColor: {r: 0, g: 1, b: 0, a: 1}
+  _lineColor: {r: 1, g: 0, b: 0, a: 1}
+  _coloredLineColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!4 &1216459803
 Transform:
   m_ObjectHideFlags: 0
@@ -2495,6 +2496,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Floating Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
