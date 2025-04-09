@@ -1,5 +1,5 @@
 // Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
-Shader "Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass"
+Shader "Hidden/TerrainEngine/Details/WavingDoublePass"
 {
     Properties
     {
