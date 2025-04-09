@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
 
     public KeyCode _key = KeyCode.Space;
+    public KeyCode _keytoo = KeyCode.P;
 
     public static GameManager Instance
     {
@@ -78,12 +79,22 @@ public class GameManager : MonoBehaviour
         {
             PlayTestSFX();
         }
+        else if (Input.GetKeyUp(_keytoo))
+        {
+            PlayTestSFXToo();
+        }
     }
 
     void PlayTestSFX()
     {
         Vector3 spawnPosition = transform.position;
         Instance._soundSystem.PlaySoundFXClipByKey("Violon", spawnPosition);
+        Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
+    }   
+    void PlayTestSFXToo()
+    {
+        Vector3 spawnPosition = transform.position;
+        Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
         Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
     }
 
