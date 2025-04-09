@@ -153,7 +153,9 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
         }
         Destroy(_particle, 2);
 
-        _particle = Instantiate(particle, Vector3.zero, Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
+        Quaternion _particleAngle = gameObject.transform.rotation * Quaternion.AngleAxis(180, new Vector3(0, 1, 0));
+
+        _particle = Instantiate(particle, Vector3.zero, _particleAngle);
         _particle.GetComponent<ParticleSystem>().enableEmission = true;
         _particle.transform.SetParent(gameObject.transform);
         _particle.transform.localPosition = _particleStartPos;
