@@ -105,8 +105,7 @@ half4 TerrainWaveGrass (inout float4 vertex, float waveAmount, half4 color)
     float grassDisplacementFalloff = 0.7;
     float influence = saturate(1.0 - dist * grassDisplacementFalloff);
     //influence = sin(_Time.y * 2.0);
-    color = lerp(color, half4(0.0, 1.0, 0.0, 1.0), influence);
-    vertex.y -= influence * 1; // Vertical displacement
+    vertex.y -= influence; // Vertical displacement
 
     return half4(2 * waveColor * color.rgb, color.a);
 }
