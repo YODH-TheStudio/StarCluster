@@ -11,10 +11,10 @@ public enum AxisOptions { Both, Horizontal, Vertical }
 
 public class PlayerJoystick : MonoBehaviour
 {
-
     [SerializeField] protected RectTransform _background = null;
     [SerializeField] private RectTransform _handle = null;
     [SerializeField] private float _movementRange;
+    [SerializeField] private List<StateManager.PlayerState> _allowedStates = new List<StateManager.PlayerState>();
 
     private PlayerScript _player = null;
     private Finger _MovementFinger;
@@ -44,6 +44,7 @@ public class PlayerJoystick : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
@@ -58,6 +59,21 @@ public class PlayerJoystick : MonoBehaviour
         EnhancedTouchSupport.Disable();
     }
 
+    private void HandleStateChanged(StateManager.PlayerState newState)
+    {
+        //check if the new state is in the allowed states
+        if (_allowedStates.Count > 0)
+        {
+            if (_allowedStates.Contains(newState))
+            {
+                EnhancedTouchSupport.Enable();
+            }else
+            {
+                EnhancedTouchSupport.Disable();
+            }
+        }
+    }
+    
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
         if(_MovementFinger == null && TouchedFinger.screenPosition.x <= Screen.width / 2f)

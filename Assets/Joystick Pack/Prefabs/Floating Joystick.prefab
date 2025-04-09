@@ -89,10 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c459721b39f314e90adb840efcb8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handleRange: 1
-  deadZone: 0
-  background: {fileID: 8170153792821263258}
-  handle: {fileID: 8170153791961219456}
+  _background: {fileID: 0}
+  _handle: {fileID: 0}
+  _movementRange: 0
+  _allowedStates: 0000000001000000
 --- !u!1 &8170153791961219457
 GameObject:
   m_ObjectHideFlags: 0

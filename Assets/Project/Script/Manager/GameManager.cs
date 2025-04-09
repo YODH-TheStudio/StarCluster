@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     
     private VibrationManager _vibrationManager { get; set; }
     public SoundSystem _soundSystem { get; private set; }
+    public StateManager _stateManager { get; private set; }
 
     // Singleton
     private static GameManager _instance;
@@ -49,6 +51,11 @@ public class GameManager : MonoBehaviour
         {
             _soundSystem = FindObjectOfType<SoundSystem>();
         }
+        
+        if (_stateManager == null)
+        {
+            FindStateManager();
+        }
     }
     
     // Start is called before the first frame update
@@ -60,12 +67,16 @@ public class GameManager : MonoBehaviour
     void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
-        
     }
 
     void FindVibrationManager()
     {
         _vibrationManager = FindObjectOfType<VibrationManager>();
+    }
+
+    void FindStateManager()
+    {
+        _stateManager = FindObjectOfType<StateManager>();
     }
 
     // Update is called once per frame
@@ -90,5 +101,14 @@ public class GameManager : MonoBehaviour
             FindVibrationManager();
         }
         return _vibrationManager;
+    }
+
+    public StateManager GetStateManager()
+    {
+        if (_stateManager == null)
+        {
+            FindStateManager();
+        }
+        return _stateManager;
     }
 }
