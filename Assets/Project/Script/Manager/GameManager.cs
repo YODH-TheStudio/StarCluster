@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     private PlayerScript _player;
+    private CompanionFollow _companion;
     
     private VibrationManager _vibrationManager { get; set; }
     public SoundSystem _soundSystem { get; private set; }
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
         {
             FindPlayer();
         }
+        if (_companion == null)
+        {
+            FindCompanion();
+        }
 
         if (_vibrationManager == null)
         {
@@ -71,6 +76,11 @@ public class GameManager : MonoBehaviour
     void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
+    }
+    
+    void FindCompanion()
+    {
+        _companion = FindObjectOfType<CompanionFollow>();
     }
 
     void FindVibrationManager()
@@ -100,13 +110,13 @@ public class GameManager : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position;
         Instance._soundSystem.PlaySoundFXClipByKey("Violon", spawnPosition);
-        Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
+        Debug.Log("SFX 'Violon' lancï¿½ ï¿½ la position : " + spawnPosition);
     }   
     void PlayTestSFXToo()
     {
         Vector3 spawnPosition = transform.position;
         Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
-        Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
+        Debug.Log("SFX 'Violon' lancï¿½ ï¿½ la position : " + spawnPosition);
     }
 
 
@@ -117,6 +127,15 @@ public class GameManager : MonoBehaviour
             FindPlayer();
         }
         return _player;
+    }
+    
+    public CompanionFollow GetCompanion()
+    {
+        if (_companion == null)
+        {
+            FindCompanion();
+        }
+        return _companion;
     }
 
     public VibrationManager GetVibrationManager()

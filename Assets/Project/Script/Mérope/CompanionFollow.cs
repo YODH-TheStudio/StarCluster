@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MéropeFollow : MonoBehaviour
+public class CompanionFollow : MonoBehaviour
 {
     private PlayerScript _player;
     
