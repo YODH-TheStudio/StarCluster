@@ -9,12 +9,14 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     // Player Controler Variable 
     [SerializeField]
     private float _speed = 250.0f;
+    [SerializeField]
+    private float _turnSpeed = 360.0f;
 
     [SerializeField]
     private float _raycastDistance = 1.25f;
 
     [SerializeField]
-    private float _turnSpeed = 360.0f;
+    private Animator _playerAnimator;
 
     [SerializeField]
     private Vector3 _particleStartPos;
@@ -97,7 +99,16 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     // Update is called once per frame
     void FixedUpdate()
     {
-        _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+        if (_direction != Vector3.zero)
+        {
+            _playerAnimator.SetBool("IsMoving", true);
+        }
+        else if (_direction == Vector3.zero)
+        {
+            _playerAnimator.SetBool("IsMoving", false);
+        }
+
+            _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         Look();
 
         if(_particle != null)
