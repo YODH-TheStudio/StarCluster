@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Meet and Talk/Script/AutoTranslate.cs.meta
 guid: 17710f53228437948a8407442432d95f
+========
+guid: b32fd7190493f354d9adc816114f5995
+>>>>>>>> CasseTete3D:Assets/Project/Script/Enigm/EnigmSocle.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Project/Script/Camera/ObjectFade.cs.meta
-guid: 1b34224fef2529648ad73fcd9af2d266
+<<<<<<<< HEAD:Assets/Meet and Talk/Script/AutoTranslate.cs.meta
+guid: 28c6ce4629ec948469599c28b16978ee
 ========
-guid: 8746e015c0da5034d8d8bfa85892b2b7
->>>>>>>> CasseTete3D:Assets/Project/Script/Enigm/Puzzle2D.cs.meta
+guid: b32fd7190493f354d9adc816114f5995
+>>>>>>>> CasseTete3D:Assets/Project/Script/Enigm/EnigmSocle.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Project/Script/System/SoundSystem.cs.meta
 guid: e5bf6f39f818ff44dbc0151090c06753
+========
+guid: 28c9a6bdd7f996d4e961c19f6e2e0edd
+>>>>>>>> CasseTete3D:Assets/Editor/Puzzle2DEditor.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Meet and Talk/Script/CSVHandler.cs.meta
 guid: 3eccf4766746ae445a4016cd38997483
+========
+guid: ac1eb05af6d391b4eb0f4c070a99f1d0
+>>>>>>>> CasseTete3D:Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
