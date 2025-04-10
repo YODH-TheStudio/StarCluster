@@ -15,6 +15,7 @@ public class StateManager : MonoBehaviour
     }
     
     private PlayerState _playerState;
+    private PlayerState _previousState;
     
     // Événement déclenché lorsqu'un état change
     public event Action<PlayerState> OnStateChanged;
@@ -30,8 +31,19 @@ public class StateManager : MonoBehaviour
     {
         if (_playerState != newState)
         {
+            _previousState = _playerState; // Enregistre l'état précédent
             _playerState = newState;
+            
             OnStateChanged?.Invoke(_playerState); // Déclenche l'événement
+        }
+    }
+    
+    public void GoBackToPreviousState()
+    {
+        if (_previousState != 0)
+        {
+            _playerState = _previousState;
+            OnStateChanged?.Invoke(_playerState);
         }
     }
     

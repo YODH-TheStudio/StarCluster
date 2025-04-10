@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private VibrationManager _vibrationManager { get; set; }
     public SoundSystem _soundSystem { get; private set; }
     public StateManager _stateManager { get; private set; }
+    public DialogueManagerCustom _dialogueManager { get; private set; }
 
     // Singleton
     private static GameManager _instance;
@@ -65,6 +66,11 @@ public class GameManager : MonoBehaviour
         {
             FindStateManager();
         }
+
+        if (_dialogueManager == null)
+        {
+            FindDialogueManager();
+        }
     }
     
     // Start is called before the first frame update
@@ -91,6 +97,11 @@ public class GameManager : MonoBehaviour
     void FindStateManager()
     {
         _stateManager = FindObjectOfType<StateManager>();
+    }
+
+    void FindDialogueManager()
+    {
+        _dialogueManager = FindObjectOfType<DialogueManagerCustom>();
     }
 
     // Update is called once per frame
@@ -154,5 +165,14 @@ public class GameManager : MonoBehaviour
             FindStateManager();
         }
         return _stateManager;
+    }
+
+    public DialogueManagerCustom GetDialogueManager()
+    {
+        if (_dialogueManager == null)
+        {
+            FindDialogueManager();
+        }
+        return _dialogueManager;
     }
 }
