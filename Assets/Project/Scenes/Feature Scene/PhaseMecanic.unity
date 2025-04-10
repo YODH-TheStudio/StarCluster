@@ -735,7 +735,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c6ce4629ec948469599c28b16978ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objetsSocles: []
+  objetsSocles:
+  - objet: {fileID: 634322607}
+    offset: {x: 2.59, y: 0, z: 2.07}
+    radius: 1.08
+  - objet: {fileID: 1146861664}
+    offset: {x: 2.59, y: 0, z: -2.56}
+    radius: 1.08
+  - objet: {fileID: 1346859304}
+    offset: {x: -2.79, y: 0, z: 2.07}
+    radius: 1.08
+  - objet: {fileID: 585251133}
+    offset: {x: -2.82, y: 0, z: -2.38}
+    radius: 1.08
   validationRadius: 1.5
 --- !u!1 &506432310
 GameObject:
