@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 {
@@ -12,6 +15,15 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
 
     [SerializeField]
     private float _turnSpeed = 360.0f;
+
+    [SerializeField]
+    private Vector3 _particleStartPos;
+
+    private GameObject _particle;
+
+    // debug pour le temps que on a pas de detecteur de sol
+    [SerializeField]
+    private bool _isOnGrass;
 
     private CharacterController _controller;
     private Vector3 _direction;
@@ -69,7 +81,7 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     }
 
     // Rotate the player in the direction he is walking
-    void Look()
+    private void Look()
     {
         // Don't go back to the starting rotation when the player don't move
         if (_direction != Vector3.zero)
@@ -87,6 +99,18 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     {
         _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         Look();
+
+        if(_particle != null)
+        {
+            if (_direction != Vector3.zero)
+            {
+                _particle.GetComponent<ParticleSystem>().enableEmission = true;
+            }
+            else if (_direction == Vector3.zero)
+            {
+                _particle.GetComponent<ParticleSystem>().enableEmission = false;
+            }
+        }
 
         if (IsGrabbing())
         {
@@ -119,5 +143,21 @@ public class PlayerScript : MonoBehaviour, Controler.IPlayerActions
     public bool IsMoving()
     {
         return _direction != Vector3.zero;
+    }
+
+    public void SpawnParticle(GameObject particle)
+    {
+        if (_particle != null)
+        {
+            _particle.GetComponent<ParticleSystem>().enableEmission = false;
+        }
+        Destroy(_particle, 2);
+
+        Quaternion _particleAngle = gameObject.transform.rotation * Quaternion.AngleAxis(180, new Vector3(0, 1, 0));
+
+        _particle = Instantiate(particle, Vector3.zero, _particleAngle);
+        _particle.GetComponent<ParticleSystem>().enableEmission = true;
+        _particle.transform.SetParent(gameObject.transform);
+        _particle.transform.localPosition = _particleStartPos;
     }
 }
