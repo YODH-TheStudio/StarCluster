@@ -64,16 +64,15 @@ public class PlayerJoystick : MonoBehaviour
         //check if the new state is in the allowed states
         if (_allowedStates.HasFlag(newState))
         {
-            Debug.Log("a");
             ETouch.Touch.onFingerDown += Touch_OnFingerDown;
             ETouch.Touch.onFingerUp += Touch_OnFingerUp;
             ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         }else
         {
-            Debug.Log("b");
             ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
             ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
             ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
+            CancelJoystick();
         }
     }
     
@@ -93,11 +92,16 @@ public class PlayerJoystick : MonoBehaviour
     {
         if(TouchedFinger == _MovementFinger)
         {
-            _MovementFinger = null;
-            _MovementAmount = Vector2.zero;
-            _handle.anchoredPosition = Vector2.zero;
-            _background.gameObject.SetActive(false);
+            CancelJoystick();
         }
+    }
+
+    private void CancelJoystick()
+    {
+        _MovementFinger = null;
+        _MovementAmount = Vector2.zero;
+        _handle.anchoredPosition = Vector2.zero;
+        _background.gameObject.SetActive(false);
     }
 
     private void Touch_OnFingerMove(Finger TouchedFinger)
