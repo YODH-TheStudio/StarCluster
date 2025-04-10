@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
 
     // Singleton
     private static GameManager _instance;
-    
+
+
+    public KeyCode _key = KeyCode.Space;
+    public KeyCode _keytoo = KeyCode.P;
+
     public static GameManager Instance
     {
         get
@@ -82,9 +86,30 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(_key))
+        {
+            PlayTestSFX();
+        }
+        else if (Input.GetKeyUp(_keytoo))
+        {
+            PlayTestSFXToo();
+        }
     }
-    
+
+    void PlayTestSFX()
+    {
+        Vector3 spawnPosition = transform.position;
+        Instance._soundSystem.PlaySoundFXClipByKey("Violon", spawnPosition);
+        Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
+    }   
+    void PlayTestSFXToo()
+    {
+        Vector3 spawnPosition = transform.position;
+        Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
+        Debug.Log("SFX 'Violon' lancé à la position : " + spawnPosition);
+    }
+
+
     public PlayerScript GetPlayer()
     {
         if (_player == null)
