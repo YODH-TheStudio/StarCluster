@@ -92,7 +92,7 @@ MonoBehaviour:
   _background: {fileID: 0}
   _handle: {fileID: 0}
   _movementRange: 0
-  _allowedStates: 0000000001000000
+  _allowedStates: 34
 --- !u!1 &8170153791961219457
 GameObject:
   m_ObjectHideFlags: 0

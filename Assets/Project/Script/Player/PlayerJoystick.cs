@@ -64,10 +64,14 @@ public class PlayerJoystick : MonoBehaviour
         //check if the new state is in the allowed states
         if (_allowedStates.HasFlag(newState))
         {
-            EnhancedTouchSupport.Enable();
+            ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+            ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+            ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         }else
         {
-            EnhancedTouchSupport.Disable();
+            ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
+            ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
+            ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         }
     }
     
