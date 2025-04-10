@@ -15,6 +15,10 @@ public class Puzzle2DEditor : Editor
     private List<GameObject> _segmentObjects = new List<GameObject>();
     private int _selectedPointA = -1, _selectedPointB = -1;
 
+    private int _startCircuitPoint = -1, _endCircuitPoint = -1;
+    private Color _circuitColor = Color.white;
+    private string _circuitSign = "";
+
     private void OnEnable()
     {
         _levelData = (LevelData)target;
@@ -109,12 +113,11 @@ public class Puzzle2DEditor : Editor
         _rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
         _rectTransform.anchoredPosition = (_pointA + _pointB) / 2f;
 
-        // Ajout du label "Sx"
         GameObject _labelObject = new GameObject("SegmentLabel", typeof(TextMeshProUGUI));
         _labelObject.transform.SetParent(_lineObject.transform);
         TextMeshProUGUI _labelText = _labelObject.GetComponent<TextMeshProUGUI>();
 
-        int segmentIndex = _segmentObjects.Count; // index du segment actuel
+        int segmentIndex = _segmentObjects.Count;
         _labelText.text = "S" + segmentIndex;
         _labelText.fontSize = 10;
         _labelText.alignment = TextAlignmentOptions.Center;
@@ -122,13 +125,11 @@ public class Puzzle2DEditor : Editor
 
         RectTransform _labelRect = _labelObject.GetComponent<RectTransform>();
         _labelRect.sizeDelta = new Vector2(30, 20);
-        _labelRect.anchoredPosition = new Vector2(0, -10); // Sous la ligne
+        _labelRect.anchoredPosition = new Vector2(0, -10);
 
         _segmentObjects.Add(_lineObject);
         return _lineObject;
     }
-
-
 
     private void CreateSegmentsUI()
     {
@@ -141,6 +142,35 @@ public class Puzzle2DEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+
+        List<string> pointOptions = new List<string>();
+        for (int i = 0; i < _levelData._points.Count; i++)
+        {
+            pointOptions.Add("Point " + i);
+        }
+
+        if (_levelData._points.Count == 0)
+        {
+            EditorGUILayout.LabelField("Aucun point disponible pour le circuit.");
+            return;
+        }
+
+        _startCircuitPoint = EditorGUILayout.Popup("Start Point", _startCircuitPoint, pointOptions.ToArray());
+        _endCircuitPoint = EditorGUILayout.Popup("End Point", _endCircuitPoint, pointOptions.ToArray());
+        _circuitColor = EditorGUILayout.ColorField("Couleur Circuit", _circuitColor);
+        _circuitSign = EditorGUILayout.TextField("Signe", _circuitSign);
+
+        if (GUILayout.Button("Ajouter Circuit"))
+        {
+            if (_startCircuitPoint == _endCircuitPoint)
+            {
+                EditorGUILayout.HelpBox("Le point de départ et le point d'arrivée ne peuvent pas être identiques.", MessageType.Error);
+            }
+            else
+            {
+                _levelData.AddCircuit(_circuitColor, _levelData._points[_startCircuitPoint], _levelData._points[_endCircuitPoint], _circuitSign);
+            }
+        }
 
         if (GUILayout.Button("Ajouter un Point"))
         {
@@ -204,6 +234,12 @@ public class Puzzle2DEditor : Editor
         }
     }
 
+    private void RemoveCircuit(int index)
+    {
+        _levelData._circuits.RemoveAt(index);
+        EditorUtility.SetDirty(_levelData);
+    }
+
     private void CreatePointsUI()
     {
         for (int _i = 0; _i < _levelData._points.Count; _i++)
@@ -246,13 +282,6 @@ public class Puzzle2DEditor : Editor
 
     private void ResetSegments()
     {
-        //foreach (var _segmentObject in _segmentObjects)
-        //{
-        //    DestroyImmediate(_segmentObject);
-        //}
-
-        //_segmentObjects.Clear();
-        //CreateSegmentsUI();
     }
 
     private void RemoveSegment(Vector2 _pointA, Vector2 _pointB)
@@ -272,7 +301,6 @@ public class Puzzle2DEditor : Editor
         string[] _pointNames = new string[_levelData._points.Count];
         for (int _i = 0; _i < _levelData._points.Count; _i++)
             _pointNames[_i] = "Point " + _i;
-
         return _pointNames;
     }
 }

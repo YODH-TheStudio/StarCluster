@@ -31,20 +31,11 @@ public class Puzzle2D : MonoBehaviour
     // Circuit
     private int _currentCircuitSelected = 0;
 
+    //
+    bool _puzzleSolved = true;
+
     void Start()
     {
-        //Debug.Log($"[Puzzle2D] Points trouvés dans LevelData: {_levelData._points.Count}");
-        foreach (var _p in _levelData._points)
-        {
-            //Debug.Log($"Point: {_p}");
-        }
-
-        //Debug.Log($"[Puzzle2D] Segments trouvés dans LevelData: {_levelData._segments.Count}");
-        foreach (var _seg in _levelData._segments)
-        {
-            //Debug.Log($"Segment: ({_seg.pointA}, {_seg.pointB})");
-        }
-
         CreatePlayArea();
         CreateMenu(); 
         InstantiatePoints();
@@ -87,33 +78,50 @@ public class Puzzle2D : MonoBehaviour
         _layoutGroup.childAlignment = TextAnchor.MiddleCenter;
         _layoutGroup.childForceExpandWidth = false;
 
-        // Ajouter 5 boutons
-        for (int _i = 0; _i < 5; _i++)
+        // Créer un bouton pour chaque circuit défini dans LevelData
+        for (int i = 0; i < _levelData._circuits.Count; i++)
         {
-            CreateMenuButton(_i);
+            CreateMenuButton(i, _levelData._circuits[i]);
         }
     }
 
-    // Méthode pour créer un bouton du menu
-    private void CreateMenuButton(int _index)
+    private void CreateMenuButton(int index, Circuit circuit)
     {
         // Créer un bouton
-        GameObject _buttonObj = new GameObject($"CircuitButton_{_index}", typeof(Button), typeof(RectTransform), typeof(Text));
+        GameObject _buttonObj = new GameObject($"CircuitButton_{index}", typeof(Button), typeof(RectTransform), typeof(Text));
         _buttonObj.transform.SetParent(_menuContainer.transform);
 
         Button _button = _buttonObj.GetComponent<Button>();
         Text _buttonText = _buttonObj.GetComponent<Text>();
-        _buttonText.text = $"Circuit {_index + 1}";
-        _buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // Police par défaut
 
-        _button.onClick.AddListener(() => OnCircuitButtonClicked(_index));
+        // Créer un conteneur horizontal pour contenir le carré de couleur et le texte
+        GameObject _textContainer = new GameObject("TextContainer", typeof(RectTransform));
+        _textContainer.transform.SetParent(_buttonObj.transform);
+        RectTransform textContainerRect = _textContainer.GetComponent<RectTransform>();
+        textContainerRect.sizeDelta = new Vector2(200, 30);  // Ajuste la taille du conteneur selon tes besoins
+
+        // Créer un petit carré de couleur
+        GameObject _colorSquare = new GameObject("ColorSquare", typeof(Image));
+        _colorSquare.transform.SetParent(_textContainer.transform);
+        Image colorSquareImage = _colorSquare.GetComponent<Image>();
+        colorSquareImage.color = circuit.circuitColor;  // Utiliser la couleur du circuit
+        RectTransform colorSquareRect = _colorSquare.GetComponent<RectTransform>();
+        colorSquareRect.sizeDelta = new Vector2(20, 20);  // Taille du carré de couleur
+
+        // Créer un texte avec le numéro et le nom du circuit
+        _buttonText.text = $" {circuit.name} {index + 1}"; // Ajouter le numéro devant le nom
+        _buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // Police par défaut
+        RectTransform textRect = _buttonText.GetComponent<RectTransform>();
+        textRect.anchoredPosition = new Vector2(30, 0);  // Positionner le texte à côté du carré de couleur
+
+        _button.onClick.AddListener(() => OnCircuitButtonClicked(index));
     }
 
     // Méthode pour gérer le clic sur un bouton de circuit
     private void OnCircuitButtonClicked(int _index)
     {
-        //Debug.Log($"Circuit {_index + 1} sélectionné");
         _currentCircuitSelected = _index;
+        //Debug.Log("Circuit sélectionné : " + _index);  // Affiche l'index dans la console
     }
 
     private void InstantiatePoints()
@@ -190,7 +198,6 @@ public class Puzzle2D : MonoBehaviour
 
                     if (lines.ContainsKey((_currentSelected.Value, _point)) || lines.ContainsKey((_point, _currentSelected.Value)))
                     {
-                        Debug.Log("Ligne a retirer");
                         RemoveColoredLine(_currentSelected.Value, _point, color); 
                         _currentSelected = null;
                         return;
@@ -229,12 +236,6 @@ public class Puzzle2D : MonoBehaviour
 
 
         _activeColoredLinesByColor[color][(_a, _b)] = _line;
-
-        //Debug.Log($"Lignes pour la couleur {color}:");
-        //foreach (var entry in _activeColoredLinesByColor[color])
-        //{
-        //    Debug.Log($"Point A: {entry.Key.Item1}, Point B: {entry.Key.Item2}, GameObject: {entry.Value.name}");
-        //}
 
         return _line; 
     }
@@ -296,15 +297,7 @@ public class Puzzle2D : MonoBehaviour
 
     private Color GetCircuitColor()
     {
-        switch (_currentCircuitSelected)
-        {
-            case 0: return Color.green;  // Circuit 1 - vert
-            case 1: return Color.blue;   // Circuit 2 - bleu
-            case 2: return Color.yellow; // Circuit 3 - jaune
-            case 3: return Color.cyan;   // Circuit 4 - cyan
-            case 4: return Color.magenta; // Circuit 5 - magenta
-            default: return Color.white; // Par défaut
-        }
+        return _levelData._circuits[_currentCircuitSelected].circuitColor;
     }
 
 
@@ -397,16 +390,6 @@ public class Puzzle2D : MonoBehaviour
     {
         List<List<(Vector2, Vector2)>> chains = FindSegmentChainsByColor(searchColor);
 
-        //foreach (var chain in chains)
-        //{
-        //    Debug.Log("Nouvelle chaîne de segments:");
-        //    foreach (var segment in chain)
-        //    {
-        //        // Afficher les points A et B du segment
-        //        Debug.Log($"Segment - Point A: {segment.Item1}, Point B: {segment.Item2}");
-        //    }
-        //}
-
         foreach (var chain in chains)
         {
             if (chain.Count > 1)
@@ -447,19 +430,34 @@ public class Puzzle2D : MonoBehaviour
 
     private void Update()
     {
-        //StartCoroutine(CheckChainWithDelay());
+        _puzzleSolved = true;
+        for (int i = 0; i < _levelData._circuits.Count; i++)
+        {
+            Circuit currentCircuit = _levelData._circuits[i];
+            bool isValidConnection = IsChainConnectingPoints(currentCircuit.circuitColor, currentCircuit.startPoint, currentCircuit.endPoint);
+
+            if (!isValidConnection)
+            {
+                _puzzleSolved = false;
+                break;
+            }
+        }
+
+        if (_puzzleSolved)
+        {
+            Debug.Log("Le puzzle est réussi !");
+        }
     }
 
     private IEnumerator RepeatChainCheck()
     {
-        while (true)
-        {
-            IsChainConnectingPoints(Color.green, _levelData._points[1], _levelData._points[3]);
-            yield return new WaitForSeconds(0.01f); // ⏱️ Attendre 2 secondes avant le prochain appel
-        }
+        
+
+
+
+
+        yield return new WaitForSeconds(0.01f); 
     }
 
 
 }
-
-// Segment dans l'inverse sa marche pas
