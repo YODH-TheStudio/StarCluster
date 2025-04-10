@@ -23,7 +23,6 @@ public class StateManager : MonoBehaviour
     void Start()
     {
         _playerState = PlayerState.Idle;
-        ChangeState(PlayerState.Phasing);
     }
 
     // Méthode pour changer l'état

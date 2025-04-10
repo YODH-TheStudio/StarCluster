@@ -519,7 +519,7 @@ MonoBehaviour:
   startEvent:
     m_PersistentCalls:
       m_Calls: []
-  test: {fileID: 11400000, guid: 9a0acb52939db274385d5eb5a6948de3, type: 2}
+  test: {fileID: 0}
 --- !u!1 &7490109085055614186
 GameObject:
   m_ObjectHideFlags: 0

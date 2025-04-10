@@ -64,11 +64,13 @@ public class PlayerJoystick : MonoBehaviour
         //check if the new state is in the allowed states
         if (_allowedStates.HasFlag(newState))
         {
+            Debug.Log("a");
             ETouch.Touch.onFingerDown += Touch_OnFingerDown;
             ETouch.Touch.onFingerUp += Touch_OnFingerUp;
             ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         }else
         {
+            Debug.Log("b");
             ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
             ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
             ETouch.Touch.onFingerMove -= Touch_OnFingerMove;

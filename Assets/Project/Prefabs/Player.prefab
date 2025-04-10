@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7132392145672990566}
-  - component: {fileID: 3199749802993010078}
+  - component: {fileID: 6796275129284258465}
   m_Layer: 3
   m_Name: CompanionAnchor
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7274927809848512391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3199749802993010078
+--- !u!114 &6796275129284258465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4926695310691428243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9198aca4f3da98b45913f4966e8ac4be, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c1beb60c6fc9c34a83885f6ea59aaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runPosition: {x: 0, y: 1.5, z: -1.5}
-  catchupSpeed: {x: 1, y: 3}
-  orbitOffset: 1.5
+  runPosition: {x: 0, y: 1, z: -1.5}
+  catchupSpeed: {x: 0.3, y: 1}
+  orbitOffset: 0.5
   orbitRadius: {x: 2.5, y: 3.5}
-  bounceAmount: {x: 0.15, y: 0.1}
-  bounceSpeed: {x: 5, y: 2}
+  bounceAmount: {x: 0.1, y: 0.1}
+  bounceSpeed: {x: 0.5, y: 0.1}
 --- !u!1 &8994400159778986238
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 3616180754021307195}
   - component: {fileID: 8092829088753426579}
   - component: {fileID: 9220612183794722723}
-  - component: {fileID: 3383219478759058757}
+  - component: {fileID: 4286792488053355797}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -178,7 +178,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3383219478759058757
+--- !u!114 &4286792488053355797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8994400159778986238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba4d5837da21424aba0ff94e8a75fce, type: 3}
+  m_Script: {fileID: 11500000, guid: c8f216f33ef02974894d62968da64868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastDistance: 1.25

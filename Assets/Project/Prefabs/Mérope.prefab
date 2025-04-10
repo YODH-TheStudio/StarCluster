@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1769100823669407351}
-  - component: {fileID: 2284230764414734287}
+  - component: {fileID: 6346620637386991314}
   m_Layer: 0
   m_Name: "M\xE9rope"
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2040120861200396576}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2284230764414734287
+--- !u!114 &6346620637386991314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,15 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787409887545080749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41426ba83eba39d4b8137328ca80e7e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 70f57947e38c2db439316cecc7b58a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  maxDistance: 5
-  minDistance: 3
-  floatHeight: 1.5
-  floatCatchupSpeed: 0.3
-  maxOffset: {x: 0, y: 0, z: 0}
+  catchupSpeed: 0.3
+  bounceAmount: 0.1
+  bounceSpeed: 0.5
 --- !u!1 &8260097012220276763
 GameObject:
   m_ObjectHideFlags: 0
