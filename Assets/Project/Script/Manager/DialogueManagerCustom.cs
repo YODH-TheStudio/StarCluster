@@ -49,6 +49,7 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         // stateMachine.currentState = StateMachine.State.InDialogue;
         _isDialogue = true;
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Dialogue);
     }
 
     public void OnEndDialogue()
@@ -58,6 +59,7 @@ public class DialogueManagerCustom : MonoBehaviour
         // dialogueManager.audioSource.Stop();
         // stateMachine.currentState = StateMachine.State.Walking;
         _isDialogue = false;
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
         StartProcessEnd();
     }
     
