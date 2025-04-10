@@ -6,13 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UIScenes/MainMenu.unity
+    path: Assets/_Project/Scenes/Bootstrapper.unity
+    guid: 71b3d176452d07940b61e5bdda345dba
+  - enabled: 1
+    path: Assets/_Project/Scenes/MainMenu/MainMenu.unity
     guid: 0f17ebba6083e6347b59bfc85a70b367
   - enabled: 1
-    path: Assets/Scenes/GameScenes/BlockOutDeplacement.unity
-    guid: 22d065280e5eb804986a5649da44b217
-    path: Assets/Project/Scenes/Main Sprint 1.unity
-    guid: b992b3afb85037841a1fbe22c8edb1c3
+    path: Assets/_Project/Scenes/Cinematic/Cinematic.unity
+    guid: 7aa738227b3ddbd4281babe8d2209302
+  - enabled: 1
+    path: Assets/_Project/Scenes/ActiveScene/MainSprint2.unity
+    guid: 5a3680572d3bf274ca07f244b3098350
+  - enabled: 1
+    path: Assets/_Project/Scenes/UserInterface/GameplayUI.unity
+    guid: b5c505ca3c2888544b89cd153dcb200b
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: 552234cfbb7485b4394b3ecce8f41da5, type: 2}
