@@ -24,6 +24,11 @@ public class PlayerInteractionZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_interactionButton == null)
+        {
+            return;
+        }
+        
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance) ||
