@@ -4,23 +4,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.OnScreen;
-
+using static UnityEngine.InputSystem.OnScreen.OnScreenStick;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public enum AxisOptions { Both, Horizontal, Vertical }
 
 public class PlayerJoystick : MonoBehaviour
 {
-
     [SerializeField] protected RectTransform _background = null;
     [SerializeField] private RectTransform _handle = null;
-    [SerializeField] private GameObject _player = null;
+    [SerializeField] private float _movementRange;
+    [SerializeField] private StateManager.PlayerState _allowedStates;
 
+    private PlayerScript _player = null;
     private Finger _MovementFinger;
     private Vector2 _MovementAmount;
     private RectTransform _baseRect = null;
     private Canvas _canvas;
     private Camera _cam;
+    private Vector2 _handleStartPosition;
 
     protected virtual void Start()
     {
@@ -36,10 +38,13 @@ public class PlayerJoystick : MonoBehaviour
         _handle.pivot = center;
         _handle.anchoredPosition = Vector2.zero;
         _background.gameObject.SetActive(false);
+
+        _player = GameManager.Instance.GetPlayer();
     }
 
     private void OnEnable()
     {
+        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
@@ -54,6 +59,18 @@ public class PlayerJoystick : MonoBehaviour
         EnhancedTouchSupport.Disable();
     }
 
+    private void HandleStateChanged(StateManager.PlayerState newState)
+    {
+        //check if the new state is in the allowed states
+        if (_allowedStates.HasFlag(newState))
+        {
+            EnhancedTouchSupport.Enable();
+        }else
+        {
+            EnhancedTouchSupport.Disable();
+        }
+    }
+    
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
         if(_MovementFinger == null && TouchedFinger.screenPosition.x <= Screen.width / 2f)
@@ -62,7 +79,8 @@ public class PlayerJoystick : MonoBehaviour
             _MovementAmount = Vector2.zero;
             _background.gameObject.SetActive(true);
             _background.anchoredPosition = ScreenPointToAnchoredPosition(TouchedFinger.screenPosition);
-            _handle.anchoredPosition = Vector2.zero;
+            _handleStartPosition = Vector2.zero;
+            _handle.anchoredPosition = _handleStartPosition;
         }
     }
     private void Touch_OnFingerUp(Finger TouchedFinger)
@@ -83,11 +101,15 @@ public class PlayerJoystick : MonoBehaviour
             Vector2 knobPosition;
             float movementRadius = _background.sizeDelta.x / 2f;
             ETouch.Touch currentTouche = TouchedFinger.currentTouch;
-
             Vector2 backgroundPosition = new Vector2(_background.position.x, _background.position.y);
             knobPosition = (currentTouche.screenPosition - backgroundPosition).normalized * movementRadius;
 
-            _handle.anchoredPosition = knobPosition;
+            var delta = currentTouche.screenPosition - backgroundPosition;
+
+            delta = Vector2.ClampMagnitude(delta, _movementRange);
+
+            _handle.anchoredPosition = _handleStartPosition + delta;
+
             _MovementAmount = knobPosition / movementRadius;
         }
     }
@@ -105,6 +127,6 @@ public class PlayerJoystick : MonoBehaviour
 
     private void Update()
     {
-        _player.GetComponent<PlayerScript>().OnMove(_MovementAmount);
+        _player.OnMove(_MovementAmount);
     }
 }

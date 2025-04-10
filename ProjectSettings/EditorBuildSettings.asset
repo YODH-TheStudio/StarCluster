@@ -11,9 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScenes/BlockOutDeplacement.unity
     guid: 22d065280e5eb804986a5649da44b217
+    path: Assets/Project/Scenes/Main Sprint 1.unity
+    guid: b992b3afb85037841a1fbe22c8edb1c3
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
+      guid: 552234cfbb7485b4394b3ecce8f41da5, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a95cb13edb7ad354faf739dc088c8abe,
       type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
+      guid: 1fac28e1abae718458b086b59e4d1204, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 66a9ffac6b6b7ad45a515b860637ede5, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 019385b4589191b43abe2c906db5c12b,

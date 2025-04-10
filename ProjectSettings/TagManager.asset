@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignore VFX
   - Water
   - UI
   - 
@@ -35,9 +35,9 @@ TagManager:
   - 
   - 
   - 
-  - Other
-  - Enigme
-  - MovableObject
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
