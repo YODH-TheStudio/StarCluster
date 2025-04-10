@@ -14,7 +14,7 @@ public class PlayerJoystick : MonoBehaviour
     [SerializeField] protected RectTransform _background = null;
     [SerializeField] private RectTransform _handle = null;
     [SerializeField] private float _movementRange;
-    [SerializeField] private List<StateManager.PlayerState> _allowedStates = new List<StateManager.PlayerState>();
+    [SerializeField] private StateManager.PlayerState _allowedStates;
 
     private PlayerScript _player = null;
     private Finger _MovementFinger;
@@ -62,15 +62,12 @@ public class PlayerJoystick : MonoBehaviour
     private void HandleStateChanged(StateManager.PlayerState newState)
     {
         //check if the new state is in the allowed states
-        if (_allowedStates.Count > 0)
+        if (_allowedStates.HasFlag(newState))
         {
-            if (_allowedStates.Contains(newState))
-            {
-                EnhancedTouchSupport.Enable();
-            }else
-            {
-                EnhancedTouchSupport.Disable();
-            }
+            EnhancedTouchSupport.Enable();
+        }else
+        {
+            EnhancedTouchSupport.Disable();
         }
     }
     

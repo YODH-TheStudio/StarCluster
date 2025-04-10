@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public enum PlayerState
+    [Flags] public enum PlayerState
     {
-        Idle,
-        PushPull,
-        Phasing,
-        Dialogue,
-        Menu
+        Idle = 2,
+        Menu = 4,
+        Dialogue = 8,
+        Phasing = 16,
+        PushPull = 32,
     }
     
     private PlayerState _playerState;
