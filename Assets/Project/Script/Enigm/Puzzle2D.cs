@@ -1,3 +1,4 @@
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,7 +21,7 @@ public class Puzzle2D : MonoBehaviour
 
     private Vector2? _currentSelected = null;
 
-    // Tableaux locaux pour gérer les segments et points actuels
+    // Tableaux locaux pour gÃ©rer les segments et points actuels
     private List<Vector2> _currentPoints = new List<Vector2>();
     private List<(Vector2, Vector2)> _currentSegments = new List<(Vector2, Vector2)>();
 
@@ -30,24 +31,17 @@ public class Puzzle2D : MonoBehaviour
     // Circuit
     private int _currentCircuitSelected = 0;
 
+    //
+    bool _puzzleSolved = true;
+
     void Start()
     {
-        //Debug.Log($"[Puzzle2D] Points trouvés dans LevelData: {_levelData._points.Count}");
-        foreach (var _p in _levelData._points)
-        {
-            //Debug.Log($"Point: {_p}");
-        }
-
-        //Debug.Log($"[Puzzle2D] Segments trouvés dans LevelData: {_levelData._segments.Count}");
-        foreach (var _seg in _levelData._segments)
-        {
-            //Debug.Log($"Segment: ({_seg.pointA}, {_seg.pointB})");
-        }
-
         CreatePlayArea();
         CreateMenu(); 
         InstantiatePoints();
         InstantiateSegments();
+
+        StartCoroutine(RepeatChainCheck());
     }
 
     private void CreatePlayArea()
@@ -66,10 +60,10 @@ public class Puzzle2D : MonoBehaviour
         _playArea = _rect;
     }
 
-    // Méthode pour créer le menu horizontal
+    // MÃ©thode pour crÃ©er le menu horizontal
     private void CreateMenu()
     {
-        // Créer un container pour le menu
+        // CrÃ©er un container pour le menu
         _menuContainer = new GameObject("MenuContainer");
         _menuContainer.transform.SetParent(_canvas.transform);
         RectTransform _menuRect = _menuContainer.AddComponent<RectTransform>();
@@ -84,33 +78,50 @@ public class Puzzle2D : MonoBehaviour
         _layoutGroup.childAlignment = TextAnchor.MiddleCenter;
         _layoutGroup.childForceExpandWidth = false;
 
-        // Ajouter 5 boutons
-        for (int _i = 0; _i < 5; _i++)
+        // CrÃ©er un bouton pour chaque circuit dÃ©fini dans LevelData
+        for (int i = 0; i < _levelData._circuits.Count; i++)
         {
-            CreateMenuButton(_i);
+            CreateMenuButton(i, _levelData._circuits[i]);
         }
     }
 
-    // Méthode pour créer un bouton du menu
-    private void CreateMenuButton(int _index)
+    private void CreateMenuButton(int index, Circuit circuit)
     {
-        // Créer un bouton
-        GameObject _buttonObj = new GameObject($"CircuitButton_{_index}", typeof(Button), typeof(RectTransform), typeof(Text));
+        // CrÃ©er un bouton
+        GameObject _buttonObj = new GameObject($"CircuitButton_{index}", typeof(Button), typeof(RectTransform), typeof(Text));
         _buttonObj.transform.SetParent(_menuContainer.transform);
 
         Button _button = _buttonObj.GetComponent<Button>();
         Text _buttonText = _buttonObj.GetComponent<Text>();
-        _buttonText.text = $"Circuit {_index + 1}";
-        _buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // Police par défaut
 
-        _button.onClick.AddListener(() => OnCircuitButtonClicked(_index));
+        // CrÃ©er un conteneur horizontal pour contenir le carrÃ© de couleur et le texte
+        GameObject _textContainer = new GameObject("TextContainer", typeof(RectTransform));
+        _textContainer.transform.SetParent(_buttonObj.transform);
+        RectTransform textContainerRect = _textContainer.GetComponent<RectTransform>();
+        textContainerRect.sizeDelta = new Vector2(200, 30);  // Ajuste la taille du conteneur selon tes besoins
+
+        // CrÃ©er un petit carrÃ© de couleur
+        GameObject _colorSquare = new GameObject("ColorSquare", typeof(Image));
+        _colorSquare.transform.SetParent(_textContainer.transform);
+        Image colorSquareImage = _colorSquare.GetComponent<Image>();
+        colorSquareImage.color = circuit.circuitColor;  // Utiliser la couleur du circuit
+        RectTransform colorSquareRect = _colorSquare.GetComponent<RectTransform>();
+        colorSquareRect.sizeDelta = new Vector2(20, 20);  // Taille du carrÃ© de couleur
+
+        // CrÃ©er un texte avec le numÃ©ro et le nom du circuit
+        _buttonText.text = $" {circuit.name} {index + 1}"; // Ajouter le numÃ©ro devant le nom
+        _buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // Police par dÃ©faut
+        RectTransform textRect = _buttonText.GetComponent<RectTransform>();
+        textRect.anchoredPosition = new Vector2(30, 0);  // Positionner le texte Ã  cÃ´tÃ© du carrÃ© de couleur
+
+        _button.onClick.AddListener(() => OnCircuitButtonClicked(index));
     }
 
-    // Méthode pour gérer le clic sur un bouton de circuit
+    // MÃ©thode pour gÃ©rer le clic sur un bouton de circuit
     private void OnCircuitButtonClicked(int _index)
     {
-        //Debug.Log($"Circuit {_index + 1} sélectionné");
         _currentCircuitSelected = _index;
+        //Debug.Log("Circuit sÃ©lectionnÃ© : " + _index);  // Affiche l'index dans la console
     }
 
     private void InstantiatePoints()
@@ -158,64 +169,51 @@ public class Puzzle2D : MonoBehaviour
 
     private void OnPointClicked(Vector2 _point)
     {
-        //Debug.Log($"[OnPointClicked] Point cliqué : {_point}");
-
         if (_currentSelected == null)
         {
-            //Debug.Log("[OnPointClicked] Aucun point sélectionné, sélection du point actuel.");
             _currentSelected = _point;
         }
         else
         {
             if (_currentSelected == _point)
             {
-                //Debug.Log("[OnPointClicked] Le point cliqué est le même que le point sélectionné, désélection.");
                 _currentSelected = null;
                 return;
             }
 
-            //Debug.Log($"[OnPointClicked] Sélection d'un segment entre {_currentSelected.Value} et {_point}");
-
-            // Vérifier si le segment existe dans _levelData._segments (lignes rouges)
             bool _isSegmentRed = _levelData._segments.Exists(_segment =>
                 (_segment.pointA == _currentSelected.Value && _segment.pointB == _point) ||
                 (_segment.pointA == _point && _segment.pointB == _currentSelected.Value)
             );
 
-            //Debug.Log($"[OnPointClicked] Segment rouge trouvé ? {_isSegmentRed}");
-
             Color circuitColor = GetCircuitColor();
+
             if (_isSegmentRed)
             {
-                // Vérifier si la ligne existe déjà dans le dictionnaire de la couleur spécifique
-                if (_activeColoredLinesByColor.ContainsKey(circuitColor) &&
-                    (_activeColoredLinesByColor[circuitColor].ContainsKey((_currentSelected.Value, _point)) ||
-                     _activeColoredLinesByColor[circuitColor].ContainsKey((_point, _currentSelected.Value))))
+                // On vÃ©rifie s'il existe dÃ©jÃ  une ligne colorÃ©e et on la supprime si c'est le cas
+                foreach (var colorEntry in _activeColoredLinesByColor)
                 {
-                    //Debug.Log($"[OnPointClicked] Le segment entre {_currentSelected.Value} et {_point} existe déjà. Suppression de la ligne colorée.");
-                    // Si la ligne colorée existe déjà, on la supprime
-                    RemoveLine(_currentSelected.Value, _point, circuitColor);
-                    _currentSegments.Remove((_currentSelected.Value, _point));
+                    var color = colorEntry.Key;
+                    var lines = colorEntry.Value;
+
+                    if (lines.ContainsKey((_currentSelected.Value, _point)) || lines.ContainsKey((_point, _currentSelected.Value)))
+                    {
+                        RemoveColoredLine(_currentSelected.Value, _point, color); 
+                        _currentSelected = null;
+                        return;
+                    }
                 }
-                else
-                {
-                    //Debug.Log($"[OnPointClicked] Le segment entre {_currentSelected.Value} et {_point} n'est pas encore dessiné. Ajout de la ligne colorée.");
-                    // Si le segment existe mais n'est pas encore dessiné, on l'ajoute
-                    DrawColoredLine(_currentSelected.Value, _point, circuitColor);
-                    _currentSegments.Add((_currentSelected.Value, _point));
-                }
+
+                DrawColoredLine(_currentSelected.Value, _point, circuitColor); 
             }
 
-            // Réinitialiser la sélection après l'ajout ou la suppression de ligne
             _currentSelected = null;
         }
     }
 
-    private void DrawColoredLine(Vector2 _a, Vector2 _b, Color color)
+    private GameObject DrawColoredLine(Vector2 _a, Vector2 _b, Color color)
     {
-        if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b)) return;
-
-        // Calculer l'extrémité des points en prenant en compte le rayon
+        if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b)) return null;
         Vector2 _aExtremity = GetPointExtremity(_a, _b);
         Vector2 _bExtremity = GetPointExtremity(_b, _a);
 
@@ -229,25 +227,45 @@ public class Puzzle2D : MonoBehaviour
         _rt.anchoredPosition = _aExtremity + _dir / 2;
         _rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg);
 
-        // Appliquer la couleur spécifique
         _line.GetComponent<Image>().color = color;
 
-        // Vérifier si le dictionnaire pour la couleur existe, sinon le créer
         if (!_activeColoredLinesByColor.ContainsKey(color))
         {
             _activeColoredLinesByColor[color] = new Dictionary<(Vector2, Vector2), GameObject>();
         }
 
-        // Ajouter la ligne au dictionnaire de la couleur spécifique
+
         _activeColoredLinesByColor[color][(_a, _b)] = _line;
-        _activeColoredLinesByColor[color][(_b, _a)] = _line;
+
+        return _line; 
+    }
+
+    private void RemoveColoredLine(Vector2 _a, Vector2 _b, Color color)
+    {
+        if (_activeColoredLinesByColor.ContainsKey(color))
+        {
+
+            if (_activeColoredLinesByColor[color].ContainsKey((_a, _b)))
+            {
+                GameObject _line = _activeColoredLinesByColor[color][(_a, _b)];
+                Destroy(_line);
+                _activeColoredLinesByColor[color].Remove((_a, _b));
+            }
+
+            if (_activeColoredLinesByColor[color].ContainsKey((_b, _a)))
+            {
+                GameObject _line = _activeColoredLinesByColor[color][(_b, _a)];
+                Destroy(_line); 
+                _activeColoredLinesByColor[color].Remove((_b, _a));
+            }
+        }
     }
 
     private void DrawLine(Vector2 _a, Vector2 _b)
     {
         if (!_pointMap.ContainsKey(_a) || !_pointMap.ContainsKey(_b)) return;
 
-        // Calculer l'extrémité des points en prenant en compte le rayon
+        // Calculer l'extrÃ©mitÃ© des points en prenant en compte le rayon
         Vector2 _aExtremity = GetPointExtremity(_a, _b);
         Vector2 _bExtremity = GetPointExtremity(_b, _a);
 
@@ -269,38 +287,60 @@ public class Puzzle2D : MonoBehaviour
 
     private Vector2 GetPointExtremity(Vector2 _point, Vector2 _direction)
     {
-        // Trouver le vecteur direction normalisé
+        // Trouver le vecteur direction normalisÃ©
         Vector2 _dir = _direction - _point;
         _dir.Normalize();
 
-        // Appliquer le rayon pour obtenir l'extrémité du point
+        // Appliquer le rayon pour obtenir l'extrÃ©mitÃ© du point
         return _point + _dir * _pointRadius;
-    }
-
-    private void RemoveLine(Vector2 _a, Vector2 _b, Color color)
-    {
-        if (_activeColoredLinesByColor.ContainsKey(color) &&
-            _activeColoredLinesByColor[color].TryGetValue((_a, _b), out GameObject _line))
-        {
-            Destroy(_line);
-            _activeColoredLinesByColor[color].Remove((_a, _b));
-            _activeColoredLinesByColor[color].Remove((_b, _a));
-        }
     }
 
     private Color GetCircuitColor()
     {
-        switch (_currentCircuitSelected)
-        {
-            case 0: return Color.green;  // Circuit 1 - vert
-            case 1: return Color.blue;   // Circuit 2 - bleu
-            case 2: return Color.yellow; // Circuit 3 - jaune
-            case 3: return Color.cyan;   // Circuit 4 - cyan
-            case 4: return Color.magenta; // Circuit 5 - magenta
-            default: return Color.white; // Par défaut
-        }
+        return _levelData._circuits[_currentCircuitSelected].circuitColor;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public bool HasCommonPoint((Vector2, Vector2) segment1, (Vector2, Vector2) segment2)
+    {
+        // VÃ©rifie si le premier point du premier segment est le mÃªme que le premier ou le second point du deuxiÃ¨me segment
+        if (segment1.Item1 == segment2.Item1 || segment1.Item1 == segment2.Item2)
+        {
+            return true;
+        }
+
+        // VÃ©rifie si le second point du premier segment est le mÃªme que le premier ou le second point du deuxiÃ¨me segment
+        if (segment1.Item2 == segment2.Item1 || segment1.Item2 == segment2.Item2)
+        {
+            return true;
+        }
+
+        return false;
+    }
     public List<List<(Vector2, Vector2)>> FindSegmentChainsByColor(Color color)
     {
         List<List<(Vector2, Vector2)>> chains = new List<List<(Vector2, Vector2)>>();
@@ -311,11 +351,13 @@ public class Puzzle2D : MonoBehaviour
         }
 
         var coloredSegments = _activeColoredLinesByColor[color];
+
         HashSet<(Vector2, Vector2)> visitedSegments = new HashSet<(Vector2, Vector2)>();
 
         void FollowChain((Vector2, Vector2) startSegment, List<(Vector2, Vector2)> chain)
         {
             if (visitedSegments.Contains(startSegment)) return;
+
             chain.Add(startSegment);
             visitedSegments.Add(startSegment);
 
@@ -323,7 +365,7 @@ public class Puzzle2D : MonoBehaviour
 
             foreach (var segment in coloredSegments)
             {
-                if (segment.Key.Item1 == currentEndPoint && !visitedSegments.Contains(segment.Key))
+                if (HasCommonPoint(startSegment, segment.Key) && !visitedSegments.Contains(segment.Key))
                 {
                     FollowChain(segment.Key, chain);
                 }
@@ -343,21 +385,42 @@ public class Puzzle2D : MonoBehaviour
         return chains;
     }
 
+
     public bool IsChainConnectingPoints(Color searchColor, Vector2 startPoint, Vector2 endPoint)
     {
         List<List<(Vector2, Vector2)>> chains = FindSegmentChainsByColor(searchColor);
 
         foreach (var chain in chains)
         {
-            if (chain.Count > 0)
+            if (chain.Count > 1)
             {
-                Vector2 firstPoint = chain[0].Item1;
-                Vector2 lastPoint = chain[chain.Count - 1].Item2;
+                Vector2 firstSegmentStart = chain[0].Item1;
+                Vector2 firstSegmentEnd = chain[0].Item2;
+                Vector2 lastSegmentStart = chain[chain.Count - 1].Item1; 
+                Vector2 lastSegmentEnd = chain[chain.Count - 1].Item2; 
 
-                if (firstPoint == startPoint && lastPoint == endPoint)
+                bool isFirstSegmentConnected = (firstSegmentStart == startPoint || firstSegmentStart == endPoint) || (firstSegmentEnd == startPoint || firstSegmentEnd == endPoint);
+                bool isLastSegmentConnected = (lastSegmentStart == startPoint || lastSegmentStart == endPoint) || (lastSegmentEnd == startPoint || lastSegmentEnd == endPoint);
+
+                if (isFirstSegmentConnected && isLastSegmentConnected)
                 {
-                    Debug.Log("Relié");
-                    return true;
+                    bool firstSegmentHasStartPoint = (firstSegmentStart == startPoint || firstSegmentEnd == startPoint);
+                    bool lastSegmentHasEndPoint = (lastSegmentStart == endPoint || lastSegmentEnd == endPoint);
+                    bool firstSegmentHasEndPoint = (firstSegmentStart == endPoint || firstSegmentEnd == endPoint);
+                    bool lastSegmentHasStartPoint = (lastSegmentStart == startPoint || lastSegmentEnd == startPoint);
+
+                    bool isValidConnection = (firstSegmentHasStartPoint && lastSegmentHasEndPoint) || (firstSegmentHasEndPoint && lastSegmentHasStartPoint);
+
+                    // Si la connexion est valide, les segments sont connectÃ©s
+                    if (isValidConnection)
+                    {
+                        Debug.Log("Les segments sont connectÃ©s");
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("Les segments ne sont pas connectÃ©s");
+                    }
                 }
             }
         }
@@ -367,12 +430,34 @@ public class Puzzle2D : MonoBehaviour
 
     private void Update()
     {
-        IsChainConnectingPoints(Color.green, _levelData._points[1], _levelData._points[2]);
+        _puzzleSolved = true;
+        for (int i = 0; i < _levelData._circuits.Count; i++)
+        {
+            Circuit currentCircuit = _levelData._circuits[i];
+            bool isValidConnection = IsChainConnectingPoints(currentCircuit.circuitColor, currentCircuit.startPoint, currentCircuit.endPoint);
+
+            if (!isValidConnection)
+            {
+                _puzzleSolved = false;
+                break;
+            }
+        }
+
+        if (_puzzleSolved)
+        {
+            Debug.Log("Le puzzle est rÃ©ussi !");
+        }
+    }
+
+    private IEnumerator RepeatChainCheck()
+    {
+        
+
+
+
+
+        yield return new WaitForSeconds(0.01f); 
     }
 
 
-
-
 }
-
-// Segment dans l'inverse sa marche pas

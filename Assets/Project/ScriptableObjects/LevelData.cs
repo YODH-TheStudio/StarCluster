@@ -15,12 +15,45 @@ public class Segment
     }
 }
 
+[System.Serializable]
+public class Circuit
+{
+    public Color circuitColor;
+    public Vector2 startPoint;
+    public Vector2 endPoint;
+    public string sign;
+    public string name;  
+
+    public Circuit(Color color, Vector2 start, Vector2 end, string sign = "", string name = "Circuit ")
+    {
+        this.circuitColor = color;
+        this.startPoint = start;
+        this.endPoint = end;
+        this.sign = sign;
+        this.name = name; 
+    }
+}
+
 [CreateAssetMenu(fileName = "NewLevelData", menuName = "Level Data", order = 1)]
 public class LevelData : ScriptableObject
 {
     public List<Vector2> _points = new List<Vector2>();
     public List<Segment> _segments = new List<Segment>();
+    public List<Circuit> _circuits = new List<Circuit>();
 
+    public void AddCircuit(Color circuitColor, Vector2 startPoint, Vector2 endPoint, string sign)
+    {
+        _circuits.Add(new Circuit(circuitColor, startPoint, endPoint, sign));
+    }
+
+
+    public void RemoveCircuit(int index)
+    {
+        if (index >= 0 && index < _circuits.Count)
+        {
+            _circuits.RemoveAt(index);
+        }
+    }
     public void AddPoint(Vector2 _point)
     {
         _points.Add(_point);
