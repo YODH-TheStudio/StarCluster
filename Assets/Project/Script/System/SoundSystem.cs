@@ -347,10 +347,13 @@ public class SoundSystem : MonoBehaviour
 
     private void PlaySoundFXClip(AudioClip audioClip, Vector3 spawnPosition, float volume = 1.0f)
     {
-        AudioSource audioSource = CreateSoundFXSource(spawnPosition);
-        audioSource.clip = audioClip;
-        audioSource.volume = volume;
-        PlayAndDestroy(audioSource, audioClip.length);
+        if (audioClip == null)
+        {
+            Debug.LogWarning("PlaySoundFXClip: AudioClip est null !");
+            return;
+        }
+
+        sfxPoolManager.PlayClip(audioClip, spawnPosition, volume);
     }
 
     public void PlaySoundFXClipByKey(string key, Vector3 spawnPosition, float volume = 1.0f)
@@ -359,20 +362,19 @@ public class SoundSystem : MonoBehaviour
         if (audioClip != null)
         {
             Debug.Log($"Playing sound: {key}");
-            sfxPoolManager.PlayClip(audioClip, spawnPosition, volume);
-            //PlaySoundFXClip(audioClip, spawnPosition, volume);
+            PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
 
-    public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
-    {
-        AudioSource audioSource = GetAvailableAudioSource();
-        AudioClip audioClip = GetSFXByKey(key);
+    //public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
+    //{
+    //    AudioSource audioSource = GetAvailableAudioSource();
+    //    AudioClip audioClip = GetSFXByKey(key);
 
-        audioSource.clip = audioClip;
-        audioSource.volume = volume;
-        audioSource.Play();
-    }
+    //    audioSource.clip = audioClip;
+    //    audioSource.volume = volume;
+    //    audioSource.Play();
+    //}
 
     public void PlayRandomSoundFXClipByKeys(string[] keys, Vector3 spawnPosition, float volume = 1.0f)
     {
@@ -393,17 +395,17 @@ public class SoundSystem : MonoBehaviour
         }
     }
 
-    private AudioSource CreateSoundFXSource(Vector3 spawnPosition)
-    {
-        AudioSource audioSource = Instantiate(soundFXObject, spawnPosition, Quaternion.identity);
-        return audioSource;
-    }
+    //private AudioSource CreateSoundFXSource(Vector3 spawnPosition)
+    //{
+    //    AudioSource audioSource = Instantiate(soundFXObject, spawnPosition, Quaternion.identity);
+    //    return audioSource;
+    //}
 
-    private void PlayAndDestroy(AudioSource audioSource, float clipLength)
-    {
-        audioSource.Play();
-        Destroy(audioSource.gameObject, clipLength);
-    }
+    //private void PlayAndDestroy(AudioSource audioSource, float clipLength)
+    //{
+    //    audioSource.Play();
+    //    Destroy(audioSource.gameObject, clipLength);
+    //}
 
     #endregion
 
