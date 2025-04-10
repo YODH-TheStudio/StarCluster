@@ -318,7 +318,7 @@ public class DialogueManagerEditor : Editor
 [CustomEditor(typeof(DialogueUIManager)), CanEditMultipleObjects]
 public class DialogueUIManagerEditor : Editor
 {
-    VisualElement IDBox, NameTextBox, DialogTextBox, ButtonBox, CanvasBox, TimerBox, SkipBox, GoBackBox;
+    VisualElement IDBox, NameTextBox, NameTextBoxRight, NameTextBoxLeft, DialogTextBox, ButtonBox, CanvasBox, TimerBox, SkipBox, GoBackBox, DialogueBoxLeftBox, DialogueBoxRightBox, NameRightBox, NameLeftBox;
 
     public override VisualElement CreateInspectorGUI()
     {
@@ -355,13 +355,27 @@ public class DialogueUIManagerEditor : Editor
         TextGroup.Add(nameTextBox);
         nameTextBox.RegisterValueChangeCallback(evt => UpdateVisibility(NameTextBox, nameTextProperty.objectReferenceValue != null));
 
+        SerializedProperty nameTextRightProperty = serializedObject.FindProperty("nameTextBoxRight");
+        NameTextBoxRight = DialogueInspector.CreateInfoBox("Not assigned Name Text Field Right", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        //TextGroup.Add(NameTextBox);
+        PropertyField nameTextBoxRight = new PropertyField(nameTextRightProperty, "Name Text Field Right");
+        TextGroup.Add(nameTextBoxRight);
+        nameTextBoxRight.RegisterValueChangeCallback(evt => UpdateVisibility(NameTextBoxRight, nameTextRightProperty.objectReferenceValue != null));
+
+        SerializedProperty nameTextLeftProperty = serializedObject.FindProperty("nameTextBoxLeft");
+        NameTextBoxLeft = DialogueInspector.CreateInfoBox("Not assigned Name Text Field Left", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        //TextGroup.Add(NameTextBox);
+        PropertyField nameTextBoxLeft = new PropertyField(nameTextLeftProperty, "Name Text Field Left");
+        TextGroup.Add(nameTextBoxLeft);
+        nameTextBoxLeft.RegisterValueChangeCallback(evt => UpdateVisibility(NameTextBoxLeft, nameTextLeftProperty.objectReferenceValue != null));
+
         SerializedProperty dialogTextProperty = serializedObject.FindProperty("textBox");
         DialogTextBox = DialogueInspector.CreateInfoBox("Not assigned Dialog Text Field", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
         TextGroup.Add(DialogTextBox);
         PropertyField textBox = new PropertyField(dialogTextProperty, "Dialog Text Field");
         TextGroup.Add(textBox);
         textBox.RegisterValueChangeCallback(evt => UpdateVisibility(DialogTextBox, dialogTextProperty.objectReferenceValue != null));
-
+        
         // UI Settings
         VisualElement UIGroup = DialogueInspector.Group(root, "UI Settings");
 
@@ -396,6 +410,34 @@ public class DialogueUIManagerEditor : Editor
         UIGroup.Add(GoBackButton);
         GoBackButton.RegisterValueChangeCallback(evt => UpdateVisibility(GoBackBox, goBackButtonProperty.objectReferenceValue != null));
 
+        SerializedProperty dialogueBoxLeftProperty = serializedObject.FindProperty("DialogueBoxLeft");
+        DialogueBoxLeftBox = DialogueInspector.CreateInfoBox("Not assigned DialogueBoxLeft", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        UIGroup.Add(DialogueBoxLeftBox);
+        PropertyField DialogueBoxLeft = new PropertyField(dialogueBoxLeftProperty, "Dialogue Box Left");
+        UIGroup.Add(DialogueBoxLeft);
+        DialogueBoxLeft.RegisterValueChangeCallback(evt => UpdateVisibility(DialogueBoxLeftBox, dialogueBoxLeftProperty.objectReferenceValue != null));
+
+        SerializedProperty dialogueBoxRightProperty = serializedObject.FindProperty("DialogueBoxRight");
+        DialogueBoxRightBox = DialogueInspector.CreateInfoBox("Not assigned DialogueBoxRight", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        UIGroup.Add(DialogueBoxRightBox);
+        PropertyField DialogueBoxRight = new PropertyField(dialogueBoxRightProperty, "Dialogue Box Right");
+        UIGroup.Add(DialogueBoxRight);
+        DialogueBoxRight.RegisterValueChangeCallback(evt => UpdateVisibility(DialogueBoxRightBox, dialogueBoxRightProperty.objectReferenceValue != null));
+
+        SerializedProperty nameRightProperty = serializedObject.FindProperty("NameRight");
+        NameRightBox = DialogueInspector.CreateInfoBox("Not assigned NameRight", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        UIGroup.Add(NameRightBox);
+        PropertyField NameRight = new PropertyField(nameRightProperty, "Name Right");
+        UIGroup.Add(NameRight);
+        NameRight.RegisterValueChangeCallback(evt => UpdateVisibility(NameRightBox, nameRightProperty.objectReferenceValue != null));
+        
+        SerializedProperty nameLeftProperty = serializedObject.FindProperty("NameLeft");
+        NameLeftBox = DialogueInspector.CreateInfoBox("Not assigned NameLeft", EditorGUIUtility.IconContent("console.erroricon").image, DialogueInspector.DialogueInspectorHintType.Error);
+        UIGroup.Add(NameLeftBox);
+        PropertyField NameLeft = new PropertyField(nameLeftProperty, "Name Left");
+        UIGroup.Add(NameLeft);
+        NameLeft.RegisterValueChangeCallback(evt => UpdateVisibility(NameLeftBox, nameLeftProperty.objectReferenceValue != null));
+
         VisualElement PortraitGroup = DialogueInspector.Group(root, "Portrait Settings Settings");
 
         PortraitGroup.Add(DialogueInspector.CreateListView<PortraitUIClass>(serializedObject.FindProperty("Portraits"), PortraitGroup, "Portraits List", false, false, false));
@@ -406,11 +448,17 @@ public class DialogueUIManagerEditor : Editor
         // Initial update
         UpdateVisibility(IDBox, !string.IsNullOrEmpty(idProperty.stringValue));
         UpdateVisibility(NameTextBox, nameTextProperty.objectReferenceValue != null);
+        UpdateVisibility(NameTextBoxRight, nameTextRightProperty.objectReferenceValue != null);
+        UpdateVisibility(NameTextBoxLeft, nameTextLeftProperty.objectReferenceValue != null);
         UpdateVisibility(DialogTextBox, dialogTextProperty.objectReferenceValue != null);
         UpdateVisibility(CanvasBox, dialogueCanvasProperty.objectReferenceValue != null);
         UpdateVisibility(TimerBox, timerSliderProperty.objectReferenceValue != null);
         UpdateVisibility(SkipBox, skipButtonProperty.objectReferenceValue != null);
         UpdateVisibility(GoBackBox, goBackButtonProperty.objectReferenceValue != null);
+        UpdateVisibility(DialogueBoxLeftBox, dialogueBoxLeftProperty.objectReferenceValue != null);
+        UpdateVisibility(DialogueBoxRightBox, dialogueBoxRightProperty.objectReferenceValue != null);
+        UpdateVisibility(NameRightBox, nameRightProperty.objectReferenceValue != null);
+        UpdateVisibility(NameLeftBox, nameLeftProperty.objectReferenceValue != null);
 
         return root;
     }

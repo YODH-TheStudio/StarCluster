@@ -24,23 +24,23 @@ namespace MeetAndTalk
         //protected BaseNodeData GetNextNode(BaseNodeData _baseNodeData) { return GetNextNode()}
         protected BaseNodeData GetNextNode(BaseNodeData _baseNodeData)
         {
-            // ZnajdŸ wszystkie linki, które pasuj¹ do podanego wêz³a na podstawie BaseNodeGuid
+            // ZnajdÅ¸ wszystkie linki, ktÃ³re pasujÂ¹ do podanego wÃªzÂ³a na podstawie BaseNodeGuid
             var matchingLinks = dialogueContainer.NodeLinkDatas
                 .Where(link => link.BaseNodeGuid == _baseNodeData.NodeGuid)
                 .ToList();
 
-            // SprawdŸ, czy znaleziono jakiekolwiek dopasowania
+            // SprawdÅ¸, czy znaleziono jakiekolwiek dopasowania
             if (matchingLinks.Count == 0)
             {
-                return null; // Brak pasuj¹cych wêz³ów, zwróæ null
+                return null; // Brak pasujÂ¹cych wÃªzÂ³Ã³w, zwrÃ³Ã¦ null
             }
 
-            // Jeœli jest wiêcej ni¿ jeden dopasowany link, losuj jeden z nich
+            // JeÅ“li jest wiÃªcej niÂ¿ jeden dopasowany link, losuj jeden z nich
             NodeLinkData selectedLink = matchingLinks.Count == 1
-                ? matchingLinks[0] // Jeœli jest tylko jeden, wybierz go
+                ? matchingLinks[0] // JeÅ“li jest tylko jeden, wybierz go
                 : matchingLinks[UnityEngine.Random.Range(0, matchingLinks.Count)]; // W przeciwnym razie losuj
 
-            // U¿yj TargetNodeGuid z wybranego linku, aby pobraæ odpowiedni wêze³
+            // UÂ¿yj TargetNodeGuid z wybranego linku, aby pobraÃ¦ odpowiedni wÃªzeÂ³
             return GetNodeByGuid(selectedLink.TargetNodeGuid);
         }
 
@@ -170,7 +170,7 @@ namespace MeetAndTalk
 
 
 
-                // G³ówny kontener dla elementów UI
+                // GÂ³Ã³wny kontener dla elementÃ³w UI
                 var container = new VisualElement();
                 container.AddToClassList("condition-field");
                 container.style.flexDirection = FlexDirection.Row;
@@ -214,12 +214,12 @@ namespace MeetAndTalk
                 {
                     ValueName = value.newValue;
 
-                    // SprawdŸ, czy ValueName znajduje siê w manager.IntValues lub manager.FloatValues
+                    // SprawdÅ¸, czy ValueName znajduje siÃª w manager.IntValues lub manager.FloatValues
                     bool isValueNameInIntValues = manager.IntValues.Any(intValue => intValue.ValueName == ValueName);
                     bool isValueNameInFloatValues = manager.FloatValues.Any(floatValue => floatValue.ValueName == ValueName);
                     bool isValueNameInStringValues = !isValueNameInIntValues && !isValueNameInFloatValues;
 
-                    // Ustaw widocznoœæ AvatarPositionField w zale¿noœci od warunków
+                    // Ustaw widocznoÅ“Ã¦ AvatarPositionField w zaleÂ¿noÅ“ci od warunkÃ³w
                     if(isValueNameInIntValues || isValueNameInFloatValues)
                     {
                         valueNameField.style.width = width;

@@ -25,12 +25,18 @@ namespace MeetAndTalk
         public bool showSeparateName = false;
         public bool clearNameColor = false;         // Premium Feature
         public TextMeshProUGUI nameTextBox;
+        public TextMeshProUGUI nameTextBoxRight;
+        public TextMeshProUGUI nameTextBoxLeft;
         public TextMeshProUGUI textBox;
         [Space()]
         public GameObject dialogueCanvas;
         public Slider TimerSlider;
         public GameObject SkipButton;
         public GameObject GoBackButton;
+        public GameObject DialogueBoxLeft;
+        public GameObject DialogueBoxRight;
+        public GameObject NameLeft;
+        public GameObject NameRight;
 
         [Header("Dynamic Dialogue UI")]
         public List<ChoiceTypeButton> BtnPrefabs = new List<ChoiceTypeButton>();
@@ -165,6 +171,25 @@ namespace MeetAndTalk
             else { foreach (GameObject obj in HideIfAllAvatarEmpty) obj.SetActive(false); }
         }
 
+        public void SetupPositionUI(PortraitPosition Position)
+        {
+            if (Position == PortraitPosition.Primary || Position == PortraitPosition.PrimaryDist)
+            {
+                nameTextBox = nameTextBoxLeft;
+                DialogueBoxLeft.SetActive(true);
+                DialogueBoxRight.SetActive(false);
+                NameLeft.SetActive(true);
+                NameRight.SetActive(false);
+            }else if (Position == PortraitPosition.Secoundary || Position == PortraitPosition.SecoundaryDist)
+            {
+                nameTextBox = nameTextBoxRight;
+                DialogueBoxLeft.SetActive(false);
+                DialogueBoxRight.SetActive(true);
+                NameLeft.SetActive(false);
+                NameRight.SetActive(true);
+            }
+        }
+        
         public void SetupPortraits(DialogueCharacterSO Character, PortraitPosition Position, string Emotion,
             DialogueCharacterSO SecoundCharacter, PortraitPosition SecoundPosition, string SecoundEmotion)
         {
@@ -181,7 +206,22 @@ namespace MeetAndTalk
             {
                 if (Position != PortraitPosition.None)
                 {
-                    Debug.Log(Position);
+                    // if (Position == PortraitPosition.Primary || Position == PortraitPosition.PrimaryDist)
+                    // {
+                    //     nameTextBox = nameTextBoxLeft;
+                    //     DialogueBoxLeft.SetActive(true);
+                    //     DialogueBoxRight.SetActive(false);
+                    //     NameLeft.SetActive(true);
+                    //     NameRight.SetActive(false);
+                    // }else if (Position == PortraitPosition.Secoundary || Position == PortraitPosition.SecoundaryDist)
+                    // {
+                    //     nameTextBox = nameTextBoxRight;
+                    //     DialogueBoxLeft.SetActive(false);
+                    //     DialogueBoxRight.SetActive(true);
+                    //     NameLeft.SetActive(false);
+                    //     NameRight.SetActive(true);
+                    // }
+                    
                     PortraitUIClass ui = Portraits.Find(d => d.Position == Position);
                     if (ui != null)
                     {

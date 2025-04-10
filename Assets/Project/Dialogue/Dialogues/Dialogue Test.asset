@@ -24,10 +24,10 @@ MonoBehaviour:
     TargetNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
   - BaseNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
     TargetNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
-  - BaseNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
-    TargetNodeGuid: ffa96b15-e2ae-4524-b8e5-34b1bdbe2710
   - BaseNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
     TargetNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
+  - BaseNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
+    TargetNodeGuid: ffa96b15-e2ae-4524-b8e5-34b1bdbe2710
   StartNodeDatas:
   - NodeGuid: 1e44b7a7-ccf4-4f64-acc2-8840f5843dfc
     Position: {x: -350, y: 299}
@@ -36,7 +36,7 @@ MonoBehaviour:
   - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
     Position: {x: -124, y: 299}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
+    PortraitPosition: 3
     Emotion: Left/Defualt
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
