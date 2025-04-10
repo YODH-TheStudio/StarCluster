@@ -90,18 +90,6 @@ public class DialogueManagerCustom : MonoBehaviour
         //run the event when the dialogue start
         startEvent.Invoke();
 
-        // //start the dialogue
-        // GameManager.Instance.dialogueManager.StartDialogue(dialogueContainerParam);
-        
-        
-        // if (GameManager.instance.stateMachine.currentState != StateMachine.State.Walking)
-        // {
-        //     return;
-        // }
-        //
-        // Move move = GameObject.FindGameObjectWithTag("Player").GetComponent<Move>();
-        // move.StopMovement();
-
         if (_dialogueManager != null)
         {
             _dialogueManager.StartDialogue(dialogueContainerParam);
@@ -111,15 +99,8 @@ public class DialogueManagerCustom : MonoBehaviour
             Debug.LogError("DialogueManager is not found");
         }
         
-        //subscribe to the event
-        // ProcessSkipDialogue += StartProcessSkip;
-        
-        
         // //subscribe to the event
         ProcessEndDialogue += bl_ProcessEndDialogue;
-
-        //subscribe to the event
-        // ProcessSkipDialogue += bl_ProcessSkipDialogue;
     }
 
     // event handler
