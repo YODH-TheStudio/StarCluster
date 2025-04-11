@@ -77,8 +77,15 @@ namespace MeetAndTalk
         public void ChangeUI(DialogueUIManager UI)
         {
             // Setup UI
-            if (UI != null) DialogueUIManager.Instance = UI;
-            else Debug.LogError("DialogueUIManager.UI Object jest Pusty!");
+            if (UI != null)
+            {
+                DialogueUIManager.Instance = UI;
+                MainUI = UI;
+            }
+            else
+            {
+                Debug.LogError("DialogueUIManager.UI Object jest Pusty!");
+            }
         }
 
         /// <summary>

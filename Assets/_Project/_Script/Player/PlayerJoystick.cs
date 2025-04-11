@@ -78,6 +78,7 @@ public class PlayerJoystick : MonoBehaviour
     
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
+        Debug.Log("Touched 2");
         if(_MovementFinger == null && TouchedFinger.screenPosition.x <= Screen.width / 2f)
         {
             _MovementFinger = TouchedFinger;

@@ -23,12 +23,12 @@ public class DialogueManagerCustom : MonoBehaviour
     
     [Header("Script References")]
     private DialogueUIManager _dialogueUIManager;
+    private DialogueUIManager _dialogueMiniUIManager;
     private DialogueManager _dialogueManager;
     private MeetAndTalk.Localization.LocalizationManager _localizationManager;
 
     private void OnEnable()
     {
-        EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
     }
 
@@ -43,22 +43,31 @@ public class DialogueManagerCustom : MonoBehaviour
         _dialogueManager = dialogueManager;
         _dialogueUIManager = _dialogueManager.MainUI;
     }
+    
+    public void SetDialogueMiniUIManager(DialogueUIManager dialogueMiniUIManager)
+    {
+        _dialogueMiniUIManager = dialogueMiniUIManager;
+    }
 
     public void OnStartDialogue()
     {
-        // stateMachine.currentState = StateMachine.State.InDialogue;
-        _isDialogue = true;
-        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Dialogue);
+        if (_dialogueManager.MainUI == _dialogueUIManager)
+        {
+            _isDialogue = true;
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Dialogue);
+        }
     }
 
     public void OnEndDialogue()
     {   
-        // get dialogue name
-
-        // dialogueManager.audioSource.Stop();
-        // stateMachine.currentState = StateMachine.State.Walking;
-        _isDialogue = false;
-        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        if (_dialogueManager.MainUI == _dialogueUIManager)
+        {
+            _isDialogue = false;
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        }else
+        {
+            _dialogueManager.ChangeUI(_dialogueUIManager);
+        }
         StartProcessEnd();
     }
     
@@ -101,6 +110,22 @@ public class DialogueManagerCustom : MonoBehaviour
         // //subscribe to the event
         ProcessEndDialogue += bl_ProcessEndDialogue;
     }
+    
+    public void StartMiniDialogue(DialogueContainerSO dialogueContainerParam)
+    {
+        //run the event when the dialogue start
+        startEvent.Invoke();
+
+        if (_dialogueMiniUIManager != null)
+        {
+            _dialogueManager.ChangeUI(_dialogueMiniUIManager);
+            _dialogueManager.StartDialogue(dialogueContainerParam);
+        }
+        else
+        {
+            Debug.LogError("DialogueManager is not found");
+        }
+    }
 
     // event handler
     public void bl_ProcessEndDialogue()
@@ -120,11 +145,13 @@ public class DialogueManagerCustom : MonoBehaviour
     
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
+        Debug.Log("Touched");
         if (_isDialogue && _dialogueManager.isSkippeable)
         {
             //if dialogueUIManager.lastTypingTime is less than Time.time + 0.1s then skip the dialogue
             if (_dialogueUIManager.lastTypingTime < Time.time - 0.1f)
             {
+                Debug.Log("Skip");
                 StartProcessSkip();
             }
             else
