@@ -3236,7 +3236,7 @@ GameObject:
   - component: {fileID: 1966982738}
   - component: {fileID: 1966982737}
   m_Layer: 5
-  m_Name: Parameters
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
