@@ -121,7 +121,7 @@ public class ObjectFade: MonoBehaviour
             if (hit.tag != "Player")
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
-                ToFadeMode(hitMaterial);
+                ToTransparentMode(hitMaterial);
                 hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
                 hit.GetComponent<MeshRenderer>().material = hitMaterial;
             }
@@ -146,29 +146,21 @@ public class ObjectFade: MonoBehaviour
             }
         }
     }
-
-
     private void ToOpaqueMode(Material material)
     {
-        material.SetOverrideTag("RenderType", "");
-        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-        material.SetInt("_ZWrite", 1);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.DisableKeyword("_ALPHABLEND_ON");
-        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        material.renderQueue = -1;
+        material.SetFloat("_Surface", 0); // 0 = Opaque
+        material.SetFloat("_Blend", 0); // 0 = Alpha (mais pas utilisé en opaque)
+        material.SetFloat("_ZWrite", 1);
+        material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        material.renderQueue = -1; // Auto
     }
 
-    private void ToFadeMode(Material material)
+    private void ToTransparentMode(Material material)
     {
-        material.SetOverrideTag("RenderType", "Transparent");
-        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        material.SetInt("_ZWrite", 0);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.EnableKeyword("_ALPHABLEND_ON");
-        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.SetFloat("_Surface", 1); // 1 = Transparent
+        material.SetFloat("_Blend", 0); // 0 = Alpha
+        material.SetFloat("_ZWrite", 0);
+        material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }
