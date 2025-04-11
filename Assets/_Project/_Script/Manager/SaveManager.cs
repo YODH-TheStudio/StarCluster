@@ -15,17 +15,42 @@ public class SaveManager : MonoBehaviour
         //_dialogueData = GameManager.Instance.GetDialogueManager() GetComponent<DialogueData>();
     }
 
+    
+    // Load and save all
     public void SaveGame(){
         SavePlayer();
         SaveDialogueData();
     }
+    public void LoadGame(){
+        LoadPlayer();
+        LoadDialogueData();
+    }
+
+    // Dialogues and choices data
+    public void addCompletedDialogue(string dialogueName){
+        //DialogueData.completedDialogues.Add(dialogueName);
+        _dialogueData.addCompletedDialogue(dialogueName);
+    }
+    public void addChoiceMade(string choiceName){
+        //Debug.Log("Saving choice in save manager: " + choiceName);
+        //DialogueData.choicesMade.Add(choiceName);
+        _dialogueData.addChoiceMade(choiceName);
+    }
     
+    #region Save
     // Player data
-    public void SavePlayer(){
+    private void SavePlayer(){
         SaveSystem.SavePlayer(_player);
     }
 
-    public void LoadPlayer(){
+    public void SaveDialogueData(){
+        Debug.Log("Saving dialogue data");
+        SaveSystem.SaveDialogueData();
+    }
+    #endregion
+
+    #region Load
+    private void LoadPlayer(){
         PlayerData data = SaveSystem.LoadPlayer();
         if(data != null){
             // Load position
@@ -49,24 +74,9 @@ public class SaveManager : MonoBehaviour
             //GameManager.Instance.stateMachine.ChangeDayState((StateMachine.DayState)data.currentDayState, false);
         }
     }
-
-    // Dialogues and choices data
-    public void addCompletedDialogue(string dialogueName){
-        //DialogueData.completedDialogues.Add(dialogueName);
-        _dialogueData.addCompletedDialogue(dialogueName);
-    }
-    public void addChoiceMade(string choiceName){
-        //Debug.Log("Saving choice in save manager: " + choiceName);
-        //DialogueData.choicesMade.Add(choiceName);
-        _dialogueData.addChoiceMade(choiceName);
-    }
-
-    public void SaveDialogueData(){
-        Debug.Log("Saving dialogue data");
-        SaveSystem.SaveDialogueData();
-    }
     public void LoadDialogueData(){
         //_dialogueData = SaveSystem.LoadDialogueData();
         SaveSystem.LoadDialogueData();
     }
+    #endregion
 }
