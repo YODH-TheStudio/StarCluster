@@ -7,7 +7,6 @@ public class PlayerInteractionZone : MonoBehaviour
     [SerializeField]
     private float _raycastDistance = 1.25f;
 
-    [SerializeField]
     private GameObject _interactionButton;
 
     private PlayerScript _player = null;
@@ -22,7 +21,7 @@ public class PlayerInteractionZone : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_interactionButton == null)
         {
@@ -56,5 +55,10 @@ public class PlayerInteractionZone : MonoBehaviour
         {
             _interactionButton.SetActive(false);
         }
+    }
+    
+    public void SetInteractionButton(GameObject button)
+    {
+        _interactionButton = button;
     }
 }

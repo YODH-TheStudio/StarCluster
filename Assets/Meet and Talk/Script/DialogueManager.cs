@@ -59,6 +59,11 @@ namespace MeetAndTalk
             EndDialogueEvent.AddListener(GameManager.Instance.GetDialogueManager().OnEndDialogue);
         }
 
+        private void Start()
+        {
+            GameManager.Instance.GetDialogueManager().SetDialogueManager(this);
+        }
+        
         private void Update()
         {
             Timer -= Time.deltaTime;

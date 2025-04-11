@@ -19,8 +19,6 @@ public class DialogueManagerCustom : MonoBehaviour
     public event Notify ProcessEndDialogue;
     public event Notify ProcessSkipDialogue;
 
-    public DialogueContainerSO test;
-
     private bool _isDialogue;
     
     [Header("Script References")]
@@ -32,17 +30,18 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-        _dialogueManager = FindObjectOfType<DialogueManager>();
-        _dialogueUIManager = _dialogueManager.MainUI;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (test != null)
-        {
-            StartDialogue(test);
-        }
+        
+    }
+    
+    public void SetDialogueManager(DialogueManager dialogueManager)
+    {
+        _dialogueManager = dialogueManager;
+        _dialogueUIManager = _dialogueManager.MainUI;
     }
 
     public void OnStartDialogue()

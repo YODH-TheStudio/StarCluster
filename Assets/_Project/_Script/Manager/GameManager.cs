@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (_player == null)
-        {
-            FindPlayer();
-        }
-        if (_companion == null)
-        {
-            FindCompanion();
-        }
+        // if (_player == null)
+        // {
+        //     FindPlayer();
+        // }
+        // if (_companion == null)
+        // {
+        //     FindCompanion();
+        // }
 
         if (_vibrationManager == null)
         {
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
         if (_soundSystem == null)
         {
-            _soundSystem = FindObjectOfType<SoundSystem>();
+            FindSoundManager();
         }
         
         if (_stateManager == null)
@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour
     void FindVibrationManager()
     {
         _vibrationManager = FindObjectOfType<VibrationManager>();
+    }
+
+    void FindSoundManager()
+    {
+        _soundSystem = FindObjectOfType<SoundSystem>();
     }
 
     void FindStateManager()
@@ -174,5 +179,14 @@ public class GameManager : MonoBehaviour
             FindDialogueManager();
         }
         return _dialogueManager;
+    }
+    
+    public SoundSystem GetSoundSystem()
+    {
+        if (_soundSystem == null)
+        {
+            FindSoundManager();
+        }
+        return _soundSystem;
     }
 }
