@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class PlayerData
 {
     public float[] position;
-    public List<string> objects;
+    //public List<string> objects;
 
     public enum DayState
     {
@@ -23,7 +23,7 @@ public class PlayerData
 
     public PlayerData(PlayerScript player)
     {
-        objects = new List<string>();
+        //objects = new List<string>();
         // get inventory slots number
         //int slotsCount = Inventory.slots.Count;
         //Debug.Log("Slots count: " + slotsCount);
@@ -48,7 +48,7 @@ public class PlayerData
         //currentDayState = (DayState)GameManager.Instance.stateMachine.currentDayState;
          
         // Write this down to a file for debug
-        string dataString = JsonUtility.ToJson(objects);
-        File.WriteAllText(Application.persistentDataPath + "/objects.json", dataString);
+        //string dataString = JsonUtility.ToJson(objects);
+        //File.WriteAllText(Application.persistentDataPath + "/objects.json", dataString);
     }
 }

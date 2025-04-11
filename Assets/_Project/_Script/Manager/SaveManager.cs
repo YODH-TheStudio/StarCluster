@@ -15,6 +15,11 @@ public class SaveManager : MonoBehaviour
         //_dialogueData = GameManager.Instance.GetDialogueManager() GetComponent<DialogueData>();
     }
 
+    public void SaveGame(){
+        SavePlayer();
+        SaveDialogueData();
+    }
+    
     // Player data
     public void SavePlayer(){
         SaveSystem.SavePlayer(_player);
