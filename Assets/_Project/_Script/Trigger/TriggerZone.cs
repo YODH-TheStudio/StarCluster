@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using MeetAndTalk;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerZone : MonoBehaviour
 {
 
     [SerializeField] private DialogueContainerSO _dialogue;
+    [SerializeField] private UnityEvent _onTriggerEnterEvent;
+    [SerializeField] private UnityEvent _onDialogueEndEvent;
     
     // Start is called before the first frame update
     void Start()
@@ -24,8 +27,15 @@ public class TriggerZone : MonoBehaviour
     {
         // Unsubscribe from the event
         GameManager.Instance.GetDialogueManager().ProcessEndDialogue -= OnEndDialogue;
-        Debug.Log("aaaaa");
+        _onDialogueEndEvent.Invoke();
         // Add your logic here for when the dialogue ends
+    }
+
+    public void StartDialogue()
+    {
+        GameManager.Instance.GetDialogueManager().StartDialogue(_dialogue);
+            
+        GameManager.Instance.GetDialogueManager().ProcessEndDialogue += OnEndDialogue;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -34,9 +44,7 @@ public class TriggerZone : MonoBehaviour
         {
             if (_dialogue != null)
             {
-                GameManager.Instance.GetDialogueManager().StartDialogue(_dialogue);
-            
-                GameManager.Instance.GetDialogueManager().ProcessEndDialogue += OnEndDialogue;
+                _onTriggerEnterEvent.Invoke();
             }
             else
             {
