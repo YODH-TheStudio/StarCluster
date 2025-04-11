@@ -10,7 +10,7 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        //Debug.Log($"{gameObject.name} a été interagi.");
+        //Debug.Log($"{gameObject.name} a Ã©tÃ© interagi.");
     }
 
     //

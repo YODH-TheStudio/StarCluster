@@ -52,9 +52,9 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass"
             #pragma fragment LitPassFragmentGrass
             #define _ALPHATEST_ON
 
-            #include "Assets/Project/Shaders/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/WavingGrassInput.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassPasses.hlsl"
-            #include "Assets/Project/Shaders/WavingGrassPasses.hlsl"
+            #include "Assets/_Project/Shaders/WavingGrassPasses.hlsl"
 
             ENDHLSL
         }
@@ -84,8 +84,8 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass"
             #pragma multi_compile_instancing
 
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassInput.hlsl"
-            #include  "Assets/Project/Shaders/WavingGrassInput.hlsl"
-            #include "Assets/Project/Shaders/WavingGrassPasses.hlsl"
+            #include  "Assets/_Project/Shaders/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/WavingGrassPasses.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassPasses.hlsl"
             ENDHLSL
         }
@@ -119,9 +119,9 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass"
             #pragma multi_compile_instancing
 
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassInput.hlsl"
-            #include "Assets/Project/Shaders/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/WavingGrassInput.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassDepthNormalsPass.hlsl"
-            #include "Assets/Project/Shaders/WavingGrassDepthNormalsPass.hlsl"
+            #include "Assets/_Project/Shaders/WavingGrassDepthNormalsPass.hlsl"
             ENDHLSL
         }
     }
