@@ -5,15 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using Systems.SceneManagement;
 
-public class SettingsMenu : MonoBehaviour
+public class SettingsMenu : Menu
 {
-    private SceneLoader _sceneLoader;
-
-    private void Awake()
-    {
-        _sceneLoader = PersistentSingleton<SceneLoader>.Instance;
-    }
-
+    [SerializeField] private VibrationManager vibrationManager;
+    [SerializeField] private SoundManager soundManager;
+    
     public void MasterVolume(float volume)
     {
 
@@ -23,19 +19,14 @@ public class SettingsMenu : MonoBehaviour
     {
 
     }
+    
     public void SFXVolume(float volume)
     {
 
     }
-
-
+    
     public async void GoToMainMenu()
     {
-        await _sceneLoader.LoadSceneGroup(0);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
+        await SceneLoader.LoadSceneGroup(0);
     }
 }

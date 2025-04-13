@@ -15,7 +15,7 @@ namespace Systems.SceneManagement
 
         SceneGroup activeSceneGroup;
 
-        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool realoadDupScenes = false)
+        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {
             activeSceneGroup = group;
             List<string> loadedScenes = new List<string>();
@@ -36,7 +36,7 @@ namespace Systems.SceneManagement
             for (int i = 0; i < totalScenesToLoad; i++)
             {
                 SceneData sceneData = group.Scenes[i];
-                if (realoadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
+                if (reloadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
                 await Task.Delay(TimeSpan.FromSeconds(2.5f));
