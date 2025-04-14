@@ -19,6 +19,7 @@ public static class SaveSystem
 
         Debug.Log("Saved file in " + path);
     }
+    
     public static void SaveDialogueData(){
         DialogueData data = GameManager.Instance.GetComponent<DialogueData>();
         string jsonString = JsonUtility.ToJson(data);
@@ -27,6 +28,25 @@ public static class SaveSystem
     public static void SavePuzzleData(PuzzleManager puzzleManager){
         string jsonString = JsonUtility.ToJson(puzzleManager.GetData());
         File.WriteAllText(Application.persistentDataPath + "/puzzleData.json", jsonString);
+    }
+
+    public static void SaveObjects()
+    {
+        Saveable[] objects = GameObject.FindObjectsOfType<Saveable>();
+        Debug.Log("Found " + objects.Length + " objects to save");
+        
+        Dictionary<string, Vector3> positionsDic = new Dictionary<string, Vector3>();
+        foreach (Saveable saveable in objects)
+        {
+            Debug.Log("Dic entry: " + saveable.identifier + ", " + saveable.transform.position);
+            positionsDic.Add(saveable.identifier, saveable.transform.position);
+        }
+        SerializableDictionary<string, Vector3> positions = new SerializableDictionary<string, Vector3>(positionsDic);
+        
+        Debug.Log("Json: " + JsonUtility.ToJson(positions));
+        File.WriteAllText(Application.persistentDataPath + "/objects.json", JsonUtility.ToJson(positions));
+        Debug.Log("Positions of objects saved: " + positions);
+        Debug.Log("Saved objects to " + Application.persistentDataPath + "/objects.save");
     }
     #endregion
     
@@ -86,6 +106,33 @@ public static class SaveSystem
             string jsonString = File.ReadAllText(path);
             List<PuzzleData> data = JsonUtility.FromJson<List<PuzzleData>>(jsonString);
             return data;
+        }
+    }
+    
+    public static void LoadObjects(){
+        string path = Application.persistentDataPath + "/objects.json";
+        if(File.Exists(path)){
+            string jsonString = File.ReadAllText(path);
+            Debug.Log("Loaded Objects data: " + jsonString);
+            SerializableDictionary<string, Vector3> data = JsonUtility.FromJson<SerializableDictionary<string, Vector3>>(jsonString);
+            //Dictionary<string, Vector3> data = JsonUtility.FromJson<Dictionary<string, Vector3>>(jsonString);
+            Dictionary<string, Vector3> positionsDic = data.ToDictionary();
+
+            // Deserialize binary from stream
+            //Dictionary<GameObject, Vector3> data = (Dictionary<GameObject, Vector3>) formatter.Deserialize(stream);
+            foreach (KeyValuePair<string, Vector3> kvp in positionsDic)
+            {
+                if (kvp.Key != null)
+                {
+                    // Set the position of the object
+                    GameObject obj = GameObject.Find(kvp.Key);
+                    obj.transform.position = kvp.Value;
+                }
+            }
+            //return data;
+        } else {
+            Debug.LogError("Save file not found at " + path);
+            //return null;
         }
     }
     #endregion

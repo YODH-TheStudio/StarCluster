@@ -20,7 +20,7 @@ public class PlayerData
     }
     public int day;
     public DayState currentDayState;
-
+    
     public PlayerData()
     {
         //objects = new List<string>();

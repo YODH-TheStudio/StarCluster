@@ -13,12 +13,14 @@ public class SaveManager : MonoBehaviour
         SavePlayer();
         SaveDialogueData();
         SavePuzzleData();
+        SaveObjects();
     }
     public void LoadGame(){
         Debug.Log("Loading game");
         LoadPlayer();
         LoadDialogueData();
         LoadPuzzleData();
+        LoadObjects();
     }
 
     // Dialogues and choices data
@@ -37,6 +39,12 @@ public class SaveManager : MonoBehaviour
     private void SavePlayer(){
         SaveSystem.SavePlayer(GameManager.Instance.GetPlayer());
     }
+    
+    // Objects data
+    private void SaveObjects(){
+       SaveSystem.SaveObjects();
+    }
+    
     private void SaveDialogueData(){
         //Debug.Log("Saving dialogue data");
         SaveSystem.SaveDialogueData();
@@ -83,6 +91,11 @@ public class SaveManager : MonoBehaviour
         if(data != null){
             GameManager.Instance.GetPuzzleManager().SetData(data);
         }
+    }
+
+    public void LoadObjects()
+    {
+        SaveSystem.LoadObjects();
     }
     #endregion
 }

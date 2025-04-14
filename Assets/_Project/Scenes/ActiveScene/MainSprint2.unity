@@ -1129,6 +1129,7 @@ GameObject:
   - component: {fileID: 585251136}
   - component: {fileID: 585251140}
   - component: {fileID: 585251141}
+  - component: {fileID: 585251142}
   m_Layer: 28
   m_Name: PushPull (3)
   m_TagString: PushPullObject
@@ -1263,6 +1264,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1009314107738614395, guid: 13c0bad8d8e816d4094c334be1a96271, type: 3}
+--- !u!114 &585251142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585251133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Caillou3
 --- !u!1 &586754882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,6 +1578,7 @@ GameObject:
   - component: {fileID: 634322609}
   - component: {fileID: 634322614}
   - component: {fileID: 634322615}
+  - component: {fileID: 634322616}
   m_Layer: 28
   m_Name: PushPull
   m_TagString: PushPullObject
@@ -1698,6 +1713,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1009314107738614395, guid: 13c0bad8d8e816d4094c334be1a96271, type: 3}
+--- !u!114 &634322616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634322607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Caillou
 --- !u!1001 &662314513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2597,6 +2625,7 @@ GameObject:
   - component: {fileID: 1146861667}
   - component: {fileID: 1146861671}
   - component: {fileID: 1146861672}
+  - component: {fileID: 1146861673}
   m_Layer: 28
   m_Name: PushPull (1)
   m_TagString: PushPullObject
@@ -2731,6 +2760,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1009314107738614395, guid: 13c0bad8d8e816d4094c334be1a96271, type: 3}
+--- !u!114 &1146861673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146861664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Caillou1
 --- !u!1 &1247789613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,6 +2926,7 @@ GameObject:
   - component: {fileID: 1346859307}
   - component: {fileID: 1346859311}
   - component: {fileID: 1346859312}
+  - component: {fileID: 1346859313}
   m_Layer: 28
   m_Name: PushPull (2)
   m_TagString: PushPullObject
@@ -3018,6 +3061,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1009314107738614395, guid: 13c0bad8d8e816d4094c334be1a96271, type: 3}
+--- !u!114 &1346859313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346859304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Caillou2
 --- !u!1 &1358289919
 GameObject:
   m_ObjectHideFlags: 0
