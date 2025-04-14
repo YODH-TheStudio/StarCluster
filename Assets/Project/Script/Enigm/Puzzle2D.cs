@@ -219,6 +219,11 @@ public class Puzzle2D : MonoBehaviour
             if (isSegmentRed)
             {
                 Debug.Log($"✔️ Connexion validée avec le point : {targetPoint.name} (2D: {linked2DPoint})");
+                Color circuitColor = GetCircuitColor();
+                DrawColored3DSegment(startLinked2DPoint, linked2DPoint, circuitColor);
+                _currentSelected = null;
+                Destroy(tempCylinder);
+
             }
             else
             {
