@@ -39,7 +39,7 @@ public class ObjectFade: MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         _distanceCamToPlayer = Vector3.Distance(_player.transform.position, _mainCamera.transform.position);
         _directionCamToPlayer = (_player.transform.position -  _mainCamera.transform.position).normalized;
@@ -121,9 +121,12 @@ public class ObjectFade: MonoBehaviour
             if (hit.tag != "Player")
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
+
                 ToTransparentMode(hitMaterial);
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
-                hit.GetComponent<MeshRenderer>().material = hitMaterial;
+
+                Color baseColor = hitMaterial.GetColor("_BaseColor");
+                baseColor.a = Mathf.Lerp(baseColor.a, _fadeAmount, _fadeSpeed * Time.deltaTime);
+                hitMaterial.SetColor("_BaseColor", baseColor);
             }
         }
     }
@@ -135,10 +138,12 @@ public class ObjectFade: MonoBehaviour
             if (hit.tag != "Player")
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));
-                hit.GetComponent<MeshRenderer>().material = hitMaterial;
 
-                if (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) >= 0.999f )
+                Color baseColor = hitMaterial.GetColor("_BaseColor");
+                baseColor.a = Mathf.Lerp(baseColor.a, 1f, _fadeSpeed * Time.deltaTime);
+                hitMaterial.SetColor("_BaseColor", baseColor);
+
+                if (baseColor.a >= 0.999f)
                 {
                     ToOpaqueMode(hitMaterial);
                     _toRemove.Add(hit);
@@ -146,21 +151,22 @@ public class ObjectFade: MonoBehaviour
             }
         }
     }
+
     private void ToOpaqueMode(Material material)
     {
+        material.renderQueue = -1; // Auto
         material.SetFloat("_Surface", 0); // 0 = Opaque
         material.SetFloat("_Blend", 0); // 0 = Alpha (mais pas utilisé en opaque)
         material.SetFloat("_ZWrite", 1);
         material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        material.renderQueue = -1; // Auto
     }
 
     private void ToTransparentMode(Material material)
     {
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
         material.SetFloat("_Surface", 1); // 1 = Transparent
         material.SetFloat("_Blend", 0); // 0 = Alpha
         material.SetFloat("_ZWrite", 0);
         material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }
