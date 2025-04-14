@@ -51,9 +51,10 @@ public class SaveManager : MonoBehaviour
         PlayerData data = SaveSystem.LoadPlayer();
         if(data != null){
             // Load position
-            Debug.Log("Loaded playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
-            GameManager.Instance.GetPlayer().transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-
+            Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
+            //GameManager.Instance.GetPlayer().gameObject.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
+            
             // // Clear Inventory
             // Inventory.Clear();
             // // Load inventory
