@@ -153,24 +153,27 @@ public class Puzzle2D : MonoBehaviour
 
         if (isDragging)
         {
+            // Récupérer la position de la souris en 3D
             Vector3 mouseScreen = Input.mousePosition;
             mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, currentStartDragPoint.position);
 
             Vector3 mousePos = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
 
+            // Calculer la direction entre la position de la souris et le point de départ
             Vector3 direction = mousePos - currentStartDragPoint.position;
-            direction.x = 0;
+            direction.x = 0;  // Restreindre la direction au plan YZ
 
             float distance = direction.magnitude;
             Vector3 directionNormalized = direction.normalized;
 
-            // Mise à jour de l'échelle
+            // Mise à jour de l'échelle du cylindre
             tempCylinder.transform.localScale = new Vector3(0.1f, distance / 2f, 0.1f); // Y = demi-distance
 
-            // Orientation dans le plan YZ
+            // Orientation dans le plan YZ (rotation autour de l'axe X)
             tempCylinder.transform.rotation = Quaternion.LookRotation(Vector3.right, directionNormalized);
 
-            tempCylinder.transform.position = currentStartDragPoint.position + (tempCylinder.transform.up * (distance / 2f));
+            // Positionner le cylindre pour que la base soit à `currentStartDragPoint.position`
+            tempCylinder.transform.position = currentStartDragPoint.position + (directionNormalized * distance / 2f);
         }
 
     }
