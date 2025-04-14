@@ -31,11 +31,12 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private CharacterController _controller;
     private Vector3 _direction;
 
-    private bool _isGrabbing = false;
     private GameObject _objectGrabbed;
 
     // Interact
     private GameObject _currentInteractObject;
+    
+    private PlayerInteractionZone _playerInteractionZone;
 
     // Limited Movement
     public enum MovementLimitType
@@ -74,6 +75,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _controller = GetComponent<CharacterController>();
         Controller playerControls = new Controller();
         playerControls.Player.SetCallbacks(this);
+        _playerInteractionZone = GetComponent<PlayerInteractionZone>();
     }
 
     // Allow the player to move, Is called by the character controler component in player
@@ -126,22 +128,28 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         if (context.started)
         {
-            // Interact with object
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
-
+            // // Interact with object
+            // RaycastHit hit;
+            // if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
+            //
+            // {
+            //     // Is interactable object
+            //     Interactable interactable = hit.transform.GetComponent<Interactable>();
+            //     if (interactable != null)
+            //     {
+            //         interactable.SetUserTransform(this.transform);
+            //         interactable.SetUserInteractionNormal(hit.normal);
+            //         interactable.Interact();
+            //     }
+            // }
+            
+            Interactable interactable = _playerInteractionZone.GetCurrentInteractable();
+            if (interactable != null)
             {
-                // Is interactable object
-                Interactable interactable = hit.transform.GetComponent<Interactable>();
-                if (interactable != null)
-                {
-                    interactable.SetUserTransform(this.transform);
-                    interactable.SetUserInteractionNormal(hit.normal);
-                    interactable.Interact();
-                }
+                interactable.SetUserTransform(this.transform);
+                interactable.SetUserInteractionNormal(_playerInteractionZone.GetRaycastHit().normal);
+                interactable.Interact();
             }
-
-            return;
         }
     }
 
@@ -201,11 +209,45 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
+            
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
             {
+                
+                Vector3 northDirection = Vector3.forward;
+                Vector3 southDirection = Vector3.back;
+                Vector3 eastDirection = Vector3.right;
+                Vector3 westDirection = Vector3.left;
+
+                Vector3 currentForward = transform.forward;
+
+                float dotNorth = Vector3.Dot(currentForward, northDirection);
+                float dotSouth = Vector3.Dot(currentForward, southDirection);
+                float dotEast = Vector3.Dot(currentForward, eastDirection);
+                float dotWest = Vector3.Dot(currentForward, westDirection);
+
+                Vector3 closestDirection = Vector3.zero;
+                float maxDot = Mathf.Max(dotNorth, dotSouth, dotEast, dotWest);
+
+                if (maxDot == dotNorth)
+                {
+                    closestDirection = northDirection;
+                }
+                else if (maxDot == dotSouth)
+                {
+                    closestDirection = southDirection;
+                }
+                else if (maxDot == dotEast)
+                {
+                    closestDirection = eastDirection;
+                }
+                else if (maxDot == dotWest)
+                {
+                    closestDirection = westDirection;
+                }
+                
                 // Limit movement only on object direction and object inverse direction
-                float forwardMove = Vector3.Dot(_limitedMoveDirection, transform.forward);  // Calculer la composante "forward"
-                _limitedMoveDirection = transform.forward * forwardMove;  // Appliquer la direction en avant uniquement
+                float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);  // Calculer la composante "forward"
+                _limitedMoveDirection = closestDirection * forwardMove;  // Appliquer la direction en avant uniquement
 
                 _controller.SimpleMove(_limitedMoveDirection * _speed * Time.deltaTime);
             }
@@ -223,17 +265,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         //     _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         // Look();
 
-    }
-
-    // Code to interact with object
-    public bool IsGrabbing()
-    {
-        return _isGrabbing;
-    }
-
-    public void SetGrabbing(bool isGrabbing)
-    {
-        _isGrabbing = isGrabbing;
     }
 
     public GameObject GetObjectGrabbed()

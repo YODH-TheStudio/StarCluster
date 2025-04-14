@@ -12,6 +12,10 @@ public class PlayerInteractionZone : MonoBehaviour
     private PlayerScript _player = null;
 
     private VibrationManager _vibrationManager = null;
+    
+    private Interactable _currentInteractable = null;
+    
+    private RaycastHit _raycastHit;
 
     // Start is called before the first frame update
     void Start()
@@ -41,24 +45,32 @@ public class PlayerInteractionZone : MonoBehaviour
             {
                 _vibrationManager.Vibrate(100f, 0.2f);
                 _interactionButton.SetActive(true);
+                _currentInteractable = hit.transform.GetComponent<Interactable>();
+                _raycastHit = hit;
             }
             else
             {
                 _interactionButton.SetActive(false);
+                _currentInteractable = null;
             }
+            return;
         }
-        else if(_player.IsGrabbing())
-        {
-            _interactionButton.SetActive(true);
-        }
-        else
-        {
-            _interactionButton.SetActive(false);
-        }
+        
+        _interactionButton.SetActive(false);
     }
     
     public void SetInteractionButton(GameObject button)
     {
         _interactionButton = button;
+    }
+    
+    public Interactable GetCurrentInteractable()
+    {
+        return _currentInteractable;
+    }
+    
+    public RaycastHit GetRaycastHit()
+    {
+        return _raycastHit;
     }
 }

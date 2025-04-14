@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,7 +32,7 @@ public class PhasableObject : Interactable
         _lineRenderer.endColor = Color.red;
         _lineRenderer.positionCount = 2;
 
-        // Ajouter les paires de positions de départ et d'arrivée
+        // Ajouter les paires de positions de dï¿½part et d'arrivï¿½e
         _phasePairs.Add((_objectBasePosition.position + _startOffset, _objectBasePosition.position + _endOffset));
         _phasePairs.Add((_objectBasePosition.position + _endOffset, _objectBasePosition.position + _startOffset));
     }
@@ -54,23 +54,23 @@ public class PhasableObject : Interactable
         // Parcours chaque paire de phase (start, end)
         foreach (var pair in _phasePairs)
         {
-            // Vérifie si le joueur est proche du point de départ de cette paire
+            // Vï¿½rifie si le joueur est proche du point de dï¿½part de cette paire
             float distance = Vector3.Distance(_userTransform.position, pair.start);
 
             if (distance <= _phaseRadius)
             {
-                // Prépare l'animation
+                // Prï¿½pare l'animation
                 if (_objectCollider != null)
                 {
                     _objectCollider.enabled = false;
                 }
 
-                StartCoroutine(PhaseAnimation(pair));  // Envoie la paire directement à l'animation
-                return;  // Fin de la méthode dès qu'une transition est effectuée
+                StartCoroutine(PhaseAnimation(pair));  // Envoie la paire directement ï¿½ l'animation
+                return;  // Fin de la mï¿½thode dï¿½s qu'une transition est effectuï¿½e
             }
         }
 
-        // Si aucune paire de phase n'est activée (pas de transition possible)
+        // Si aucune paire de phase n'est activï¿½e (pas de transition possible)
         Debug.Log("Player is out of phase radius. Phase transition denied.");
     }
 
@@ -80,10 +80,10 @@ public class PhasableObject : Interactable
 
         yield return StartCoroutine(playerScript.MoveTo(phasePair.start, _phaseDuration));
 
-        // Déplace le joueur à la fin de la phase et attend que ça soit fini
+        // Dï¿½place le joueur ï¿½ la fin de la phase et attend que ï¿½a soit fini
         yield return StartCoroutine(playerScript.MoveTo(phasePair.end, _phaseDuration));
 
-        // Réactive le collider
+        // Rï¿½active le collider
         if (_objectCollider != null)
         {
             _objectCollider.enabled = true;
@@ -98,10 +98,10 @@ public class PhasableObject : Interactable
         // Affiche la position du joueur et de la phase active
         _lineRenderer.SetPosition(0, _userTransform.position);
 
-        // Optionnel : On peut aussi dessiner la ligne de phase active entre le joueur et le point de départ de la phase
+        // Optionnel : On peut aussi dessiner la ligne de phase active entre le joueur et le point de dï¿½part de la phase
         if (_phasePairs.Count > 0)
         {
-            _lineRenderer.SetPosition(1, _phasePairs[0].start);  // Affiche la première paire pour l'exemple
+            _lineRenderer.SetPosition(1, _phasePairs[0].start);  // Affiche la premiï¿½re paire pour l'exemple
         }
     }
 
@@ -113,7 +113,7 @@ public class PhasableObject : Interactable
             return;
         }
 
-        // Dessine les paires de phases dans l'éditeur
+        // Dessine les paires de phases dans l'ï¿½diteur
         foreach (var pair in _phasePairs)
         {
             Gizmos.color = Color.green;
