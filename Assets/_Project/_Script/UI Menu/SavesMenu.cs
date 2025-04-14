@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SavesMenu : Menu
 {
-    private int _saveIndex = 1;
-    private string _previousSavedScene;
+    private int _previousSavedGroupScene;
+    private int _saveIndex;
+
+    public enum SaveState {Full, Empty};
 
     public void SetSelectedSaveIndex()
     {
@@ -20,7 +23,7 @@ public class SavesMenu : Menu
             Debug.LogError("Button name is not valid: " + name);
         }
     }
-
+    
     public void LoadSelectedSave()
     {
         //load the save at the _saveIndex
@@ -30,4 +33,10 @@ public class SavesMenu : Menu
     {
         //delete the save at the _saveIndex
     }
+
+    public override int GetIndex()
+    {
+        return _saveIndex;
+    }
+
 }
