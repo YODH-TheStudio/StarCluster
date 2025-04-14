@@ -154,19 +154,37 @@ public class ObjectFade: MonoBehaviour
 
     private void ToOpaqueMode(Material material)
     {
-        material.renderQueue = -1; // Auto
-        material.SetFloat("_Surface", 0); // 0 = Opaque
-        material.SetFloat("_Blend", 0); // 0 = Alpha (mais pas utilisé en opaque)
-        material.SetFloat("_ZWrite", 1);
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        material.SetInt("_ZWrite", 1);
+        material.SetInt("_Surface", 0);
+
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
+
+        material.SetShaderPassEnabled("DepthOnly", true);
+        material.SetShaderPassEnabled("SHADOWCASTER", true);
+
+        material.SetOverrideTag("RenderType", "Opaque");
+
         material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
     }
 
     private void ToTransparentMode(Material material)
     {
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.SetInt("_Surface", 1);
+
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-        material.SetFloat("_Surface", 1); // 1 = Transparent
-        material.SetFloat("_Blend", 0); // 0 = Alpha
-        material.SetFloat("_ZWrite", 0);
+
+        material.SetShaderPassEnabled("DepthOnly", false);
+        material.SetShaderPassEnabled("SHADOWCASTER", false);
+
+        material.SetOverrideTag("RenderType", "Transparent");
+
         material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
     }
 }
