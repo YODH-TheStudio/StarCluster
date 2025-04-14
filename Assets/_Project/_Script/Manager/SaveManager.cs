@@ -1,29 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-
-    private PlayerScript _player;
     private DialogueData _dialogueData;
-    void Start()
-    {
-        _player = GameManager.Instance.GetPlayer();
-        if(_player == null)
-            Debug.LogError("Player not found in SaveManager");
-        //_dialogueData = GameManager.Instance.GetDialogueManager() GetComponent<DialogueData>();
-    }
-
     
     // Load and save all
     public void SaveGame(){
+        Debug.Log("Saving game");
         SavePlayer();
         SaveDialogueData();
+        SavePuzzleData();
     }
     public void LoadGame(){
+        Debug.Log("Loading game");
         LoadPlayer();
         LoadDialogueData();
+        LoadPuzzleData();
     }
 
     // Dialogues and choices data
@@ -40,12 +35,14 @@ public class SaveManager : MonoBehaviour
     #region Save
     // Player data
     private void SavePlayer(){
-        SaveSystem.SavePlayer(_player);
+        SaveSystem.SavePlayer(GameManager.Instance.GetPlayer());
     }
-
-    public void SaveDialogueData(){
-        Debug.Log("Saving dialogue data");
+    private void SaveDialogueData(){
+        //Debug.Log("Saving dialogue data");
         SaveSystem.SaveDialogueData();
+    }
+    private void SavePuzzleData(){
+        SaveSystem.SavePuzzleData(GameManager.Instance.GetPuzzleManager());
     }
     #endregion
 
@@ -54,7 +51,8 @@ public class SaveManager : MonoBehaviour
         PlayerData data = SaveSystem.LoadPlayer();
         if(data != null){
             // Load position
-            _player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            Debug.Log("Loaded playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
+            GameManager.Instance.GetPlayer().transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
 
             // // Clear Inventory
             // Inventory.Clear();
@@ -77,6 +75,13 @@ public class SaveManager : MonoBehaviour
     public void LoadDialogueData(){
         //_dialogueData = SaveSystem.LoadDialogueData();
         SaveSystem.LoadDialogueData();
+    }
+    
+    private void LoadPuzzleData(){
+        List<PuzzleData> data = SaveSystem.LoadPuzzleData();
+        if(data != null){
+            GameManager.Instance.GetPuzzleManager().SetData(data);
+        }
     }
     #endregion
 }

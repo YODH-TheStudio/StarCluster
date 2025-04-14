@@ -22,9 +22,13 @@ public class PuzzleManager : MonoBehaviour
                 puzzle.SetFinish(true);
             }
         }
+        
+        // Save the game
+        GameManager.Instance.GetSaveManager().SaveGame();
+        Debug.Log("Autosave");
     }
 
-    private void AccesToFinalBattle()
+    private void AccessToFinalPuzzle()
     {
         int FinishedPuzzle = 0;
 
@@ -39,6 +43,29 @@ public class PuzzleManager : MonoBehaviour
         if (FinishedPuzzle == _puzzleList.Count) 
         {
             OnFinalPuzzleActive?.Invoke();
+        }
+    }
+
+    public List<PuzzleData> GetData()
+    {
+        return _puzzleList;
+    }
+    public void SetData(List<PuzzleData> newPuzzleList)
+    {
+        
+        // Update positions
+        foreach (PuzzleData puzzle in newPuzzleList)
+        {
+            if (puzzle.GetFinish())
+            {
+                puzzle.GetFusionPoint().SetState(true);
+            }
+            else
+            {
+                puzzle.GetFusionPoint().SetState(false);
+            }
+            // Restore position of gameObjects
+            puzzle.RestorePositions();
         }
     }
 }

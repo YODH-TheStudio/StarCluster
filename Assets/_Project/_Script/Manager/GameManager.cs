@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public SoundSystem _soundSystem { get; private set; }
     public StateManager _stateManager { get; private set; }
     public DialogueManagerCustom _dialogueManager { get; private set; }
+    public PuzzleManager _puzzleManager { get; private set; }
+    public SaveManager _saveManager { get; private set; }
 
     // Singleton
     private static GameManager _instance;
@@ -88,7 +90,14 @@ public class GameManager : MonoBehaviour
     {
         _companion = FindObjectOfType<CompanionFollow>();
     }
-
+    public void FindPuzzleManager()
+    {
+        _puzzleManager = FindObjectOfType<PuzzleManager>();
+    }
+    public void FindSaveManager()
+    {
+        _saveManager = FindObjectOfType<SaveManager>();
+    }
     void FindVibrationManager()
     {
         _vibrationManager = FindObjectOfType<VibrationManager>();
@@ -172,6 +181,23 @@ public class GameManager : MonoBehaviour
         return _stateManager;
     }
 
+    public PuzzleManager GetPuzzleManager()
+    {
+        if (_puzzleManager == null)
+        {
+            FindPuzzleManager();
+        }
+        return _puzzleManager;
+    }
+    public SaveManager GetSaveManager()
+    {
+        if (_saveManager == null)
+        {
+            FindSaveManager();
+        }
+        return _saveManager;
+    }
+    
     public DialogueManagerCustom GetDialogueManager()
     {
         if (_dialogueManager == null)

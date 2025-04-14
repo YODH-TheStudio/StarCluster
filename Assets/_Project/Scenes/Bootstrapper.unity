@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 3553120399947041324}
   - component: {fileID: 3841915818729758175}
   m_Layer: 0
-  m_Name: State Manaager
+  m_Name: StateManaager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,7 +21,7 @@ public class PlayerData
     public int day;
     public DayState currentDayState;
 
-    public PlayerData(PlayerScript player)
+    public PlayerData()
     {
         //objects = new List<string>();
         // get inventory slots number
@@ -29,6 +29,8 @@ public class PlayerData
         //Debug.Log("Slots count: " + slotsCount);
        // objects = new string[slotsCount];
 
+       PlayerScript player = GameManager.Instance.GetPlayer();
+       
         position = new float[3];
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;
