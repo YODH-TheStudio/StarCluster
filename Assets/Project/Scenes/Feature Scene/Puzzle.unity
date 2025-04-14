@@ -314,7 +314,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 52
+  field of view: 96.4
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2320,10 +2320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac48dcb57fcbb1f4eb51e999ff7d35d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvas: {fileID: 1867283244}
-  _levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
   _pointColor: {r: 0, g: 1, b: 0, a: 1}
   _lineColor: {r: 1, g: 0, b: 0, a: 1}
+  _canvas: {fileID: 1867283244}
+  _levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
   _puzzleCamera: {fileID: 275782304}
   _cinemachineMainCamera: {fileID: 1774719521}
   _mainCamera: {fileID: 963194227}

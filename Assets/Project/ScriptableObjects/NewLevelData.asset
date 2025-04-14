@@ -19,7 +19,7 @@ MonoBehaviour:
   - {x: -284.8, y: 110.5}
   - {x: -183.8, y: 106.6}
   - {x: -119.1, y: 133}
-  - {x: -115.4, y: 52}
+  - {x: -115.66, y: 52}
   - {x: -44.5, y: 51.7}
   - {x: -109.5, y: -47.58}
   - {x: 32.7, y: -29.1}
@@ -38,12 +38,10 @@ MonoBehaviour:
   - pointA: {x: -183.8, y: 106.6}
     pointB: {x: -119.1, y: 133}
   - pointA: {x: -119.1, y: 133}
-    pointB: {x: -115.4, y: 52}
-  - pointA: {x: -115.4, y: 52}
+    pointB: {x: -115.66, y: 52}
+  - pointA: {x: -115.66, y: 52}
     pointB: {x: -44.5, y: 51.7}
-  - pointA: {x: -44.5, y: 51.7}
-    pointB: {x: -109.5, y: -47.58}
-  - pointA: {x: -115.4, y: 52}
+  - pointA: {x: -115.66, y: 52}
     pointB: {x: -109.5, y: -47.58}
   - pointA: {x: -109.5, y: -47.58}
     pointB: {x: 32.7, y: -29.1}
@@ -53,6 +51,10 @@ MonoBehaviour:
     pointB: {x: -256.82, y: -65.77}
   - pointA: {x: -256.82, y: -65.77}
     pointB: {x: -326.7, y: -71.16}
+  - pointA: {x: -44.5, y: 51.7}
+    pointB: {x: -109.5, y: -47.58}
+  - pointA: {x: -119.1, y: 133}
+    pointB: {x: -44.5, y: 51.7}
   _circuits:
   - circuitColor: {r: 0, g: 1, b: 0.06282711, a: 1}
     startPoint: {x: -405.6, y: 103.4}
