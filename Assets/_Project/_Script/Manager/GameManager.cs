@@ -14,7 +14,10 @@ public class GameManager : PersistentSingleton<GameManager>
     public SoundSystem _soundSystem { get; private set; }
     public StateManager _stateManager { get; private set; }
     public DialogueManagerCustom _dialogueManager { get; private set; }
-    
+    public PuzzleManager _puzzleManager { get; private set; }
+    public SaveManager _saveManager { get; private set; }
+
+
     public KeyCode _key = KeyCode.Space;
     public KeyCode _keytoo = KeyCode.P;
 
@@ -66,7 +69,14 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         _companion = FindObjectOfType<CompanionFollow>();
     }
-
+    public void FindPuzzleManager()
+    {
+        _puzzleManager = FindObjectOfType<PuzzleManager>();
+    }
+    public void FindSaveManager()
+    {
+        _saveManager = FindObjectOfType<SaveManager>();
+    }
     void FindVibrationManager()
     {
         _vibrationManager = FindObjectOfType<VibrationManager>();
@@ -150,6 +160,23 @@ public class GameManager : PersistentSingleton<GameManager>
         return _stateManager;
     }
 
+    public PuzzleManager GetPuzzleManager()
+    {
+        if (_puzzleManager == null)
+        {
+            FindPuzzleManager();
+        }
+        return _puzzleManager;
+    }
+    public SaveManager GetSaveManager()
+    {
+        if (_saveManager == null)
+        {
+            FindSaveManager();
+        }
+        return _saveManager;
+    }
+    
     public DialogueManagerCustom GetDialogueManager()
     {
         if (_dialogueManager == null)

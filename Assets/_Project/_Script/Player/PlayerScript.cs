@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static UnityEngine.ParticleSystem;
 using System.Collections;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 {
@@ -225,6 +226,14 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     }
 
+    public void Teleport(float x, float y, float z)
+    {
+        Vector3 newPosition = new Vector3(x, y, z);
+        _controller.enabled = false;
+        transform.position = newPosition;
+        _controller.enabled = true;
+    }
+    
     // Code to interact with object
     public bool IsGrabbing()
     {
