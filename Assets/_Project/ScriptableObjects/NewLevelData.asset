@@ -56,8 +56,13 @@ MonoBehaviour:
   - pointA: {x: -119.1, y: 133}
     pointB: {x: -44.5, y: 51.7}
   _circuits:
-  - circuitColor: {r: 0, g: 1, b: 0.06282711, a: 1}
-    startPoint: {x: -405.6, y: 103.4}
-    endPoint: {x: 32.7, y: -29.1}
+  - circuitColor: {r: 0.6792453, g: 0.13777146, b: 0.3718891, a: 1}
+    startPoint: {x: 32.7, y: -29.1}
+    endPoint: {x: -405.6, y: 103.4}
+    sign: 1
+    name: 'Circuit '
+  - circuitColor: {r: 0.039649326, g: 0.14836657, b: 0.9339623, a: 1}
+    startPoint: {x: -115.66, y: 52}
+    endPoint: {x: -326.7, y: -71.16}
     sign: 
     name: 'Circuit '
