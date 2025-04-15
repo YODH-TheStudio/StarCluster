@@ -21,6 +21,9 @@ public class MainMenu : Menu
         }
     }
 
-
+    public async void LaunchGame()
+    {
+        await SceneLoader.LoadSceneGroup(2);
+    }
 
 }

@@ -34,6 +34,11 @@ public class VibrationManager : MonoBehaviour
     public void SwitchVibrationMode()
     {
         _canVibrate = !_canVibrate;
+        Debug.Log(_canVibrate);
     }
-    
+
+    public bool GetVibrationMode()
+    {
+        return _canVibrate;
+    }
 }
