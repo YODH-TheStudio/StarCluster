@@ -512,6 +512,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 8118371296582556067, guid: f9aa99616444f83478f2aecd56ed730e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8216035244087889287, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_Layer
@@ -1532,7 +1537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 4
-  _grabOffset: 2
 --- !u!23 &585251138
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1966,7 +1970,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 4
-  _grabOffset: 2
 --- !u!23 &634322611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2892,7 +2895,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 4
-  _grabOffset: 2
 --- !u!23 &1146861669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3179,7 +3181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 1
-  _grabOffset: 2
 --- !u!23 &1346859309
 MeshRenderer:
   m_ObjectHideFlags: 0
