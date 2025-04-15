@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class Saveable : MonoBehaviour
+public class SavePosition : MonoBehaviour
 {
     public string identifier;
 
