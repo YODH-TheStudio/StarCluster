@@ -20,10 +20,4 @@ public class MainMenu : Menu
             await SceneLoader.LoadSceneGroup(1);
         }
     }
-
-    public async void LaunchGame()
-    {
-        await SceneLoader.LoadSceneGroup(2);
-    }
-
 }

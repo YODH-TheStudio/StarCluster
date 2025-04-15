@@ -7,9 +7,7 @@ public class SavesMenu : Menu
 {
     private int _previousSavedGroupScene;
     private int _saveIndex = 1;
-
-
-
+    
     public void SetSaveIndex(int newSaveIndex)
     {
         _saveIndex = newSaveIndex;

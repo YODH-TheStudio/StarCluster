@@ -71,9 +71,4 @@ public class SettingsMenu : Menu
         _vibration = _canVibrate ? 1 : 0;
         PlayerPrefs.SetInt("CanVibrate", _vibration);
     }
-    
-    public async void GoToMainMenu()
-    {
-        await SceneLoader.LoadSceneGroup(0);
-    }
 }

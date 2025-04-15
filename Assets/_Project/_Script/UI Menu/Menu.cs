@@ -21,11 +21,15 @@ public class Menu : MonoBehaviour
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Menu);
     } 
     
-    public void DesactivateMenuState()
+    public void DeactivateMenuState()
     {
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
-    
+
+    public virtual async void LoadGroupScene(int index)
+    {
+        await SceneLoader.LoadSceneGroup(index);
+    }
     public void Quit()
     {
         Application.Quit();
