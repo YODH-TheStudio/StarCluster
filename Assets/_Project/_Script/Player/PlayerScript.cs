@@ -28,7 +28,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     [SerializeField]
     private bool _isOnGrass;
 
-    private CharacterController _controller;
+    // private CharacterController _controller;
+    private Rigidbody _rigidbody;
     private Vector3 _direction;
 
     private GameObject _objectGrabbed;
@@ -72,7 +73,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     private void Awake()
     {
-        _controller = GetComponent<CharacterController>();
+        // _controller = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody>();
         Controller playerControls = new Controller();
         playerControls.Player.SetCallbacks(this);
         _playerInteractionZone = GetComponent<PlayerInteractionZone>();
@@ -249,11 +251,11 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
                 float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);  // Calculer la composante "forward"
                 _limitedMoveDirection = closestDirection * forwardMove;  // Appliquer la direction en avant uniquement
 
-                _controller.SimpleMove(_limitedMoveDirection * _speed * Time.deltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + _limitedMoveDirection * _speed * Time.deltaTime);
             }
             else
             {
-                _controller.SimpleMove(_direction * _speed * Time.deltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + _direction * _speed * Time.deltaTime);
             }
 
             if (MovementLimit != MovementLimitType.ForwardBackwardNoLook)
@@ -265,6 +267,16 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         //     _controller.SimpleMove(_direction * _speed * Time.deltaTime);
         // Look();
 
+    }
+    
+    public void FreezeRotation()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+    
+    public void UnfreezeRotation()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     public GameObject GetObjectGrabbed()

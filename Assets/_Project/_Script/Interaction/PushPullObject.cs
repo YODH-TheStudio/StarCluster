@@ -8,7 +8,7 @@ public class PushPullObject : Interactable
     private Vector3 _pushDirection;
     [SerializeField] float _pushForce = 3f;
 
-    private float _grabOffset = 1.5f;
+    private float _grabOffset = 2f;
 
     private List<Vector3> _offsetPosition;
 
@@ -22,7 +22,7 @@ public class PushPullObject : Interactable
     {
         _rigidbody = GetComponent<Rigidbody>();
         // Initialement, la pierre est entièrement figée (pas de mouvement ni de rotation)
-        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         _offsetPosition = new List<Vector3>();
         _offsetPosition.Add(new Vector3(0, 0, _grabOffset));
         _offsetPosition.Add(new Vector3(0, 0, -_grabOffset));
@@ -50,9 +50,6 @@ public class PushPullObject : Interactable
         }
         else
         {
-            Debug.Log("PushPullObject : " + _isActive);
-            DetachObjectFromPlayer();
-            
             // Trouver la position la plus proche
             Vector3 closestPosition = _offsetPosition[0] + transform.position;
             closestPosition.y = playerTransformPosition.y;
@@ -93,14 +90,19 @@ public class PushPullObject : Interactable
 
         transform.SetParent(_userTransform);
         transform.position = originalWorldPosition;
+        
+        _userTransform.GetComponent<PlayerScript>().FreezeRotation();
 
-        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     private void DetachObjectFromPlayer()
     {
         transform.SetParent(_stoneOriginalParent);
-        _rigidbody.constraints = RigidbodyConstraints.FreezeAll; // La pierre est complètement figée lorsqu'elle est détachée
+        
+        _userTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+
+        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll; // La pierre est complètement figée lorsqu'elle est détachée
     }
 
     private void Update()
@@ -126,7 +128,7 @@ public class PushPullObject : Interactable
                 }
                 else
                 {
-                    Debug.Log("collision");
+                    // Debug.Log("collision");
                     _userTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
                 }
             }
@@ -164,6 +166,7 @@ public class PushPullObject : Interactable
     
 private void OnCollisionEnter(Collision collision)
     {
+        print("Collision Enter");
         if (collision.gameObject.CompareTag("PushPullObject"))
         {
             _isColliding = true;
@@ -172,6 +175,7 @@ private void OnCollisionEnter(Collision collision)
 
     private void OnCollisionStay(Collision collision)
     {
+        print("Collision Stay");
         if (collision.gameObject.CompareTag("PushPullObject"))
         {
             _isColliding = true;
@@ -180,6 +184,7 @@ private void OnCollisionEnter(Collision collision)
 
     private void OnCollisionExit(Collision collision)
     {
+        print("Collision Exit");
         if (collision.gameObject.CompareTag("PushPullObject"))
         {
             _isColliding = false;
