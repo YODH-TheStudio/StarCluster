@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1405829661384549779}
   - component: {fileID: 6178143683376003211}
   - component: {fileID: 7305720368712365301}
-  - component: {fileID: 8145264698754175708}
   m_Layer: 5
   m_Name: 1
   m_TagString: Untagged
@@ -97,7 +96,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -108,9 +107,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 60a9d7c6708620f4284da62c3fecdb05, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: affa2f877d74a3142bc080345a370303, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 55645768736a3d14189a0013652fac60, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -121,37 +120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6178143683376003211}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: SetSelectedSaveIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8145264698754175708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712298258200805778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b9de429c46e98a48bad1a5a49e8c729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSprite: {fileID: 21300000, guid: 6e4bd80313236e4419f697074ee91cd3, type: 3}
-  pressedSprite: {fileID: 21300000, guid: 60a9d7c6708620f4284da62c3fecdb05, type: 3}
-  selectedSprite: {fileID: 21300000, guid: affa2f877d74a3142bc080345a370303, type: 3}
-  emptySprite: {fileID: 21300000, guid: 55645768736a3d14189a0013652fac60, type: 3}
-  menu: {fileID: 0}
-  index: 0
+      m_Calls: []
 --- !u!1 &8562881015095082201
 GameObject:
   m_ObjectHideFlags: 0

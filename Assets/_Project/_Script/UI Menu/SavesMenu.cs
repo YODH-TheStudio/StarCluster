@@ -6,9 +6,7 @@ using UnityEngine;
 public class SavesMenu : Menu
 {
     private int _previousSavedGroupScene;
-    private int _saveIndex;
-
-    public enum SaveState {Full, Empty};
+    private int _saveIndex = 1;
 
     public void SetSelectedSaveIndex()
     {

@@ -10,7 +10,7 @@ public class SettingsMenu : Menu
     private SoundSystem _soundSystem;
     private VibrationManager _vibrationManager;
 
-    private void Awake()
+    private void Start()
     {
         _soundSystem = GameManager.GetSoundSystem();
         _vibrationManager = GameManager.GetVibrationManager();

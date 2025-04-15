@@ -5,13 +5,15 @@ using Systems.SceneManagement;
 public class MainMenu : Menu
 {
     
-    private bool _hasAlreadyPlayed = true; //serializeField for now to test if the button works
+    [SerializeField] bool hasAlreadyPlayed = true; //serializeField for now to test if the button works
+    [SerializeField] GameObject planetMenu;
     
     public async void PlayGame()
     {
-        if (_hasAlreadyPlayed)
+        if (hasAlreadyPlayed)
         {
-            await SceneLoader.LoadSceneGroup(2);
+            planetMenu.SetActive(true);
+            this.gameObject.SetActive(false);
         }
         else
         {
