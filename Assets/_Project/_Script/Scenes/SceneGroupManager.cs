@@ -13,11 +13,11 @@ namespace Systems.SceneManagement
         public event Action<string> OnSceneUnloaded = delegate { };
         public event Action OnSceneGroupLoaded = delegate { };
 
-        SceneGroup activeSceneGroup;
+        SceneGroup _activeSceneGroup;
 
         public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {
-            activeSceneGroup = group;
+            _activeSceneGroup = group;
             List<string> loadedScenes = new List<string>();
 
             await UnloadScenes();
@@ -29,7 +29,7 @@ namespace Systems.SceneManagement
                 loadedScenes.Add(SceneManager.GetSceneAt(i).name);
             }
 
-            int totalScenesToLoad = activeSceneGroup.Scenes.Count;
+            int totalScenesToLoad = _activeSceneGroup.Scenes.Count;
 
             AsyncOperationGroup operationGroup = new AsyncOperationGroup(totalScenesToLoad);
 
@@ -53,7 +53,7 @@ namespace Systems.SceneManagement
                 await Task.Delay(100);
             }
 
-            Scene activeScene = SceneManager.GetSceneByName(activeSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
+            Scene activeScene = SceneManager.GetSceneByName(_activeSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
 
             if (activeScene.IsValid())
             {

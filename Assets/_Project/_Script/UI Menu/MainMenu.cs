@@ -6,6 +6,7 @@ public class MainMenu : Menu
 {
     
     [SerializeField] bool hasAlreadyPlayed = true; //serializeField for now to test if the button works
+    [SerializeField] private bool test;
     [SerializeField] GameObject planetMenu;
     
     public async void PlayGame()
@@ -14,6 +15,10 @@ public class MainMenu : Menu
         {
             planetMenu.SetActive(true);
             this.gameObject.SetActive(false);
+            if (test)
+            {
+                await SceneLoader.LoadSceneGroup(2);
+            }
         }
         else
         {

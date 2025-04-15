@@ -30,6 +30,20 @@ public class SaveManager : MonoBehaviour
         LoadObjects(slot);
     }
 
+    public void DeleteSave(int slot)
+    {
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString();
+        if (Directory.Exists(path))
+        {
+            Directory.Delete(path, true);
+            Debug.Log("Deleted save at " + path);
+        }
+        else
+        {
+            Debug.LogWarning("No save at " + path);
+        }
+    }
+
     // Dialogues and choices data
     public void addCompletedDialogue(string dialogueName){
         //DialogueData.completedDialogues.Add(dialogueName);
@@ -45,7 +59,7 @@ public class SaveManager : MonoBehaviour
     private static void SavePlayer(int slot)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "Slot" + slot.ToString() + "/player.save";
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.save";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData();
@@ -60,7 +74,7 @@ public class SaveManager : MonoBehaviour
     private static void SaveDialogueData(int slot){
         DialogueData data = GameManager.Instance.GetComponent<DialogueData>();
         string jsonString = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "Slot" + slot.ToString() + "/dialogueData.json", jsonString);
+        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/dialogueData.json", jsonString);
     }
     private static void SavePuzzleData(int slot){
         FusionPoint[] fusionPoints = GameObject.FindObjectsOfType<FusionPoint>();
@@ -70,7 +84,7 @@ public class SaveManager : MonoBehaviour
             fusionPointsDic.Add(fp.name, fp.GetState());
         }
         SerializableDictionary<string, bool> data = new SerializableDictionary<string, bool>(fusionPointsDic);
-        File.WriteAllText(Application.persistentDataPath + "Slot" + slot.ToString() + "/puzzleData.json", JsonUtility.ToJson(data));
+        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/puzzleData.json", JsonUtility.ToJson(data));
     }
 
     private static void SaveObjects(int slot)
@@ -84,13 +98,13 @@ public class SaveManager : MonoBehaviour
         }
         SerializableDictionary<string, Vector3> positions = new SerializableDictionary<string, Vector3>(positionsDic);
         
-        File.WriteAllText(Application.persistentDataPath + "Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
+        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
     }
     #endregion
     
     #region Load
     private static void LoadPlayer(int slot){
-        string path = Application.persistentDataPath + "Slot" + slot.ToString() +"/player.save";
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() +"/player.save";
         if(File.Exists(path)){
             //load
             BinaryFormatter formatter = new BinaryFormatter();
@@ -101,7 +115,7 @@ public class SaveManager : MonoBehaviour
 
             // Write this down to a file for debug
             string dataString = JsonUtility.ToJson(data);
-            File.WriteAllText(Application.persistentDataPath + "Slot" + slot.ToString() + "/player.json", dataString);
+            File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.json", dataString);
 
             stream.Close();
             
@@ -113,7 +127,7 @@ public class SaveManager : MonoBehaviour
     }
     
     private static DialogueData LoadDialogueData(int slot){
-        string path = Application.persistentDataPath + "Slot" + slot.ToString() + "/dialogueData.json";
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/dialogueData.json";
         if(File.Exists(path)){
             //load
             string jsonString = File.ReadAllText(path);
@@ -131,7 +145,7 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadPuzzleData(int slot){
-        string path = Application.persistentDataPath + "Slot" + slot.ToString() + "/puzzleData.json";
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/puzzleData.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
             Debug.Log("Loaded puzzle data: " + jsonString);
@@ -153,7 +167,7 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadObjects(int slot){
-        string path = Application.persistentDataPath + "Slot" + slot.ToString() + "/objects.json";
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
             Debug.Log("Loaded Objects data: " + jsonString);
