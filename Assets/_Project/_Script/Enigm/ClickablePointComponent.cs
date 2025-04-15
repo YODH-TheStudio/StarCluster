@@ -10,7 +10,6 @@ public class ClickablePointComponent : MonoBehaviour
     {
         if (puzzle != null)
         {
-            Debug.Log($"Position 3D du cube: {transform.position}");
             puzzle.OnPointClicked3D(linked2DPoint, transform);
         }
     }

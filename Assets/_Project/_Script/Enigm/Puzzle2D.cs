@@ -5,6 +5,7 @@ using System.Net;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Puzzle2D : MonoBehaviour
@@ -113,6 +114,14 @@ public class Puzzle2D : MonoBehaviour
         if (_mainCamera == null || _cinemachineMainCamera == null || _puzzleCamera == null)
             return;
 
+        // Start/End point of circuit
+        Dictionary<Vector2, Color> circuitPoints = new Dictionary<Vector2, Color>();
+        foreach (var circuit in _levelData._circuits)
+        {
+            circuitPoints[circuit.startPoint] = circuit.circuitColor;
+            circuitPoints[circuit.endPoint] = circuit.circuitColor;
+        }
+
         _cinemachineMainCamera.gameObject.SetActive(false);
         _mainCamera.gameObject.SetActive(false);
         _puzzleCamera.gameObject.SetActive(true);
@@ -125,7 +134,14 @@ public class Puzzle2D : MonoBehaviour
             cube.transform.localScale = Vector3.one * 0.5f;
 
             var rend = cube.GetComponent<Renderer>();
+
             if (rend) rend.material.color = _pointColor;
+
+            // Change shape (color) depend on if start point or end point exist for this point
+            if (circuitPoints.TryGetValue(pos, out Color circuitColor))
+            {
+                rend.material.color = circuitColor;
+            }
 
             cube.tag = "CasseTete";
 
@@ -148,34 +164,43 @@ public class Puzzle2D : MonoBehaviour
         }
     }
 
+    private Vector3 mouseWorldPosition;
+
     private void UpdateDragging()
     {
 
         if (isDragging)
         {
-            // Récupérer la position de la souris en 3D
             Vector3 mouseScreen = Input.mousePosition;
             mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, currentStartDragPoint.position);
 
-            Vector3 mousePos = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+            mouseWorldPosition = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
 
-            // Calculer la direction entre la position de la souris et le point de départ
-            Vector3 direction = mousePos - currentStartDragPoint.position;
-            direction.x = 0;  // Restreindre la direction au plan YZ
+            Vector3 start = currentStartDragPoint.position;
+            Vector3 end = mouseWorldPosition;
 
-            float distance = direction.magnitude;
-            Vector3 directionNormalized = direction.normalized;
+            // Dir
+            Vector3 dir = end - start;
+            float distance = dir.magnitude;
+            Vector3 dirNormalized = dir.normalized;
 
-            // Mise à jour de l'échelle du cylindre
+            // 
+            Vector3 midPoint = start + dirNormalized * (distance / 2f);
+
+            // Cylinder
+            tempCylinder.transform.position = midPoint;
+            tempCylinder.transform.up = dirNormalized; // Oriente le cylindre selon Y (axe principal du mesh)
             tempCylinder.transform.localScale = new Vector3(0.1f, distance / 2f, 0.1f); // Y = demi-distance
-
-            // Orientation dans le plan YZ (rotation autour de l'axe X)
-            tempCylinder.transform.rotation = Quaternion.LookRotation(Vector3.right, directionNormalized);
-
-            // Positionner le cylindre pour que la base soit à `currentStartDragPoint.position`
-            tempCylinder.transform.position = currentStartDragPoint.position + (directionNormalized * distance / 2f);
         }
+    }
 
+    private void OnDrawGizmos()
+    {
+        if (isDragging)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(mouseWorldPosition, 0.1f);
+        }
     }
 
     void HandleMouseRelease()
@@ -184,26 +209,35 @@ public class Puzzle2D : MonoBehaviour
             return;
 
         isDragging = false;
-        Debug.Log("🛑 Fin de drag");
 
         Vector3 mouseScreen = Input.mousePosition;
         mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, currentStartDragPoint.position);
 
-        Vector3 mousePos = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
-        mousePos.x = 0f; // Restriction au plan YZ
+        Vector3 mouse3D = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+        mouse3D.x = 0;
 
-        const float detectionRadius = 0.5f;
+        const float detectionRadius = 5f;
         Transform targetPoint = null;
         Vector2 linked2DPoint = Vector2.zero;
 
+        // shortest point Distance
+        float shortestDistance = float.MaxValue;
+        Transform shortestPoint = null;
+
         foreach (var pointTransform in _pointObjects3D)
         {
-            if (Vector3.Distance(mousePos, pointTransform.position) <= detectionRadius &&
-                _cubePositions3D.TryGetValue(pointTransform.gameObject, out linked2DPoint))
+            float distance = Vector3.Distance(mouse3D, pointTransform.position);
+            if (_cubePositions3D.TryGetValue(pointTransform.gameObject, out Vector2 point2D) && distance < shortestDistance)
             {
-                targetPoint = pointTransform;
-                break;
+                shortestDistance = distance;
+                shortestPoint = pointTransform;
+                linked2DPoint = point2D;
             }
+        }
+
+        if (shortestPoint != null && Vector3.Distance(mouse3D, shortestPoint.position) < detectionRadius)
+        {
+            targetPoint = shortestPoint;
         }
 
         if (targetPoint)
@@ -235,7 +269,7 @@ public class Puzzle2D : MonoBehaviour
             if (tempCylinder != null)
             {
                 Destroy(tempCylinder);
-                Debug.Log("❌ Aucun point trouvé, cylindre supprimé.");
+                //Debug.Log("❌ Aucun point trouvé, cylindre supprimé.");
             }
         }
 
@@ -250,6 +284,7 @@ public class Puzzle2D : MonoBehaviour
         tempCylinder.transform.rotation = Quaternion.identity;
         currentStartDragPoint = startTransform;
         isDragging = true; 
+        //
 
 
 
@@ -286,8 +321,6 @@ public class Puzzle2D : MonoBehaviour
                         return;
                     }
                 }
-
-                //DrawColored3DSegment(_currentSelected.Value, point, circuitColor);
             }
 
             _currentSelected = null;
@@ -296,6 +329,46 @@ public class Puzzle2D : MonoBehaviour
 
     private GameObject DrawColored3DSegment(Vector2 a, Vector2 b, Color color)
     {
+        // Check any color already exist
+        foreach (var kvp in _activeColoredLinesByColor)
+        {
+            var segmentDict = kvp.Value;
+            var existingColor = kvp.Key;
+
+            // AB
+            if (segmentDict.TryGetValue((a, b), out GameObject existingObj))
+            {
+                // 
+                if (existingColor == color)
+                {
+                    Debug.Log($"⚠️ Segment déjà existant entre {a} et {b} avec la même couleur.");
+                    return null;
+                }
+
+                // 
+                Debug.Log($"🗑️ Segment entre {a} et {b} existant avec une autre couleur ({existingColor}). Suppression...");
+                Destroy(existingObj);
+                segmentDict.Remove((a, b));
+                break;
+            }
+
+            // BA
+            if (segmentDict.TryGetValue((b, a), out existingObj))
+            {
+                if (existingColor == color)
+                {
+                    Debug.Log($"⚠️ Segment déjà existant entre {b} et {a} avec la même couleur.");
+                    return null;
+                }
+
+                Debug.Log($"🗑️ Segment entre {b} et {a} existant avec une autre couleur ({existingColor}). Suppression...");
+                Destroy(existingObj);
+                segmentDict.Remove((b, a));
+                break;
+            }
+        }
+
+        // 
         Vector3 aPos = new Vector3(0f, (a.y / 30f) + 10f, (-a.x / 30f) - 54f);
         Vector3 bPos = new Vector3(0f, (b.y / 30f) + 10f, (-b.x / 30f) - 54f);
 
@@ -309,9 +382,11 @@ public class Puzzle2D : MonoBehaviour
         cylinder.transform.position = aPos + dir / 2f;
         cylinder.transform.up = dir.normalized;
         cylinder.transform.localScale = new Vector3(0.2f, distance / 2f, 0.2f);
+
         Renderer cylinderRenderer = cylinder.GetComponent<Renderer>();
         cylinderRenderer.material.color = color;
 
+        // 
         if (!_activeColoredLinesByColor.ContainsKey(color))
             _activeColoredLinesByColor[color] = new Dictionary<(Vector2, Vector2), GameObject>();
 
@@ -518,7 +593,7 @@ public class Puzzle2D : MonoBehaviour
 
     private IEnumerator ResetClickLock()
     {
-        yield return new WaitForSeconds(0.2f);  // Adjust the duration as needed
+        yield return new WaitForSeconds(0.2f); 
         isClicked = false;
     }
 

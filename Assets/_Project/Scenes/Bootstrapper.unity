@@ -762,6 +762,10 @@ MonoBehaviour:
   loadingCamera: {fileID: 84354451}
   loadingCanvas: {fileID: 1656532154}
   sceneGroups:
+  - groupName: Test
+    Scenes:
+    - sceneName: Puzzle
+      sceneType: 0
   - groupName: MainMenu
     Scenes:
     - sceneName: MainMenu
@@ -770,10 +774,6 @@ MonoBehaviour:
     Scenes:
     - sceneName: Cinematic
       sceneType: 4
-  - groupName: Test
-    Scenes:
-    - sceneName: Puzzle
-      sceneType: 0
   - groupName: FirstPlanet
     Scenes:
     - sceneName: MainSprint2
