@@ -5,21 +5,11 @@ using UnityEngine;
 
 public class VibrationManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    private bool _canVibrate = true;
     public void Vibrate(float strength, float duration)
     {
-
+        if (!_canVibrate) return;
+        
         if (Application.platform == RuntimePlatform.Android)
         {
             long milliseconds = (long)(duration * 1000);
@@ -40,4 +30,10 @@ public class VibrationManager : MonoBehaviour
             }
         }
     }
+
+    public void SwitchVibrationMode()
+    {
+        _canVibrate = !_canVibrate;
+    }
+    
 }
