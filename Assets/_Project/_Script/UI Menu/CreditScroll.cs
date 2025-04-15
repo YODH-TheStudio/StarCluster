@@ -27,17 +27,17 @@ public class CreditScroll : MonoBehaviour
         
         _rectTransform.localPosition += new Vector3(0, Time.deltaTime * scrollSpeed, 0);
 
-        ExitCredit();
+        if (_rectTransform.localPosition.y > 1200)
+        {
+            ExitCredit();
+        }
     }
 
-    private void ExitCredit()
+    public void ExitCredit()
     {
-        if (_rectTransform.localPosition.y > 1500)
-        {
             creditMenu.SetActive(false);
             mainMenu.gameObject.SetActive(true);
             ResetPosition();
-        }
     }
 
     private void ResetPosition()
