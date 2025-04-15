@@ -26,10 +26,6 @@ public class Menu : MonoBehaviour
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
     
-    public virtual int GetIndex()
-    {
-        return _index;
-    }
     public void Quit()
     {
         Application.Quit();
