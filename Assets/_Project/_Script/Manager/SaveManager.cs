@@ -87,10 +87,11 @@ public class SaveManager : MonoBehaviour
     }
     
     private void LoadPuzzleData(){
-        List<PuzzleData> data = SaveSystem.LoadPuzzleData();
-        if(data != null){
-            GameManager.Instance.GetPuzzleManager().SetData(data);
-        }
+        // List<PuzzleData> data = SaveSystem.LoadPuzzleData();
+        // if(data != null){
+        //     GameManager.Instance.GetPuzzleManager().SetData(data);
+        // }
+        SaveSystem.LoadPuzzleData();
     }
 
     public void LoadObjects()

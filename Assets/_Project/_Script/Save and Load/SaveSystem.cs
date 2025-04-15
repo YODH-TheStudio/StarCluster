@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class SaveSystem
 {
@@ -26,27 +27,38 @@ public static class SaveSystem
         File.WriteAllText(Application.persistentDataPath + "/dialogueData.json", jsonString);
     }
     public static void SavePuzzleData(PuzzleManager puzzleManager){
-        string jsonString = JsonUtility.ToJson(puzzleManager.GetData());
-        File.WriteAllText(Application.persistentDataPath + "/puzzleData.json", jsonString);
+        // SerializableList<PuzzleData> puzzleData = new SerializableList<PuzzleData>(puzzleManager.GetData());
+        // string jsonString = JsonUtility.ToJson(puzzleData);
+        // Debug.Log("Puzzle data: "+ puzzleData);
+        // File.WriteAllText(Application.persistentDataPath + "/puzzleData.json", jsonString);
+        
+        FusionPoint[] fusionPoints = GameObject.FindObjectsOfType<FusionPoint>();
+        Dictionary<string, bool> fusionPointsDic = new Dictionary<string, bool>();
+        foreach (FusionPoint fp in fusionPoints)
+        {
+            fusionPointsDic.Add(fp.name, fp.GetState());
+        }
+        SerializableDictionary<string, bool> data = new SerializableDictionary<string, bool>(fusionPointsDic);
+        File.WriteAllText(Application.persistentDataPath + "/puzzleData.json", JsonUtility.ToJson(data));
     }
 
     public static void SaveObjects()
     {
         Saveable[] objects = GameObject.FindObjectsOfType<Saveable>();
-        Debug.Log("Found " + objects.Length + " objects to save");
+        //Debug.Log("Found " + objects.Length + " objects to save");
         
         Dictionary<string, Vector3> positionsDic = new Dictionary<string, Vector3>();
         foreach (Saveable saveable in objects)
         {
-            Debug.Log("Dic entry: " + saveable.identifier + ", " + saveable.transform.position);
+            //Debug.Log("Dic entry: " + saveable.identifier + ", " + saveable.transform.position);
             positionsDic.Add(saveable.identifier, saveable.transform.position);
         }
         SerializableDictionary<string, Vector3> positions = new SerializableDictionary<string, Vector3>(positionsDic);
         
-        Debug.Log("Json: " + JsonUtility.ToJson(positions));
+        //Debug.Log("Json: " + JsonUtility.ToJson(positions));
         File.WriteAllText(Application.persistentDataPath + "/objects.json", JsonUtility.ToJson(positions));
-        Debug.Log("Positions of objects saved: " + positions);
-        Debug.Log("Saved objects to " + Application.persistentDataPath + "/objects.save");
+        //Debug.Log("Positions of objects saved: " + positions);
+        //Debug.Log("Saved objects to " + Application.persistentDataPath + "/objects.save");
     }
     #endregion
     
@@ -92,20 +104,45 @@ public static class SaveSystem
         }
     }
     
-    public static List<PuzzleData> LoadPuzzleData(){
+    public static void LoadPuzzleData(){
+        // string path = Application.persistentDataPath + "/puzzleData.json";
+        // if(File.Exists(path)){
+        //     //load
+        //     string jsonString = File.ReadAllText(path);
+        //     //Debug.Log("Loaded puzzle data: " + jsonString);
+        //     SerializableList<PuzzleData> data = JsonUtility.FromJson<SerializableList<PuzzleData>>(jsonString);
+        //     List<PuzzleData> list = data.ToList();
+        //     return list;
+        // } else {
+        //     // Create the save
+        //     SavePuzzleData(GameManager.Instance.GetPuzzleManager());
+        //     string jsonString = File.ReadAllText(path);
+        //     List<PuzzleData> data = JsonUtility.FromJson<PuzzleData[]>(jsonString).ToList();
+        //     return data;
+        // }
         string path = Application.persistentDataPath + "/puzzleData.json";
         if(File.Exists(path)){
-            //load
             string jsonString = File.ReadAllText(path);
             Debug.Log("Loaded puzzle data: " + jsonString);
-            List<PuzzleData> data = JsonUtility.FromJson<List<PuzzleData>>(jsonString);
-            return data;
+            SerializableDictionary<string, bool> data = JsonUtility.FromJson<SerializableDictionary<string, bool>>(jsonString);
+            //Dictionary<string, Vector3> data = JsonUtility.FromJson<Dictionary<string, Vector3>>(jsonString);
+            Dictionary<string, bool> dataDic = data.ToDictionary();
+
+            // Deserialize binary from stream
+            //Dictionary<GameObject, Vector3> data = (Dictionary<GameObject, Vector3>) formatter.Deserialize(stream);
+            foreach (KeyValuePair<string, bool> kvp in dataDic)
+            {
+                if (kvp.Key != null)
+                {
+                    // Set the position of the object
+                    GameObject obj = GameObject.Find(kvp.Key);
+                    obj.GetComponent<FusionPoint>().SetState(kvp.Value);
+                }
+            }
+            //return data;
         } else {
-            // Create the save
-            SavePuzzleData(GameManager.Instance.GetPuzzleManager());
-            string jsonString = File.ReadAllText(path);
-            List<PuzzleData> data = JsonUtility.FromJson<List<PuzzleData>>(jsonString);
-            return data;
+            Debug.LogError("Save file not found at " + path);
+            //return null;
         }
     }
     

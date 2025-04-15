@@ -42,15 +42,4 @@ public class PuzzleData
             _savedPositions.Add(obj.transform.position);
         }
     }
-
-    public void RestorePositions()
-    {
-        for (int i = 0; i < _puzzleGameObjectList.Count; i++)
-        {
-            if (i < _savedPositions.Count)
-            {
-                _puzzleGameObjectList[i].transform.position = _savedPositions[i];
-            }
-        }
-    }
 }

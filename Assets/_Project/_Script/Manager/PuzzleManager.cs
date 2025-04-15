@@ -50,22 +50,20 @@ public class PuzzleManager : MonoBehaviour
     {
         return _puzzleList;
     }
-    public void SetData(List<PuzzleData> newPuzzleList)
-    {
-        
-        // Update positions
-        foreach (PuzzleData puzzle in newPuzzleList)
-        {
-            if (puzzle.GetFinish())
-            {
-                puzzle.GetFusionPoint().SetState(true);
-            }
-            else
-            {
-                puzzle.GetFusionPoint().SetState(false);
-            }
-            // Restore position of gameObjects
-            puzzle.RestorePositions();
-        }
-    }
+    // public void SetData(List<PuzzleData> newPuzzleList)
+    // {
+    //     //Debug.Log("Setting data: " + newPuzzleList.ToString());
+    //     // Update positions
+    //     foreach (PuzzleData puzzle in newPuzzleList)
+    //     {
+    //         if (puzzle.GetFinish())
+    //         {
+    //             puzzle.GetFusionPoint().SetState(true);
+    //         }
+    //         else
+    //         {
+    //             puzzle.GetFusionPoint().SetState(false);
+    //         }
+    //     }
+    // }
 }
