@@ -18,10 +18,12 @@ public class SavesMenu : Menu
     public void LoadSelectedSave()
     {
         //load the save at the _saveIndex
+        GameManager.GetSaveManager().LoadGame(_saveIndex);
     }
 
     public void DeleteSelectedSave()
     {
         //delete the save at the _saveIndex
+        GameManager.GetSaveManager().DeleteSave(_saveIndex);
     }
 }
