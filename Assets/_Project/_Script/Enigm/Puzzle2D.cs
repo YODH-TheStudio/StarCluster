@@ -6,7 +6,10 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
+
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class Puzzle2D : MonoBehaviour
 {
@@ -36,14 +39,34 @@ public class Puzzle2D : MonoBehaviour
     private Transform _segmentsParent;
 
     // Resolve
-    private int _currentCircuitSelected = 0;
     private bool _puzzleSolved = true;
 
     // Drag and drop
-    private bool isDragging = false;
-    private Transform currentStartDragPoint;
-    private GameObject tempCylinder;
-    private Vector3 mousePos;
+    private bool _isDragging = false;
+    private Transform _currentStartDragPoint;
+    private GameObject _tempCylinder;
+    private float _dragThreshold = 1f;
+
+    // Visual size and offset
+    [Header("3D Display Settings")]
+    [SerializeField] private float _scaleFactor = 30f;
+    [SerializeField] private float _yOffset = 10f;
+    [SerializeField] private float _zOffset = 54f;
+
+    [SerializeField] private float _cubeScale = 0.5f;
+    [SerializeField] private float _redLineRadius = 0.1f;
+    [SerializeField] private float _coloredLineRadius = 0.2f;
+
+    // Circuit / Eraser
+    private int _currentCircuitSelected = 0;
+    private bool _eraserMode = false;
+
+    private Vector3 _fingerMP = Vector3.zero;
+
+    private void Touch_OnFingerMove(Finger TouchedFinger)
+    {
+        _fingerMP = TouchedFinger.screenPosition;
+    }
 
     void Start()
     {
@@ -51,8 +74,12 @@ public class Puzzle2D : MonoBehaviour
         _segmentsParent = new GameObject("Segments3D").transform;
         InstantiatePoints3D();
         InstantiateSegments();
+
+
+        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
     }
 
+    // UI ***
     private void CreateTopMenu()
     {
         _topMenuContainer = new GameObject("TopMenuContainer");
@@ -74,6 +101,49 @@ public class Puzzle2D : MonoBehaviour
         {
             CreateCircuitButton(i, _levelData._circuits[i]);
         }
+
+        // Crée un objet pour le bouton
+        GameObject buttonObj = new GameObject("EraserButton", typeof(Button), typeof(RectTransform), typeof(Text));
+        buttonObj.transform.SetParent(_topMenuContainer.transform, false);
+
+        Button button = buttonObj.GetComponent<Button>();
+        Text buttonText = buttonObj.GetComponent<Text>();
+
+        // Crée un conteneur pour le texte
+        GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
+        textContainer.transform.SetParent(buttonObj.transform);
+        RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
+        textContainerRect.sizeDelta = new Vector2(200, 30);
+
+        // Crée un carré de couleur (fond blanc)
+        GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
+        colorSquare.transform.SetParent(textContainer.transform);
+        Image colorSquareImage = colorSquare.GetComponent<Image>();
+        colorSquareImage.color = Color.white; // Fond blanc
+
+        RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
+        colorSquareRect.sizeDelta = new Vector2(20, 20);  // Taille du carré (20x20)
+
+        // S'assurer que le carré est bien ancré et visible
+        colorSquareRect.anchorMin = new Vector2(0, 0.5f);
+        colorSquareRect.anchorMax = new Vector2(0, 0.5f);
+        colorSquareRect.anchoredPosition = new Vector2(0, 0); // Centrer le carré dans le conteneur
+
+        // Définir le texte sur le bouton
+        buttonText.text = "Gomme";  // Texte du bouton
+        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");  // Utilisation de LegacyRuntime.ttf
+
+        // Positionner le texte à côté du carré de couleur
+        RectTransform textRect = buttonText.GetComponent<RectTransform>();
+        textRect.anchoredPosition = new Vector2(30, 0);  // Décalage à droite du carré de couleur
+
+        // Ajouter le gestionnaire de clic pour activer/désactiver le mode gomme
+        button.onClick.AddListener(() =>
+        {
+            _eraserMode = !_eraserMode;
+            Debug.Log($"Mode gomme : {_eraserMode}");
+        });
+
     }
 
     private void CreateCircuitButton(int index, Circuit circuit)
@@ -107,7 +177,12 @@ public class Puzzle2D : MonoBehaviour
     private void OnCircuitButtonClicked(int index)
     {
         _currentCircuitSelected = index;
+        _eraserMode = false;
     }
+
+    // UI *
+
+    // 3D Visual *** 
 
     private void InstantiatePoints3D()
     {
@@ -130,8 +205,8 @@ public class Puzzle2D : MonoBehaviour
         {
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.name = $"Point3D_{pos.x}_{pos.y}";
-            cube.transform.position = new Vector3(0f, pos.y / 30f + 10f, -pos.x / 30f - 54f);
-            cube.transform.localScale = Vector3.one * 0.5f;
+            cube.transform.position = new Vector3(0f, pos.y / _scaleFactor + _yOffset, -pos.x / _scaleFactor - _zOffset);
+            cube.transform.localScale = Vector3.one * _cubeScale;
 
             var rend = cube.GetComponent<Renderer>();
 
@@ -164,167 +239,25 @@ public class Puzzle2D : MonoBehaviour
         }
     }
 
-    private Vector3 mouseWorldPosition;
-
-    private void UpdateDragging()
+    private void Draw3DLine(Vector2 a, Vector2 b)
     {
+        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactor) + _yOffset, (-a.x / _scaleFactor) - _zOffset);
+        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactor) + _yOffset, (-b.x / _scaleFactor) - _zOffset);
 
-        if (isDragging)
-        {
-            Vector3 mouseScreen = Input.mousePosition;
-            mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, currentStartDragPoint.position);
+        Vector3 dir = bPos - aPos;
+        float distance = dir.magnitude;
 
-            mouseWorldPosition = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        cylinder.name = "SegmentCylinder";
+        cylinder.transform.SetParent(_segmentsParent);
 
-            Vector3 start = currentStartDragPoint.position;
-            Vector3 end = mouseWorldPosition;
+        cylinder.transform.position = aPos + dir / 2f;
+        cylinder.transform.up = dir.normalized;
 
-            // Dir
-            Vector3 dir = end - start;
-            float distance = dir.magnitude;
-            Vector3 dirNormalized = dir.normalized;
+        cylinder.transform.localScale = new Vector3(_redLineRadius, distance / 2f, _redLineRadius);
+        cylinder.GetComponent<Renderer>().material.color = Color.red;
 
-            // 
-            Vector3 midPoint = start + dirNormalized * (distance / 2f);
-
-            // Cylinder
-            tempCylinder.transform.position = midPoint;
-            tempCylinder.transform.up = dirNormalized; // Oriente le cylindre selon Y (axe principal du mesh)
-            tempCylinder.transform.localScale = new Vector3(0.1f, distance / 2f, 0.1f); // Y = demi-distance
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (isDragging)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(mouseWorldPosition, 0.1f);
-        }
-    }
-
-    void HandleMouseRelease()
-    {
-        if (!isDragging || !Input.GetMouseButtonUp(0))
-            return;
-
-        isDragging = false;
-
-        Vector3 mouseScreen = Input.mousePosition;
-        mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, currentStartDragPoint.position);
-
-        Vector3 mouse3D = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
-        mouse3D.x = 0;
-
-        const float detectionRadius = 5f;
-        Transform targetPoint = null;
-        Vector2 linked2DPoint = Vector2.zero;
-
-        // shortest point Distance
-        float shortestDistance = float.MaxValue;
-        Transform shortestPoint = null;
-
-        foreach (var pointTransform in _pointObjects3D)
-        {
-            float distance = Vector3.Distance(mouse3D, pointTransform.position);
-            if (_cubePositions3D.TryGetValue(pointTransform.gameObject, out Vector2 point2D) && distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                shortestPoint = pointTransform;
-                linked2DPoint = point2D;
-            }
-        }
-
-        if (shortestPoint != null && Vector3.Distance(mouse3D, shortestPoint.position) < detectionRadius)
-        {
-            targetPoint = shortestPoint;
-        }
-
-        if (targetPoint)
-        {
-            var startPoint = currentStartDragPoint.gameObject.GetComponent<ClickablePointComponent>();
-            Vector2 startLinked2DPoint = startPoint != null ? startPoint.linked2DPoint : Vector2.zero;
-
-            bool isSegmentRed = _levelData._segments.Exists(segment =>
-                (segment.pointA == startLinked2DPoint && segment.pointB == linked2DPoint) ||
-                (segment.pointA == linked2DPoint && segment.pointB == startLinked2DPoint)
-            );
-
-            if (isSegmentRed)
-            {
-                Debug.Log($"✔️ Connexion validée avec le point : {targetPoint.name} (2D: {linked2DPoint})");
-                Color circuitColor = GetCircuitColor();
-                DrawColored3DSegment(startLinked2DPoint, linked2DPoint, circuitColor);
-                _currentSelected = null;
-                Destroy(tempCylinder);
-
-            }
-            else
-            {
-                Destroy(tempCylinder);
-            }
-        }
-        else
-        {
-            if (tempCylinder != null)
-            {
-                Destroy(tempCylinder);
-                //Debug.Log("❌ Aucun point trouvé, cylindre supprimé.");
-            }
-        }
-
-        tempCylinder = null;
-    }
-
-    public void OnPointClicked3D(Vector2 point, Transform startTransform)
-    {
-        // Drag and drop 
-        tempCylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        tempCylinder.transform.position = startTransform.position;
-        tempCylinder.transform.rotation = Quaternion.identity;
-        currentStartDragPoint = startTransform;
-        isDragging = true; 
-        //
-
-
-
-        if (!_currentSelected.HasValue)
-        {
-            _currentSelected = point;
-        }
-        else
-        {
-            if (_currentSelected == point)
-            {
-                _currentSelected = null;
-                return;
-            }
-
-            bool isSegmentRed = _levelData._segments.Exists(segment =>
-                (segment.pointA == _currentSelected.Value && segment.pointB == point) ||
-                (segment.pointA == point && segment.pointB == _currentSelected.Value)
-            );
-
-            Color circuitColor = GetCircuitColor();
-
-            if (isSegmentRed)
-            {
-                foreach (var colorEntry in _activeColoredLinesByColor)
-                {
-                    var color = colorEntry.Key;
-                    var lines = colorEntry.Value;
-
-                    if (lines.ContainsKey((_currentSelected.Value, point)) || lines.ContainsKey((point, _currentSelected.Value)))
-                    {
-                        RemoveColoredLine(_currentSelected.Value, point, color);
-                        _currentSelected = null;
-                        return;
-                    }
-                }
-            }
-
-            _currentSelected = null;
-        }
+        _activeRedLines[(a, b)] = cylinder;
     }
 
     private GameObject DrawColored3DSegment(Vector2 a, Vector2 b, Color color)
@@ -369,8 +302,8 @@ public class Puzzle2D : MonoBehaviour
         }
 
         // 
-        Vector3 aPos = new Vector3(0f, (a.y / 30f) + 10f, (-a.x / 30f) - 54f);
-        Vector3 bPos = new Vector3(0f, (b.y / 30f) + 10f, (-b.x / 30f) - 54f);
+        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactor) + _yOffset, (-a.x / _scaleFactor) - _zOffset);
+        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactor) + _yOffset, (-b.x / _scaleFactor) - _zOffset);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
@@ -381,7 +314,7 @@ public class Puzzle2D : MonoBehaviour
 
         cylinder.transform.position = aPos + dir / 2f;
         cylinder.transform.up = dir.normalized;
-        cylinder.transform.localScale = new Vector3(0.2f, distance / 2f, 0.2f);
+        cylinder.transform.localScale = new Vector3(_coloredLineRadius, distance / 2f, _coloredLineRadius);
 
         Renderer cylinderRenderer = cylinder.GetComponent<Renderer>();
         cylinderRenderer.material.color = color;
@@ -393,6 +326,242 @@ public class Puzzle2D : MonoBehaviour
         _activeColoredLinesByColor[color][(a, b)] = cylinder;
 
         return cylinder;
+    }
+
+    // 3D Visual *
+
+
+
+
+
+
+
+
+
+
+
+
+    // Logic ***
+
+    private Vector3 mouseWorldPosition;
+
+    private void UpdateDragging()
+    {
+
+        if (_isDragging)
+        {
+            Vector3 mouseScreen = _fingerMP;
+            mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, _currentStartDragPoint.position);
+
+            mouseWorldPosition = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+
+            Vector3 start = _currentStartDragPoint.position;
+            Vector3 end = mouseWorldPosition;
+
+            // Dir
+            Vector3 dir = end - start;
+            float distance = dir.magnitude;
+            Vector3 dirNormalized = dir.normalized;
+
+            // 
+            Vector3 midPoint = start + dirNormalized * (distance / 2f);
+
+            // Cylinder
+            _tempCylinder.transform.position = midPoint;
+            _tempCylinder.transform.up = dirNormalized; 
+            _tempCylinder.transform.localScale = new Vector3(0.1f, distance / 2f, 0.1f); 
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_isDragging)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(mouseWorldPosition, 0.1f);
+        }
+    }
+
+
+    void HandleMouseRelease()
+    {
+        if (!_isDragging || !Input.GetMouseButtonUp(0))
+            return;
+
+        _isDragging = false;
+
+        //Vector3 mouse3D = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+        //Vector3 mouseScreen = Input.mousePosition;
+        //mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, _currentStartDragPoint.position);
+
+        Vector3 mouse3D = Vector3.zero;
+        //mouse3D.x = 0;
+        //Debug.Log($"Mouse 3D Position: {mouse3D}");
+
+        Vector3 mouseScreen = _fingerMP;
+
+        Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
+
+        // Dessine le rayon en rouge pendant 2 secondes
+        Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 20f);
+
+        // Lancer le raycast all
+        RaycastHit[] hits = Physics.RaycastAll(ray);
+
+        if (hits.Length > 0)
+        {
+            bool hitPlan = false;
+
+            foreach (RaycastHit h in hits)
+            {
+                Debug.Log($"☄️ Touché : {h.collider.name} (Tag: {h.collider.tag})");
+
+                if (h.collider.CompareTag("CTRP"))
+                {
+                    mouse3D = h.point;
+                    hitPlan = true;
+                    Debug.Log($"✅ Mouse 3D Position sur le plan CTRP : {mouse3D}");
+                    break; // facultatif si tu veux juste le premier plan touché
+                }
+            }
+
+            if (!hitPlan)
+                Debug.Log("⚠️ Aucun objet touché n’a le tag CTRP.");
+        }
+        else
+        {
+            Debug.Log("❌ RaycastAll n’a rien touché.");
+        }
+
+        // Check if drag is larger than threshold
+        float dragDistance = Vector3.Distance(_currentStartDragPoint.position, mouse3D);
+        //Debug.Log($"Drag Distance: {dragDistance} (Threshold: {_dragThreshold})");
+
+        if (dragDistance < _dragThreshold)
+        {
+            Debug.Log("Threshold too low, no segment drawn.");
+            Destroy(_tempCylinder);
+            _tempCylinder = null;
+            return;
+        }
+
+        const float detectionRadius = 5f;
+        Transform targetPoint = null;
+        Vector2 linked2DPoint = Vector2.zero;
+
+        // shortest point Distance
+        float shortestDistance = float.MaxValue;
+        Transform shortestPoint = null;
+
+        foreach (var pointTransform in _pointObjects3D)
+        {
+            float distance = Vector3.Distance(mouse3D, pointTransform.position);
+            //Debug.Log($"Checking point: {pointTransform.position}, Distance: {distance}");
+
+
+            if (_cubePositions3D.TryGetValue(pointTransform.gameObject, out Vector2 point2D) && distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                shortestPoint = pointTransform;
+                linked2DPoint = point2D;
+            }
+        }
+
+        //Debug.Log($"✅ Shortest point found:\n" +
+                  //$"- 3D Point: {shortestPoint.position}\n");
+
+        if (shortestPoint != null && Vector3.Distance(mouse3D, shortestPoint.position) < detectionRadius)
+        {
+            targetPoint = shortestPoint;
+        }
+        else
+        {
+            if (shortestPoint == null)
+            {
+                Debug.Log("shortestPoint is null.");
+            }
+            else
+            {
+                Debug.Log($"Distance too large: {Vector3.Distance(mouse3D, shortestPoint.position)} > {detectionRadius}");
+            }
+        }
+
+        if (targetPoint)
+        {
+            var startPoint = _currentStartDragPoint.gameObject.GetComponent<ClickablePointComponent>();
+            Vector2 startLinked2DPoint = startPoint != null ? startPoint.linked2DPoint : Vector2.zero;
+
+            bool isSegmentRed = _levelData._segments.Exists(segment =>
+                (segment.pointA == startLinked2DPoint && segment.pointB == linked2DPoint) ||
+                (segment.pointA == linked2DPoint && segment.pointB == startLinked2DPoint)
+            );
+
+            if (isSegmentRed)
+            {
+                Color circuitColor = GetCircuitColor();
+                if (_eraserMode)
+                {
+                    foreach (var kvp in _activeColoredLinesByColor)
+                    {
+                        var segmentDict = kvp.Value;
+                        var existingColor = kvp.Key;
+
+                        // AB
+                        if (segmentDict.TryGetValue((startLinked2DPoint, linked2DPoint), out GameObject existingObj))
+                        {
+                            Debug.Log("Erase");
+                            RemoveColoredLine(startLinked2DPoint, linked2DPoint, existingColor);
+                            break;
+                        }
+                        // BA
+                        else if (segmentDict.TryGetValue((linked2DPoint, startLinked2DPoint), out existingObj))
+                        {
+                            Debug.Log("Erase");
+                            RemoveColoredLine(linked2DPoint, startLinked2DPoint, existingColor);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.Log($"✔️ Connexion validée avec le point : {targetPoint.name} (2D: {linked2DPoint})");
+
+                    DrawColored3DSegment(startLinked2DPoint, linked2DPoint, circuitColor);
+
+                }
+                _currentSelected = null;
+                Destroy(_tempCylinder);
+
+            }
+            else
+            {
+                Debug.Log("No valid segment found, cylinder destroyed.");
+                Destroy(_tempCylinder);
+            }
+
+        }
+        else
+        {
+            if (_tempCylinder != null)
+            {
+                Destroy(_tempCylinder);
+                Debug.Log("❌ Aucun point trouvé, cylindre supprimé.");
+            }
+        }
+
+        _tempCylinder = null;
+    }
+
+    public void OnPointClicked3D(Vector2 point, Transform startTransform)
+    {
+        // Drag and drop 
+        _tempCylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        _tempCylinder.transform.position = startTransform.position;
+        _tempCylinder.transform.rotation = Quaternion.identity;
+        _currentStartDragPoint = startTransform;
+        _isDragging = true; 
+        //
+
     }
 
     private void RemoveColoredLine(Vector2 a, Vector2 b, Color color)
@@ -413,27 +582,6 @@ public class Puzzle2D : MonoBehaviour
         }
     }
 
-    private void Draw3DLine(Vector2 a, Vector2 b)
-    {
-        Vector3 aPos = new Vector3(0f, (a.y / 30f) + 10f, (-a.x / 30f) - 54f);
-        Vector3 bPos = new Vector3(0f, (b.y / 30f) + 10f, (-b.x / 30f) - 54f);
-
-        Vector3 dir = bPos - aPos;
-        float distance = dir.magnitude;
-
-        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        cylinder.name = "SegmentCylinder";
-        cylinder.transform.SetParent(_segmentsParent);
-
-        cylinder.transform.position = aPos + dir / 2f;
-        cylinder.transform.up = dir.normalized;
-
-        cylinder.transform.localScale = new Vector3(0.1f, distance / 2f, 0.1f);
-        cylinder.GetComponent<Renderer>().material.color = Color.red;
-
-        _activeRedLines[(a, b)] = cylinder;
-    }
-
     private Color GetCircuitColor()
     {
         if (_currentCircuitSelected < _levelData._circuits.Count)
@@ -441,6 +589,26 @@ public class Puzzle2D : MonoBehaviour
 
         return Color.white;
     }
+
+    // Logic *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public bool HasCommonPoint((Vector2, Vector2) segment1, (Vector2, Vector2) segment2)
     {
@@ -586,7 +754,6 @@ public class Puzzle2D : MonoBehaviour
                 }
             }
         }
-           
     }
 
     private bool isClicked = false;
