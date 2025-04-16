@@ -39,11 +39,14 @@ public class VibrationManager : MonoBehaviour
 
     private void LoadPlayerPrefs()
     {
-        
+        _canVibrate = PlayerPrefs.GetInt("CanVibrate", 1) == 1;
     }
     public void SwitchVibrationMode()
     {
         _canVibrate = !_canVibrate;
+        int vibrationBool = _canVibrate ? 1 : 0;
+        PlayerPrefs.SetInt("CanVibrate", vibrationBool);
+        PlayerPrefs.Save();
     }
 
     public bool GetVibrationMode()

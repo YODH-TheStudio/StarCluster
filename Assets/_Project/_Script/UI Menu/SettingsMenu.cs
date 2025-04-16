@@ -41,9 +41,8 @@ public class SettingsMenu : Menu
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
 
-        vibrationToggle.;
         _vibration = PlayerPrefs.GetInt("CanVibrate", 1);
-        _canVibrate = _vibration == 1;
+        vibrationToggle.isOn = _vibration == 1;
     }
 
     public void SwitchLanguage()
@@ -79,9 +78,5 @@ public class SettingsMenu : Menu
     {
         _vibrationManager.SwitchVibrationMode();
         _canVibrate = _vibrationManager.GetVibrationMode();
-        
-        _vibration = _canVibrate ? 1 : 0;
-        PlayerPrefs.SetInt("CanVibrate", _vibration);
-        PlayerPrefs.Save();
     }
 }

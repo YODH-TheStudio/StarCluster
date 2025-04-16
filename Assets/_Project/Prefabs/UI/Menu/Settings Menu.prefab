@@ -1765,6 +1765,7 @@ MonoBehaviour:
   masterSlider: {fileID: 7916340446036433179}
   musicSlider: {fileID: 7046118414541612763}
   sfxSlider: {fileID: 6834262638604019726}
+  vibrationToggle: {fileID: 4769583377906926309}
 --- !u!1 &8343911818285473944
 GameObject:
   m_ObjectHideFlags: 0
