@@ -8,8 +8,8 @@ public class TriggerZone : MonoBehaviour
 {
 
     [SerializeField] private DialogueContainerSO _dialogue;
-    
-    [SerializeField] private UnityEvent _onTriggerEnter;
+    [SerializeField] private UnityEvent _onTriggerEnterEvent;
+    [SerializeField] private UnityEvent _onDialogueEndEvent;
     
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,15 @@ public class TriggerZone : MonoBehaviour
     {
         // Unsubscribe from the event
         GameManager.Instance.GetDialogueManager().ProcessEndDialogue -= OnEndDialogue;
+        _onDialogueEndEvent.Invoke();
         // Add your logic here for when the dialogue ends
+    }
+
+    public void StartDialogue()
+    {
+        GameManager.Instance.GetDialogueManager().StartDialogue(_dialogue);
+            
+        GameManager.Instance.GetDialogueManager().ProcessEndDialogue += OnEndDialogue;
     }
     
     public void StartDialogue()
@@ -62,7 +70,7 @@ public class TriggerZone : MonoBehaviour
         {
             if (_dialogue != null)
             {
-                _onTriggerEnter?.Invoke();
+                _onTriggerEnterEvent?.Invoke();
             }
             else
             {
