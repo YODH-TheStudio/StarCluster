@@ -1,11 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsMenu : Menu
 {
     private SoundSystem _soundSystem;
     private VibrationManager _vibrationManager;
+    
+    [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Toggle vibrationToggle;
 
     private readonly List<string> _languages= new List<string> { "English", "French" };
     private string _currentLanguage;
@@ -22,7 +28,7 @@ public class SettingsMenu : Menu
     {
         _soundSystem = GameManager.GetSoundSystem();
         _vibrationManager = GameManager.GetVibrationManager();
-        
+
         LoadPlayerPrefs();
     }
 
@@ -30,39 +36,45 @@ public class SettingsMenu : Menu
     {
         _currentLanguage = PlayerPrefs.GetString("Language", "en");
         _currentLanguageIndex = PlayerPrefs.GetInt("Language", 0);
-        _masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
-        _musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        _sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+
+        vibrationToggle.;
         _vibration = PlayerPrefs.GetInt("CanVibrate", 1);
         _canVibrate = _vibration == 1;
     }
 
     public void SwitchLanguage()
     {
-        _currentLanguageIndex = (_currentLanguageIndex++) % _languages.Count();
+        _currentLanguageIndex = (_currentLanguageIndex + 1) % _languages.Count();
         _currentLanguage = _languages[_currentLanguageIndex];
         PlayerPrefs.SetString("Language", _currentLanguage);
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
+        PlayerPrefs.Save();
     }
     
-    public void MasterVolume(float volume)
+    public void MasterVolume()
     {
-        _masterVolume = volume;
-        PlayerPrefs.SetFloat("MasterVolume", _masterVolume);
+        _masterVolume = masterSlider.value;
+        _soundSystem.SetMasterVolume(_masterVolume);
     }
 
-    public void MusicVolume(float volume)
+    public void MusicVolume()
     {
-        _musicVolume = volume;
-        PlayerPrefs.SetFloat("MusicVolume", _musicVolume);
+        _musicVolume =  musicSlider.value;
+        _soundSystem.SetMusicVolume(_musicVolume);
+        _soundSystem.SetAmbianceVolume(_musicVolume);
     }
     
-    public void SfxVolume(float volume)
+    public void SfxVolume()
     {
-        _sfxVolume = volume;
-        PlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
+        _sfxVolume = sfxSlider.value;
+        _soundSystem.SetSFXVolume(_sfxVolume);
     }
 
+    
     public void SetVibration()
     {
         _vibrationManager.SwitchVibrationMode();
@@ -70,5 +82,6 @@ public class SettingsMenu : Menu
         
         _vibration = _canVibrate ? 1 : 0;
         PlayerPrefs.SetInt("CanVibrate", _vibration);
+        PlayerPrefs.Save();
     }
 }

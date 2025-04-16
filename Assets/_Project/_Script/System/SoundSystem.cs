@@ -30,6 +30,7 @@ public class SoundSystem : MonoBehaviour
 
     private int _numberOfChannels;
 
+    [SerializeField] private AudioMixerGroup _masterMixerGroup;
     [SerializeField] private AudioMixerGroup _musicMixerGroup;
     [SerializeField] private AudioMixerGroup _ambianceMixerGroup;
     [SerializeField] private AudioMixerGroup _sfxMixerGroup; 
@@ -87,8 +88,14 @@ public class SoundSystem : MonoBehaviour
         {
             _audioSources.Add(attachedAudioSources[i]);
         }
+
     }
 
+    private void Start()
+    {
+        LoadPlayerPrefs();
+    }
+    
     private void GenerateKeys()
     {
         GenerateSFXKeys();
@@ -297,8 +304,31 @@ public class SoundSystem : MonoBehaviour
         return null;
     }
 
+    private void LoadPlayerPrefs()
+    {
+        float master = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        float music = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float sfx = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        
+        Debug.Log($"[SoundSystem] Loaded: Master={master}, Music={music}, SFX={sfx}");
+        
+        SetMasterVolume(master);
+        SetMusicVolume(music);
+        SetAmbianceVolume(music);
+        SetSFXVolume(sfx);
+    }
     #endregion
 
+    #region Master
+    public void SetMasterVolume (float volume)
+    {
+        _musicMixerGroup.audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    #endregion
+    
     #region Music
 
     private void ChangeMusic(AudioClip audioClip)
@@ -314,6 +344,8 @@ public class SoundSystem : MonoBehaviour
     public void SetMusicVolume (float volume)
     {
         _musicMixerGroup.audioMixer.SetFloat("MusicVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        PlayerPrefs.Save();
     }
 
     #endregion
@@ -426,6 +458,8 @@ public class SoundSystem : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         _sfxMixerGroup.audioMixer.SetFloat("SFXVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
     }
 
 

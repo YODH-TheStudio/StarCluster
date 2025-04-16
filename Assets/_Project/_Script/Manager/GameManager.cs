@@ -58,7 +58,7 @@ public class GameManager : PersistentSingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        //Instance._soundSystem.ChangeMusicByKey("Main");
+        Instance._soundSystem.ChangeMusicByKey("Main");
     }
 
     void FindPlayer()

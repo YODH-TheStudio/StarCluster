@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class VibrationManager : MonoBehaviour
 {
-    private bool _canVibrate = true;
+    private bool _canVibrate;
+    
+    private void Start()
+    {
+        LoadPlayerPrefs();
+    }
+    
     public void Vibrate(float strength, float duration)
     {
         if (!_canVibrate) return;
@@ -31,10 +37,13 @@ public class VibrationManager : MonoBehaviour
         }
     }
 
+    private void LoadPlayerPrefs()
+    {
+        
+    }
     public void SwitchVibrationMode()
     {
         _canVibrate = !_canVibrate;
-        Debug.Log(_canVibrate);
     }
 
     public bool GetVibrationMode()
