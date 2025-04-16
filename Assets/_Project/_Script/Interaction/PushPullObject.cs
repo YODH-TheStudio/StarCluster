@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PushPullObject : Interactable
 {
-    private bool _isActive = false;
+    private bool _isOnPedestal = false;
+    private bool _isGrab = false;
     private Vector3 _pushDirection;
     [SerializeField] float _pushForce = 3f;
 
@@ -31,12 +32,12 @@ public class PushPullObject : Interactable
 
     private void TogglePushPull()
     {
-        _isActive = !_isActive;
+        _isGrab = !_isGrab;
         
         PlayerScript playerScriptComponent = _userTransform.GetComponent<PlayerScript>();
         Vector3 playerTransformPosition = _userTransform.gameObject.transform.position;
         
-        if (!_isActive)
+        if (!_isGrab)
         {
             playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
             DetachObjectFromPlayer();
@@ -48,6 +49,25 @@ public class PushPullObject : Interactable
         
             // Lancer la coroutine pour la position la plus proche
             StartCoroutine(PhaseAnimation(closestPosition));
+        }
+    }
+    
+    public void SetIsOnPedestal(bool isOnPedestal)
+    {
+        _isOnPedestal = isOnPedestal;
+        
+        GlowSymbol();
+    }
+
+    private void GlowSymbol()
+    {
+        if (_isOnPedestal)
+        {
+            //Glow the symbol
+        }
+        else
+        {
+            //Unglow the symbol
         }
     }
     
@@ -96,7 +116,7 @@ public class PushPullObject : Interactable
 
     private void Update()
     {
-        if (_isActive)
+        if (_isGrab)
         {
             Vector3 playerMoveDirection = _userTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
             Vector3 direction = transform.position - _userTransform.position;

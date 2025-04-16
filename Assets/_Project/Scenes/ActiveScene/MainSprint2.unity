@@ -678,7 +678,7 @@ Transform:
   m_GameObject: {fileID: 262793133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.85, y: 0, z: 2.77}
+  m_LocalPosition: {x: -3.03, y: 0, z: -2.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1384,9 +1384,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pedestalDataList:
   - puzzleObject: {fileID: 634322607}
+    pedestalObject: {fileID: 1108264925}
+    isOnPedestal: 0
+  - puzzleObject: {fileID: 1146861664}
+    pedestalObject: {fileID: 395846272}
+    isOnPedestal: 0
+  - puzzleObject: {fileID: 1346859304}
     pedestalObject: {fileID: 262793133}
-    isValid: 0
-  validationRadius: 1.5
+    isOnPedestal: 0
+  - puzzleObject: {fileID: 585251133}
+    pedestalObject: {fileID: 1990121290}
+    isOnPedestal: 0
+  validationRadius: 0.5
 --- !u!1 &552402639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,7 +3043,7 @@ Transform:
   m_GameObject: {fileID: 1108264925}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.68, y: 0, z: -3.25}
+  m_LocalPosition: {x: 3.58, y: 0, z: 2.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

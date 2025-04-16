@@ -22,12 +22,29 @@ public class EnigmeSocle : MonoBehaviour
         [NonSerialized]
         public PushPullObject pushPullObject;
         public GameObject pedestalObject;
-        public bool isValid = false;
+        public bool isOnPedestal = false;
+    }
+    
+    private void Start()
+    {
+        foreach (var pair in _pedestalDataList)
+        {
+            if (pair.puzzleObject != null)
+            {
+                pair.pushPullObject = pair.puzzleObject.GetComponent<PushPullObject>();
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        CheckObjectPosition();
 
+        CheckPuzzleResolution();
+    }
+
+    private void CheckObjectPosition()
+    {
         foreach (var pair in _pedestalDataList)
         {
             Vector3 pedestalPosition = pair.pedestalObject.transform.position;
@@ -39,30 +56,33 @@ public class EnigmeSocle : MonoBehaviour
 
                 if (distanceXZ <= validationRadius)
                 {
-                    if (!pair.isValid) // Si l'objet n'etait pas deja valide
+                    if (!pair.isOnPedestal) // Si l'objet n'etait pas deja valide
                     {
-                        pair.isValid = true;
+                        pair.isOnPedestal = true;
+                        pair.pushPullObject.SetIsOnPedestal(true);
+                        
                         Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
                     }
                 }
                 else
                 {
-                    if (pair.isValid) 
+                    if (pair.isOnPedestal) 
                     {
-                        pair.isValid = false;
+                        pair.isOnPedestal = false;
+                        pair.pushPullObject.SetIsOnPedestal(false);
+                        
+                        Debug.Log($"Objet {pair.puzzleObject.name} retire du socle.");
                     }
                 }
             }
         }
-
-        CheckEnigmeResolution();
     }
 
-    private void CheckEnigmeResolution()
+    private void CheckPuzzleResolution()
     {
         foreach (var pedestal in _pedestalDataList)
         {
-            if (!pedestal.isValid)
+            if (!pedestal.isOnPedestal)
             {
                 return;
             }
@@ -73,6 +93,6 @@ public class EnigmeSocle : MonoBehaviour
 
     protected virtual void OnEnigmeSolved()
     {
-        Debug.Log("L'�nigme est r�solue!");
+        Debug.Log("L'enigme est resolue!");
     }
 }
