@@ -7,7 +7,6 @@ public class PushPullObject : Interactable
     private bool _isOnPedestal = false;
     private bool _isGrab = false;
     private Vector3 _pushDirection;
-    [SerializeField] float _pushForce = 3f;
 
     private float _grabOffset = 2f;
 
@@ -46,10 +45,30 @@ public class PushPullObject : Interactable
         {
             // Trouver la position la plus proche
             Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
-        
-            // Lancer la coroutine pour la position la plus proche
+            
             StartCoroutine(PhaseAnimation(closestPosition));
+
+            // if (PossibleToGrab(closestPosition))
+            // {
+            //     // Lancer la coroutine pour la position la plus proche
+            //     StartCoroutine(PhaseAnimation(closestPosition));
+            // }
         }
+    }
+
+    private bool PossibleToGrab(Vector3 DestinationPosition)
+    {
+        //Shoot a raycast to check if the object is in the way
+        RaycastHit hit;
+        if (Physics.Raycast(_userTransform.position, DestinationPosition - _userTransform.position, out hit, _grabOffset))
+        {
+            if (hit.collider.gameObject != null)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
     
     public void SetIsOnPedestal(bool isOnPedestal)
@@ -114,7 +133,7 @@ public class PushPullObject : Interactable
         // _rigidbody.constraints = RigidbodyConstraints.FreezeAll; // La pierre est complètement figée lorsqu'elle est détachée
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isGrab)
         {
@@ -151,7 +170,7 @@ public class PushPullObject : Interactable
 
         //distance beetween player and start
         float distance = Vector3.Distance(_userTransform.position, start);
-        yield return StartCoroutine(playerScript.MoveTo(start, distance));
+        yield return StartCoroutine(playerScript.MoveTo(start, distance / 2f));
         
         //rotate the player to face the object instantly
         Vector3 direction = transform.position - _userTransform.position;

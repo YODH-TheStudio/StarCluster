@@ -7,6 +7,9 @@ using UnityEngine.Serialization;
 public class EnigmeSocle : MonoBehaviour
 {
     [SerializeField]
+    private FusionPoint _fusionPoint;
+    
+    [SerializeField]
     private List<PedestalData> _pedestalDataList = new List<PedestalData>();
     // private Dictionary<GameObject, bool> objetsPlacementStatus = new Dictionary<GameObject, bool>();
 
@@ -39,8 +42,6 @@ public class EnigmeSocle : MonoBehaviour
     private void FixedUpdate()
     {
         CheckObjectPosition();
-
-        CheckPuzzleResolution();
     }
 
     private void CheckObjectPosition()
@@ -60,6 +61,8 @@ public class EnigmeSocle : MonoBehaviour
                     {
                         pair.isOnPedestal = true;
                         pair.pushPullObject.SetIsOnPedestal(true);
+
+                        CheckPuzzleResolution();
                         
                         Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
                     }
@@ -70,6 +73,11 @@ public class EnigmeSocle : MonoBehaviour
                     {
                         pair.isOnPedestal = false;
                         pair.pushPullObject.SetIsOnPedestal(false);
+
+                        if (_fusionPoint )
+                        {
+                            _fusionPoint.SetState(false);
+                        }
                         
                         Debug.Log($"Objet {pair.puzzleObject.name} retire du socle.");
                     }
@@ -84,6 +92,11 @@ public class EnigmeSocle : MonoBehaviour
         {
             if (!pedestal.isOnPedestal)
             {
+                if (_fusionPoint)
+                {
+                    _fusionPoint.SetState(false);
+                }
+
                 return;
             }
         }
@@ -94,5 +107,9 @@ public class EnigmeSocle : MonoBehaviour
     protected virtual void OnEnigmeSolved()
     {
         Debug.Log("L'enigme est resolue!");
+        if (_fusionPoint)
+        {
+            _fusionPoint.SetState(true);
+        }
     }
 }
