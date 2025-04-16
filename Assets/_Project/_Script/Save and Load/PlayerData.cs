@@ -1,25 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using System.IO;
-using Unity.VisualScripting;
-
-[System.Serializable] // This attribute allows the class to be serialized and saved to a file
+[System.Serializable]
 public class PlayerData
 {
     public float[] position;
     //public List<string> objects;
-
-    public enum DayState
-    {
-        Morning,
-        Noon,
-        Afternoon,
-        Evening,
-        Night
-    }
-    public int day;
-    public DayState currentDayState;
     
     public PlayerData()
     {
@@ -44,13 +27,5 @@ public class PlayerData
         //     Debug.Log("Saving item: " + item.itemName);
         //     objects.Add(item.itemName);
         // }
-
-        // Save current day
-        //day = GameManager.Instance.GetComponent<StateMachine>().day;
-        //currentDayState = (DayState)GameManager.Instance.stateMachine.currentDayState;
-         
-        // Write this down to a file for debug
-        //string dataString = JsonUtility.ToJson(objects);
-        //File.WriteAllText(Application.persistentDataPath + "/objects.json", dataString);
     }
 }
