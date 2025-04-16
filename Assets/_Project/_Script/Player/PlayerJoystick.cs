@@ -87,6 +87,16 @@ public class PlayerJoystick : MonoBehaviour
             _background.anchoredPosition = ScreenPointToAnchoredPosition(TouchedFinger.screenPosition);
             _handleStartPosition = Vector2.zero;
             _handle.anchoredPosition = _handleStartPosition;
+            
+// Shoot a raycast at the touch position
+            Ray ray = Camera.main.ScreenPointToRay(TouchedFinger.screenPosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Debug.Log("Raycast hit: " + hit.collider.gameObject.name);
+                // Add logic here to handle the object hit by the raycast
+            }
+
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
         }
     }
     private void Touch_OnFingerUp(Finger TouchedFinger)

@@ -20,6 +20,7 @@ public class DialogueManagerCustom : MonoBehaviour
     public event Notify ProcessSkipDialogue;
 
     private bool _isDialogue;
+    private bool _isMiniDialogue;
     
     [Header("Script References")]
     private DialogueUIManager _dialogueUIManager;
@@ -55,6 +56,9 @@ public class DialogueManagerCustom : MonoBehaviour
         {
             _isDialogue = true;
             GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Dialogue);
+        }else
+        {
+            _isMiniDialogue = true;
         }
     }
 
@@ -66,6 +70,7 @@ public class DialogueManagerCustom : MonoBehaviour
             GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
         }else
         {
+            _isMiniDialogue = false;
             _dialogueManager.ChangeUI(_dialogueUIManager);
         }
         StartProcessEnd();
@@ -97,9 +102,13 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         //run the event when the dialogue start
         startEvent.Invoke();
-
         if (_dialogueManager != null)
         {
+            if (_isMiniDialogue)
+            {
+                _dialogueManager.ForceEndDialog();
+            }
+            _dialogueManager.ChangeUI(_dialogueUIManager);
             _dialogueManager.StartDialogue(dialogueContainerParam);
         }
         else

@@ -30,13 +30,6 @@ public class TriggerZone : MonoBehaviour
         _onDialogueEndEvent.Invoke();
         // Add your logic here for when the dialogue ends
     }
-
-    public void StartDialogue()
-    {
-        GameManager.Instance.GetDialogueManager().StartDialogue(_dialogue);
-            
-        GameManager.Instance.GetDialogueManager().ProcessEndDialogue += OnEndDialogue;
-    }
     
     public void StartDialogue()
     {

@@ -321,6 +321,28 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     }
 
     // Move the player to the target position in a given duration, with movement restriction
+    // public IEnumerator MoveTo(Vector3 targetPosition, float duration)
+    // {
+    //     float elapsedTime = 0f;
+    //     Vector3 initialPosition = transform.position;
+    //
+    //     MovementLimit = MovementLimitType.FullRestriction;
+    //
+    //     while (elapsedTime < duration)
+    //     {
+    //         elapsedTime += Time.deltaTime;
+    //         float t = Mathf.Clamp01(elapsedTime / duration);
+    //         transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+    //
+    //         yield return null; // Attendre jusqu'au prochain frame
+    //     }
+    //
+    //     transform.position = targetPosition;
+    //     MovementLimit = MovementLimitType.None;
+    //
+    //     Debug.Log("Movement complete!");
+    // }
+    
     public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
         float elapsedTime = 0f;
@@ -332,12 +354,15 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            Vector3 newPosition = Vector3.Lerp(initialPosition, targetPosition, t);
+            newPosition.y = transform.position.y;
 
-            yield return null; // Attendre jusqu'au prochain frame
+            _rigidbody.MovePosition(newPosition); // Use Rigidbody to move the player
+
+            yield return null; // Wait until the next frame
         }
 
-        transform.position = targetPosition;
+        _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
 
         Debug.Log("Movement complete!");
