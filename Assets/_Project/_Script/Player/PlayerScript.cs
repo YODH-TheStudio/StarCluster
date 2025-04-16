@@ -17,6 +17,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     [SerializeField]
     private float _raycastDistance = 1.25f;
 
+    private float _footstepTimer = 0f;
+    private float _footstepInterval = 0.4f;
+
     [SerializeField]
     private Animator _playerAnimator;
 
@@ -27,7 +30,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     // debug pour le temps que on a pas de detecteur de sol
     [SerializeField]
-    private bool _isOnGrass;
+    public bool _isOnGrass;
 
     private CharacterController _controller;
     private Vector3 _direction;
@@ -37,6 +40,11 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     // Interact
     private GameObject _currentInteractObject;
+
+
+    private string[] _footstepSFXKeys_ground;
+    private string[] _footstepSFXKeys_Grass;
+
 
     // Limited Movement
     public enum MovementLimitType
@@ -74,7 +82,25 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         _controller = GetComponent<CharacterController>();
         Controller playerControls = new Controller();
+        
         playerControls.Player.SetCallbacks(this);
+
+
+        _footstepSFXKeys_ground = new string[] 
+        { 
+        "Chemin Pasa", "Chemin Pasb", "Chemin Pasc", "Chemin Pasd",
+        "Chemin Pase","Chemin Pasf","Chemin Pasg",
+        "Chemin Pash","Chemin Pasi","Chemin Pasj"
+        };
+        Debug.Log(_footstepSFXKeys_ground);
+        
+        _footstepSFXKeys_Grass = new string[] 
+        { 
+            "Feuillage Fpasa", "Feuillage Fpasb", "Feuillage Fpasc", "Feuillage Fpasd",
+            "Feuillage Fpase","Feuillage Fpasf","Feuillage Fpasg",
+            "Feuillage Fpash","Feuillage Fpasi","Feuillage Fpasj",
+            "Feuillage Fpask", "Feuillage Fpasl"
+        };
     }
 
     // Allow the player to move, Is called by the character controler component in player
@@ -91,6 +117,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         _lastMoveDirection = _direction.normalized; 
     }
+
+    #region  OnInteract
 
     // public void OnInteract(InputAction.CallbackContext context)
     // {
@@ -123,6 +151,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     // }
     //
     // Allow the player to interact with objetc, Is called by the character controler component in player
+
+    #endregion
+   
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -178,10 +209,18 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
         if (_direction != Vector3.zero)
         {
             _playerAnimator.SetBool("IsMoving", true);
+
+            _footstepTimer -= Time.deltaTime;
+            if(_footstepTimer < 0f)
+            {
+                PlayFootstepSound();
+                _footstepTimer = _footstepInterval; 
+            }
+                
         }
         else if (_direction == Vector3.zero)
         {
@@ -199,7 +238,22 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
                 _particle.GetComponent<ParticleSystem>().enableEmission = false;
             }
         }
-        
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f); // check juste sous les pieds
+        bool onGrass = false;
+
+        foreach (var col in colliders)
+        {
+            GroundScript ground = col.GetComponent<GroundScript>();
+            if (ground != null && ground.IsOnGrass)
+            {
+                onGrass = true;
+                break;
+            }
+        }
+
+        _isOnGrass = onGrass;
+
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
@@ -221,9 +275,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
             }
         }
 
-        //     _controller.SimpleMove(_direction * _speed * Time.deltaTime);
-        // Look();
-
     }
 
     public void Teleport(float x, float y, float z)
@@ -233,7 +284,23 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         transform.position = newPosition;
         _controller.enabled = true;
     }
-    
+
+    public void PlayFootstepSound() 
+    {
+        string[] footstepBank = _isOnGrass? _footstepSFXKeys_Grass : _footstepSFXKeys_ground; 
+        
+        // Play the footstep sound
+        if (footstepBank.Length > 0)
+        {
+            Vector3 spawnPosition = transform.position;
+            Debug.Log(footstepBank); 
+
+            GameManager.Instance._soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
+        }
+    }
+
+
+
     // Code to interact with object
     public bool IsGrabbing()
     {
@@ -274,6 +341,15 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _particle.GetComponent<ParticleSystem>().enableEmission = true;
         _particle.transform.SetParent(gameObject.transform);
         _particle.transform.localPosition = _particleStartPos;
+    }
+
+    public void DeleteParticle(GameObject particle)
+    {
+        if (_particle == null)
+        {
+            return;
+        }
+        Destroy(_particle);
     }
 
     // Move the player to the target position in a given duration, with movement restriction

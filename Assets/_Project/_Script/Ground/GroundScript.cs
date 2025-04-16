@@ -8,6 +8,11 @@ public class GroundScript : MonoBehaviour
     [SerializeField]
     private GameObject _particleSystem;
 
+    private bool _isOnGrass;
+
+    public bool IsOnGrass => _isOnGrass;
+
+
     private void Start()
     {
 
@@ -17,7 +22,17 @@ public class GroundScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            _isOnGrass = true;
             other.gameObject.GetComponent<PlayerScript>().SpawnParticle(_particleSystem);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _isOnGrass = false;
+            other.gameObject.GetComponent<PlayerScript>().DeleteParticle(_particleSystem);
         }
     }
 }

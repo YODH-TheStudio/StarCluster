@@ -259,6 +259,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!4 &109436404 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594501568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &109436405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2092846984300112779, guid: f127477a765108e4ab04617955033d10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594501568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676e27fd22f2510489353e37d221db64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &155003935
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +835,7 @@ Transform:
   - {fileID: 1475285385}
   - {fileID: 4192592026750900239}
   - {fileID: 4944758440539475494}
+  - {fileID: 109436404}
   - {fileID: 3343265351098451059}
   - {fileID: 2772743023017524590}
   - {fileID: 3553120399947041324}
@@ -922,6 +941,80 @@ Transform:
   - {fileID: 84354449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1594501568
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1345441317}
+    m_Modifications:
+    - target: {fileID: 2092846984300112779, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: sfxPrefab
+      value: 
+      objectReference: {fileID: 8012898631253316200, guid: e9b6ef47231e65648bbfd883d8ab1d88,
+        type: 3}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608423859228312758, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744409899522930683, guid: f127477a765108e4ab04617955033d10,
+        type: 3}
+      propertyPath: m_Name
+      value: SFXPoolManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f127477a765108e4ab04617955033d10, type: 3}
 --- !u!1 &1656532150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,14 +1291,18 @@ MonoBehaviour:
   SFXFolderPath: SFX
   musicFolderPath: Music
   ambianceFolderPath: Ambiance
-  _musicMixerGroup: {fileID: 0}
-  _ambianceMixerGroup: {fileID: 0}
+  _musicMixerGroup: {fileID: -4797192509734559872, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+    type: 2}
+  _ambianceMixerGroup: {fileID: -1329955992164730233, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+    type: 2}
+  _sfxMixerGroup: {fileID: -7239697908820815027, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+    type: 2}
   _startingMusic: {fileID: 0}
   _startingAmbianceSound: {fileID: 0}
   _fadeInDuration: 2
   _fadeOutDuration: 2
   soundFXObject: {fileID: 0}
-  sfxPoolManager: {fileID: 0}
+  sfxPoolManager: {fileID: 109436405}
 --- !u!4 &2772743023017524590
 Transform:
   m_ObjectHideFlags: 0

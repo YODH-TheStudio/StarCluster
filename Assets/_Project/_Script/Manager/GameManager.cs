@@ -58,7 +58,7 @@ public class GameManager : PersistentSingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Instance._soundSystem.ChangeMusicByKey("Main");
+        //Instance._soundSystem.ChangeMusicByKey("Main");
     }
 
     void FindPlayer()
@@ -111,6 +111,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
+    #region TestSon
     void PlayTestSFX()
     {
         Vector3 spawnPosition = transform.position;
@@ -123,7 +124,7 @@ public class GameManager : PersistentSingleton<GameManager>
         Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
         Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
     }
-
+    #endregion
 
     public PlayerScript GetPlayer()
     {
