@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
+public class GameManager : PersistentSingleton<GameManager>
 {
 
     private PlayerScript _player;
@@ -14,31 +14,12 @@ public class GameManager : MonoBehaviour
     public SoundSystem _soundSystem { get; private set; }
     public StateManager _stateManager { get; private set; }
     public DialogueManagerCustom _dialogueManager { get; private set; }
-
-    // Singleton
-    private static GameManager _instance;
+    public PuzzleManager _puzzleManager { get; private set; }
+    public SaveManager _saveManager { get; private set; }
 
 
     public KeyCode _key = KeyCode.Space;
     public KeyCode _keytoo = KeyCode.P;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-
-                if (_instance == null)
-                {
-                    GameObject singleton = new GameObject(typeof(GameManager).ToString());
-                    _instance = singleton.AddComponent<GameManager>();
-                }
-            }
-            return _instance;
-        }
-    }
 
     // Start is called before the first frame update
     void Awake()
@@ -88,7 +69,14 @@ public class GameManager : MonoBehaviour
     {
         _companion = FindObjectOfType<CompanionFollow>();
     }
-
+    public void FindPuzzleManager()
+    {
+        _puzzleManager = FindObjectOfType<PuzzleManager>();
+    }
+    public void FindSaveManager()
+    {
+        _saveManager = FindObjectOfType<SaveManager>();
+    }
     void FindVibrationManager()
     {
         _vibrationManager = FindObjectOfType<VibrationManager>();
@@ -172,6 +160,23 @@ public class GameManager : MonoBehaviour
         return _stateManager;
     }
 
+    public PuzzleManager GetPuzzleManager()
+    {
+        if (_puzzleManager == null)
+        {
+            FindPuzzleManager();
+        }
+        return _puzzleManager;
+    }
+    public SaveManager GetSaveManager()
+    {
+        if (_saveManager == null)
+        {
+            FindSaveManager();
+        }
+        return _saveManager;
+    }
+    
     public DialogueManagerCustom GetDialogueManager()
     {
         if (_dialogueManager == null)

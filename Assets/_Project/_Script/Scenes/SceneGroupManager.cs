@@ -13,11 +13,11 @@ namespace Systems.SceneManagement
         public event Action<string> OnSceneUnloaded = delegate { };
         public event Action OnSceneGroupLoaded = delegate { };
 
-        SceneGroup activeSceneGroup;
+        SceneGroup _activeSceneGroup;
 
-        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool realoadDupScenes = false)
+        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {
-            activeSceneGroup = group;
+            _activeSceneGroup = group;
             List<string> loadedScenes = new List<string>();
 
             await UnloadScenes();
@@ -29,14 +29,14 @@ namespace Systems.SceneManagement
                 loadedScenes.Add(SceneManager.GetSceneAt(i).name);
             }
 
-            int totalScenesToLoad = activeSceneGroup.Scenes.Count;
+            int totalScenesToLoad = _activeSceneGroup.Scenes.Count;
 
             AsyncOperationGroup operationGroup = new AsyncOperationGroup(totalScenesToLoad);
 
             for (int i = 0; i < totalScenesToLoad; i++)
             {
                 SceneData sceneData = group.Scenes[i];
-                if (realoadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
+                if (reloadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
                 await Task.Delay(TimeSpan.FromSeconds(2.5f));
@@ -53,7 +53,7 @@ namespace Systems.SceneManagement
                 await Task.Delay(100);
             }
 
-            Scene activeScene = SceneManager.GetSceneByName(activeSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
+            Scene activeScene = SceneManager.GetSceneByName(_activeSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
 
             if (activeScene.IsValid())
             {
