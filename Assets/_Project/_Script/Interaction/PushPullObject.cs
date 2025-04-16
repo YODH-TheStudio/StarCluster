@@ -13,16 +13,9 @@ public class PushPullObject : Interactable
     private List<Vector3> _offsetPosition;
 
     private Transform _stoneOriginalParent;
-    private Rigidbody _rigidbody;
-
-    // Utilisation d'une variable pour savoir si l'objet est en collision
-    private bool _isColliding = false;
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        // Initialement, la pierre est entièrement figée (pas de mouvement ni de rotation)
-        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         _offsetPosition = new List<Vector3>();
         _offsetPosition.Add(new Vector3(0, 0, _grabOffset));
         _offsetPosition.Add(new Vector3(0, 0, -_grabOffset));
@@ -51,36 +44,32 @@ public class PushPullObject : Interactable
         else
         {
             // Trouver la position la plus proche
-            Vector3 closestPosition = _offsetPosition[0] + transform.position;
-            closestPosition.y = playerTransformPosition.y;
-            float closestDistance = Vector3.Distance(playerTransformPosition, closestPosition);
-        
-            foreach (var offset in _offsetPosition)
-            {
-                Vector3 offsetPosition = offset + transform.position;
-                offsetPosition.y = playerTransformPosition.y;
-                float distance = Vector3.Distance(playerTransformPosition, offsetPosition);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestPosition = offsetPosition;
-                }
-            }
+            Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
         
             // Lancer la coroutine pour la position la plus proche
             StartCoroutine(PhaseAnimation(closestPosition));
         }
+    }
     
-        // if (_isActive)
-        // {
-        //     playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
-        //     AttachObjectToPlayer();
-        // }
-        // else
-        // {
-        //     playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
-        //     DetachObjectFromPlayer();
-        // }
+    private Vector3 GetClosestPosition(Vector3 playerPosition)
+    {
+        Vector3 closestPosition = _offsetPosition[0] + transform.position;
+        closestPosition.y = playerPosition.y;
+        float closestDistance = Vector3.Distance(playerPosition, closestPosition);
+        
+        foreach (var offset in _offsetPosition)
+        {
+            Vector3 offsetPosition = offset + transform.position;
+            offsetPosition.y = playerPosition.y;
+            float distance = Vector3.Distance(playerPosition, offsetPosition);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPosition = offsetPosition;
+            }
+        }
+
+        return closestPosition;
     }
 
     private void AttachObjectToPlayer()
@@ -122,15 +111,7 @@ public class PushPullObject : Interactable
             else if (dot < -0.5f)  // pull
             {
                 _pushDirection = -direction;
-                if (!_isColliding)  // Empêche la poussée si l'objet est en collision
-                {
-                    MovePlayerAndObject(_pushDirection);
-                }
-                else
-                {
-                    // Debug.Log("collision");
-                    _userTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
-                }
+                MovePlayerAndObject(_pushDirection);
             }
             else
             {
@@ -141,7 +122,6 @@ public class PushPullObject : Interactable
 
     private void MovePlayerAndObject(Vector3 direction)
     {
-        //_userTransform.position += direction * _pushForce * Time.deltaTime;
         _userTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
     }
 
@@ -162,32 +142,5 @@ public class PushPullObject : Interactable
         
         playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
-    }
-    
-private void OnCollisionEnter(Collision collision)
-    {
-        print("Collision Enter");
-        if (collision.gameObject.CompareTag("PushPullObject"))
-        {
-            _isColliding = true;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        print("Collision Stay");
-        if (collision.gameObject.CompareTag("PushPullObject"))
-        {
-            _isColliding = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        print("Collision Exit");
-        if (collision.gameObject.CompareTag("PushPullObject"))
-        {
-            _isColliding = false;
-        }
     }
 }

@@ -41,7 +41,6 @@ public class PlayerInteractionZone : MonoBehaviour
             Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.5f, 0, 1)), out hit, _raycastDistance) 
             )
         {
-            print(hit.collider.transform.name);
             if(hit.collider.transform.GetComponent<Interactable>())
             {
                 _vibrationManager.Vibrate(100f, 0.2f);

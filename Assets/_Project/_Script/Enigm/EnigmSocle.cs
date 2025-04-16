@@ -1,72 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnigmeSocle : MonoBehaviour
 {
-    public List<ObjetSoclePair> objetsSocles = new List<ObjetSoclePair>();
-    private Dictionary<GameObject, bool> objetsPlacementStatus = new Dictionary<GameObject, bool>();
+    [SerializeField]
+    private List<PedestalData> _pedestalDataList = new List<PedestalData>();
+    // private Dictionary<GameObject, bool> objetsPlacementStatus = new Dictionary<GameObject, bool>();
 
-    public float validationRadius = 1.5f;
+    [SerializeField]
+    private float validationRadius = 1.5f;
 
     public bool IsSolved { get; private set; }
 
     [System.Serializable]
-    public class ObjetSoclePair
+    private class PedestalData
     {
-        public GameObject objet; 
-        public Vector3 offset;  
-        public float radius;   
+        public GameObject puzzleObject;
+        [NonSerialized]
+        public PushPullObject pushPullObject;
+        public GameObject pedestalObject;
+        public bool isValid = false;
     }
 
-    private void Start()
-    {
-        foreach (var pair in objetsSocles)
-        {
-            objetsPlacementStatus[pair.objet] = false; 
-        }
-    }
-
-    private void Update()
+    private void FixedUpdate()
     {
 
-        foreach (var pair in objetsSocles)
+        foreach (var pair in _pedestalDataList)
         {
-            Vector3 socleGlobalPosition = transform.position + pair.offset;
+            Vector3 pedestalPosition = pair.pedestalObject.transform.position;
 
-            if (pair.objet != null)
+            if (pair.puzzleObject != null)
             {
 
-                float distanceXZ = Vector3.Distance(new Vector3(pair.objet.transform.position.x, 0, pair.objet.transform.position.z), new Vector3(socleGlobalPosition.x, 0, socleGlobalPosition.z));
+                float distanceXZ = Vector3.Distance(new Vector3(pair.puzzleObject.transform.position.x, 0, pair.puzzleObject.transform.position.z), new Vector3(pedestalPosition.x, 0, pedestalPosition.z));
 
-                if (distanceXZ <= pair.radius)
+                if (distanceXZ <= validationRadius)
                 {
-                    if (!objetsPlacementStatus[pair.objet]) // Si l'objet n'était pas déjà validé
+                    if (!pair.isValid) // Si l'objet n'etait pas deja valide
                     {
-                        objetsPlacementStatus[pair.objet] = true;
-                        Debug.Log($"Objet {pair.objet.name} placé correctement sur le socle.");
-                    }
-                    else
-                    {
-                        //Debug.Log($"Objet {pair.objet.name} déjà placé correctement.");
+                        pair.isValid = true;
+                        Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
                     }
                 }
                 else
                 {
-                    if (objetsPlacementStatus[pair.objet]) 
+                    if (pair.isValid) 
                     {
-                        objetsPlacementStatus[pair.objet] = false;
-                        //Debug.Log($"Objet {pair.objet.name} n'est plus sur le socle.");
-                    }
-                    else
-                    {
-                        //Debug.Log($"Objet {pair.objet.name} est hors du rayon, mais n'était pas encore validé.");
+                        pair.isValid = false;
                     }
                 }
-            }
-            else
-            {
-                //Debug.LogWarning($"Objet non assigné pour le socle à {socleGlobalPosition}.");
             }
         }
 
@@ -75,61 +60,19 @@ public class EnigmeSocle : MonoBehaviour
 
     private void CheckEnigmeResolution()
     {
-        IsSolved = true;
-        foreach (var item in objetsPlacementStatus)
+        foreach (var pedestal in _pedestalDataList)
         {
-            if (!item.Value)
+            if (!pedestal.isValid)
             {
-                IsSolved = false;
-                break;
+                return;
             }
         }
 
-        if (IsSolved)
-        {
-            OnEnigmeSolved();
-        }
+        OnEnigmeSolved();
     }
 
     protected virtual void OnEnigmeSolved()
     {
-        //Debug.Log("L'énigme est résolue!");
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green; 
-
-        foreach (var pair in objetsSocles)
-        {
-            Vector3 socleGlobalPosition = transform.position + pair.offset;
-
-            if (pair.objet != null)
-            {
-                DrawFilledCircle(socleGlobalPosition, pair.radius);
-
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position, socleGlobalPosition);
-                Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(socleGlobalPosition, 0.1f);
-            }
-        }
-    }
-
-    private void DrawFilledCircle(Vector3 position, float radius)
-    {
-        int segments = 50; 
-        float angleStep = 360f / segments;
-
-        Gizmos.color = Color.red;
-
-        for (int i = 0; i < segments; i++)
-        {
-            float angle = angleStep * i;
-            float radian = angle * Mathf.Deg2Rad;
-
-            Vector3 pointOnCircle = position + new Vector3(radius * Mathf.Cos(radian), 0, radius * Mathf.Sin(radian));
-            Gizmos.DrawLine(position, pointOnCircle); 
-        }
+        Debug.Log("L'ï¿½nigme est rï¿½solue!");
     }
 }
