@@ -140,7 +140,12 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0.2
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: d497bf9bc6f944948b42426568374c8c, type: 2}
+  - {fileID: 11400000, guid: fce423a6b3da51046b32a6e3c979a5b7, type: 2}
+  - {fileID: -7259723060835694254, guid: a95cb13edb7ad354faf739dc088c8abe, type: 2}
+  - {fileID: 11400000, guid: 1fac28e1abae718458b086b59e4d1204, type: 2}
+  - {fileID: 11400000, guid: 552234cfbb7485b4394b3ecce8f41da5, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -170,7 +175,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 22
+  AndroidMinSdkVersion: 34
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -860,7 +865,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: 17fd4317-a368-4414-a470-671c3a84701d
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: StarCluster
   organizationId: loanalix
   cloudEnabled: 0

@@ -33,48 +33,6 @@ MonoBehaviour:
     Position: {x: -350, y: 299}
     startID: 
   DialogueNodeDatas:
-  - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
-    Position: {x: -124, y: 299}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 3
-    Emotion: Left/Defualt
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever since
-        the 1500s,
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
-  - NodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
-    Position: {x: 152, y: 299}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Left/Smile
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: 'It is a long established fact that a reader will be distracted
-        by the readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it '
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
   - NodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
     Position: {x: 407, y: 299}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
@@ -90,12 +48,48 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: Contrary to popular belief, Lorem Ipsum is not simply
-        random text. It has roots in a piece of classical Latin literature from 45
-        BC, making it over 2000 years old
+      LanguageGenericType: "Test num\xE9ro 3"
     - languageEnum: 1
       LanguageGenericType: 
-    Duration: 10
+    Duration: 2
+  - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+    Position: {x: -124, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 3
+    Emotion: Left/Defualt
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Test num\xE9ro 1"
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 2
+  - NodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
+    Position: {x: 152, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Left/Smile
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Test num\xE9ro 2"
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 2
   - NodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
     Position: {x: 654, y: 299}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
@@ -111,12 +105,10 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: There are many variations of passages of Lorem Ipsum available,
-        but the majority have suffered alteration in some form, by injected humour,
-        or randomised words which don't look
+      LanguageGenericType: "Test num\xE9ro 4"
     - languageEnum: 1
       LanguageGenericType: 
-    Duration: 10
+    Duration: 2
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []
   TimerChoiceNodeDatas: []
