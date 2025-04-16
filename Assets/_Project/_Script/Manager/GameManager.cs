@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -193,5 +194,11 @@ public class GameManager : PersistentSingleton<GameManager>
             FindSoundManager();
         }
         return _soundSystem;
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 }

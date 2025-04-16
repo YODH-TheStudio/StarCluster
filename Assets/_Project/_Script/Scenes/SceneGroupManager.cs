@@ -39,7 +39,7 @@ namespace Systems.SceneManagement
                 if (reloadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
-                await Task.Delay(TimeSpan.FromSeconds(2.5f));
+                await Task.Delay(TimeSpan.FromSeconds(5f));
 
                 operationGroup.operations.Add(operation);
 
