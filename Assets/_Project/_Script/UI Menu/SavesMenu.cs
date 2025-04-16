@@ -6,24 +6,21 @@ using UnityEngine;
 public class SavesMenu : Menu
 {
     private int _previousSavedGroupScene;
-    private int _saveIndex = 1;
-
-
+    private int _saveIndex = 0;
 
     public void SetSaveIndex(int newSaveIndex)
     {
         _saveIndex = newSaveIndex;
+        GameManager.GetSaveManager().currentSlot = newSaveIndex;
     }
     
     public void LoadSelectedSave()
     {
-        //load the save at the _saveIndex
         GameManager.GetSaveManager().LoadGame(_saveIndex);
     }
 
     public void DeleteSelectedSave()
     {
-        //delete the save at the _saveIndex
         GameManager.GetSaveManager().DeleteSave(_saveIndex);
     }
 }

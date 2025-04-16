@@ -128,7 +128,7 @@ public class SaveManager : MonoBehaviour
             Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
-            Debug.LogError("Player save file not found in " + path);
+            Debug.LogWarning("Player save file not found in " + path);
         }
     }
     
