@@ -60,6 +60,11 @@ public class SaveManager : MonoBehaviour
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.save";
+        if (Directory.Exists(path) == false)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            Debug.Log("Creating save file at " + path);
+        }
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData();
