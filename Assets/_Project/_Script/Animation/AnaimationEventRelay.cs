@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class AnaimationEventRelay : MonoBehaviour
 {
+    #region Fields
     private PlayerScript _playerScript;
 
+    #endregion
 
+    #region Main Functions
     // Start is called before the first frame update
     void Start()
     {
@@ -21,4 +24,6 @@ public class AnaimationEventRelay : MonoBehaviour
             _playerScript.PlayFootstepSound();
         }
     }
+
+    #endregion
 }

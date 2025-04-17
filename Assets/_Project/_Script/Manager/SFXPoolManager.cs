@@ -5,12 +5,16 @@ using UnityEngine.Audio;
 
 public class SFXPoolManager : MonoBehaviour
 {
+    #region Fields
     public GameObject sfxPrefab;
     public int poolSize = 10;
 
     private Queue<AudioSource> availableSources = new Queue<AudioSource>();
-    private AudioMixerGroup sfxMixerGroup; 
+    private AudioMixerGroup sfxMixerGroup;
 
+    #endregion
+
+    #region Main Function 
     void Awake()
     {
         for (int i = 0; i < poolSize; i++)
@@ -25,7 +29,9 @@ public class SFXPoolManager : MonoBehaviour
             availableSources.Enqueue(source);
         }
     }
+    #endregion
 
+    #region SFX
     public void SetMixerGroup(AudioMixerGroup mixerGroup)
     {
         sfxMixerGroup = mixerGroup;
@@ -71,6 +77,9 @@ public class SFXPoolManager : MonoBehaviour
         source.Play();
         StartCoroutine(DisableAfterPlay(source, clip.length));
     }
+    #endregion
+
+    #region Coroutines 
     private IEnumerator DisableAfterPlay(AudioSource source, float duration)
     {
         yield return new WaitForSeconds(duration);
@@ -79,4 +88,6 @@ public class SFXPoolManager : MonoBehaviour
         source.gameObject.SetActive(false);
         availableSources.Enqueue(source); // IMPORTANT : On remet la source dans la pool
     }
+
+    #endregion
 }

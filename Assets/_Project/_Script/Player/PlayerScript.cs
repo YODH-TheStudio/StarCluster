@@ -8,6 +8,8 @@ using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 {
+    #region Fields
+
     // Player Controler Variable 
     [SerializeField]
     private float _speed = 250.0f;
@@ -45,7 +47,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private string[] _footstepSFXKeys_ground;
     private string[] _footstepSFXKeys_Grass;
 
+    #endregion
 
+    #region Classes 
     // Limited Movement
     public enum MovementLimitType
     {
@@ -77,6 +81,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         _limitedMoveDirection = newDirection;
     }
+
+    #endregion
 
     private void Awake()
     {
