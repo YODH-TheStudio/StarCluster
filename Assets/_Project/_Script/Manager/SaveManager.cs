@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -115,6 +116,16 @@ public class SaveManager : MonoBehaviour
         
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
     }
+
+    // private static void SaveSlotData(int slot)
+    // {
+    //     int[] data = new int[3];
+    //     // data[0] = planetes unlock;
+    //     DateTime saveTime = System.DateTime.Now;
+    //     // data[2] = playtime;
+    //     
+    //     File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/slot.json", JsonUtility.ToJson(data));
+    // }
     #endregion
     
     #region Load

@@ -8,6 +8,16 @@ public class SavesMenu : Menu
     private int _previousSavedGroupScene;
     private int _saveIndex = 0;
 
+    void Awake()
+    {
+        // setup slot text
+    }
+
+    public void UpdateSlotsData()
+    {
+        
+    }
+    
     public void SetSaveIndex(int newSaveIndex)
     {
         _saveIndex = newSaveIndex;
