@@ -162,6 +162,7 @@ public class PushPullObject : Interactable
     private void MovePlayerAndObject(Vector3 direction)
     {
         _userTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
+        
     }
 
     private IEnumerator PhaseAnimation(Vector3 start)

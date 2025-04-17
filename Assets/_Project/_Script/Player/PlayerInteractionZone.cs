@@ -14,14 +14,27 @@ public class PlayerInteractionZone : MonoBehaviour
     private VibrationManager _vibrationManager = null;
     
     private Interactable _currentInteractable = null;
-    
-    private RaycastHit _raycastHit;
 
+    private Vector3 _ray1;
+    private Vector3 _ray2;
+    private Vector3 _ray3;
+    private Vector3 _ray4;
+    
     // Start is called before the first frame update
     void Start()
     {
         _player = GameManager.Instance.GetPlayer();
         _vibrationManager = GameManager.Instance.GetVibrationManager();
+        
+
+        _ray1 = new Vector3(1f, 0, 1);
+        _ray1.Normalize();
+        _ray2 = new Vector3(-1f, 0, 1);
+        _ray2.Normalize();
+        _ray3 = new Vector3(1f, 0, -1);
+        _ray3.Normalize();
+        _ray4 = new Vector3(-1f, 0, -1);
+        _ray4.Normalize();
     }
 
     // Update is called once per frame
@@ -35,18 +48,20 @@ public class PlayerInteractionZone : MonoBehaviour
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.25f, 0, 1)), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.25f, 0, 1)), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.5f, 0, 1)), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.5f, 0, 1)), out hit, _raycastDistance) 
-            )
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray1), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray2), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray3), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray4), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, _raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, _raycastDistance)
+           )
         {
             if(hit.collider.transform.GetComponent<Interactable>())
             {
                 _vibrationManager.Vibrate(100f, 0.2f);
                 _interactionButton.SetActive(true);
                 _currentInteractable = hit.collider.transform.GetComponent<Interactable>();
-                _raycastHit = hit;
             }
             else
             {
@@ -67,10 +82,5 @@ public class PlayerInteractionZone : MonoBehaviour
     public Interactable GetCurrentInteractable()
     {
         return _currentInteractable;
-    }
-    
-    public RaycastHit GetRaycastHit()
-    {
-        return _raycastHit;
     }
 }

@@ -74,7 +74,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     private void Awake()
     {
-        // _controller = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody>();
         Controller playerControls = new Controller();
         playerControls.Player.SetCallbacks(this);
@@ -95,82 +94,18 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         _lastMoveDirection = _direction.normalized; 
     }
-
-    // public void OnInteract(InputAction.CallbackContext context)
-    // {
-    //     if (context.started)
-    //     {
-    //
-    //         if (IsGrabbing())
-    //         {
-    //             SetGrabbing(false);
-    //             _objectGrabbed.GetComponent<BoxCollider>().enabled = true;
-    //             _objectGrabbed.GetComponent<Rigidbody>().useGravity = true;
-    //
-    //             return;
-    //         }
-    //
-    //         else
-    //         {
-    //             RaycastHit hit;
-    //             // Does the ray intersect any objects excluding the player layer
-    //             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
-    //             {
-    //                 GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Violon");
-    //                 GameManager.Instance._soundSystem.ChangeMusicByKey("Doce"); 
-    //                 //SoundManager.PlaySound(SoundType.None,1);
-    //             }
-    //
-    //             return;
-    //         }
-    //     }
-    // }
-    //
-    // Allow the player to interact with objetc, Is called by the character controler component in player
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            // // Interact with object
-            // RaycastHit hit;
-            // if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance))
-            //
-            // {
-            //     // Is interactable object
-            //     Interactable interactable = hit.transform.GetComponent<Interactable>();
-            //     if (interactable != null)
-            //     {
-            //         interactable.SetUserTransform(this.transform);
-            //         interactable.SetUserInteractionNormal(hit.normal);
-            //         interactable.Interact();
-            //     }
-            // }
-            
             Interactable interactable = _playerInteractionZone.GetCurrentInteractable();
             if (interactable != null)
             {
                 interactable.SetUserTransform(this.transform);
-                interactable.SetUserInteractionNormal(_playerInteractionZone.GetRaycastHit().normal);
                 interactable.Interact();
             }
         }
     }
-
-    // Rotate the player in the direction he is walking
-    // private void Look()
-    // {
-    //     // Calculated the movement of the player with the 45� change due to isometric view
-    //     Vector3 position = new Vector3(readVector.x, 0, readVector.y);
-    //     Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
-    //
-    //
-    //      _direction = isoMatrix.MultiplyPoint3x4(position);
-    //
-    //     // store last move position to inform component about user movement direction
-    //
-    //     _lastMoveDirection = _direction.normalized; 
-    // }
-    
     // Rotate the player in the direction he is walking
     void Look()
     {
@@ -183,6 +118,15 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
         }  
+    }
+    
+    void LookAt(Vector3 target)
+    {
+        // Calculated the rotation and set it
+        var relative = (target) - transform.position;
+        var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
     }
 
     // Update is called once per frame
@@ -265,18 +209,13 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
             }
         }
 
-        //     _controller.SimpleMove(_direction * _speed * Time.deltaTime);
-        // Look();
-
     }
     
 
     public void Teleport(float x, float y, float z)
     {
         Vector3 newPosition = new Vector3(x, y, z);
-        // _controller.enabled = false;
         transform.position = newPosition;
-        // _controller.enabled = true;
     }
 
     public void FreezeRotation()
@@ -319,29 +258,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _particle.transform.SetParent(gameObject.transform);
         _particle.transform.localPosition = _particleStartPos;
     }
-
-    // Move the player to the target position in a given duration, with movement restriction
-    // public IEnumerator MoveTo(Vector3 targetPosition, float duration)
-    // {
-    //     float elapsedTime = 0f;
-    //     Vector3 initialPosition = transform.position;
-    //
-    //     MovementLimit = MovementLimitType.FullRestriction;
-    //
-    //     while (elapsedTime < duration)
-    //     {
-    //         elapsedTime += Time.deltaTime;
-    //         float t = Mathf.Clamp01(elapsedTime / duration);
-    //         transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
-    //
-    //         yield return null; // Attendre jusqu'au prochain frame
-    //     }
-    //
-    //     transform.position = targetPosition;
-    //     MovementLimit = MovementLimitType.None;
-    //
-    //     Debug.Log("Movement complete!");
-    // }
     
     public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
@@ -359,12 +275,16 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
             _rigidbody.MovePosition(newPosition); // Use Rigidbody to move the player
 
+            //LookAt(targetPosition); // Look at the target position
+            
+            //Vector3 direction = (targetPosition - transform.position).normalized;
+            
+            //Debug.DrawRay(transform.position, direction * 2, Color.red); // Debug ray to visualize the direction
+
             yield return null; // Wait until the next frame
         }
 
         _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
-
-        Debug.Log("Movement complete!");
     }
 }

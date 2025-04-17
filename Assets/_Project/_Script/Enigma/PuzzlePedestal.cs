@@ -11,7 +11,6 @@ public class PuzzlePedestal : MonoBehaviour
     
     [SerializeField]
     private List<PedestalData> _pedestalDataList = new List<PedestalData>();
-    // private Dictionary<GameObject, bool> objetsPlacementStatus = new Dictionary<GameObject, bool>();
 
     [SerializeField]
     private float validationRadius = 1.5f;
