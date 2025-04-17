@@ -27,6 +27,15 @@ public class SaveManager : MonoBehaviour
     public void LoadGame(int slot = 0){
         if(slot == 0)
             slot = currentSlot;
+        
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/";
+        if (Directory.Exists(path) == false)
+        {
+            SaveGame(slot);
+            //Directory.CreateDirectory(Path.GetDirectoryName(path));
+            //Debug.Log("Creating save file at " + path);
+        }
+        
         Debug.Log("Loading game");
         LoadPlayer(slot);
         //LoadDialogueData();
