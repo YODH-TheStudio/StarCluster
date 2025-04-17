@@ -417,7 +417,7 @@ public class Puzzle2D : MonoBehaviour
 
         Vector3 mouse3D = Vector3.zero;
 
-        Vector3 mouseScreen = _fingerMP;
+        Vector3 mouseScreen = Input.mousePosition;
 
         Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
 
