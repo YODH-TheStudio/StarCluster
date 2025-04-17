@@ -15,6 +15,13 @@ public class Segment
     }
 }
 
+public enum PointSize
+{
+    Petite,
+    Moyenne,
+    Grosse
+}
+
 [System.Serializable]
 public class Circuit
 {
@@ -34,12 +41,22 @@ public class Circuit
     }
 }
 
+public class PointSizeEntry
+{
+    public Vector2 point;
+    public PointSize size;
+}
+
+
 [CreateAssetMenu(fileName = "NewLevelData", menuName = "Level Data", order = 1)]
 public class LevelData : ScriptableObject
 {
     public List<Vector2> _points = new List<Vector2>();
     public List<Segment> _segments = new List<Segment>();
     public List<Circuit> _circuits = new List<Circuit>();
+
+    // Point size to determine their size in creation time
+    public List<PointSizeEntry> pointSizes = new List<PointSizeEntry>();
 
     public void AddCircuit(Color circuitColor, Vector2 startPoint, Vector2 endPoint, string sign)
     {

@@ -350,13 +350,38 @@ public class Puzzle2D : MonoBehaviour
 
         if (_isDragging)
         {
-            Vector3 mouseScreen = _fingerMP;
-            mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, _currentStartDragPoint.position);
+            Vector3 mouse3D = Vector3.zero;
+            Vector3 mouseScreen = Input.mousePosition;
+            Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
+            Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 20f);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
 
-            mouseWorldPosition = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
+            if (hits.Length > 0)
+            {
+                bool hitPlan = false;
+
+                foreach (RaycastHit h in hits)
+                {
+                    //Debug.Log($"☄️ Touché : {h.collider.name} (Tag: {h.collider.tag})");
+
+                    if (h.collider.CompareTag("CTRP"))
+                    {
+                        mouse3D = h.point;
+                        hitPlan = true;
+                        break;
+                    }
+                }
+
+                if (!hitPlan)
+                    Debug.Log("⚠️ Aucun objet touché n’a le tag CTRP.");
+            }
+            else
+            {
+                Debug.Log("❌ RaycastAll n’a rien touché.");
+            }
 
             Vector3 start = _currentStartDragPoint.position;
-            Vector3 end = mouseWorldPosition;
+            Vector3 end = mouse3D;
 
             // Dir
             Vector3 dir = end - start;
@@ -390,22 +415,13 @@ public class Puzzle2D : MonoBehaviour
 
         _isDragging = false;
 
-        //Vector3 mouse3D = _puzzleCamera.ScreenToWorldPoint(mouseScreen);
-        //Vector3 mouseScreen = Input.mousePosition;
-        //mouseScreen.z = Vector3.Distance(_puzzleCamera.transform.position, _currentStartDragPoint.position);
-
         Vector3 mouse3D = Vector3.zero;
-        //mouse3D.x = 0;
-        //Debug.Log($"Mouse 3D Position: {mouse3D}");
 
         Vector3 mouseScreen = _fingerMP;
 
         Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
 
-        // Dessine le rayon en rouge pendant 2 secondes
         Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 20f);
-
-        // Lancer le raycast all
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
         if (hits.Length > 0)
@@ -420,8 +436,8 @@ public class Puzzle2D : MonoBehaviour
                 {
                     mouse3D = h.point;
                     hitPlan = true;
-                    Debug.Log($"✅ Mouse 3D Position sur le plan CTRP : {mouse3D}");
-                    break; // facultatif si tu veux juste le premier plan touché
+                    //Debug.Log($"✅ Mouse 3D Position sur le plan CTRP : {mouse3D}");
+                    break; 
                 }
             }
 
@@ -445,7 +461,7 @@ public class Puzzle2D : MonoBehaviour
             return;
         }
 
-        const float detectionRadius = 5f;
+        const float detectionRadius = 10f;
         Transform targetPoint = null;
         Vector2 linked2DPoint = Vector2.zero;
 
