@@ -143,6 +143,12 @@ public class Puzzle2DEditor : Editor
     {
         base.OnInspectorGUI();
 
+        //if (GUILayout.Button("Set All Points to Small"))
+        //{
+
+        //    _levelData.SetAllPointsToSmall();
+        //}
+
         List<string> pointOptions = new List<string>();
         for (int i = 0; i < _levelData._points.Count; i++)
         {
@@ -250,8 +256,10 @@ public class Puzzle2DEditor : Editor
 
     private void AddRandomPoint()
     {
+        string pointName = "Point " + (_levelData._points.Count + 1);  // Nom basé sur l'index du point
+
         Vector2 _newPoint = GenerateRandomPointInsidePlayArea();
-        _levelData.AddPoint(_newPoint);
+        _levelData.AddPoint(_newPoint, pointName);
         EditorUtility.SetDirty(_levelData);
         AddPointToUI(_newPoint, _levelData._points.Count - 1);
     }

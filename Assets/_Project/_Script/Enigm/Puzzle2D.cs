@@ -38,6 +38,8 @@ public class Puzzle2D : MonoBehaviour
     private List<Transform> _pointObjects3D = new List<Transform>();
     private Transform _segmentsParent;
 
+    public Transform parentPuzzleGroup;
+
     // Resolve
     private bool _puzzleSolved = true;
 
@@ -61,6 +63,12 @@ public class Puzzle2D : MonoBehaviour
     private int _currentCircuitSelected = 0;
     private bool _eraserMode = false;
 
+    // Prefab of Stars/ Prefab of Circuit Shape
+    [Header("Prefabs")]
+    public GameObject starPrefab; 
+    public List<GameObject> circuitShapePrefabs; 
+
+
     private Vector3 _fingerMP = Vector3.zero;
 
     private void Touch_OnFingerMove(Finger TouchedFinger)
@@ -70,8 +78,11 @@ public class Puzzle2D : MonoBehaviour
 
     void Start()
     {
-        CreateTopMenu();
         _segmentsParent = new GameObject("Segments3D").transform;
+        _segmentsParent.SetParent(parentPuzzleGroup);
+
+        CreateTopMenu();
+
         InstantiatePoints3D();
         InstantiateSegments();
 
@@ -190,11 +201,11 @@ public class Puzzle2D : MonoBehaviour
             return;
 
         // Start/End point of circuit
-        Dictionary<Vector2, Color> circuitPoints = new Dictionary<Vector2, Color>();
+        Dictionary<Vector2, string> circuitPoints = new Dictionary<Vector2, string>();
         foreach (var circuit in _levelData._circuits)
         {
-            circuitPoints[circuit.startPoint] = circuit.circuitColor;
-            circuitPoints[circuit.endPoint] = circuit.circuitColor;
+            circuitPoints[circuit.startPoint] = circuit.sign;
+            circuitPoints[circuit.endPoint] = circuit.sign;
         }
 
         _cinemachineMainCamera.gameObject.SetActive(false);
@@ -203,19 +214,59 @@ public class Puzzle2D : MonoBehaviour
 
         foreach (Vector2 pos in _levelData._points)
         {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            Debug.Log("ddd");
+            GameObject cube = Instantiate(starPrefab, parentPuzzleGroup);
             cube.name = $"Point3D_{pos.x}_{pos.y}";
             cube.transform.position = new Vector3(0f, pos.y / _scaleFactor + _yOffset, -pos.x / _scaleFactor - _zOffset);
             cube.transform.localScale = Vector3.one * _cubeScale;
+
+            PointSizeEntry pointSizeEntry = _levelData.pointSizes.FirstOrDefault(p => p.pointPosition == pos);
+            if (pointSizeEntry != null)
+            {
+                switch (pointSizeEntry.size)
+                {
+                    case PointSize.Petite:
+                        cube.transform.localScale = Vector3.one * 0.5f; 
+                        break;
+                    case PointSize.Moyenne:
+                        cube.transform.localScale = Vector3.one * 1f;    
+                        break;
+                    case PointSize.Grosse:
+                        cube.transform.localScale = Vector3.one * 2f;    
+                        break;
+                }
+            }
+            else
+            {
+                cube.transform.localScale = Vector3.one * _cubeScale;  
+            }
 
             var rend = cube.GetComponent<Renderer>();
 
             if (rend) rend.material.color = _pointColor;
 
-            // Change shape (color) depend on if start point or end point exist for this point
-            if (circuitPoints.TryGetValue(pos, out Color circuitColor))
+            // Change shape depend on if start point or end point exist for this point
+            if (circuitPoints.TryGetValue(pos, out string circuitIndex))
             {
-                rend.material.color = circuitColor;
+                int prefabIndex;
+                if (int.TryParse(circuitIndex, out prefabIndex) && prefabIndex >= 0 && prefabIndex < circuitShapePrefabs.Count)
+                {
+                    GameObject circuitPrefab = Instantiate(circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
+
+                    var circuit = _levelData._circuits.FirstOrDefault(c => c.startPoint == pos || c.endPoint == pos);
+                    if (circuit != null)
+                    {
+                        Vector3 offset = Vector3.zero;
+                        if (circuit.startPoint == pos) {
+                            offset = circuit.startPointOffset;  
+                        }
+                        else if (circuit.endPoint == pos)
+                        {
+                            offset = circuit.endPointOffset; 
+                        }
+                        circuitPrefab.transform.position = cube.transform.position + offset;
+                    }
+                }
             }
 
             cube.tag = "CasseTete";
