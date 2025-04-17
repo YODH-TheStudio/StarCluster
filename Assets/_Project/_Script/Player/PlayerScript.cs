@@ -213,13 +213,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         if (_direction != Vector3.zero)
         {
             _playerAnimator.SetBool("IsMoving", true);
-
-            _footstepTimer -= Time.deltaTime;
-            if(_footstepTimer < 0f)
-            {
-                PlayFootstepSound();
-                _footstepTimer = _footstepInterval; 
-            }
                 
         }
         else if (_direction == Vector3.zero)
