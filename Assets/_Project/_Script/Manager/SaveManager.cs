@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class SaveManager : MonoBehaviour
         //SaveDialogueData();
         SavePuzzleData(slot);
         SaveObjects(slot);
+        SaveInfo(slot); // Time played, planets unlocked, etc.
     }
     public void LoadGame(int slot = 0){
         if(slot == 0)
@@ -70,18 +72,27 @@ public class SaveManager : MonoBehaviour
     // }
     
     #region Save
+    [System.Serializable]
+    public class SaveData
+    {
+        public int[] values;
+        public string time; // DateTime is not directly serializable by JsonUtility, so we use string
+    }
+    private void SaveInfo(int slot)
+    {
+        SaveData data = new SaveData();
+        data.time = DateTime.Now.ToString("f");
+        data.values = new int[4];
+        data.values[0] = 1; // Unlocked planets
+        data.values[1] = 2; // Unlocked pleiads
+        data.values[2] = 3; // Last planet played
+        data.values[3] = (int) 4; // Playtime
+        
+        string jsonString = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json", jsonString);
+    }
     private static void SavePlayer(int slot)
     {
-        // BinaryFormatter formatter = new BinaryFormatter();
-        // string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.save";
-        // FileStream stream = new FileStream(path, FileMode.Create);
-        // PlayerData data = new PlayerData();
-        //
-        // // Insert data into save file as binary
-        // formatter.Serialize(stream, data);
-        // stream.Close();
-        //
-        // //Debug.Log("Saved file in " + path);
         PlayerData data = new PlayerData();
         string jsonString = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.json", jsonString);
@@ -129,6 +140,19 @@ public class SaveManager : MonoBehaviour
     #endregion
     
     #region Load
+
+    public int[] GetInfo(int slot)
+    {
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json";
+        if(File.Exists(path)){
+            string jsonString = File.ReadAllText(path);
+            int[] data = JsonUtility.FromJson<int[]>(jsonString);
+            return data;
+        } else {
+            Debug.LogError("Save file not found at " + path);
+            return null;
+        }
+    }
     private static void LoadPlayer(int slot){
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() +"/player.save";
         if(File.Exists(path)){
