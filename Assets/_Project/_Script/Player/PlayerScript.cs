@@ -86,7 +86,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         // Calculated the movement of the player with the 45° change due to isometric view
         Vector3 position = new Vector3(readVector.x, 0, readVector.y);
-        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45.0f, 0));
+        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
 
 
         _direction = isoMatrix.MultiplyPoint3x4(position);
