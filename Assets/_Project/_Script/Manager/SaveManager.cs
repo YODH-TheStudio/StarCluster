@@ -100,6 +100,13 @@ public class SaveManager : MonoBehaviour
         
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
     }
+
+    private static void SaveProgress(int slot)
+    {
+        int unlockedPlanets = 1;
+        int lastTimePlayed = 0;
+        int playTime = 0;
+    }
     #endregion
     
     #region Load
@@ -186,6 +193,25 @@ public class SaveManager : MonoBehaviour
         } else {
             Debug.LogError("Save file not found at " + path);
         }
+    }
+
+    public int GetUnlockedPlanets(int slot)
+    {
+        // Placeholder
+        int unlockedPlanets = 1;
+        return unlockedPlanets;
+    }
+    public int GetLastTimePlayed(int slot)
+    {
+        // Placeholder
+        int lastTimePlayed = 1;
+        return lastTimePlayed;
+    }
+    public int GetPlayTime(int slot)
+    {
+        // Placeholder
+        int playTime = 1;
+        return playTime;
     }
     #endregion
 }
