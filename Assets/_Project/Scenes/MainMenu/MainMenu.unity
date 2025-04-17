@@ -2191,6 +2191,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Save 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5493393101439882131, guid: aecd9121c43eec4418ebf4ed0cd75a48,
+        type: 3}
+      propertyPath: m_text
+      value: SLOT 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7305720368712365301, guid: aecd9121c43eec4418ebf4ed0cd75a48,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2452,6 +2457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Save 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493393101439882131, guid: aecd9121c43eec4418ebf4ed0cd75a48,
+        type: 3}
+      propertyPath: m_text
+      value: SLOT 2
       objectReference: {fileID: 0}
     - target: {fileID: 7305720368712365301, guid: aecd9121c43eec4418ebf4ed0cd75a48,
         type: 3}
@@ -5071,6 +5081,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Save 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493393101439882131, guid: aecd9121c43eec4418ebf4ed0cd75a48,
+        type: 3}
+      propertyPath: m_text
+      value: SLOT 1
       objectReference: {fileID: 0}
     - target: {fileID: 7305720368712365301, guid: aecd9121c43eec4418ebf4ed0cd75a48,
         type: 3}
