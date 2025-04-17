@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class EnigmeSocle : MonoBehaviour
+public class PuzzlePedestal : MonoBehaviour
 {
     [SerializeField]
     private FusionPoint _fusionPoint;

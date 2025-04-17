@@ -12,6 +12,7 @@ CBUFFER_START(UnityPerMaterial)
     half _Cutoff;
     half _Shininess;
     float3 _PlayerPosition; // Player position for grass displacement
+    float3 _Terrain; // Terrain position
 CBUFFER_END
 
 #define _Surface 0.0 // Grass is always opaque
@@ -100,8 +101,11 @@ half4 TerrainWaveGrass (inout float4 vertex, float waveAmount, half4 color)
     half3 offset = vertex.xyz - _CameraPosition.xyz;
     color.a = saturate (2 * (_WaveAndDistance.w - dot (offset, offset)) * _CameraPosition.w);
 
+    float4 newVertex = vertex;
+    newVertex.y += _Terrain.y;
+    
     // Displace grass under the player
-    float dist = distance(_PlayerPosition.xyz, vertex.xyz);
+    float dist = distance(_PlayerPosition.xyz, newVertex.xyz);
     float grassDisplacementFalloff = 0.7;
     float influence = saturate(1.0 - dist * grassDisplacementFalloff);
     //influence = sin(_Time.y * 2.0);

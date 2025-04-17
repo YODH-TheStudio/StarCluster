@@ -12,4 +12,12 @@ public class DialogueTrigger : MonoBehaviour
             GameManager.Instance.GetDialogueManager().StartDialogue(dialogue);
         }
     }
+    
+    public void StartMiniDialogue(DialogueContainerSO dialogue)
+    {
+        if (dialogue != null)
+        {
+            GameManager.Instance.GetDialogueManager().StartMiniDialogue(dialogue);
+        }
+    }
 }
