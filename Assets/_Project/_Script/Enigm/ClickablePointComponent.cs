@@ -6,8 +6,9 @@ public class ClickablePointComponent : MonoBehaviour
 
     public Vector2 linked2DPoint;
 
-    public void OnMouseDown()
+    public void TriggerMouseDownByDistance()
     {
+        Debug.Log("On mouse down");
         if (puzzle != null)
         {
             puzzle.OnPointClicked3D(linked2DPoint, transform);

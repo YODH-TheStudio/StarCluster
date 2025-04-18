@@ -86,7 +86,7 @@ public class Puzzle2DEditor : Editor
         _labelObject.transform.SetParent(_pointObject.transform);
         TextMeshProUGUI _labelText = _labelObject.GetComponent<TextMeshProUGUI>();
         _labelText.text = "P" + _index;
-        _labelText.fontSize = 10;
+        _labelText.fontSize = 15;
         _labelText.alignment = TextAlignmentOptions.Center;
 
         RectTransform _labelRect = _labelObject.GetComponent<RectTransform>();
@@ -109,7 +109,7 @@ public class Puzzle2DEditor : Editor
         float _distance = Vector2.Distance(_pointA, _pointB);
         float _angle = Mathf.Atan2(_pointB.y - _pointA.y, _pointB.x - _pointA.x) * Mathf.Rad2Deg;
 
-        _rectTransform.sizeDelta = new Vector2(_distance, 10f);
+        _rectTransform.sizeDelta = new Vector2(_distance, 3f);
         _rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
         _rectTransform.anchoredPosition = (_pointA + _pointB) / 2f;
 
@@ -119,7 +119,7 @@ public class Puzzle2DEditor : Editor
 
         int segmentIndex = _segmentObjects.Count;
         _labelText.text = "S" + segmentIndex;
-        _labelText.fontSize = 10;
+        _labelText.fontSize = 5;
         _labelText.alignment = TextAlignmentOptions.Center;
         _labelText.color = Color.white;
 
