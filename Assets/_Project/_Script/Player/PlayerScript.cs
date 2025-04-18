@@ -264,7 +264,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         Vector3 newPosition = new Vector3(x, y, z);
         transform.position = newPosition;
-        _controller.enabled = true;
     }
 
     public void PlayFootstepSound() 
@@ -279,14 +278,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
             GameManager.Instance._soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
         }
-    }
-
-
-
-    // Code to interact with object
-    public bool IsGrabbing()
-    {
-        return _isGrabbing;
     }
 
     public void FreezeRotation()

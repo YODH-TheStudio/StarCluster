@@ -19,8 +19,8 @@ public class MainMenu : Menu
             //     await SceneLoader.LoadSceneGroup(2);
             //     GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
             // }
-            await SceneLoader.LoadSceneGroup(2);
-            GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
+            // await SceneLoader.LoadSceneGroup(2);
+            // GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
             planetMenu.SetActive(true);
             this.gameObject.SetActive(false);
         }

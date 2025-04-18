@@ -6,7 +6,7 @@ using UnityEngine;
 public class SavesMenu : Menu
 {
     private int _previousSavedGroupScene;
-    private int _saveIndex = 0;
+    private int _saveIndex = 1;
     
     [SerializeField] private List<SaveDataDisplayer> slots;
     // [SerializeField] private GameObject _saveSlot1;
@@ -56,7 +56,6 @@ public class SavesMenu : Menu
             }
         }
     }
-    private int _saveIndex = 1;
     
     public void SetSaveIndex(int newSaveIndex)
     {
