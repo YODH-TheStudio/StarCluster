@@ -19,7 +19,6 @@ public class Menu : MonoBehaviour
     public void ActivateMenuState()
     {
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Menu);
-        GameManager.Instance._soundSystem.PlaySoundFXClipByKey("UI Clicb", transform.position);
     } 
     
     public void DeactivateMenuState()
