@@ -12320,14 +12320,14 @@ MonoBehaviour:
   _puzzleList:
   - _fusionPoint: {fileID: 1842012847}
     _puzzleGameObjectList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 241559048}
+    - {fileID: 1496375261}
+    - {fileID: 566289299}
+    - {fileID: 17560289}
+    - {fileID: 124009592}
+    - {fileID: 1463064489}
+    - {fileID: 557419727}
+    - {fileID: 28356124}
   _finalPuzzle:
     _fusionPoint: {fileID: 0}
     _puzzleGameObjectList: []

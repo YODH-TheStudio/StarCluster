@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bafce4fb2c0f64486938b7d3b48c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSlot: 1
 --- !u!1 &1345441316
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,10 +808,6 @@ MonoBehaviour:
   loadingCamera: {fileID: 84354451}
   loadingCanvas: {fileID: 1656532154}
   sceneGroups:
-  - groupName: Test
-    Scenes:
-    - sceneName: Puzzle
-      sceneType: 0
   - groupName: MainMenu
     Scenes:
     - sceneName: MainMenu
