@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76bf2ff3652a68438d37775da7ebe79, type: 3}
+  m_Name: Merope
+  m_EditorClassIdentifier: 
+  characterName:
+  - languageEnum: 0
+    LanguageGenericType: "M\xE9rope"
+  - languageEnum: 1
+    LanguageGenericType: "M\xE9rope"
+  CustomizedName:
+    ValueName: PlayerName
+  UseGlobalValue: 0
+  textColor: {r: 0.8962264, g: 0.78525484, b: 0.20714669, a: 1}
+  Avatars:
+  - EmotionName: "Amus\xE9"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: ca639a1b847b1934da38ef7a6f978cf6, type: 3}
+  - EmotionName: Sus
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: 1b351aac0a4309c49b1bfb6a15c5945e, type: 3}
+  - EmotionName: Triste
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: 21d33b33e4cb83c4ab3dc027693c5ece, type: 3}
+  - EmotionName: "Fi\xE8re"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: 4a49d57b245722c449065c81c30c0cf7, type: 3}
+  - EmotionName: Joyeuse
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: b076cdef9f3b8c847a656294dec67621, type: 3}
+  - EmotionName: Pensive
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: f39f531ea6a813a44979f74992539c2c, type: 3}
+  - EmotionName: "Enerv\xE9e"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: dfec6d4b672043843b6ce0365f80c518, type: 3}
+  - EmotionName: "Emerveill\xE9e"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: facfcfcde94b9744b81424937d06e9d5, type: 3}
+  - EmotionName: "Fatigu\xE9es"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: f5a76be9f5732df4f90bc5e5f231e14c, type: 3}
+  - EmotionName: "L\xE9vitation"
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: b3684c8148b72d642b0778cc3df0f62f, type: 3}
