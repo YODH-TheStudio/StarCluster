@@ -13,6 +13,12 @@ public class PushPullObject : Interactable
     private List<Vector3> _offsetPosition;
 
     private Transform _stoneOriginalParent;
+    private Rigidbody _rigidbody;
+
+    private float _soundCooldown = 0f;
+
+    // Utilisation d'une variable pour savoir si l'objet est en collision
+    private bool _isColliding = false;
 
     void Start()
     {
@@ -137,6 +143,8 @@ public class PushPullObject : Interactable
     {
         if (_isGrab)
         {
+            _soundCooldown -= Time.deltaTime;
+
             Vector3 playerMoveDirection = _userTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
             Vector3 direction = transform.position - _userTransform.position;
             direction.Normalize();
@@ -162,6 +170,13 @@ public class PushPullObject : Interactable
     private void MovePlayerAndObject(Vector3 direction)
     {
         _userTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
+
+        if (_soundCooldown <= 0f)
+        {
+            GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
+            _soundCooldown = 1f; // joue un son toutes les 0.4 sec
+        }
+
         
     }
 

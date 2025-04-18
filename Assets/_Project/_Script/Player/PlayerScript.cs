@@ -7,6 +7,8 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 {
+    #region Fields
+
     // Player Controler Variable 
     [SerializeField]
     private float _speed = 250.0f;
@@ -46,7 +48,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private string[] _footstepSFXKeys_ground;
     private string[] _footstepSFXKeys_Grass;
 
+    #endregion
 
+    #region Classes 
     // Limited Movement
     public enum MovementLimitType
     {
@@ -78,6 +82,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         _limitedMoveDirection = newDirection;
     }
+
+    #endregion
 
     private void Awake()
     {
@@ -161,13 +167,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         if (_direction != Vector3.zero)
         {
             _playerAnimator.SetBool("IsMoving", true);
-
-            _footstepTimer -= Time.deltaTime;
-            if(_footstepTimer < 0f)
-            {
-                PlayFootstepSound();
-                _footstepTimer = _footstepInterval; 
-            }
                 
         }
         else if (_direction == Vector3.zero)

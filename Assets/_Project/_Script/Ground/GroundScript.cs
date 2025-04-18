@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GroundScript : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField]
     private GameObject _particleSystem;
 
@@ -12,12 +14,9 @@ public class GroundScript : MonoBehaviour
 
     public bool IsOnGrass => _isOnGrass;
 
+    #endregion
 
-    private void Start()
-    {
-
-    }
-
+    #region Triggers
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -35,4 +34,5 @@ public class GroundScript : MonoBehaviour
             other.gameObject.GetComponent<PlayerScript>().DeleteParticle(_particleSystem);
         }
     }
+    #endregion
 }
