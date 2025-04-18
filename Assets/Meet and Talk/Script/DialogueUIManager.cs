@@ -9,6 +9,7 @@ using MeetAndTalk.GlobalValue;
 using System;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 namespace MeetAndTalk
 {
@@ -27,7 +28,9 @@ namespace MeetAndTalk
         public TextMeshProUGUI nameTextBox;
         public TextMeshProUGUI nameTextBoxRight;
         public TextMeshProUGUI nameTextBoxLeft;
-        public TextMeshProUGUI textBox;
+        private TextMeshProUGUI _textBox;
+        public TextMeshProUGUI textBoxRight;
+        public TextMeshProUGUI textBoxLeft;
         [Space()]
         public GameObject dialogueCanvas;
         public Slider TimerSlider;
@@ -66,6 +69,7 @@ namespace MeetAndTalk
 
             // Premium Feature: Type-Writing
             if(EnableTypeWriting) lastTypingTime = Time.time;
+            _textBox = textBoxLeft;
         }
 
         private void OnValidate()
@@ -109,16 +113,16 @@ namespace MeetAndTalk
                         }
                         currentText += fullText[characterIndex];
                         characterIndex++;
-                        textBox.text = currentText;
+                        _textBox.text = currentText;
                     }
-                    else { currentText += fullText[characterIndex]; characterIndex++; textBox.text = currentText; }
+                    else { currentText += fullText[characterIndex]; characterIndex++; _textBox.text = currentText; }
 
                     lastTypingTime = Time.time;
                 }
             }
             else
             {
-                textBox.text = prefixText+fullText;
+                _textBox.text = prefixText+fullText;
             }
 
             if (DialogueManager.Instance.listOfOpenedNodes.Count > 1) { GoBackButton.SetActive(true); }else { GoBackButton.SetActive(false); }
@@ -180,6 +184,9 @@ namespace MeetAndTalk
                 DialogueBoxRight.SetActive(false);
                 NameLeft.SetActive(true);
                 NameRight.SetActive(false);
+                textBoxLeft.gameObject.SetActive(true);
+                textBoxRight.gameObject.SetActive(false);
+                _textBox = textBoxLeft;
             }else if (Position == PortraitPosition.Secoundary || Position == PortraitPosition.SecoundaryDist)
             {
                 nameTextBox = nameTextBoxRight;
@@ -187,6 +194,9 @@ namespace MeetAndTalk
                 DialogueBoxRight.SetActive(true);
                 NameLeft.SetActive(false);
                 NameRight.SetActive(true);
+                textBoxLeft.gameObject.SetActive(false);
+                textBoxRight.gameObject.SetActive(true);
+                _textBox = textBoxRight;
             }
         }
         

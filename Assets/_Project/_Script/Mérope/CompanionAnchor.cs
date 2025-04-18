@@ -58,10 +58,15 @@ public class CompanionAnchor : MonoBehaviour
             _companion.bounceSpeed = bounceSpeed.y;
             
             // move to another position
-            int angle = Random.Range(0, 360);
-            float distance = Random.Range(orbitRadius.x, orbitRadius.y);
-            Vector3 newPosition = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
-            transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
+            NewPos();
         }
+    }
+
+    public void NewPos()
+    {
+        int angle = Random.Range(0, 360);
+        float distance = Random.Range(orbitRadius.x, orbitRadius.y);
+        Vector3 newPosition = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
+        transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
     }
 }

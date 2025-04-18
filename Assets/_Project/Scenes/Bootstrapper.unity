@@ -824,6 +824,8 @@ MonoBehaviour:
       sceneType: 2
     - sceneName: GameplayHUD
       sceneType: 3
+    - sceneName: DialogueUI
+      sceneType: 2
 --- !u!1 &1558495324
 GameObject:
   m_ObjectHideFlags: 0

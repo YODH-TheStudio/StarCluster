@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1769100823669407351}
   - component: {fileID: 6346620637386991314}
+  - component: {fileID: 3729327795937414911}
+  - component: {fileID: 5681424134025940300}
   m_Layer: 0
   m_Name: "M\xE9rope"
   m_TagString: Untagged
@@ -45,9 +47,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f57947e38c2db439316cecc7b58a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchupSpeed: 0.3
-  bounceAmount: 0.1
-  bounceSpeed: 0.5
+--- !u!135 &3729327795937414911
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787409887545080749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!54 &5681424134025940300
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787409887545080749}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1001 &7019824249053707653
 PrefabInstance:
   m_ObjectHideFlags: 0

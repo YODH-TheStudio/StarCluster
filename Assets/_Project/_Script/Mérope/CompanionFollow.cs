@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class CompanionFollow : MonoBehaviour
 {
     private PlayerScript _player;
+    private CompanionAnchor _companionAnchor;
     
     [NonSerialized]
     public float catchupSpeed = 0.3f;
@@ -25,7 +26,6 @@ public class CompanionFollow : MonoBehaviour
     
     private List<Vector3> _path;
 
-    private Transform _companionAnchor;
     private GameObject _model;
     
     // Start is called before the first frame update
@@ -34,10 +34,12 @@ public class CompanionFollow : MonoBehaviour
         _player = GameManager.Instance.GetPlayer();
         _agent = GetComponent<NavMeshAgent>();
         
-        _companionAnchor = _player.transform.Find("CompanionAnchor");
+        _companionAnchor = _player.GetComponentInChildren<CompanionAnchor>();
         
         _path = new List<Vector3>();
         _model = transform.GetChild(0).gameObject;
+        
+        _rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class CompanionFollow : MonoBehaviour
         // Follow the player
         if (_player != null)
         {
-            Vector3 targetPosition = _companionAnchor.position;
+            Vector3 targetPosition = _companionAnchor.transform.position;
             Vector3 direction = (targetPosition - transform.position).normalized;
 
             // Rotate towards the direction of movement
@@ -74,5 +76,10 @@ public class CompanionFollow : MonoBehaviour
         {
             Debug.LogWarning("Model not found");
         }
+    }
+    
+    void OnCollisionEnter(Collision other)
+    {
+        _companionAnchor.NewPos();
     }
 }
