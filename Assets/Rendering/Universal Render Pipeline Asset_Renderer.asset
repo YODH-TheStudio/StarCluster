@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   material: {fileID: 2100000, guid: 3748131af20412e478461c6445c73923, type: 2}
-  renderingDebugger: 0
+  renderingDebugger: 1
   reflectionProbe: 0
   resolutionScale: 0.5
   upscaleMode: 0

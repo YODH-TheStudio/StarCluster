@@ -180,10 +180,10 @@ MonoBehaviour:
     m_Value: 5
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 1
   erosionScale:
     m_OverrideState: 1
-    m_Value: 781.2
+    m_Value: 700
   erosionCurve:
     m_OverrideState: 1
     m_Value:
@@ -253,13 +253,13 @@ MonoBehaviour:
     m_Value: 0.425
   microErosionScale:
     m_OverrideState: 1
-    m_Value: 336
+    m_Value: 6000
   bottomAltitude:
     m_OverrideState: 1
-    m_Value: 1347.6
+    m_Value: 1348.6
   altitudeRange:
     m_OverrideState: 1
-    m_Value: 152.7
+    m_Value: 155
   shapeOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   globalSpeed:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 50
   globalOrientation:
     m_OverrideState: 0
