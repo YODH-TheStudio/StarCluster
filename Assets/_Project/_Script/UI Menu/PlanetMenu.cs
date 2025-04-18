@@ -10,7 +10,8 @@ public class PlanetMenu : Menu
     
     public void MoveSelection(int increment)
     {
-        _planetIndex = (_planetIndex + increment + _planetNumber) % _planetNumber; 
+        GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Ui Clica", transform.position); 
+        _planetIndex = (_planetIndex + increment + _planetNumber) % _planetNumber;
         Debug.Log(_planetIndex);
     }
 }
