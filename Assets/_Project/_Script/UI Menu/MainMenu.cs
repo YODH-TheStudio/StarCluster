@@ -13,19 +13,20 @@ public class MainMenu : Menu
     {
         if (hasAlreadyPlayed)
         {
-            planetMenu.SetActive(true);
-            this.gameObject.SetActive(false);
-            if (test)
-            {
-                await SceneLoader.LoadSceneGroup(2);
-            }
+            //planetMenu.SetActive(true);
+            //this.gameObject.SetActive(false);
+            // if (test)
+            // {
+            //     await SceneLoader.LoadSceneGroup(2);
+            //     GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
+            // }
+            await SceneLoader.LoadSceneGroup(2);
+            GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
         }
         else
         {
             await SceneLoader.LoadSceneGroup(1);
+            GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
         }
     }
-
-
-
 }

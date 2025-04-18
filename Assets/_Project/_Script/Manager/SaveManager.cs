@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -23,10 +25,20 @@ public class SaveManager : MonoBehaviour
         //SaveDialogueData();
         SavePuzzleData(slot);
         SaveObjects(slot);
+        SaveInfo(slot); // Time played, planets unlocked, etc.
     }
     public void LoadGame(int slot = 0){
         if(slot == 0)
             slot = currentSlot;
+        
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/";
+        if (Directory.Exists(path) == false)
+        {
+            SaveGame(slot);
+            //Directory.CreateDirectory(Path.GetDirectoryName(path));
+            //Debug.Log("Creating save file at " + path);
+        }
+        
         Debug.Log("Loading game");
         LoadPlayer(slot);
         //LoadDialogueData();
@@ -60,18 +72,23 @@ public class SaveManager : MonoBehaviour
     // }
     
     #region Save
+    [System.Serializable]
+    public class SaveData
+    {
+        public int unlockedPlanets = 1;
+        public int currentPlanet = 1;
+        public int unlockedPleiads = 0;
+        public string saveTime = DateTime.Now.ToString("g");
+        public string playtime = "0:00:00";
+    }
+    private void SaveInfo(int slot)
+    {
+        SaveData data = new SaveData();
+        string jsonString = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json", jsonString);
+    }
     private static void SavePlayer(int slot)
     {
-        // BinaryFormatter formatter = new BinaryFormatter();
-        // string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.save";
-        // FileStream stream = new FileStream(path, FileMode.Create);
-        // PlayerData data = new PlayerData();
-        //
-        // // Insert data into save file as binary
-        // formatter.Serialize(stream, data);
-        // stream.Close();
-        //
-        // //Debug.Log("Saved file in " + path);
         PlayerData data = new PlayerData();
         string jsonString = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.json", jsonString);
@@ -109,6 +126,20 @@ public class SaveManager : MonoBehaviour
     #endregion
     
     #region Load
+
+    public SaveData GetSaveData(int slot)
+    {
+        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json";
+        if(File.Exists(path)){
+            string jsonString = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(jsonString);
+            return data;
+        } else {
+            Debug.Log("Save file not found at " + path);
+            return null;
+        }
+    }
+    
     private static void LoadPlayer(int slot){
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() +"/player.save";
         if(File.Exists(path)){
@@ -128,7 +159,7 @@ public class SaveManager : MonoBehaviour
             Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
-            Debug.LogError("Player save file not found in " + path);
+            Debug.LogWarning("Player save file not found in " + path);
         }
     }
     
