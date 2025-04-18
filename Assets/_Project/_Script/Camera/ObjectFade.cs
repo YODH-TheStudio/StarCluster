@@ -117,7 +117,7 @@ public class ObjectFade: MonoBehaviour
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player")
+            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
                 ToFadeMode(hitMaterial);
@@ -131,7 +131,7 @@ public class ObjectFade: MonoBehaviour
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player")
+            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
                 hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));

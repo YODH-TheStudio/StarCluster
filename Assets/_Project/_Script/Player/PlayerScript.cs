@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static UnityEngine.ParticleSystem;
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 {

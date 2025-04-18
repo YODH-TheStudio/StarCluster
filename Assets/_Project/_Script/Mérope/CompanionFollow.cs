@@ -9,9 +9,13 @@ public class CompanionFollow : MonoBehaviour
 {
     private PlayerScript _player;
     
+    [NonSerialized]
     public float catchupSpeed = 0.3f;
     
+    [NonSerialized]
     public float bounceAmount = 0.1f;
+    
+    [NonSerialized]
     public float bounceSpeed = 0.5f;
     
     private NavMeshAgent _agent;
@@ -39,21 +43,31 @@ public class CompanionFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // follow the player
+        // Follow the player
         if (_player != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, _companionAnchor.position, ref velocity, catchupSpeed);
+            Vector3 targetPosition = _companionAnchor.position;
+            Vector3 direction = (targetPosition - transform.position).normalized;
+
+            // Rotate towards the direction of movement
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // Adjust rotation speed as needed
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, catchupSpeed);
         }
         else
         {
             Debug.LogWarning("Player not found");
         }
-        
-        // bounce
+
+        // Bounce
         if (_model != null)
         {
             float newY = Mathf.Sin(Time.time * bounceSpeed) * bounceAmount;
-            
+
             _model.transform.localPosition = new Vector3(_model.transform.localPosition.x, Mathf.Lerp(_model.transform.localPosition.y, newY, 0.1f), _model.transform.localPosition.z);
         }
         else

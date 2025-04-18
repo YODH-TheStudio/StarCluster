@@ -154,13 +154,11 @@ public class DialogueManagerCustom : MonoBehaviour
     
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
-        Debug.Log("Touched");
         if (_isDialogue && _dialogueManager.isSkippeable)
         {
             //if dialogueUIManager.lastTypingTime is less than Time.time + 0.1s then skip the dialogue
             if (_dialogueUIManager.lastTypingTime < Time.time - 0.1f)
             {
-                Debug.Log("Skip");
                 StartProcessSkip();
             }
             else
