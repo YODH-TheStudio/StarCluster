@@ -77,12 +77,58 @@ public class Puzzle2D : MonoBehaviour
     private void Touch_OnFingerMove(Finger TouchedFinger)
     {
         _fingerMP = TouchedFinger.screenPosition;
+
+        // On mouse move
+        UpdateDragging();
     }
 
     private void Touch_OnFingerDown(Finger TouchedFinger)
     {
         _fingerMP = TouchedFinger.screenPosition;
+
+        Vector3 hitPosition = GetMouseHitPosition(_puzzleCamera);
+        Debug.Log("HITPOSITION : " + hitPosition);
+
+        float minDistance = Mathf.Infinity;
+        GameObject closestObject = null;
+
+        foreach (var kvp in _cubePositions3D)
+        {
+            GameObject obj = kvp.Key;
+            float dist = Vector3.Distance(obj.transform.position, hitPosition);
+
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closestObject = obj;
+            }
+        }
+
+        float maxRange = 3f;
+
+        if (closestObject != null)
+        {
+            float distanceToClosest = Vector3.Distance(closestObject.transform.position, hitPosition);
+            if (distanceToClosest <= maxRange)
+            {
+                var pointComponent = closestObject.GetComponent<ClickablePointComponent>();
+                pointComponent.TriggerMouseDownByDistance();
+            }
+        }
     }
+
+    private void Touch_OnFingerUp(Finger TouchedFinger)
+    {
+        Debug.Log("RELACHEMENT");
+
+        if (!_isDragging)
+            return;
+
+        _isDragging = false;
+        HandleMouseRelease();
+    }
+
+
 
     void Start()
     {
@@ -97,6 +143,7 @@ public class Puzzle2D : MonoBehaviour
 
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
     }
 
     // UI ***
@@ -479,10 +526,6 @@ public class Puzzle2D : MonoBehaviour
 
     void HandleMouseRelease()
     {
-        if (!_isDragging || !Input.GetMouseButtonUp(0))
-            return;
-
-        _isDragging = false;
 
         Vector3 mouse3D = Vector3.zero;
 
@@ -795,10 +838,10 @@ public class Puzzle2D : MonoBehaviour
         return false;
     }
 
-    public static Vector3 GetMouseHitPosition(Camera camera, string targetTag = "CTRP", float rayLength = 1000f)
+    public Vector3 GetMouseHitPosition(Camera camera, string targetTag = "CTRP", float rayLength = 1000f)
     {
         Vector3 mouse3D = Vector3.zero;
-        Vector3 mouseScreen = Input.mousePosition;
+        Vector2 mouseScreen = _fingerMP;
 
         Ray ray = camera.ScreenPointToRay(mouseScreen);
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red, 2f);
@@ -822,11 +865,6 @@ public class Puzzle2D : MonoBehaviour
 
     private void Update()
     {
-
-        UpdateDragging();
-
-        HandleMouseRelease();
-
         // Puzzle solved Logic *** 
         _puzzleSolved = true;
         _circuitValidationStatus.Clear(); 
@@ -848,45 +886,6 @@ public class Puzzle2D : MonoBehaviour
         {
             Debug.Log("Le puzzle est réussi !");
         }
-
-        //if (isClicked) return;  
-        //isClicked = true;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 hitPosition = GetMouseHitPosition(_puzzleCamera);
-            Debug.Log("HITPOSITION : " + hitPosition);
-
-            float minDistance = Mathf.Infinity;
-            GameObject closestObject = null;
-
-            foreach (var kvp in _cubePositions3D)
-            {
-                GameObject obj = kvp.Key;
-                float dist = Vector3.Distance(obj.transform.position, hitPosition);
-
-                if (dist < minDistance)
-                {
-                    minDistance = dist;
-                    closestObject = obj;
-                }
-            }
-
-            if (closestObject != null)
-            {
-                var pointComponent = closestObject.GetComponent<ClickablePointComponent>();
-                pointComponent.TriggerMouseDownByDistance();
-            }
-        }
-
-    }
-
-    private bool isClicked = false;
-
-    private IEnumerator ResetClickLock()
-    {
-        yield return new WaitForSeconds(0.2f); 
-        isClicked = false;
     }
 
 
