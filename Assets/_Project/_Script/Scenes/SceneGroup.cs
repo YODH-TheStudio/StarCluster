@@ -8,11 +8,11 @@ namespace Systems.SceneManagement
     public class SceneGroup
     {
         public string groupName = "New Scene Group";
-        public List<SceneData> Scenes;
+        public List<SceneData> scenes;
 
         public string FindSceneNameByType(SceneType sceneType)
         {
-            return Scenes.FirstOrDefault(scene => scene.sceneType == sceneType)?.sceneName; 
+            return scenes.FirstOrDefault(scene => scene.sceneType == sceneType)?.sceneName; 
         }
     }
 

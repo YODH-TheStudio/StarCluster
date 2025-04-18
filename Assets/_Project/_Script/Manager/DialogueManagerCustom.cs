@@ -1,7 +1,4 @@
 using MeetAndTalk;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,13 +27,8 @@ public class DialogueManagerCustom : MonoBehaviour
 
     private void OnEnable()
     {
+        EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
     
     public void SetDialogueManager(DialogueManager dialogueManager)
@@ -152,7 +144,7 @@ public class DialogueManagerCustom : MonoBehaviour
         // GameManager.instance.dialogueManager.SkipDialogue();
     }
     
-    private void Touch_OnFingerDown(Finger TouchedFinger)
+    private void Touch_OnFingerDown(Finger touchedFinger)
     {
         if (_isDialogue && _dialogueManager.isSkippeable)
         {

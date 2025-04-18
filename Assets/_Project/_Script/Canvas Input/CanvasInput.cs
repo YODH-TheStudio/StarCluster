@@ -1,21 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasInput : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _interactionButton;
+    [SerializeField] private GameObject interactionButton;
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        GameManager.Instance.GetPlayer().gameObject.GetComponent<PlayerInteractionZone>().SetInteractionButton(_interactionButton);
+        GameManager.Instance.GetPlayer().gameObject.GetComponent<PlayerInteractionZone>().SetInteractionButton(interactionButton);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

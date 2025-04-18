@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour
@@ -17,7 +15,7 @@ public class StateManager : MonoBehaviour
     private PlayerState _playerState;
     private PlayerState _previousState;
     
-    // Événement déclenché lorsqu'un état change
+    // Event triggered when changing state
     public event Action<PlayerState> OnStateChanged;
     
     // Start is called before the first frame update
@@ -26,15 +24,15 @@ public class StateManager : MonoBehaviour
         _playerState = PlayerState.Idle;
     }
 
-    // Méthode pour changer l'état
+    // Method to change state
     public void ChangeState(PlayerState newState)
     {
         if (_playerState != newState)
         {
-            _previousState = _playerState; // Enregistre l'état précédent
+            _previousState = _playerState; // Save previous state
             _playerState = newState;
             
-            OnStateChanged?.Invoke(_playerState); // Déclenche l'événement
+            OnStateChanged?.Invoke(_playerState); // Fire the event
         }
     }
     

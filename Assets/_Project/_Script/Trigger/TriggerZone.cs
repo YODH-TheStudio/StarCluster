@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using MeetAndTalk;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,35 +5,23 @@ using UnityEngine.Events;
 public class TriggerZone : MonoBehaviour
 {
 
-    [SerializeField] private DialogueContainerSO _dialogue;
-    [SerializeField] private UnityEvent _onTriggerEnterEvent;
-    [SerializeField] private UnityEvent _onDialogueEndEvent;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private DialogueContainerSO dialogue;
+    [SerializeField] private UnityEvent onTriggerEnterEvent;
+    [SerializeField] private UnityEvent onDialogueEndEvent;
     
     private void OnEndDialogue()
     {
         // Unsubscribe from the event
         GameManager.Instance.GetDialogueManager().ProcessEndDialogue -= OnEndDialogue;
-        _onDialogueEndEvent.Invoke();
+        onDialogueEndEvent.Invoke();
         // Add your logic here for when the dialogue ends
     }
     
     public void StartDialogue()
     {
-        if (_dialogue != null)
+        if (dialogue != null)
         {
-            GameManager.Instance.GetDialogueManager().StartDialogue(_dialogue);
+            GameManager.Instance.GetDialogueManager().StartDialogue(dialogue);
             
             GameManager.Instance.GetDialogueManager().ProcessEndDialogue += OnEndDialogue;
         }
@@ -47,9 +33,9 @@ public class TriggerZone : MonoBehaviour
     
     public void StartMiniDialogue()
     {
-        if (_dialogue != null)
+        if (dialogue != null)
         {
-            GameManager.Instance.GetDialogueManager().StartMiniDialogue(_dialogue);
+            GameManager.Instance.GetDialogueManager().StartMiniDialogue(dialogue);
         }
         else
         {
@@ -59,16 +45,15 @@ public class TriggerZone : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerScript>() != null)
+        if (other.GetComponent<PlayerScript>() == null) return;
+        
+        if (dialogue != null)
         {
-            if (_dialogue != null)
-            {
-                _onTriggerEnterEvent?.Invoke();
-            }
-            else
-            {
-                Debug.LogError("DialogueContainer is null for trigger zone");
-            }
+            onTriggerEnterEvent?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("DialogueContainer is null for trigger zone");
         }
     }
 }

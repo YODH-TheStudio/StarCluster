@@ -1,21 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<PuzzleData> _puzzleList;
+    [SerializeField] private List<PuzzleData> puzzleList;
 
-    [SerializeField]
-    private PuzzleData _finalPuzzle;
+    [SerializeField] private PuzzleData finalPuzzle;
 
     public event Action OnFinalPuzzleActive;
 
     public void ValidatePuzzle(FusionPoint fusionPoint)
     {
-        foreach (var puzzle in _puzzleList) 
+        foreach (var puzzle in puzzleList) 
         { 
             if(puzzle.GetFusionPoint() == fusionPoint)
             {
@@ -30,17 +27,17 @@ public class PuzzleManager : MonoBehaviour
 
     private void AccessToFinalPuzzle()
     {
-        int FinishedPuzzle = 0;
+        int finishedPuzzle = 0;
 
-        foreach (var puzzle in _puzzleList)
+        foreach (var puzzle in puzzleList)
         {
             if (puzzle.GetFinish())
             {
-                FinishedPuzzle++;
+                finishedPuzzle++;
             }
         }
 
-        if (FinishedPuzzle == _puzzleList.Count) 
+        if (finishedPuzzle == puzzleList.Count) 
         {
             OnFinalPuzzleActive?.Invoke();
         }
@@ -48,7 +45,7 @@ public class PuzzleManager : MonoBehaviour
 
     public List<PuzzleData> GetData()
     {
-        return _puzzleList;
+        return puzzleList;
     }
     // public void SetData(List<PuzzleData> newPuzzleList)
     // {

@@ -16,7 +16,7 @@ namespace Systems.SceneManagement
         private float _targetProgress;
         private bool _isLoading;
 
-        public readonly SceneGroupManager Manager = new SceneGroupManager();
+        private readonly SceneGroupManager Manager = new SceneGroupManager();
 
         private void Awake()
         {
@@ -68,15 +68,15 @@ namespace Systems.SceneManagement
             loadingCamera.gameObject.SetActive(enable);
         }
 
-        public class LoadingProgress : IProgress<float>
+        private class LoadingProgress : IProgress<float>
         {
             public event Action<float> Progressed;
 
-            const float ratio = 1f;
+            private const float Ratio = 1f;
 
             public void Report(float value)
             {
-                Progressed?.Invoke(value / ratio);
+                Progressed?.Invoke(value / Ratio);
             }
         }
     }

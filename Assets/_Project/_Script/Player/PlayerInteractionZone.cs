@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteractionZone : MonoBehaviour
 {
-    [SerializeField]
-    private float _raycastDistance = 1.25f;
+    [SerializeField] private float raycastDistance = 1.25f;
 
     private GameObject _interactionButton;
 
@@ -20,8 +17,7 @@ public class PlayerInteractionZone : MonoBehaviour
     private Vector3 _ray3;
     private Vector3 _ray4;
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
         _vibrationManager = GameManager.Instance.GetVibrationManager();
@@ -37,8 +33,7 @@ public class PlayerInteractionZone : MonoBehaviour
         _ray4.Normalize();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (_interactionButton == null)
         {
@@ -47,14 +42,14 @@ public class PlayerInteractionZone : MonoBehaviour
         
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(_ray1), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(_ray2), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(_ray3), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(_ray4), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, _raycastDistance) ||
-            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, _raycastDistance)
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray1), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray2), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray3), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(_ray4), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, raycastDistance) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, raycastDistance)
            )
         {
             if(hit.collider.transform.GetComponent<Interactable>())

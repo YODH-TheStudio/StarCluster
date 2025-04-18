@@ -1,21 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UIElements;
 
 public class ObjectFade: MonoBehaviour
 {
-    [SerializeField]
-    private float _fadeSpeed = 2f;
+    [SerializeField] private float fadeSpeed = 2f;
 
-    [SerializeField]
-    private float _fadeAmount = 0.25f;
+    [SerializeField] private float fadeAmount = 0.25f;
 
     private PlayerScript _player;
     private Camera _mainCamera;
@@ -26,8 +16,7 @@ public class ObjectFade: MonoBehaviour
     private List<GameObject> _oldHits;
     private List<GameObject> _toRemove;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
         _mainCamera = Camera.main;
@@ -37,54 +26,52 @@ public class ObjectFade: MonoBehaviour
         _toRemove = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _distanceCamToPlayer = Vector3.Distance(_player.transform.position, _mainCamera.transform.position);
         _directionCamToPlayer = (_player.transform.position -  _mainCamera.transform.position).normalized;
 
         RaycastHit hit;
-        if (Physics.Raycast(_mainCamera.transform.position, _directionCamToPlayer, out hit, _distanceCamToPlayer))
+        if (!Physics.Raycast(_mainCamera.transform.position, _directionCamToPlayer, out hit, _distanceCamToPlayer)) return;
+        
+        if (!hit.transform.gameObject.CompareTag("Player"))
         {
-            if (hit.transform.gameObject.tag != "Player")
-            {
-                SendRaycast();
+            SendRaycast();
 
-                List<GameObject> toUnfade = new List<GameObject>();
-                foreach (GameObject value in _oldHits)
+            List<GameObject> toUnfade = new List<GameObject>();
+            foreach (GameObject value in _oldHits)
+            {
+                if(!value.transform.gameObject.CompareTag("Player"))
                 {
-                    if(value.transform.gameObject.tag != "Player")
+                    if (!_hits.Contains(value))
                     {
-                        if (!_hits.Contains(value))
-                        {
-                            toUnfade.Add(value);
-                        }
+                        toUnfade.Add(value);
                     }
+                }
                     
-                }
-
-                UnfadeObject(toUnfade);
-
-                foreach (GameObject obj in _toRemove)
-                {
-                    _hits.Remove(obj);
-                }
-
-                FadeObject(_hits);
-
-                _toRemove.Clear();
             }
-            else
+
+            UnfadeObject(toUnfade);
+
+            foreach (GameObject obj in _toRemove)
             {
-                UnfadeObject(_oldHits);
-
-                foreach (GameObject obj in _toRemove)
-                {
-                    _hits.Remove(obj);
-                }
-
-                _toRemove.Clear();
+                _hits.Remove(obj);
             }
+
+            FadeObject(_hits);
+
+            _toRemove.Clear();
+        }
+        else
+        {
+            UnfadeObject(_oldHits);
+
+            foreach (GameObject obj in _toRemove)
+            {
+                _hits.Remove(obj);
+            }
+
+            _toRemove.Clear();
         }
     }
 
@@ -117,11 +104,11 @@ public class ObjectFade: MonoBehaviour
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
+            if (!hit.CompareTag("Player") && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
                 ToFadeMode(hitMaterial);
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
+                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, fadeAmount, fadeSpeed * Time.deltaTime));
                 hit.GetComponent<MeshRenderer>().material = hitMaterial;
             }
         }
@@ -131,13 +118,13 @@ public class ObjectFade: MonoBehaviour
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
+            if (!hit.CompareTag("Player") && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));
+                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, fadeSpeed * Time.deltaTime));
                 hit.GetComponent<MeshRenderer>().material = hitMaterial;
 
-                if (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) >= 0.999f )
+                if (Mathf.Lerp(hitMaterial.color.a, 1f, fadeSpeed * Time.deltaTime) >= 0.999f )
                 {
                     ToOpaqueMode(hitMaterial);
                     _toRemove.Add(hit);

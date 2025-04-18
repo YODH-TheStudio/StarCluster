@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -11,120 +6,77 @@ public class GameManager : PersistentSingleton<GameManager>
     private PlayerScript _player;
     private CompanionFollow _companion;
     
-    private VibrationManager _vibrationManager { get; set; }
-    public SoundSystem _soundSystem { get; private set; }
-    public StateManager _stateManager { get; private set; }
-    public DialogueManagerCustom _dialogueManager { get; private set; }
-    public PuzzleManager _puzzleManager { get; private set; }
-    public SaveManager _saveManager { get; private set; }
+    private VibrationManager VibrationManager { get; set; }
+    private SoundSystem SoundSystem { get; set; }
+    private StateManager StateManager { get; set; }
+    private DialogueManagerCustom DialogueManager { get; set; }
+    private PuzzleManager PuzzleManager { get; set; }
+    private SaveManager SaveManager { get; set; }
 
-
-    public KeyCode _key = KeyCode.Space;
-    public KeyCode _keytoo = KeyCode.P;
-
-    // Start is called before the first frame update
     private new void Awake()
     {
-        // if (_player == null)
-        // {
-        //     FindPlayer();
-        // }
-        // if (_companion == null)
-        // {
-        //     FindCompanion();
-        // }
-
-        if (_vibrationManager == null)
+        if (VibrationManager == null)
         {
             FindVibrationManager();
         }
 
-        if (_soundSystem == null)
+        if (SoundSystem == null)
         {
             FindSoundManager();
         }
         
-        if (_stateManager == null)
+        if (StateManager == null)
         {
             FindStateManager();
         }
 
-        if (_dialogueManager == null)
+        if (DialogueManager == null)
         {
             FindDialogueManager();
         }
     }
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Instance._soundSystem.ChangeMusicByKey("Main");
+        Instance.SoundSystem.ChangeMusicByKey("Main");
     }
 
-    void FindPlayer()
+    private void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
     }
     
-    void FindCompanion()
+    private void FindCompanion()
     {
         _companion = FindObjectOfType<CompanionFollow>();
     }
-    public void FindPuzzleManager()
+    private void FindPuzzleManager()
     {
-        _puzzleManager = FindObjectOfType<PuzzleManager>();
+        PuzzleManager = FindObjectOfType<PuzzleManager>();
     }
-    public void FindSaveManager()
+    private void FindSaveManager()
     {
-        _saveManager = FindObjectOfType<SaveManager>();
+        SaveManager = FindObjectOfType<SaveManager>();
     }
-    void FindVibrationManager()
+    private void FindVibrationManager()
     {
-        _vibrationManager = FindObjectOfType<VibrationManager>();
-    }
-
-    void FindSoundManager()
-    {
-        _soundSystem = FindObjectOfType<SoundSystem>();
+        VibrationManager = FindObjectOfType<VibrationManager>();
     }
 
-    void FindStateManager()
+    private void FindSoundManager()
     {
-        _stateManager = FindObjectOfType<StateManager>();
+        SoundSystem = FindObjectOfType<SoundSystem>();
     }
 
-    void FindDialogueManager()
+    private void FindStateManager()
     {
-        _dialogueManager = FindObjectOfType<DialogueManagerCustom>();
+        StateManager = FindObjectOfType<StateManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FindDialogueManager()
     {
-        if (Input.GetKeyDown(_key))
-        {
-            PlayTestSFX();
-        }
-        else if (Input.GetKeyUp(_keytoo))
-        {
-            PlayTestSFXToo();
-        }
+        DialogueManager = FindObjectOfType<DialogueManagerCustom>();
     }
-
-    #region TestSon
-    void PlayTestSFX()
-    {
-        Vector3 spawnPosition = transform.position;
-        Instance._soundSystem.PlaySoundFXClipByKey("Violon", spawnPosition);
-        Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
-    }   
-    void PlayTestSFXToo()
-    {
-        Vector3 spawnPosition = transform.position;
-        Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
-        Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
-    }
-    #endregion
 
     public PlayerScript GetPlayer()
     {
@@ -146,60 +98,61 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public VibrationManager GetVibrationManager()
     {
-        if (_vibrationManager == null)
+        if (VibrationManager == null)
         {
             FindVibrationManager();
         }
-        return _vibrationManager;
+        return VibrationManager;
     }
 
     public StateManager GetStateManager()
     {
-        if (_stateManager == null)
+        if (StateManager == null)
         {
             FindStateManager();
         }
-        return _stateManager;
+        return StateManager;
     }
 
     public PuzzleManager GetPuzzleManager()
     {
-        if (_puzzleManager == null)
+        if (PuzzleManager == null)
         {
             FindPuzzleManager();
         }
-        return _puzzleManager;
+        return PuzzleManager;
     }
     public SaveManager GetSaveManager()
     {
-        if (_saveManager == null)
+        if (SaveManager == null)
         {
             FindSaveManager();
         }
-        return _saveManager;
+        return SaveManager;
     }
     
     public DialogueManagerCustom GetDialogueManager()
     {
-        if (_dialogueManager == null)
+        if (DialogueManager == null)
         {
             FindDialogueManager();
         }
-        return _dialogueManager;
+        return DialogueManager;
     }
     
     public SoundSystem GetSoundSystem()
     {
-        if (_soundSystem == null)
+        if (SoundSystem == null)
         {
             FindSoundManager();
         }
-        return _soundSystem;
+        return SoundSystem;
     }
 
 
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();
+        Instance.GetSaveManager().SaveGame();
     }
 }

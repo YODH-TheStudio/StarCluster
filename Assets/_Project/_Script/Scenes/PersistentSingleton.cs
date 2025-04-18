@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PersistentSingleton<T> : MonoBehaviour where T : Component
 {
-    public bool UnparentOnAwake = true;
+    public bool unparentOnAwake = true;
 
     public static bool HasInstance => instance != null;
     public static T Current => instance;
@@ -37,7 +37,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
             return;
         }
 
-        if (UnparentOnAwake)
+        if (unparentOnAwake)
         {
             transform.SetParent(null);
         }

@@ -1,38 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GroundScript : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField]
-    private GameObject _particleSystem;
+    [SerializeField] private new GameObject particleSystem;
 
-    private bool _isOnGrass;
-
-    public bool IsOnGrass => _isOnGrass;
+    public bool IsOnGrass { get; private set; }
 
     #endregion
 
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            _isOnGrass = true;
-            other.gameObject.GetComponent<PlayerScript>().SpawnParticle(_particleSystem);
-        }
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        IsOnGrass = true;
+        other.gameObject.GetComponent<PlayerScript>().SpawnParticle(particleSystem);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            _isOnGrass = false;
-            other.gameObject.GetComponent<PlayerScript>().DeleteParticle(_particleSystem);
-        }
+        if (!other.gameObject.CompareTag("Player")) return;
+
+        IsOnGrass = false;
+        other.gameObject.GetComponent<PlayerScript>().DeleteParticle(particleSystem);
+        
     }
     #endregion
 }

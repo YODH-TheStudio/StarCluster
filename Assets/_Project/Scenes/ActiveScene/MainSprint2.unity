@@ -622,6 +622,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 8092829088753426579, guid: f9aa99616444f83478f2aecd56ed730e,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092829088753426579, guid: f9aa99616444f83478f2aecd56ed730e,
+        type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 10067094}
     - target: {fileID: 8118371296582556067, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_Layer
@@ -672,6 +682,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9aa99616444f83478f2aecd56ed730e, type: 3}
+--- !u!95 &10067094 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6262806267379485504, guid: f9aa99616444f83478f2aecd56ed730e,
+    type: 3}
+  m_PrefabInstance: {fileID: 10067093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &17560289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f4a1904034b7e774e8a814a16c4fffbc,
@@ -6310,8 +6326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34224fef2529648ad73fcd9af2d266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeSpeed: 2
-  _fadeAmount: 0.25
+  fadeSpeed: 2
+  fadeAmount: 0.25
 --- !u!4 &969695523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
@@ -12857,20 +12873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80aa43bf85b8b8c43a72176a9a36c10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _puzzleList:
-  - _fusionPoint: {fileID: 1842012847}
-    _puzzleGameObjectList:
-    - {fileID: 241559048}
-    - {fileID: 1496375261}
-    - {fileID: 566289299}
-    - {fileID: 17560289}
-    - {fileID: 124009592}
-    - {fileID: 1463064489}
-    - {fileID: 557419727}
-    - {fileID: 28356124}
-  _finalPuzzle:
-    _fusionPoint: {fileID: 0}
-    _puzzleGameObjectList: []
+  puzzleList: []
+  finalPuzzle:
+    fusionPoint: {fileID: 0}
+    puzzleGameObjectList: []
 --- !u!1001 &2059455903
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,8 +19,7 @@ public class CompanionAnchor : MonoBehaviour
     private CompanionFollow _companion;
     private PlayerScript _player;
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
         _companion = GameManager.Instance.GetCompanion();
@@ -40,8 +36,7 @@ public class CompanionAnchor : MonoBehaviour
         transform.position = runPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Check if the player is running
         if (_player.IsMoving())
@@ -57,7 +52,7 @@ public class CompanionAnchor : MonoBehaviour
             _companion.bounceAmount = bounceAmount.y;
             _companion.bounceSpeed = bounceSpeed.y;
             
-            // move to another position
+            // Move to another position
             NewPos();
         }
     }

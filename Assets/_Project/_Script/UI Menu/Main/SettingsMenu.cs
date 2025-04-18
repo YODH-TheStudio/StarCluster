@@ -70,7 +70,7 @@ public class SettingsMenu : Menu
     public void SfxVolume()
     {
         _sfxVolume = sfxSlider.value;
-        _soundSystem.SetSFXVolume(_sfxVolume);
+        _soundSystem.SetSfxVolume(_sfxVolume);
     }
 
     

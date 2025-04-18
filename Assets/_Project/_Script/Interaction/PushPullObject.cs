@@ -1,32 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PushPullObject : Interactable
 {
-    private bool _isOnPedestal = false;
-    private bool _isGrab = false;
+    private SoundSystem _soundSystem;
+    
+    private bool _isOnPedestal;
+    private bool _isGrab;
     private Vector3 _pushDirection;
 
-    private float _grabOffset = 2f;
+    private const float GrabOffset = 2f;
 
     private List<Vector3> _offsetPosition;
 
     private Transform _stoneOriginalParent;
     private Rigidbody _rigidbody;
 
-    private float _soundCooldown = 0f;
+    private float _soundCooldown;
 
-    // Utilisation d'une variable pour savoir si l'objet est en collision
-    private bool _isColliding = false;
+
+    private void Awake()
+    {
+        _soundSystem = GameManager.Instance.GetSoundSystem();
+    }
 
     void Start()
     {
         _offsetPosition = new List<Vector3>();
-        _offsetPosition.Add(new Vector3(0, 0, _grabOffset));
-        _offsetPosition.Add(new Vector3(0, 0, -_grabOffset));
-        _offsetPosition.Add(new Vector3(_grabOffset, 0, 0));
-        _offsetPosition.Add(new Vector3(-_grabOffset, 0, 0));
+        _offsetPosition.Add(new Vector3(0, 0, GrabOffset));
+        _offsetPosition.Add(new Vector3(0, 0, -GrabOffset));
+        _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
+        _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
     }
 
     public override void Interact()
@@ -39,8 +45,8 @@ public class PushPullObject : Interactable
     {
         _isGrab = !_isGrab;
         
-        PlayerScript playerScriptComponent = _userTransform.GetComponent<PlayerScript>();
-        Vector3 playerTransformPosition = _userTransform.gameObject.transform.position;
+        PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
+        Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
         
         if (!_isGrab)
         {
@@ -49,7 +55,7 @@ public class PushPullObject : Interactable
         }
         else
         {
-            // Trouver la position la plus proche
+            // Find nearest position
             Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
             
             StartCoroutine(PhaseAnimation(closestPosition));
@@ -62,19 +68,13 @@ public class PushPullObject : Interactable
         }
     }
 
-    private bool PossibleToGrab(Vector3 DestinationPosition)
+    private bool PossibleToGrab(Vector3 destinationPosition)
     {
-        //Shoot a raycast to check if the object is in the way
+        // Shoot a raycast to check if the object is in the way
         RaycastHit hit;
-        if (Physics.Raycast(_userTransform.position, DestinationPosition - _userTransform.position, out hit, _grabOffset))
-        {
-            if (hit.collider.gameObject != null)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
+        
+        return hit.collider.gameObject == null;
     }
     
     public void SetIsOnPedestal(bool isOnPedestal)
@@ -88,11 +88,11 @@ public class PushPullObject : Interactable
     {
         if (_isOnPedestal)
         {
-            //Glow the symbol
+            // Glow the symbol
         }
         else
         {
-            //Unglow the symbol
+            // Unglow the symbol
         }
     }
     
@@ -122,59 +122,55 @@ public class PushPullObject : Interactable
         _stoneOriginalParent = transform.parent;
         Vector3 originalWorldPosition = transform.position;
 
-        transform.SetParent(_userTransform);
+        transform.SetParent(UserTransform);
         transform.position = originalWorldPosition;
         
-        _userTransform.GetComponent<PlayerScript>().FreezeRotation();
-
-        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        UserTransform.GetComponent<PlayerScript>().FreezeRotation();
     }
 
     private void DetachObjectFromPlayer()
     {
         transform.SetParent(_stoneOriginalParent);
         
-        _userTransform.GetComponent<PlayerScript>().UnfreezeRotation();
-
-        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll; // La pierre est complètement figée lorsqu'elle est détachée
+        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
     }
 
     private void FixedUpdate()
     {
-        if (_isGrab)
-        {
-            _soundCooldown -= Time.deltaTime;
+        if (!_isGrab) return;
+        
+        _soundCooldown -= Time.deltaTime;
 
-            Vector3 playerMoveDirection = _userTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
-            Vector3 direction = transform.position - _userTransform.position;
-            direction.Normalize();
-            float dot = Vector3.Dot(playerMoveDirection, direction);
-            
-            if (dot > 0.5f)  // push
-            {
-                _pushDirection = direction;
-                MovePlayerAndObject(_pushDirection);
-            }
-            else if (dot < -0.5f)  // pull
-            {
-                _pushDirection = -direction;
-                MovePlayerAndObject(_pushDirection);
-            }
-            else
-            {
-                _userTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
-            }
+        Vector3 playerMoveDirection = UserTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
+        Vector3 direction = transform.position - UserTransform.position;
+        direction.Normalize();
+        float dot = Vector3.Dot(playerMoveDirection, direction);
+        
+        if (dot > 0.5f)  // push
+        {
+            _pushDirection = direction;
+            MovePlayerAndObject(_pushDirection);
         }
+        else if (dot < -0.5f)  // pull
+        {
+            _pushDirection = -direction;
+            MovePlayerAndObject(_pushDirection);
+        }
+        else
+        {
+            UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
+        }
+        
     }
 
     private void MovePlayerAndObject(Vector3 direction)
     {
-        _userTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
+        UserTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
 
         if (_soundCooldown <= 0f)
         {
-            GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
-            _soundCooldown = 1f; // joue un son toutes les 0.4 sec
+            _soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
+            _soundCooldown = 1f;
         }
 
         
@@ -184,16 +180,16 @@ public class PushPullObject : Interactable
     {
         PlayerScript playerScript = GameManager.Instance.GetPlayer();
 
-        //distance beetween player and start
-        float distance = Vector3.Distance(_userTransform.position, start);
+        // Distance between player and start
+        float distance = Vector3.Distance(UserTransform.position, start);
         yield return StartCoroutine(playerScript.MoveTo(start, distance / 2f));
         
-        //rotate the player to face the object instantly
-        Vector3 direction = transform.position - _userTransform.position;
+        // Rotate the player to face the object instantly
+        Vector3 direction = transform.position - UserTransform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation.z = 0;
         targetRotation.x = 0;
-        _userTransform.rotation = targetRotation;
+        UserTransform.rotation = targetRotation;
         
         playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();

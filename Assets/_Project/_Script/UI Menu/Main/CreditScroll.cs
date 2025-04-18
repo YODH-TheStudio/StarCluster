@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CreditScroll : MonoBehaviour
@@ -13,15 +12,14 @@ public class CreditScroll : MonoBehaviour
 
     private RectTransform _rectTransform;
 
-    void Start()
+    private void Start()
     {
         _shouldScroll = false;
         StartCoroutine(WaitForScroll(waitTime));
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!_shouldScroll) return;
         

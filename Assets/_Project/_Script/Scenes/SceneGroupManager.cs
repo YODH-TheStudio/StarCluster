@@ -13,7 +13,7 @@ namespace Systems.SceneManagement
         public event Action<string> OnSceneUnloaded = delegate { };
         public event Action OnSceneGroupLoaded = delegate { };
 
-        SceneGroup _activeSceneGroup;
+        private SceneGroup _activeSceneGroup;
 
         public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {
@@ -29,24 +29,24 @@ namespace Systems.SceneManagement
                 loadedScenes.Add(SceneManager.GetSceneAt(i).name);
             }
 
-            int totalScenesToLoad = _activeSceneGroup.Scenes.Count;
+            int totalScenesToLoad = _activeSceneGroup.scenes.Count;
 
             AsyncOperationGroup operationGroup = new AsyncOperationGroup(totalScenesToLoad);
 
             for (int i = 0; i < totalScenesToLoad; i++)
             {
-                SceneData sceneData = group.Scenes[i];
+                SceneData sceneData = group.scenes[i];
                 if (reloadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
-                //await Task.Delay(TimeSpan.FromSeconds(5f));
+                await Task.Delay(TimeSpan.FromSeconds(2f)); // Add delay time in loading screen
 
-                operationGroup.operations.Add(operation);
+                operationGroup.Operations.Add(operation);
 
                 OnSceneLoaded.Invoke(sceneData.sceneName);
             }
 
-            //wait until all AsyncOperations in a group are done
+            // Wait until all AsyncOperations in a group are done
             while (!operationGroup.IsDone)
             {
                 progress?.Report(operationGroup.Progress);
@@ -62,7 +62,7 @@ namespace Systems.SceneManagement
 
             OnSceneGroupLoaded.Invoke();
         }
-        public async Task UnloadScenes()
+        private async Task UnloadScenes()
         {
             List<string> scenes = new List<string>();
             string activeScene = SceneManager.GetActiveScene().name;
@@ -88,28 +88,28 @@ namespace Systems.SceneManagement
                 var operation = SceneManager.UnloadSceneAsync(scene);
                 if (operation == null) continue;
 
-                operationGroup.operations.Add(operation);
+                operationGroup.Operations.Add(operation);
 
                 OnSceneUnloaded.Invoke(scene);
             }
 
-            //wait until all AsyncOperations in a group are done
+            // Wait until all AsyncOperations in a group are done
             while (!operationGroup.IsDone)
             {
                 await Task.Delay(100);
             }
         }
 
-        public readonly struct AsyncOperationGroup
+        private readonly struct AsyncOperationGroup
         {
-            public readonly List<AsyncOperation> operations;
+            public readonly List<AsyncOperation> Operations;
 
-            public float Progress => operations.Count == 0 ? 0 : operations.Average(o => o.progress);
-            public bool IsDone => operations.All(o => o.isDone);
+            public float Progress => Operations.Count == 0 ? 0 : Operations.Average(o => o.progress);
+            public bool IsDone => Operations.All(o => o.isDone);
 
             public AsyncOperationGroup(int initialCapacity)
             {
-                operations = new List<AsyncOperation>(initialCapacity);
+                Operations = new List<AsyncOperation>(initialCapacity);
             }
         }
     }

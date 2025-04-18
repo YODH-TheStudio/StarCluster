@@ -151,7 +151,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 654912945}
   - {fileID: 1508000377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,54 +191,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &654912943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 654912945}
-  - component: {fileID: 654912944}
-  m_Layer: 0
-  m_Name: Puzzle2D
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &654912944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654912943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac48dcb57fcbb1f4eb51e999ff7d35d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 1508000384}
-  _levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
-  _pointColor: {r: 0, g: 1, b: 0, a: 1}
-  _lineColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!4 &654912945
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654912943}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.846954, y: 22.426056, z: -1.9945455}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 394904293}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &819021594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3832024571365300259, guid: a4f8473cf92594d4a9125beeb0ab26f8,
@@ -254,6 +205,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 394904293}
     m_Modifications:
+    - target: {fileID: 248284728731999528, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+        type: 3}
+      propertyPath: handle
+      value: 
+      objectReference: {fileID: 1508000379}
+    - target: {fileID: 248284728731999528, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+        type: 3}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 1508000378}
+    - target: {fileID: 248284728731999528, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+        type: 3}
+      propertyPath: movementRange
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4191795063154039907, guid: a4f8473cf92594d4a9125beeb0ab26f8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -354,6 +320,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5553327181413111587, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9209847089272910270, guid: a4f8473cf92594d4a9125beeb0ab26f8,
         type: 3}
       propertyPath: m_Name
@@ -374,6 +345,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1508000376}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1508000378 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5669696489485367564, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1508000376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1508000379 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5669696487728005910, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1508000376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1508000381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,13 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773e48f90f04b11448f606f0b65b6fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionButton: {fileID: 819021594}
---- !u!223 &1508000384 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 2224464202643127052, guid: a4f8473cf92594d4a9125beeb0ab26f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1508000376}
-  m_PrefabAsset: {fileID: 0}
+  interactionButton: {fileID: 819021594}
 --- !u!1 &1522167067
 GameObject:
   m_ObjectHideFlags: 0

@@ -925,21 +925,21 @@ MonoBehaviour:
   loadingCanvas: {fileID: 1656532154}
   sceneGroups:
   - groupName: MainMenu
-    Scenes:
+    scenes:
     - sceneName: MainMenu
       sceneType: 1
   - groupName: Cinematic
-    Scenes:
-    - sceneName: Cinematic
+    scenes:
+    - sceneName: IntroCinematic
       sceneType: 4
   - groupName: FirstPlanet
-    Scenes:
+    scenes:
     - sceneName: MainSprint2
       sceneType: 5
-    - sceneName: GameplayUI
-      sceneType: 2
     - sceneName: GameplayHUD
       sceneType: 3
+    - sceneName: GameplayUI
+      sceneType: 2
     - sceneName: DialogueUI
       sceneType: 2
 --- !u!1 &1558495324
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6464a77dab14134c86911a62581cf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnparentOnAwake: 1
+  unparentOnAwake: 1
 --- !u!1 &343000318410705433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,20 +1321,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5bf6f39f818ff44dbc0151090c06753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXFolderPath: SFX
+  sfxFolderPath: SFX
   musicFolderPath: Music
   ambianceFolderPath: Ambiance
-  _masterMixerGroup: {fileID: 24300002, guid: f7b2a2f36abbfe645a8e087f2114c50e, type: 2}
-  _musicMixerGroup: {fileID: -4797192509734559872, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+  masterMixerGroup: {fileID: 24300002, guid: f7b2a2f36abbfe645a8e087f2114c50e, type: 2}
+  musicMixerGroup: {fileID: -4797192509734559872, guid: f7b2a2f36abbfe645a8e087f2114c50e,
     type: 2}
-  _ambianceMixerGroup: {fileID: -1329955992164730233, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+  ambianceMixerGroup: {fileID: -1329955992164730233, guid: f7b2a2f36abbfe645a8e087f2114c50e,
     type: 2}
-  _sfxMixerGroup: {fileID: -7239697908820815027, guid: f7b2a2f36abbfe645a8e087f2114c50e,
+  sfxMixerGroup: {fileID: -7239697908820815027, guid: f7b2a2f36abbfe645a8e087f2114c50e,
     type: 2}
-  _startingMusic: {fileID: 0}
-  _startingAmbianceSound: {fileID: 0}
-  _fadeInDuration: 2
-  _fadeOutDuration: 2
+  startingMusic: {fileID: 0}
+  startingAmbianceSound: {fileID: 0}
+  fadeInDuration: 0
+  fadeOutDuration: 0
   soundFXObject: {fileID: 0}
   sfxPoolManager: {fileID: 109436405}
 --- !u!4 &2772743023017524590
@@ -1483,9 +1483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b1b3317540f0439951224a500b845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnparentOnAwake: 1
-  _key: 32
-  _keytoo: 112
+  unparentOnAwake: 1
 --- !u!1 &6791436043421849194
 GameObject:
   m_ObjectHideFlags: 0

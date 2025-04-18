@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -17,7 +16,7 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/";
         if (Directory.Exists(path) == false)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
             //Debug.Log("Creating save file at " + path);
         }
         Debug.Log("Saving game");
@@ -77,7 +76,7 @@ public class SaveManager : MonoBehaviour
     {
         public int unlockedPlanets = 1;
         public int currentPlanet = 1;
-        public int unlockedPleiads = 0;
+        public int unlockedPleiades = 0;
         public string saveTime = DateTime.Now.ToString("g");
         public string playtime = "0:00:00";
     }

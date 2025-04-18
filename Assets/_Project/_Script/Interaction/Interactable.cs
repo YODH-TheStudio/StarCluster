@@ -5,16 +5,15 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     // transform of interact user
-    protected Transform _userTransform;
+    protected Transform UserTransform;
 
     public virtual void Interact()
     {
         //Debug.Log($"{gameObject.name} a été interagi.");
     }
 
-    //
     public void SetUserTransform(Transform newTransform)
     {
-        _userTransform = newTransform;
+        UserTransform = newTransform;
     }
 }

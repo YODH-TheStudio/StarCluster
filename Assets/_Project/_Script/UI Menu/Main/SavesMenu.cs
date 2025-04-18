@@ -1,29 +1,30 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SavesMenu : Menu
 {
+    [SerializeField] private List<Texture2D> planetIcons;
+    
     private int _previousSavedGroupScene;
     private int _saveIndex = 1;
+    
     
     [SerializeField] private List<SaveDataDisplayer> slots;
     // [SerializeField] private GameObject _saveSlot1;
     // [SerializeField] private GameObject _saveSlot2;
     // [SerializeField] private GameObject _saveSlot3;
 
-    void Awake()
+    private new void Awake()
     {
         // setup slot text
-        if (_planetIcons.Count != _planetNames.Count)
+        if (planetIcons.Count != _planetNames.Count)
         {
             Debug.LogError("Planet icons not set up correctly");
         }
         RefreshSlotsData();
     }
     
-    private static List<string> _planetNames = new List<string>()
+    private readonly List<string> _planetNames = new List<string>()
     { 
         "PLANET_JOY",
         "PLANET_EMPATHY",
@@ -34,9 +35,8 @@ public class SavesMenu : Menu
         "PLANET_SEEDY"
     };
 
-    [SerializeField] private List<Texture2D> _planetIcons;
 
-    public void RefreshSlotsData()
+    private void RefreshSlotsData()
     {
         // Read save info
         for (int i = 0; i < slots.Count; i++)
@@ -52,7 +52,7 @@ public class SavesMenu : Menu
             {
                 slots[i].Set(_planetNames[slotInfo.currentPlanet],
                     slotInfo.saveTime,
-                    _planetIcons[slotInfo.currentPlanet]);
+                    planetIcons[slotInfo.currentPlanet]);
             }
         }
     }
