@@ -10,6 +10,8 @@ public class MainMenu : Menu
     
     public async void PlayGame()
     {
+        GameManager.Instance._soundSystem.PlaySoundFXClipByKey("UI Clicb", transform.position);
+        
         if (hasAlreadyPlayed)
         {
             //planetMenu.SetActive(true);

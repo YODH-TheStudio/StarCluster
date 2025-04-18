@@ -55,6 +55,8 @@ public class PlanetMenu : Menu
     {
         if (_isMoving) return;
         
+        GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Ui Clica", transform.position); 
+        
         _planetIndex = (_planetIndex + increment + PlanetNumber) % PlanetNumber; 
         Debug.Log(_planetIndex);
         if (increment >= 1)

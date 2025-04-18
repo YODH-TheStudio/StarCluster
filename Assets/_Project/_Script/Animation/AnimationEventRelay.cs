@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnaimationEventRelay : MonoBehaviour
+public class AnimationEventRelay : MonoBehaviour
 {
     #region Fields
     private PlayerScript _playerScript;
