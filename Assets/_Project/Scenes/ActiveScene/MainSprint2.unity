@@ -5536,7 +5536,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -5553,7 +5553,7 @@ Camera:
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9489,7 +9489,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1774719522}
   - component: {fileID: 1774719521}
-  - component: {fileID: 1774719523}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -9519,7 +9518,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1526070876}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 5
+    OrthographicSize: 50
     NearClipPlane: -50
     FarClipPlane: 1000
     Dutch: 0
@@ -9552,23 +9551,6 @@ Transform:
   - {fileID: 1675748360}
   m_Father: {fileID: 1247789614}
   m_LocalEulerAnglesHint: {x: 15, y: 45, z: 0}
---- !u!114 &1774719523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774719520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 0
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: 886a428a8debc8f43aff59b1989c1e65, type: 2}
 --- !u!1001 &1774944136
 PrefabInstance:
   m_ObjectHideFlags: 0
