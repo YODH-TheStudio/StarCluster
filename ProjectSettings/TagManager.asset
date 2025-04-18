@@ -35,8 +35,8 @@ TagManager:
   - 
   - 
   - 
-  - 
   - Player
+  - Camera
   - ExludePPObject/Player
   - Other
   - Enigme

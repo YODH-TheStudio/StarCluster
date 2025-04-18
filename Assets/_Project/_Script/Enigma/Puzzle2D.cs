@@ -74,6 +74,24 @@ public class Puzzle2D : MonoBehaviour
 
     private Vector3 _fingerMP = Vector3.zero;
 
+    void Start()
+    {
+        OpenPuzzle();
+
+        _segmentsParent = new GameObject("Segments3D").transform;
+        _segmentsParent.SetParent(parentPuzzleGroup);
+
+        CreateTopMenu();
+
+        InstantiatePoints3D();
+        InstantiateSegments();
+
+
+        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+    }
+
     private void Touch_OnFingerMove(Finger TouchedFinger)
     {
         _fingerMP = TouchedFinger.screenPosition;
@@ -130,20 +148,16 @@ public class Puzzle2D : MonoBehaviour
 
 
 
-    void Start()
+
+
+    private void SwitchCamera(bool activatePuzzleCamera)
     {
-        _segmentsParent = new GameObject("Segments3D").transform;
-        _segmentsParent.SetParent(parentPuzzleGroup);
+        if (_mainCamera == null || _cinemachineMainCamera == null || _puzzleCamera == null)
+            return;
 
-        CreateTopMenu();
-
-        InstantiatePoints3D();
-        InstantiateSegments();
-
-
-        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
-        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+        _cinemachineMainCamera.gameObject.SetActive(!activatePuzzleCamera);
+        _mainCamera.gameObject.SetActive(!activatePuzzleCamera);
+        _puzzleCamera.gameObject.SetActive(activatePuzzleCamera);
     }
 
     // UI ***
@@ -253,13 +267,6 @@ public class Puzzle2D : MonoBehaviour
 
     private void InstantiatePoints3D()
     {
-        if (_mainCamera == null || _cinemachineMainCamera == null || _puzzleCamera == null)
-            return;
-
-        _cinemachineMainCamera.gameObject.SetActive(false);
-        _mainCamera.gameObject.SetActive(false);
-        _puzzleCamera.gameObject.SetActive(true);
-
         foreach (Vector2 pos in _levelData._points)
         {
             GameObject cube = Instantiate(_starPrefab, parentPuzzleGroup);
@@ -886,6 +893,16 @@ public class Puzzle2D : MonoBehaviour
         {
             Debug.Log("Le puzzle est réussi !");
         }
+    }
+
+    private void OpenPuzzle()
+    {
+        SwitchCamera(true);
+    }
+
+    private void ClosePuzzle()
+    {
+        SwitchCamera(false);
     }
 
 

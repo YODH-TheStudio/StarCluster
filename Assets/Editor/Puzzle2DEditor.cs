@@ -119,7 +119,7 @@ public class Puzzle2DEditor : Editor
 
         int segmentIndex = _segmentObjects.Count;
         _labelText.text = "S" + segmentIndex;
-        _labelText.fontSize = 5;
+        _labelText.fontSize = 8;
         _labelText.alignment = TextAlignmentOptions.Center;
         _labelText.color = Color.white;
 
