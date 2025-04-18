@@ -5,7 +5,7 @@ using Systems.SceneManagement;
 public class MainMenu : Menu
 {
     
-    [SerializeField] bool hasAlreadyPlayed = true; //serializeField for now to test if the button works
+    [SerializeField] bool hasAlreadyPlayed = true; // TODO : Use the bool from the loaded save
     [SerializeField] GameObject planetMenu;
     
     public async void PlayGame()

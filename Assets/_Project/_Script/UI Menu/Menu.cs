@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
     protected GameManager GameManager;
     private int _index;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         SceneLoader = PersistentSingleton<SceneLoader>.Instance;
         GameManager = PersistentSingleton<GameManager>.Instance;

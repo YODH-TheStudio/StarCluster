@@ -935,7 +935,7 @@ MonoBehaviour:
   - groupName: FirstPlanet
     Scenes:
     - sceneName: MainSprint2
-      sceneType: 0
+      sceneType: 5
     - sceneName: GameplayUI
       sceneType: 2
     - sceneName: GameplayHUD

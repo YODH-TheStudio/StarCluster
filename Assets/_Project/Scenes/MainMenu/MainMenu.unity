@@ -6104,7 +6104,6 @@ MonoBehaviour:
   - {fileID: 2023056132}
   - {fileID: 255598071}
   rectTransform: {fileID: 1144906606}
-  scalar: 1
 --- !u!1 &2023056130
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public KeyCode _keytoo = KeyCode.P;
 
     // Start is called before the first frame update
-    void Awake()
+    private new void Awake()
     {
         // if (_player == null)
         // {
