@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/UserInterface/DialogueUI.unity
     guid: 461c44372da7b8b4483f18703e32ef0e
+  - enabled: 1
+    path: Assets/_Project/Scenes/ActiveScene/Puzzle.unity
+    guid: b4184db31a2457846810d1b42101ef90
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: 552234cfbb7485b4394b3ecce8f41da5, type: 2}

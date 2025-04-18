@@ -86,7 +86,7 @@ public class Puzzle2DEditor : Editor
         _labelObject.transform.SetParent(_pointObject.transform);
         TextMeshProUGUI _labelText = _labelObject.GetComponent<TextMeshProUGUI>();
         _labelText.text = "P" + _index;
-        _labelText.fontSize = 10;
+        _labelText.fontSize = 15;
         _labelText.alignment = TextAlignmentOptions.Center;
 
         RectTransform _labelRect = _labelObject.GetComponent<RectTransform>();
@@ -109,7 +109,7 @@ public class Puzzle2DEditor : Editor
         float _distance = Vector2.Distance(_pointA, _pointB);
         float _angle = Mathf.Atan2(_pointB.y - _pointA.y, _pointB.x - _pointA.x) * Mathf.Rad2Deg;
 
-        _rectTransform.sizeDelta = new Vector2(_distance, 10f);
+        _rectTransform.sizeDelta = new Vector2(_distance, 3f);
         _rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
         _rectTransform.anchoredPosition = (_pointA + _pointB) / 2f;
 
@@ -119,7 +119,7 @@ public class Puzzle2DEditor : Editor
 
         int segmentIndex = _segmentObjects.Count;
         _labelText.text = "S" + segmentIndex;
-        _labelText.fontSize = 10;
+        _labelText.fontSize = 5;
         _labelText.alignment = TextAlignmentOptions.Center;
         _labelText.color = Color.white;
 
@@ -142,6 +142,12 @@ public class Puzzle2DEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+
+        //if (GUILayout.Button("Set All Points to Small"))
+        //{
+
+        //    _levelData.SetAllPointsToSmall();
+        //}
 
         List<string> pointOptions = new List<string>();
         for (int i = 0; i < _levelData._points.Count; i++)
@@ -250,8 +256,10 @@ public class Puzzle2DEditor : Editor
 
     private void AddRandomPoint()
     {
+        string pointName = "Point " + (_levelData._points.Count + 1);  // Nom basé sur l'index du point
+
         Vector2 _newPoint = GenerateRandomPointInsidePlayArea();
-        _levelData.AddPoint(_newPoint);
+        _levelData.AddPoint(_newPoint, pointName);
         EditorUtility.SetDirty(_levelData);
         AddPointToUI(_newPoint, _levelData._points.Count - 1);
     }

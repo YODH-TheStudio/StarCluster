@@ -132,14 +132,14 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     void FixedUpdate()
     {
         
-        if (_direction != Vector3.zero)
-        {
-            _playerAnimator.SetBool("IsMoving", true);
-        }
-        else if (_direction == Vector3.zero)
-        {
-            _playerAnimator.SetBool("IsMoving", false);
-        }
+        //if (_direction != Vector3.zero)
+        //{
+        //    _playerAnimator.SetBool("IsMoving", true);
+        //}
+        //else if (_direction == Vector3.zero)
+        //{
+        //    _playerAnimator.SetBool("IsMoving", false);
+        //}
         
         if(_particle != null)
         {
