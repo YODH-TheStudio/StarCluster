@@ -863,6 +863,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7765965395216489914, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765965395216489914, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1763526723}
+    - target: {fileID: 7765965395216489914, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadGroupScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765965395216489914, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7801755210049345049, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       propertyPath: m_Name

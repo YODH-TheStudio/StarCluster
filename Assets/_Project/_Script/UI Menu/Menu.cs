@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
     protected GameManager GameManager;
     private int _index;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         SceneLoader = PersistentSingleton<SceneLoader>.Instance;
         GameManager = PersistentSingleton<GameManager>.Instance;
@@ -25,7 +25,11 @@ public class Menu : MonoBehaviour
     {
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
-    
+
+    public virtual async void LoadGroupScene(int index)
+    {
+        await SceneLoader.LoadSceneGroup(index);
+    }
     public void Quit()
     {
         Application.Quit();

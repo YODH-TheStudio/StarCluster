@@ -7,45 +7,45 @@ namespace Systems.SceneManagement
 {
     public class SceneLoader : MonoBehaviour
     {
-        [SerializeField] Image loadingBar;
-        [SerializeField] float fillSpeed = 0.5f;
-        [SerializeField] Camera loadingCamera;
-        [SerializeField] Canvas loadingCanvas;
-        [SerializeField] SceneGroup[] sceneGroups;
+        [SerializeField] private Image loadingBar;
+        [SerializeField] private float fillSpeed = 0.5f;
+        [SerializeField] private Camera loadingCamera;
+        [SerializeField] private Canvas loadingCanvas;
+        [SerializeField] private SceneGroup[] sceneGroups;
 
-        float targetProgress;
-        bool isLoading;
+        private float _targetProgress;
+        private bool _isLoading;
 
-        public readonly SceneGroupManager manager = new SceneGroupManager();
+        public readonly SceneGroupManager Manager = new SceneGroupManager();
 
         private void Awake()
         {
-            manager.OnSceneLoaded += sceneName => Debug.Log("Loaded: " + sceneName);
-            manager.OnSceneUnloaded += sceneName => Debug.Log("Unloaded: " + sceneName);
-            manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
+            Manager.OnSceneLoaded += sceneName => Debug.Log("Loaded: " + sceneName);
+            Manager.OnSceneUnloaded += sceneName => Debug.Log("Unloaded: " + sceneName);
+            Manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
         }
 
-        async void Start()
+        private async void Start()
         {
             await LoadSceneGroup(0);
         }
 
-        void Update()
+        private void Update()
         {
-            if (!isLoading) return;
+            if (!_isLoading) return;
 
             float currentFillAmount = loadingBar.fillAmount;
-            float progressDifference = Mathf.Abs(currentFillAmount - targetProgress);
+            float progressDifference = Mathf.Abs(currentFillAmount - _targetProgress);
 
             float dynamicFillSpeed = progressDifference * fillSpeed;
 
-            loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, targetProgress, Time.deltaTime * dynamicFillSpeed);
+            loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
 
         public async Task LoadSceneGroup(int index)
         {
             loadingBar.fillAmount = 0f;
-            targetProgress = 1f;
+            _targetProgress = 1f;
 
             if (index < 0 || index >= sceneGroups.Length)
             {
@@ -54,16 +54,16 @@ namespace Systems.SceneManagement
             }
 
             LoadingProgress progress = new();
-            progress.Progressed += target => targetProgress = Mathf.Max(target, targetProgress);
+            progress.Progressed += target => _targetProgress = Mathf.Max(target, _targetProgress);
 
             EnableLoadingElements();
-            await manager.LoadScenes(sceneGroups[index], progress);
+            await Manager.LoadScenes(sceneGroups[index], progress);
             EnableLoadingElements(false);
         }
 
-        void EnableLoadingElements(bool enable = true)
+        private void EnableLoadingElements(bool enable = true)
         {
-            isLoading = enable;
+            _isLoading = enable;
             loadingCanvas.gameObject.SetActive(enable);
             loadingCamera.gameObject.SetActive(enable);
         }

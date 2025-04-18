@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,7 +23,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public KeyCode _keytoo = KeyCode.P;
 
     // Start is called before the first frame update
-    void Awake()
+    private new void Awake()
     {
         // if (_player == null)
         // {
@@ -110,6 +111,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
+    #region TestSon
     void PlayTestSFX()
     {
         Vector3 spawnPosition = transform.position;
@@ -122,7 +124,7 @@ public class GameManager : PersistentSingleton<GameManager>
         Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
         Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
     }
-
+    #endregion
 
     public PlayerScript GetPlayer()
     {
@@ -193,5 +195,11 @@ public class GameManager : PersistentSingleton<GameManager>
             FindSoundManager();
         }
         return _soundSystem;
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 }

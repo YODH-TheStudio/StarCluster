@@ -1762,6 +1762,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669e6cd1c1206744da78f7153df3dad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterSlider: {fileID: 7916340446036433179}
+  musicSlider: {fileID: 7046118414541612763}
+  sfxSlider: {fileID: 6834262638604019726}
+  vibrationToggle: {fileID: 4769583377906926309}
 --- !u!1 &8343911818285473944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,7 +2366,7 @@ PrefabInstance:
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2377,7 +2381,7 @@ PrefabInstance:
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SFXVolume
+      value: SfxVolume
       objectReference: {fileID: 0}
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2492,7 +2496,7 @@ PrefabInstance:
     - target: {fileID: 4415837336995084021, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: SFX Slider
       objectReference: {fileID: 0}
     - target: {fileID: 4884928510169232912, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2509,6 +2513,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0332724c85f86f1408d790798af3da24, type: 3}
+--- !u!114 &6834262638604019726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
+    type: 3}
+  m_PrefabInstance: {fileID: 5221469057892348904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7904381814190518450 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2721408999147684698, guid: 0332724c85f86f1408d790798af3da24,
@@ -2546,7 +2562,7 @@ PrefabInstance:
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2676,7 +2692,7 @@ PrefabInstance:
     - target: {fileID: 4415837336995084021, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: Music Slider
       objectReference: {fileID: 0}
     - target: {fileID: 4884928510169232912, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2699,6 +2715,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8603731835723054397}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7046118414541612763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
+    type: 3}
+  m_PrefabInstance: {fileID: 8603731835723054397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8895227644688564989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2730,7 +2758,7 @@ PrefabInstance:
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2860,7 +2888,7 @@ PrefabInstance:
     - target: {fileID: 4415837336995084021, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: Master Slider
       objectReference: {fileID: 0}
     - target: {fileID: 4884928510169232912, guid: 0332724c85f86f1408d790798af3da24,
         type: 3}
@@ -2883,3 +2911,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8895227644688564989}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7916340446036433179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1634331506512665574, guid: 0332724c85f86f1408d790798af3da24,
+    type: 3}
+  m_PrefabInstance: {fileID: 8895227644688564989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

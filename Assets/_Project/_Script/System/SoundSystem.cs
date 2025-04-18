@@ -30,8 +30,10 @@ public class SoundSystem : MonoBehaviour
 
     private int _numberOfChannels;
 
+    [SerializeField] private AudioMixerGroup _masterMixerGroup;
     [SerializeField] private AudioMixerGroup _musicMixerGroup;
     [SerializeField] private AudioMixerGroup _ambianceMixerGroup;
+    [SerializeField] private AudioMixerGroup _sfxMixerGroup; 
     private AudioListener _audioListener;
 
     [SerializeField] private AudioClip _startingMusic;
@@ -78,14 +80,22 @@ public class SoundSystem : MonoBehaviour
         _currentAmbianceSources = new List<AudioSource>();
         _numberOfChannels = GetComponents<AudioSource>().Length;
 
+        sfxPoolManager.SetMixerGroup(_sfxMixerGroup);
+
         AudioSource[] attachedAudioSources = GetComponents<AudioSource>();
 
         for (int i = 0; i < _numberOfChannels; i++)
         {
             _audioSources.Add(attachedAudioSources[i]);
         }
+
     }
 
+    private void Start()
+    {
+        LoadPlayerPrefs();
+    }
+    
     private void GenerateKeys()
     {
         GenerateSFXKeys();
@@ -101,9 +111,9 @@ public class SoundSystem : MonoBehaviour
         {
             string[] words = _audioClip.name.Split('_');
 
-            if (words[0] != "SFX" || words.Length < 2)
+            if (words[0] != "SFX" || words.Length < 3)
             {
-                Debug.LogWarning($"The audio clip {_audioClip.name} has not the SFX_xxx format.");
+                Debug.LogWarning($"The audio clip {_audioClip.name} has not the SFX_xxx_xxx format.");
             }
 
             string key = "";
@@ -121,6 +131,8 @@ public class SoundSystem : MonoBehaviour
                 index--;
 
             key = key.Substring(0, index + 1);
+
+            Debug.Log(key);
 
             SoundFX existingSound = _SFXList.Find(sound => sound.key == key);
 
@@ -292,8 +304,31 @@ public class SoundSystem : MonoBehaviour
         return null;
     }
 
+    private void LoadPlayerPrefs()
+    {
+        float master = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        float music = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float sfx = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        
+        Debug.Log($"[SoundSystem] Loaded: Master={master}, Music={music}, SFX={sfx}");
+        
+        SetMasterVolume(master);
+        SetMusicVolume(music);
+        SetAmbianceVolume(music);
+        SetSFXVolume(sfx);
+    }
     #endregion
 
+    #region Master
+    public void SetMasterVolume (float volume)
+    {
+        _musicMixerGroup.audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    #endregion
+    
     #region Music
 
     private void ChangeMusic(AudioClip audioClip)
@@ -304,6 +339,13 @@ public class SoundSystem : MonoBehaviour
     public void ChangeMusicByKey(string key)
     {
         ChangeMusic(GetMusicByKey(key));
+    }
+
+    public void SetMusicVolume (float volume)
+    {
+        _musicMixerGroup.audioMixer.SetFloat("MusicVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        PlayerPrefs.Save();
     }
 
     #endregion
@@ -340,6 +382,12 @@ public class SoundSystem : MonoBehaviour
             AddAmbianceSound(audioClip, volume);
         }
     }
+
+    public void SetAmbianceVolume(float volume)
+    {
+        _ambianceMixerGroup.audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(volume));
+    }
+
 
     #endregion
 
@@ -406,6 +454,25 @@ public class SoundSystem : MonoBehaviour
     //    audioSource.Play();
     //    Destroy(audioSource.gameObject, clipLength);
     //}
+
+    public void SetSFXVolume(float volume)
+    {
+        _sfxMixerGroup.audioMixer.SetFloat("SFXVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+
+    #endregion
+
+    #region ConvertDecibel
+    // Convertit une valeur de 0.0001 à 1.0 en dB (utile pour l'AudioMixer)
+    private float LinearToDecibel(float linear)
+    {
+        if (linear <= 0.0001f)
+            return -80f; // Silence
+        return Mathf.Log10(linear) * 20f;
+    }
 
     #endregion
 

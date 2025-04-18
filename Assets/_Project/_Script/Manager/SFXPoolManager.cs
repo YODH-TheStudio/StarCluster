@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SFXPoolManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SFXPoolManager : MonoBehaviour
     public int poolSize = 10;
 
     private Queue<AudioSource> availableSources = new Queue<AudioSource>();
+    private AudioMixerGroup sfxMixerGroup; 
 
     void Awake()
     {
@@ -16,11 +18,22 @@ public class SFXPoolManager : MonoBehaviour
             GameObject obj = Instantiate(sfxPrefab, transform);
             obj.SetActive(false);
             AudioSource source = obj.GetComponent<AudioSource>();
-            if (source == null)
+            if (sfxMixerGroup != null)
             {
-                Debug.LogError("Le prefab ne contient pas d'AudioSource !");
+                source.outputAudioMixerGroup = sfxMixerGroup;
             }
             availableSources.Enqueue(source);
+        }
+    }
+
+    public void SetMixerGroup(AudioMixerGroup mixerGroup)
+    {
+        sfxMixerGroup = mixerGroup;
+
+        // On applique le groupe aux sources déjà créées
+        foreach (var source in availableSources)
+        {
+            source.outputAudioMixerGroup = sfxMixerGroup;
         }
     }
 
@@ -37,14 +50,6 @@ public class SFXPoolManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableAfterPlay(AudioSource source, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        source.Stop();
-        source.clip = null;
-        source.gameObject.SetActive(false);
-        availableSources.Enqueue(source); // IMPORTANT : On remet la source dans la pool
-    }
 
     public void PlayClip(AudioClip clip, Vector3 position, float volume = 1.0f)
     {
@@ -65,5 +70,13 @@ public class SFXPoolManager : MonoBehaviour
         source.gameObject.SetActive(true);
         source.Play();
         StartCoroutine(DisableAfterPlay(source, clip.length));
+    }
+    private IEnumerator DisableAfterPlay(AudioSource source, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        source.Stop();
+        source.clip = null;
+        source.gameObject.SetActive(false);
+        availableSources.Enqueue(source); // IMPORTANT : On remet la source dans la pool
     }
 }
