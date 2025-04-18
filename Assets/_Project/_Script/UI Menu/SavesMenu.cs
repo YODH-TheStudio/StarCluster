@@ -13,26 +13,16 @@ public class SavesMenu : Menu
     // [SerializeField] private GameObject _saveSlot2;
     // [SerializeField] private GameObject _saveSlot3;
 
-    void Awake()
+    void Start()
     {
         // setup slot text
-        if (_planetIcons.Count != _planetNames.Count)
+        if (_planetIcons.Count != 7)
         {
             Debug.LogError("Planet icons not set up correctly");
         }
         RefreshSlotsData();
     }
     
-    private static List<string> _planetNames = new List<string>()
-    { 
-        "PLANET_JOY",
-        "PLANET_EMPATHY",
-        "PLANET_SADNESS",
-        "PLANET_COMICAL",
-        "PLANET_BOREDOM",
-        "PLANET_MELANCHOLY",
-        "PLANET_SEEDY"
-    };
 
     [SerializeField] private List<Texture2D> _planetIcons;
 
@@ -50,7 +40,7 @@ public class SavesMenu : Menu
             }
             else
             {
-                slots[i].Set(_planetNames[slotInfo.currentPlanet],
+                slots[i].Set("PLANET_" + slotInfo.currentPlanet,
                     slotInfo.saveTime,
                     _planetIcons[slotInfo.currentPlanet]);
             }

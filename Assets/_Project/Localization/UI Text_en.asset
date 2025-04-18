@@ -23,11 +23,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 529404600320
-    m_Localized: Settings
+    m_Localized: SETTINGS
     m_Metadata:
       m_Items: []
   - m_Id: 434971340251136
-    m_Localized: Quit
+    m_Localized: QUIT
     m_Metadata:
       m_Items: []
   - m_Id: 435027137077248
@@ -56,6 +56,26 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 436185981329408
     m_Localized: Vibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6571296715988992
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6571628292497408
+    m_Localized: SAVES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6576980060823552
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577072750747648
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577710377230336
+    m_Localized: SAVES
     m_Metadata:
       m_Items: []
   references:
