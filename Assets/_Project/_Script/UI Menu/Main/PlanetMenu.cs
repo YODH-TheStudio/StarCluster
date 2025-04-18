@@ -29,42 +29,26 @@ public class PlanetMenu : Menu
 
     private void ScrollHorizontalLeft(int increment)
     {
-        if (_planetIndex >= 0)
-        {
-            Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x - _planetWidth, 
-                                            rectTransform.anchoredPosition.y);
-            Debug.Log(targetPos);
+        if (_planetIndex < 0) return;
+        
+        Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x - _planetWidth, 
+            rectTransform.anchoredPosition.y);
             
-            if (_planetIndex == 0)
-            {
-                Debug.Log("Singe");
-                StartCoroutine(LerpToPos(targetPos,0.5f, () => Snap(increment)));
-            }
-            else
-            {
-                StartCoroutine(LerpToPos(targetPos,0.5f));
-            }
-        }
+        StartCoroutine(_planetIndex == 0
+            ? LerpToPos(targetPos, 0.5f, () => Snap(increment))
+            : LerpToPos(targetPos, 0.5f));
     }
     
     private void ScrollHorizontalRight(int increment)
     {
-        if (_planetIndex <= 6)
-        {
-            Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x + _planetWidth, 
-                                            rectTransform.anchoredPosition.y);
-            Debug.Log(targetPos);
+        if (_planetIndex > 6) return;
         
-            if (_planetIndex == 6)
-            {
-                Debug.Log("Chimpanzini Bananini");
-                StartCoroutine(LerpToPos(targetPos,0.5f, () => Snap(increment)));
-            }
-            else
-            {
-                StartCoroutine(LerpToPos(targetPos,0.5f));
-            }
-        }
+        Vector2 targetPos = new Vector2(rectTransform.anchoredPosition.x + _planetWidth, 
+            rectTransform.anchoredPosition.y);
+
+        StartCoroutine(_planetIndex == 6
+            ? LerpToPos(targetPos, 0.5f, () => Snap(increment))
+            : LerpToPos(targetPos, 0.5f));
     }
 
     public void MoveSelection(int increment)
@@ -87,6 +71,7 @@ public class PlanetMenu : Menu
         for (int i = 0; i < planets.Length; i++)
         {
             var planet = planets[i].GetComponent<UnlockedSprite>();
+            
             if (i <= _unlockedPlanets)
             {
                 planet.SetIsUnlocked(true);
@@ -100,7 +85,14 @@ public class PlanetMenu : Menu
 
     private void Snap(int increment)
     {
-        rectTransform.anchoredPosition = new Vector2(increment * _planetWidth * (PlanetNumber - 3), rectTransform.anchoredPosition.y); 
+        if (increment > 0)
+        {
+            rectTransform.anchoredPosition = new Vector2(increment * _planetWidth * (PlanetNumber - 5), rectTransform.anchoredPosition.y); 
+        }
+        else
+        {
+            rectTransform.anchoredPosition = new Vector2(increment * _planetWidth * (PlanetNumber - 3), rectTransform.anchoredPosition.y); 
+        }
     }
 
 
