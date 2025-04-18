@@ -39,10 +39,7 @@ MonoBehaviour:
   - {x: -255.3, y: -27.95}
   - {x: -1.07, y: -84.1}
   - {x: -32.02, y: -82.8}
-  - {x: -48.25, y: -105.8}
   - {x: -52.7, y: -129.04}
-  - {x: -62.2, y: -154.7}
-  - {x: -48.41, y: -187.23}
   - {x: 79, y: -59.5}
   - {x: 17.9, y: -128.9}
   - {x: 130.1, y: -80.2}
@@ -59,6 +56,7 @@ MonoBehaviour:
   - {x: 365.3, y: 71.29}
   - {x: 400.76, y: 64}
   - {x: 403.02, y: 122.02}
+  - {x: -39.07, y: -182.44}
   _segments:
   - pointA: {x: -405.6, y: 103.4}
     pointB: {x: -369.3, y: 68.1}
@@ -122,14 +120,6 @@ MonoBehaviour:
     pointB: {x: 17.9, y: -128.9}
   - pointA: {x: -1.07, y: -84.1}
     pointB: {x: -32.02, y: -82.8}
-  - pointA: {x: -32.02, y: -82.8}
-    pointB: {x: -48.25, y: -105.8}
-  - pointA: {x: -48.25, y: -105.8}
-    pointB: {x: -52.7, y: -129.04}
-  - pointA: {x: -52.7, y: -129.04}
-    pointB: {x: -62.2, y: -154.7}
-  - pointA: {x: -62.2, y: -154.7}
-    pointB: {x: -48.41, y: -187.23}
   - pointA: {x: 32.7, y: -29.1}
     pointB: {x: 47.8, y: 120.8}
   - pointA: {x: 47.8, y: 120.8}
@@ -164,6 +154,10 @@ MonoBehaviour:
     pointB: {x: -318.7, y: -25.94}
   - pointA: {x: -318.7, y: -25.94}
     pointB: {x: -255.3, y: -27.95}
+  - pointA: {x: -32.02, y: -82.8}
+    pointB: {x: -52.7, y: -129.04}
+  - pointA: {x: -52.7, y: -129.04}
+    pointB: {x: -39.07, y: -182.44}
   _circuits:
   - circuitColor: {r: 0, g: 0.7075472, b: 0.12268998, a: 1}
     startPoint: {x: -405.6, y: 103.4}
@@ -188,7 +182,7 @@ MonoBehaviour:
     endPointOffset: {x: 0, y: 0, z: 0}
   - circuitColor: {r: 1, g: 0.05450766, b: 0, a: 1}
     startPoint: {x: 4.3, y: 80.8}
-    endPoint: {x: -48.41, y: -187.23}
+    endPoint: {x: -39.07, y: -182.44}
     sign: 4
     name: 'Circuit '
     startPointOffset: {x: 0, y: 0, z: 0}
@@ -279,16 +273,7 @@ MonoBehaviour:
   - pointPosition: {x: -32.02, y: -82.8}
     size: 0
     name: 
-  - pointPosition: {x: -48.25, y: -105.8}
-    size: 0
-    name: 
   - pointPosition: {x: -52.7, y: -129.04}
-    size: 0
-    name: 
-  - pointPosition: {x: -62.2, y: -154.7}
-    size: 0
-    name: 
-  - pointPosition: {x: -48.41, y: -187.23}
     size: 0
     name: 
   - pointPosition: {x: 79, y: -59.5}
@@ -339,3 +324,6 @@ MonoBehaviour:
   - pointPosition: {x: 403.02, y: 122.02}
     size: 0
     name: 
+  - pointPosition: {x: 0.82837725, y: 0.07384002}
+    size: 0
+    name: Point 44
