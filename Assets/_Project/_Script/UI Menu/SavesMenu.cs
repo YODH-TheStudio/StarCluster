@@ -7,49 +7,70 @@ public class SavesMenu : Menu
 {
     private int _previousSavedGroupScene;
     private int _saveIndex = 0;
-    [SerializeField] private GameObject _saveSlot1;
-    [SerializeField] private GameObject _saveSlot2;
-    [SerializeField] private GameObject _saveSlot3;
+    
+    [SerializeField] private List<SaveDataDisplayer> slots;
+    // [SerializeField] private GameObject _saveSlot1;
+    // [SerializeField] private GameObject _saveSlot2;
+    // [SerializeField] private GameObject _saveSlot3;
 
     void Awake()
     {
         // setup slot text
+        if (_planetIcons.Count != _planetNames.Count)
+        {
+            Debug.LogError("Planet icons not set up correctly");
+        }
+        RefreshSlotsData();
     }
     
-    Dictionary<int, string> planetNames = new Dictionary<int, string>()
-    {
-        {1, "PLANET_JOY"},
-        {2, "PLANET_EMPATHY"},
-        {3, "PLANET_SADNESS"},
-        {4, "PLANET_COMICAL"},
-        {5, "PLANET_BOREDOM"},
-        {6, "PLANET_MELANCHOLY"},
-        {7, "PLANET_SEEDY"}
+    private static List<string> _planetNames = new List<string>()
+    { 
+        "PLANET_JOY",
+        "PLANET_EMPATHY",
+        "PLANET_SADNESS",
+        "PLANET_COMICAL",
+        "PLANET_BOREDOM",
+        "PLANET_MELANCHOLY",
+        "PLANET_SEEDY"
     };
 
-    [SerializeField] private Dictionary<int, Texture2D> planetIcons = new Dictionary<int, Texture2D>();
+    [SerializeField] private List<Texture2D> _planetIcons;
 
     public void RefreshSlotsData()
     {
         // Read save info
-        int[] slot1Info = GameManager.Instance.GetSaveManager().GetInfo(1);
-        string planetName1 = planetNames[slot1Info[2]];
-        _saveSlot1.GetComponent<SaveDataDisplayer>().Set(planetName1, DateTime(slot1Info[0]), planetIcons[slot1Info[2]]);
+        for (int i = 0; i < slots.Count; i++)
+        {
+            SaveManager.SaveData slotInfo = GameManager.Instance.GetSaveManager().GetSaveData(i+1);
+            if(slotInfo == null)
+            {
+                slots[i].Set("EMPTY",
+                    "",
+                    null);
+            }
+            else
+            {
+                slots[i].Set(_planetNames[slotInfo.currentPlanet],
+                    slotInfo.saveTime,
+                    _planetIcons[slotInfo.currentPlanet]);
+            }
+        }
     }
     
     public void SetSaveIndex(int newSaveIndex)
     {
         _saveIndex = newSaveIndex;
-        GameManager.GetSaveManager().currentSlot = newSaveIndex;
+        GameManager.Instance.GetSaveManager().currentSlot = newSaveIndex;
     }
     
     public void LoadSelectedSave()
     {
-        GameManager.GetSaveManager().LoadGame(_saveIndex);
+        GameManager.Instance.GetSaveManager().LoadGame(_saveIndex);
     }
 
     public void DeleteSelectedSave()
     {
-        GameManager.GetSaveManager().DeleteSave(_saveIndex);
+        GameManager.Instance.GetSaveManager().DeleteSave(_saveIndex);
+        RefreshSlotsData();
     }
 }

@@ -75,19 +75,15 @@ public class SaveManager : MonoBehaviour
     [System.Serializable]
     public class SaveData
     {
-        public int[] values;
-        public string time; // DateTime is not directly serializable by JsonUtility, so we use string
+        public int unlockedPlanets = 1;
+        public int currentPlanet = 1;
+        public int unlockedPleiads = 0;
+        public string saveTime = DateTime.Now.ToString("g");
+        public string playtime = "0:00:00";
     }
     private void SaveInfo(int slot)
     {
         SaveData data = new SaveData();
-        data.time = DateTime.Now.ToString("f");
-        data.values = new int[4];
-        data.values[0] = 1; // Unlocked planets
-        data.values[1] = 2; // Unlocked pleiads
-        data.values[2] = 3; // Last planet played
-        data.values[3] = (int) 4; // Playtime
-        
         string jsonString = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json", jsonString);
     }
@@ -127,32 +123,23 @@ public class SaveManager : MonoBehaviour
         
         File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
     }
-
-    // private static void SaveSlotData(int slot)
-    // {
-    //     int[] data = new int[3];
-    //     // data[0] = planetes unlock;
-    //     DateTime saveTime = System.DateTime.Now;
-    //     // data[2] = playtime;
-    //     
-    //     File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/slot.json", JsonUtility.ToJson(data));
-    // }
     #endregion
     
     #region Load
 
-    public int[] GetInfo(int slot)
+    public SaveData GetSaveData(int slot)
     {
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            int[] data = JsonUtility.FromJson<int[]>(jsonString);
+            SaveData data = JsonUtility.FromJson<SaveData>(jsonString);
             return data;
         } else {
-            Debug.LogError("Save file not found at " + path);
+            Debug.Log("Save file not found at " + path);
             return null;
         }
     }
+    
     private static void LoadPlayer(int slot){
         string path = Application.persistentDataPath + "/Slot" + slot.ToString() +"/player.save";
         if(File.Exists(path)){

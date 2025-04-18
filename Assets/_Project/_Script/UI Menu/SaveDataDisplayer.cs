@@ -13,6 +13,14 @@ public class SaveDataDisplayer : MonoBehaviour
     {
         _planetName.text = planetName;
         _saveDate.text = saveDate;
-        _planetIcon.texture = planetIcon;
+        if(planetIcon == null)
+        {
+            _planetIcon.gameObject.SetActive(false);
+        }
+        else
+        {
+            _planetIcon.gameObject.SetActive(true);
+            _planetIcon.texture = planetIcon;
+        }
     }
 }
