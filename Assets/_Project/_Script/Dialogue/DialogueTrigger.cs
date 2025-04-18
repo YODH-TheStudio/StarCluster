@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    #region Start Dialogue 
     public void StartDialogue(DialogueContainerSO dialogue)
     {
         if (dialogue != null)
@@ -18,4 +19,5 @@ public class DialogueTrigger : MonoBehaviour
             GameManager.Instance.GetDialogueManager().StartMiniDialogue(dialogue);
         }
     }
+    #endregion
 }

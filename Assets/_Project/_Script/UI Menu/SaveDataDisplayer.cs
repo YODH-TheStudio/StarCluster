@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class SaveDataDisplayer : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private TextMeshProUGUI planetNameText;
     [SerializeField] private TextMeshProUGUI saveDateText;
     [SerializeField] private RawImage planetIconImage;
-    
+    #endregion
+
+    #region Set Function
     public void Set(string planetName, string saveDate, Texture2D planetIcon)
     {
         planetNameText.text = planetName;
@@ -22,4 +25,5 @@ public class SaveDataDisplayer : MonoBehaviour
             planetIconImage.texture = planetIcon;
         }
     }
+    #endregion
 }

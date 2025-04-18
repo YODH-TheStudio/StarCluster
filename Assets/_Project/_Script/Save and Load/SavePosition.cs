@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class SavePosition : MonoBehaviour
 {
+    #region Fields
     public string identifier;
 
+    #endregion
+
+    #region Main Functions
     private void Awake()
     {
         // check if the identifier is empty
@@ -28,4 +32,6 @@ public class SavePosition : MonoBehaviour
     {
         return GameObject.Find(name) != null;
     }
+
+    #endregion
 }

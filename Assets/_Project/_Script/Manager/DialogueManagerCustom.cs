@@ -8,7 +8,7 @@ public delegate void Notify();
 
 public class DialogueManagerCustom : MonoBehaviour
 {
-
+    #region Fields
     private DialogueContainerSO _dialogueContainer;
     public UnityEvent endEvent;
     public UnityEvent startEvent;
@@ -25,6 +25,9 @@ public class DialogueManagerCustom : MonoBehaviour
     private DialogueManager _dialogueManager;
     private MeetAndTalk.Localization.LocalizationManager _localizationManager;
 
+    #endregion
+
+    #region Main Functions
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
@@ -42,6 +45,9 @@ public class DialogueManagerCustom : MonoBehaviour
         _dialogueMiniUIManager = dialogueMiniUIManager;
     }
 
+    #endregion
+
+    #region OnStart/End Dialogue
     public void OnStartDialogue()
     {
         if (_dialogueManager.MainUI == _dialogueUIManager)
@@ -67,7 +73,10 @@ public class DialogueManagerCustom : MonoBehaviour
         }
         StartProcessEnd();
     }
-    
+
+    #endregion
+
+    #region Preocess End/Skip Dialogue
     public void StartProcessEnd()
     {
         OnProcessEndDialogue();
@@ -89,7 +98,9 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         _dialogueManager.SkipDialogue();
     }
-    
+    #endregion
+
+    #region Start Dialogue
     public void StartDialogue(DialogueContainerSO dialogueContainerParam)
     {
         //run the event when the dialogue start
@@ -128,6 +139,9 @@ public class DialogueManagerCustom : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region event handler
     // event handler
     public void bl_ProcessEndDialogue()
     {
@@ -143,7 +157,8 @@ public class DialogueManagerCustom : MonoBehaviour
     {
         // GameManager.instance.dialogueManager.SkipDialogue();
     }
-    
+   
+
     private void Touch_OnFingerDown(Finger touchedFinger)
     {
         if (_isDialogue && _dialogueManager.isSkippeable)
@@ -160,4 +175,5 @@ public class DialogueManagerCustom : MonoBehaviour
             }
         }
     }
+    #endregion
 }

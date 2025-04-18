@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ObjectFade: MonoBehaviour
 {
+    #region Fields
     [SerializeField] private float fadeSpeed = 2f;
 
     [SerializeField] private float fadeAmount = 0.25f;
@@ -16,6 +17,9 @@ public class ObjectFade: MonoBehaviour
     private List<GameObject> _oldHits;
     private List<GameObject> _toRemove;
 
+    #endregion
+
+    #region Main Functions
     private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
@@ -75,6 +79,9 @@ public class ObjectFade: MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Raycast
     private void SendRaycast()
     {
         _hits.Clear();
@@ -100,6 +107,9 @@ public class ObjectFade: MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fade Function
     private void FadeObject(List<GameObject> hits)
     {
         foreach (GameObject hit in hits)
@@ -132,8 +142,9 @@ public class ObjectFade: MonoBehaviour
             }
         }
     }
+    #endregion
 
-
+    #region Material Mode
     private void ToOpaqueMode(Material material)
     {
         material.SetOverrideTag("RenderType", "");
@@ -157,4 +168,5 @@ public class ObjectFade: MonoBehaviour
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
+    #endregion
 }

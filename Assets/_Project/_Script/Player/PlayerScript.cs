@@ -4,9 +4,9 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 {
+    #region Fields
     private static readonly int Moving = Animator.StringToHash("IsMoving");
 
-    #region Fields
 
     private SoundSystem _soundSystem;
     
@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     #endregion
 
+    #region Main Functions
     private void Awake()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
@@ -101,55 +102,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         };
     }
 
-    // Allow the player to move, Is called by the character controler component in player
-    public void OnMove(Vector2 readVector)
-    {
-        // Calculated the movement of the player with the 45° change due to isometric view
-        Vector3 position = new Vector3(readVector.x, 0, readVector.y);
-        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
-
-
-        _direction = isoMatrix.MultiplyPoint3x4(position);
-
-        // store last move position to inform component about user movement direction
-
-        _lastMoveDirection = _direction.normalized; 
-    }
-    
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (!context.started) return;
-        
-        Interactable interactable = _playerInteractionZone.GetCurrentInteractable();
-        
-        if (interactable == null) return;
-        
-        interactable.SetUserTransform(this.transform);
-        interactable.Interact();
-
-    }
-    
-    // Rotate the player in the direction he is walking
-    private void Look()
-    {
-        // Don't go back to the starting rotation when the player don't move
-        if (_direction == Vector3.zero) return;
-        
-        // Calculated the rotation and set it
-        var relative = (transform.position + _direction) - transform.position;
-        var rot = Quaternion.LookRotation(relative, Vector3.up);
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
-    }
-    
-    private void LookAt(Vector3 target)
-    {
-        // Calculated the rotation and set it
-        var relative = (target) - transform.position;
-        var rot = Quaternion.LookRotation(relative, Vector3.up);
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
-    }
 
     private void FixedUpdate()
     {
@@ -157,14 +109,14 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         if (_direction != Vector3.zero)
         {
             playerAnimator.SetBool(Moving, true);
-                
+
         }
         else if (_direction == Vector3.zero)
         {
             playerAnimator.SetBool(Moving, false);
         }
-        
-        if(_particle != null)
+
+        if (_particle != null)
         {
             if (_direction != Vector3.zero)
             {
@@ -193,10 +145,10 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
-            
+
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
             {
-                
+
                 Vector3 northDirection = Vector3.forward;
                 Vector3 southDirection = Vector3.back;
                 Vector3 eastDirection = Vector3.right;
@@ -228,7 +180,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
                 {
                     closestDirection = westDirection;
                 }
-                
+
                 // Limit movement only on object direction and object inverse direction
                 float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);
                 _limitedMoveDirection = closestDirection * forwardMove;
@@ -247,14 +199,74 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         }
 
     }
+
+    #endregion
+
+    #region Input System
+    // Allow the player to move, Is called by the character controler component in player
+    public void OnMove(Vector2 readVector)
+    {
+        // Calculated the movement of the player with the 45° change due to isometric view
+        Vector3 position = new Vector3(readVector.x, 0, readVector.y);
+        Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
+
+
+        _direction = isoMatrix.MultiplyPoint3x4(position);
+
+        // store last move position to inform component about user movement direction
+
+        _lastMoveDirection = _direction.normalized; 
+    }
+    
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        
+        Interactable interactable = _playerInteractionZone.GetCurrentInteractable();
+        
+        if (interactable == null) return;
+        
+        interactable.SetUserTransform(this.transform);
+        interactable.Interact();
     
 
+    }
+
+    #endregion
+
+    #region Look
+    // Rotate the player in the direction he is walking
+    private void Look()
+    {
+        // Don't go back to the starting rotation when the player don't move
+        if (_direction == Vector3.zero) return;
+        
+        // Calculated the rotation and set it
+        var relative = (transform.position + _direction) - transform.position;
+        var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+    }
+    
+    private void LookAt(Vector3 target)
+    {
+        // Calculated the rotation and set it
+        var relative = (target) - transform.position;
+        var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+    }
+    #endregion
+
+    #region Teleport
     public void Teleport(float x, float y, float z)
     {
         Vector3 newPosition = new Vector3(x, y, z);
         transform.position = newPosition;
     }
+    #endregion
 
+    #region SfxPlay
     public void PlayFootstepSound() 
     {
         string[] footstepBank = isOnGrass? _footstepSfxKeysGrass : _footstepSfxKeysGround; 
@@ -267,7 +279,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         _soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
     }
+    #endregion
 
+    #region Rotation
     public void FreezeRotation()
     {
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -278,6 +292,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
+    #endregion
+
+    #region Grab Object
     public GameObject GetObjectGrabbed()
     {
         return _objectGrabbed;
@@ -288,11 +305,16 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _objectGrabbed = objectGrabbed;
     }
 
+    #endregion
+
+    #region Animation
     public bool IsMoving()
     {
         return _direction != Vector3.zero;
     }
+    #endregion
 
+    #region Particle
     public void SpawnParticle(GameObject particle)
     {
         if (_particle != null)
@@ -318,6 +340,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         Destroy(_particle);
     }
 
+    #endregion
+
+    #region Coroutine
     // Move the player to the target position in a given duration, with movement restriction
     public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
@@ -347,4 +372,5 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
     }
+    #endregion
 }

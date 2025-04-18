@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Systems.SceneManagement
 {
+    #region Classes
     public class SceneGroupManager
     {
         public event Action<string> OnSceneLoaded = delegate { };
@@ -113,4 +114,5 @@ namespace Systems.SceneManagement
             }
         }
     }
+    #endregion
 }

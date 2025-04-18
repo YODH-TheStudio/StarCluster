@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private List<PuzzleData> puzzleList;
 
     [SerializeField] private PuzzleData finalPuzzle;
 
     public event Action OnFinalPuzzleActive;
+    #endregion
 
+    #region Validation
     public void ValidatePuzzle(FusionPoint fusionPoint)
     {
         foreach (var puzzle in puzzleList) 
@@ -24,7 +27,9 @@ public class PuzzleManager : MonoBehaviour
         GameManager.Instance.GetSaveManager().SaveGame();
         Debug.Log("Autosave");
     }
+    #endregion
 
+    #region Final Puzzle
     private void AccessToFinalPuzzle()
     {
         int finishedPuzzle = 0;
@@ -42,7 +47,9 @@ public class PuzzleManager : MonoBehaviour
             OnFinalPuzzleActive?.Invoke();
         }
     }
+    #endregion
 
+    #region Data
     public List<PuzzleData> GetData()
     {
         return puzzleList;
@@ -63,4 +70,5 @@ public class PuzzleManager : MonoBehaviour
     //         }
     //     }
     // }
+    #endregion
 }

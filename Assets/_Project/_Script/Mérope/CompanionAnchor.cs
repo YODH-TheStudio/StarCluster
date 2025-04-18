@@ -3,6 +3,7 @@ using Random = UnityEngine.Random;
 
 public class CompanionAnchor : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private Vector3 runPosition = new Vector3(0, 1, -1.5f);
     
     /* Companion catchup speed, while running and orbiting */
@@ -18,7 +19,10 @@ public class CompanionAnchor : MonoBehaviour
     
     private CompanionFollow _companion;
     private PlayerScript _player;
-    
+
+    #endregion
+
+    #region Main Functions
     private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
@@ -57,6 +61,9 @@ public class CompanionAnchor : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Positions
     public void NewPos()
     {
         int angle = Random.Range(0, 360);
@@ -64,4 +71,5 @@ public class CompanionAnchor : MonoBehaviour
         Vector3 newPosition = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
         transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
     }
+    #endregion
 }

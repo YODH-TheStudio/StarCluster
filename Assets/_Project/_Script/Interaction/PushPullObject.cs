@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PushPullObject : Interactable
 {
+    #region Fields
     private SoundSystem _soundSystem;
     
     private bool _isOnPedestal;
@@ -20,6 +21,9 @@ public class PushPullObject : Interactable
 
     private float _soundCooldown;
 
+    #endregion
+
+    #region Main Functions
 
     private void Awake()
     {
@@ -34,107 +38,6 @@ public class PushPullObject : Interactable
         _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
         _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
     }
-
-    public override void Interact()
-    {
-        base.Interact();
-        TogglePushPull();
-    }
-
-    private void TogglePushPull()
-    {
-        _isGrab = !_isGrab;
-        
-        PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
-        Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
-        
-        if (!_isGrab)
-        {
-            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
-            DetachObjectFromPlayer();
-        }
-        else
-        {
-            // Find nearest position
-            Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
-            
-            StartCoroutine(PhaseAnimation(closestPosition));
-
-            // if (PossibleToGrab(closestPosition))
-            // {
-            //     // Lancer la coroutine pour la position la plus proche
-            //     StartCoroutine(PhaseAnimation(closestPosition));
-            // }
-        }
-    }
-
-    private bool PossibleToGrab(Vector3 destinationPosition)
-    {
-        // Shoot a raycast to check if the object is in the way
-        RaycastHit hit;
-        if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
-        
-        return hit.collider.gameObject == null;
-    }
-    
-    public void SetIsOnPedestal(bool isOnPedestal)
-    {
-        _isOnPedestal = isOnPedestal;
-        
-        GlowSymbol();
-    }
-
-    private void GlowSymbol()
-    {
-        if (_isOnPedestal)
-        {
-            // Glow the symbol
-        }
-        else
-        {
-            // Unglow the symbol
-        }
-    }
-    
-    private Vector3 GetClosestPosition(Vector3 playerPosition)
-    {
-        Vector3 closestPosition = _offsetPosition[0] + transform.position;
-        closestPosition.y = playerPosition.y;
-        float closestDistance = Vector3.Distance(playerPosition, closestPosition);
-        
-        foreach (var offset in _offsetPosition)
-        {
-            Vector3 offsetPosition = offset + transform.position;
-            offsetPosition.y = playerPosition.y;
-            float distance = Vector3.Distance(playerPosition, offsetPosition);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestPosition = offsetPosition;
-            }
-        }
-
-        return closestPosition;
-    }
-
-    private void AttachObjectToPlayer()
-    {
-        _stoneOriginalParent = transform.parent;
-        Vector3 originalWorldPosition = transform.position;
-
-        transform.SetParent(UserTransform);
-        transform.position = originalWorldPosition;
-        
-        UserTransform.GetComponent<PlayerScript>().FreezeRotation();
-    }
-
-    private void DetachObjectFromPlayer()
-    {
-        transform.SetParent(_stoneOriginalParent);
-        
-        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
-    }
-
     private void FixedUpdate()
     {
         if (!_isGrab) return;
@@ -163,6 +66,111 @@ public class PushPullObject : Interactable
         
     }
 
+    #endregion
+
+    #region Interact
+    public override void Interact()
+    {
+        base.Interact();
+        TogglePushPull();
+    }
+    #endregion
+
+    #region Push/Pull
+    private void TogglePushPull()
+    {
+        _isGrab = !_isGrab;
+        
+        PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
+        Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
+        
+        if (!_isGrab)
+        {
+            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+            DetachObjectFromPlayer();
+        }
+        else
+        {
+            // Find nearest position
+            Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
+            
+            StartCoroutine(PhaseAnimation(closestPosition));
+        }
+    }
+
+    private bool PossibleToGrab(Vector3 destinationPosition)
+    {
+        // Shoot a raycast to check if the object is in the way
+        RaycastHit hit;
+        if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
+        
+        return hit.collider.gameObject == null;
+    }
+    
+    public void SetIsOnPedestal(bool isOnPedestal)
+    {
+        _isOnPedestal = isOnPedestal;
+        
+        GlowSymbol();
+    }
+    private Vector3 GetClosestPosition(Vector3 playerPosition)
+    {
+        Vector3 closestPosition = _offsetPosition[0] + transform.position;
+        closestPosition.y = playerPosition.y;
+        float closestDistance = Vector3.Distance(playerPosition, closestPosition);
+        
+        foreach (var offset in _offsetPosition)
+        {
+            Vector3 offsetPosition = offset + transform.position;
+            offsetPosition.y = playerPosition.y;
+            float distance = Vector3.Distance(playerPosition, offsetPosition);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPosition = offsetPosition;
+            }
+        }
+
+        return closestPosition;
+    }
+    #endregion
+
+    #region ???
+    private void GlowSymbol()
+    {
+        if (_isOnPedestal)
+        {
+            // Glow the symbol
+        }
+        else
+        {
+            // Unglow the symbol
+        }
+    }
+    #endregion
+
+    #region Attach/Detach
+    private void AttachObjectToPlayer()
+    {
+        _stoneOriginalParent = transform.parent;
+        Vector3 originalWorldPosition = transform.position;
+
+        transform.SetParent(UserTransform);
+        transform.position = originalWorldPosition;
+        
+        UserTransform.GetComponent<PlayerScript>().FreezeRotation();
+    }
+
+    private void DetachObjectFromPlayer()
+    {
+        transform.SetParent(_stoneOriginalParent);
+        
+        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+    }
+
+    #endregion
+
+    #region Movement
     private void MovePlayerAndObject(Vector3 direction)
     {
         UserTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
@@ -175,7 +183,9 @@ public class PushPullObject : Interactable
 
         
     }
+    #endregion
 
+    #region Coroutines
     private IEnumerator PhaseAnimation(Vector3 start)
     {
         PlayerScript playerScript = GameManager.Instance.GetPlayer();
@@ -194,4 +204,5 @@ public class PushPullObject : Interactable
         playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
     }
+    #endregion
 }

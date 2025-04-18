@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : Menu
 {
+    #region Fields
     private SoundSystem _soundSystem;
     private VibrationManager _vibrationManager;
     
@@ -23,7 +24,9 @@ public class SettingsMenu : Menu
     
     private bool _canVibrate;
     private int _vibration;
+    #endregion
 
+    #region Main Functions
     private void Start()
     {
         _soundSystem = GameManager.GetSoundSystem();
@@ -31,7 +34,9 @@ public class SettingsMenu : Menu
 
         LoadPlayerPrefs();
     }
+    #endregion
 
+    #region Player Prefs
     private void LoadPlayerPrefs()
     {
         _currentLanguage = PlayerPrefs.GetString("Language", "en");
@@ -44,7 +49,9 @@ public class SettingsMenu : Menu
         _vibration = PlayerPrefs.GetInt("CanVibrate", 1);
         vibrationToggle.isOn = _vibration == 1;
     }
+    #endregion
 
+    #region Language
     public void SwitchLanguage()
     {
         _currentLanguageIndex = (_currentLanguageIndex + 1) % _languages.Count();
@@ -53,7 +60,9 @@ public class SettingsMenu : Menu
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
         PlayerPrefs.Save();
     }
-    
+    #endregion
+
+    #region Volume
     public void MasterVolume()
     {
         _masterVolume = masterSlider.value;
@@ -73,10 +82,13 @@ public class SettingsMenu : Menu
         _soundSystem.SetSfxVolume(_sfxVolume);
     }
 
-    
+    #endregion
+
+    #region Vibration
     public void SetVibration()
     {
         _vibrationManager.SwitchVibrationMode();
         _canVibrate = _vibrationManager.GetVibrationMode();
     }
+    #endregion
 }

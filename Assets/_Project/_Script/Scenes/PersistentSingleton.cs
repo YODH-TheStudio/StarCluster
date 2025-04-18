@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PersistentSingleton<T> : MonoBehaviour where T : Component
 {
+    #region Fields
     public bool unparentOnAwake = true;
 
     public static bool HasInstance => instance != null;
@@ -30,6 +31,9 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
 
     protected virtual void Awake() => InitializeSingleton();
 
+    #endregion
+
+    #region Main Functions
     protected virtual void InitializeSingleton()
     {
         if (!Application.isPlaying)
@@ -56,4 +60,5 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
             }
         }
     }
+    #endregion
 }

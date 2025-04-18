@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlanetMenu : Menu
 {
+    #region Fields
     private SaveManager _saveManager;
     private SoundSystem _soundSystem;
     
@@ -17,7 +18,9 @@ public class PlanetMenu : Menu
     private int _unlockedPlanets;
 
     private bool _isMoving = false;
+    #endregion
 
+    #region Main Functions
     protected override void Awake()
     {
         base.Awake();
@@ -27,6 +30,9 @@ public class PlanetMenu : Menu
         _rectWidth = rectTransform.rect.width;
         _planetWidth = _rectWidth / PlanetNumber;
     }
+    #endregion
+
+    #region Scroll
 
     private void ScrollHorizontalLeft(int increment)
     {
@@ -51,7 +57,9 @@ public class PlanetMenu : Menu
             ? LerpToPos(targetPos, 0.5f, () => Snap(increment))
             : LerpToPos(targetPos, 0.5f));
     }
+    #endregion
 
+    #region Planet Selection
     public void MoveSelection(int increment)
     {
         if (_isMoving) return;
@@ -83,8 +91,9 @@ public class PlanetMenu : Menu
     {
         rectTransform.anchoredPosition = increment > 0 ? new Vector2(increment * _planetWidth * (PlanetNumber - 5), rectTransform.anchoredPosition.y) : new Vector2(increment * _planetWidth * (PlanetNumber - 3), rectTransform.anchoredPosition.y);
     }
+#endregion
 
-
+    #region Coroutine
     private IEnumerator LerpToPos(Vector3 targetPos, float duration,System.Action onComplete = null)
     {
         _isMoving = true;
@@ -101,4 +110,5 @@ public class PlanetMenu : Menu
         _isMoving = false;
         onComplete?.Invoke();
     }
+    #endregion
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace Systems.SceneManagement
 {
+    #region Classes
     public class SceneLoader : MonoBehaviour
     {
         [SerializeField] private Image loadingBar;
@@ -80,4 +81,6 @@ namespace Systems.SceneManagement
             }
         }
     }
+
+    #endregion
 }

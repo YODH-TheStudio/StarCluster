@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerInteractionZone : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private float raycastDistance = 1.25f;
 
     private GameObject _interactionButton;
@@ -16,7 +17,10 @@ public class PlayerInteractionZone : MonoBehaviour
     private Vector3 _ray2;
     private Vector3 _ray3;
     private Vector3 _ray4;
-    
+
+    #endregion
+
+    #region Main Functions
     private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
@@ -68,7 +72,10 @@ public class PlayerInteractionZone : MonoBehaviour
         
         _interactionButton.SetActive(false);
     }
-    
+    #endregion
+
+    #region Interactions
+
     public void SetInteractionButton(GameObject button)
     {
         _interactionButton = button;
@@ -78,4 +85,5 @@ public class PlayerInteractionZone : MonoBehaviour
     {
         return _currentInteractable;
     }
+    #endregion
 }

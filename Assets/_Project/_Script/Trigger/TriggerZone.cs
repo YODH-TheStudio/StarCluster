@@ -4,11 +4,14 @@ using UnityEngine.Events;
 
 public class TriggerZone : MonoBehaviour
 {
-
+    #region Fields
     [SerializeField] private DialogueContainerSO dialogue;
     [SerializeField] private UnityEvent onTriggerEnterEvent;
     [SerializeField] private UnityEvent onDialogueEndEvent;
-    
+
+    #endregion
+
+    #region End Dialogue event
     private void OnEndDialogue()
     {
         // Unsubscribe from the event
@@ -16,7 +19,9 @@ public class TriggerZone : MonoBehaviour
         onDialogueEndEvent.Invoke();
         // Add your logic here for when the dialogue ends
     }
-    
+    #endregion
+
+    #region Start Dialogue
     public void StartDialogue()
     {
         if (dialogue != null)
@@ -42,7 +47,9 @@ public class TriggerZone : MonoBehaviour
             Debug.LogError("DialogueContainer is null for trigger zone");
         }
     }
-    
+    #endregion
+
+    #region Trigger Functions
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerScript>() == null) return;
@@ -56,4 +63,5 @@ public class TriggerZone : MonoBehaviour
             Debug.LogError("DialogueContainer is null for trigger zone");
         }
     }
+    #endregion
 }

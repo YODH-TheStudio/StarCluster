@@ -7,6 +7,8 @@ using UnityEngine.Events;
 [Serializable]
 public class FusionPoint : Interactable
 {
+    #region Fields
+
     [SerializeField]
     private bool _isFinished;
 
@@ -16,6 +18,9 @@ public class FusionPoint : Interactable
     [SerializeField]
     private UnityEvent _onInteractIfPuzzleFinish;
 
+    #endregion
+
+    #region Interactable Functions
     override public void Interact()
     {
         if (_isFinished)
@@ -27,14 +32,19 @@ public class FusionPoint : Interactable
             _onInteractIfPuzzleNotFinish.Invoke();
         }
     }
+    #endregion
 
+    #region Getteur
     public bool GetState()
     {
         return _isFinished;
     }
+    #endregion
 
+    #region Setteur
     public void SetState(bool finish)
     {
         _isFinished = finish;
     }
+    #endregion
 }

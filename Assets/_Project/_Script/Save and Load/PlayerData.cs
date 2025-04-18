@@ -1,9 +1,13 @@
 [System.Serializable]
 public class PlayerData
 {
+    #region Fields
     public float[] position;
     //public List<string> objects;
-    
+
+    #endregion
+
+    #region Player Data
     public PlayerData()
     {
         //objects = new List<string>();
@@ -30,4 +34,5 @@ public class PlayerData
         //     objects.Add(item.itemName);
         // }
     }
+    #endregion
 }

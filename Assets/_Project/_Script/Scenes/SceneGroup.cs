@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Systems.SceneManagement
 {
+    #region Classes
     [Serializable]
     public class SceneGroup
     {
@@ -25,5 +26,5 @@ namespace Systems.SceneManagement
     }
 
     public enum SceneType { ActiveScene, MainMenu, UserInterface, HUD, Cinematic, Enironment, Tooling }
-
+    #endregion
 }

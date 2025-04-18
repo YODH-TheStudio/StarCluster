@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class VibrationManager : MonoBehaviour
 {
+    #region Fields
     private bool _canVibrate;
-    
+
+    #endregion
+
+    #region Main Functions
     private void Start()
     {
         LoadPlayerPrefs();
     }
-    
+    #endregion
+
+    #region Vibration
     public void Vibrate(float strength, float duration)
     {
         if (!_canVibrate) return;
@@ -48,4 +54,5 @@ public class VibrationManager : MonoBehaviour
     {
         return _canVibrate;
     }
+    #endregion
 }

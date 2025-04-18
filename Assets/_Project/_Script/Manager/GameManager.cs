@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
-
+    #region Fields
     private PlayerScript _player;
     private CompanionFollow _companion;
     
@@ -12,7 +12,9 @@ public class GameManager : PersistentSingleton<GameManager>
     private DialogueManagerCustom DialogueManager { get; set; }
     private PuzzleManager PuzzleManager { get; set; }
     private SaveManager SaveManager { get; set; }
+    #endregion
 
+    #region Main Functions
     private new void Awake()
     {
         if (VibrationManager == null)
@@ -40,7 +42,9 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         Instance.SoundSystem.ChangeMusicByKey("Main");
     }
+    #endregion
 
+    #region Finders
     private void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
@@ -77,7 +81,9 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         DialogueManager = FindObjectOfType<DialogueManagerCustom>();
     }
+    #endregion
 
+    #region Getters
     public PlayerScript GetPlayer()
     {
         if (_player == null)
@@ -149,10 +155,13 @@ public class GameManager : PersistentSingleton<GameManager>
         return SoundSystem;
     }
 
+    #endregion
 
+    #region Save/Load
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();
         Instance.GetSaveManager().SaveGame();
     }
+    #endregion
 }

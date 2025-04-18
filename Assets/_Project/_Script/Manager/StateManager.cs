@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    #region Fields
     [Flags] public enum PlayerState
     {
         Idle = 2,
@@ -17,13 +18,18 @@ public class StateManager : MonoBehaviour
     
     // Event triggered when changing state
     public event Action<PlayerState> OnStateChanged;
-    
+
+    #endregion
+
+    #region Main Functions
     // Start is called before the first frame update
     void Start()
     {
         _playerState = PlayerState.Idle;
     }
+    #endregion
 
+    #region Sates
     // Method to change state
     public void ChangeState(PlayerState newState)
     {
@@ -49,4 +55,5 @@ public class StateManager : MonoBehaviour
     {
         return _playerState;
     }
+    #endregion
 }

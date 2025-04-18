@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SavesMenu : Menu
 {
+
+    #region Fields
     [SerializeField] private List<Texture2D> planetIcons;
     
     private int _previousSavedGroupScene;
@@ -13,7 +15,9 @@ public class SavesMenu : Menu
     // [SerializeField] private GameObject _saveSlot1;
     // [SerializeField] private GameObject _saveSlot2;
     // [SerializeField] private GameObject _saveSlot3;
+    #endregion
 
+    #region Main Functions
     private new void Awake()
     {
         // setup slot text
@@ -23,7 +27,9 @@ public class SavesMenu : Menu
         }
         RefreshSlotsData();
     }
-    
+    #endregion
+
+    #region Planets Names
     private readonly List<string> _planetNames = new List<string>()
     { 
         "PLANET_JOY",
@@ -34,8 +40,9 @@ public class SavesMenu : Menu
         "PLANET_MELANCHOLY",
         "PLANET_SEEDY"
     };
+    #endregion
 
-
+    #region Save Data
     private void RefreshSlotsData()
     {
         // Read save info
@@ -73,4 +80,5 @@ public class SavesMenu : Menu
         GameManager.Instance.GetSaveManager().DeleteSave(_saveIndex);
         RefreshSlotsData();
     }
+    #endregion
 }

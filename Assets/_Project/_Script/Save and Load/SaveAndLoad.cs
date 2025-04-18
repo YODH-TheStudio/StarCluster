@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SaveAndLoad : MonoBehaviour
 {
+    #region Save/Load
     public void SaveGame()
     {
         GameManager.Instance.GetSaveManager().SaveGame();
@@ -10,4 +11,5 @@ public class SaveAndLoad : MonoBehaviour
     {
         GameManager.Instance.GetSaveManager().LoadGame();
     }
+    #endregion
 }

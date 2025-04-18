@@ -6,6 +6,7 @@ public enum AxisOptions { Both, Horizontal, Vertical }
 
 public class PlayerJoystick : MonoBehaviour
 {
+    #region Fields
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
     [SerializeField] private float movementRange;
@@ -19,6 +20,9 @@ public class PlayerJoystick : MonoBehaviour
     private Camera _cam;
     private Vector2 _handleStartPosition;
 
+    #endregion
+
+    #region Main Functions
     protected virtual void Start()
     {
         _baseRect = GetComponent<RectTransform>();
@@ -36,7 +40,13 @@ public class PlayerJoystick : MonoBehaviour
 
         _player = GameManager.Instance.GetPlayer();
     }
+    private void Update()
+    {
+        _player.OnMove(_movementAmount);
+    }
 
+
+ 
     private void OnEnable()
     {
         GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
@@ -53,6 +63,9 @@ public class PlayerJoystick : MonoBehaviour
         ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         EnhancedTouchSupport.Disable();
     }
+    #endregion
+
+    #region StateChange
 
     private void HandleStateChanged(StateManager.PlayerState newState)
     {
@@ -70,7 +83,9 @@ public class PlayerJoystick : MonoBehaviour
             CancelJoystick();
         }
     }
-    
+    #endregion
+
+    #region Touch
     private void Touch_OnFingerDown(Finger touchedFinger)
     {
         if(_movementFinger == null && touchedFinger.screenPosition.x <= Screen.width / 2f)
@@ -127,9 +142,5 @@ public class PlayerJoystick : MonoBehaviour
         Vector2 pivotOffset = _baseRect.pivot * _baseRect.sizeDelta;
         return localPoint - (background.anchorMax * _baseRect.sizeDelta) + pivotOffset;
     }
-
-    private void Update()
-    {
-        _player.OnMove(_movementAmount);
-    }
+    #endregion
 }

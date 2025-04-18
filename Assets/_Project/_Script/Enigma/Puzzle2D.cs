@@ -13,6 +13,7 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class Puzzle2D : MonoBehaviour
 {
+    #region Fields
     // Colors
     public Color _pointColor = Color.green;
     public Color _lineColor = Color.red;
@@ -73,6 +74,8 @@ public class Puzzle2D : MonoBehaviour
 
 
     private Vector3 _fingerMP = Vector3.zero;
+
+    #endregion
 
     void Start()
     {

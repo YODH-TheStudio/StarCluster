@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class CompanionFollow : MonoBehaviour
 {
+    #region Fields
     private PlayerScript _player;
     private CompanionAnchor _companionAnchor;
     
@@ -27,7 +28,10 @@ public class CompanionFollow : MonoBehaviour
     private List<Vector3> _path;
 
     private GameObject _model;
-    
+
+    #endregion
+
+    #region Main Functions
     // Start is called before the first frame update
     void Start()
     {
@@ -77,9 +81,12 @@ public class CompanionFollow : MonoBehaviour
             Debug.LogWarning("Model not found");
         }
     }
-    
+    #endregion
+
+    #region Collisions
     void OnCollisionEnter(Collision other)
     {
         _companionAnchor.NewPos();
     }
+    #endregion
 }

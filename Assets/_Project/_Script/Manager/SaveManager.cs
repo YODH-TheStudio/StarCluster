@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    #region Fields
     private DialogueData _dialogueData;
     public int currentSlot = 1;
-    
+    #endregion
+
+    #region Main Functions
     // Load and save all
     public void SaveGame(int slot = 0){
         if(slot == 0)
@@ -69,7 +72,8 @@ public class SaveManager : MonoBehaviour
     //     //DialogueData.choicesMade.Add(choiceName);
     //     _dialogueData.addChoiceMade(choiceName);
     // }
-    
+    #endregion
+
     #region Save
     [System.Serializable]
     public class SaveData

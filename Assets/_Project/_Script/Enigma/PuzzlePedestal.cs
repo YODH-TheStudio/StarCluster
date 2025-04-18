@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PuzzlePedestal : MonoBehaviour
 {
+
+    #region Fields
     [SerializeField]
     private FusionPoint _fusionPoint;
     
@@ -24,7 +26,9 @@ public class PuzzlePedestal : MonoBehaviour
         public GameObject pedestalObject;
         public bool isOnPedestal = false;
     }
-    
+    #endregion
+
+    #region Main Functions
     private void Start()
     {
         foreach (var pair in _pedestalDataList)
@@ -40,7 +44,9 @@ public class PuzzlePedestal : MonoBehaviour
     {
         CheckObjectPosition();
     }
+    #endregion
 
+    #region Puzzel
     private void CheckObjectPosition()
     {
         foreach (var pair in _pedestalDataList)
@@ -109,4 +115,5 @@ public class PuzzlePedestal : MonoBehaviour
             _fusionPoint.SetState(true);
         }
     }
+    #endregion
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class PhasableObject : Interactable
 {
+    #region Fields
     private SoundSystem _soundSystem;
     
     // Animation
@@ -20,6 +21,9 @@ public class PhasableObject : Interactable
 
     private Collider _objectCollider;
 
+    #endregion
+
+    #region Main Functions
     private void Awake()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
@@ -38,12 +42,30 @@ public class PhasableObject : Interactable
         _phasePairs.Add((this.transform.position + startOffset, this.transform.position + endOffset));
         _phasePairs.Add((this.transform.position + endOffset, this.transform.position + startOffset));
     }
+    #endregion
 
+    #region Interaction
     public override void Interact()
     {
         base.Interact();
         TogglePhase();
     }
+    private void Update()
+    {
+        if (UserTransform == null) return;
+
+        // Draw the position of the player and the pair
+        _lineRenderer.SetPosition(0, UserTransform.position);
+
+        // Optional : Can draw the line between the player and the phase start
+        if (_phasePairs.Count > 0)
+        {
+            _lineRenderer.SetPosition(1, _phasePairs[0].start);  // Draw first pair for the example
+        }
+    }
+    #endregion
+
+    #region Phase
 
     private void TogglePhase()
     {
@@ -78,36 +100,9 @@ public class PhasableObject : Interactable
         Debug.Log("Player is out of phase radius. Phase transition denied.");
     }
 
-    private IEnumerator PhaseAnimation((Vector3 start, Vector3 end) phasePair)
-    {
-        PlayerScript playerScript = UserTransform.GetComponent<PlayerScript>();
+    #endregion
 
-        yield return StartCoroutine(playerScript.MoveTo(phasePair.start, PhaseDuration));
-
-        // Move the player and wait until the end of the phase
-        yield return StartCoroutine(playerScript.MoveTo(phasePair.end, PhaseDuration));
-
-        // Activate the collider
-        if (_objectCollider != null)
-        {
-            _objectCollider.enabled = true;
-        }
-    }
-
-    private void Update()
-    {
-        if (UserTransform == null) return;
-
-        // Draw the position of the player and the pair
-        _lineRenderer.SetPosition(0, UserTransform.position);
-
-        // Optional : Can draw the line between the player and the phase start
-        if (_phasePairs.Count > 0)
-        {
-            _lineRenderer.SetPosition(1, _phasePairs[0].start);  // Draw first pair for the example
-        }
-    }
-
+    #region Draw Debug 
     private void OnDrawGizmos()
     {
         // Draw the phase pairs in game
@@ -123,4 +118,23 @@ public class PhasableObject : Interactable
             Gizmos.DrawLine(pair.start, pair.end);
         }
     }
+    #endregion
+
+    #region Coroutine
+    private IEnumerator PhaseAnimation((Vector3 start, Vector3 end) phasePair)
+    {
+        PlayerScript playerScript = UserTransform.GetComponent<PlayerScript>();
+
+        yield return StartCoroutine(playerScript.MoveTo(phasePair.start, PhaseDuration));
+
+        // Move the player and wait until the end of the phase
+        yield return StartCoroutine(playerScript.MoveTo(phasePair.end, PhaseDuration));
+
+        // Activate the collider
+        if (_objectCollider != null)
+        {
+            _objectCollider.enabled = true;
+        }
+    }
+    #endregion
 }
