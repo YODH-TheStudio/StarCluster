@@ -6394,6 +6394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 0}
 --- !u!4 &979239176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f24a48b266e09f9488a8fdf1aaf5df76,
@@ -7006,6 +7007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!1001 &1045358110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9731,6 +9733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!4 &1488512180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bba83a7fe774ec4d9696501d3f124e7,
@@ -9803,6 +9806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!1001 &1510778304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10501,6 +10505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!1001 &1669344647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11580,6 +11585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!4 &1803447244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3746ce76d166d764e868c36a27b9ea5b,
@@ -11991,6 +11997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!1001 &1851072115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12459,6 +12466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48387fc7ce75478bea13c0a4acfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!4 &1982352465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be9fcb9c85bd60c4b8ba80e6784daf17,

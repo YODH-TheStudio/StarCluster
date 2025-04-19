@@ -21,6 +21,11 @@ public class PushPullObject : Interactable
 
     private float _soundCooldown;
 
+    private AudioSource _pushAudioSource;
+    [SerializeField] private AudioClip pushClip;
+
+    private bool _isAudioPlaying;
+
     #endregion
 
     #region Main Functions
@@ -37,6 +42,12 @@ public class PushPullObject : Interactable
         _offsetPosition.Add(new Vector3(0, 0, -GrabOffset));
         _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
         _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
+
+        _pushAudioSource = gameObject.AddComponent<AudioSource>();
+        _pushAudioSource.clip = pushClip;
+        _pushAudioSource.loop = true;
+        _pushAudioSource.playOnAwake = false;
+
     }
     private void FixedUpdate()
     {
@@ -62,8 +73,13 @@ public class PushPullObject : Interactable
         else
         {
             UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
+
+            if (_pushAudioSource.isPlaying)
+            {
+                _pushAudioSource.Stop();
+                _isAudioPlaying = false;
+            }
         }
-        
     }
 
     #endregion
@@ -166,6 +182,13 @@ public class PushPullObject : Interactable
         transform.SetParent(_stoneOriginalParent);
         
         UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+
+        if (_isAudioPlaying)
+        {
+            _pushAudioSource.Stop();
+            _isAudioPlaying = false;
+        }
+
     }
 
     #endregion
@@ -175,13 +198,13 @@ public class PushPullObject : Interactable
     {
         UserTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
 
-        if (_soundCooldown <= 0f)
+
+        if (!_pushAudioSource.isPlaying)
         {
-            _soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
-            _soundCooldown = 1f;
+            _pushAudioSource.Play();
+            _isAudioPlaying = true;
         }
 
-        
     }
     #endregion
 
