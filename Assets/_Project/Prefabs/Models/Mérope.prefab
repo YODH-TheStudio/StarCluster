@@ -267,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 3691437104814576882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.047, y: 0, z: 0.226}
+  m_LocalPosition: {x: -0.047, y: -0.029, z: 0.252}
   m_LocalScale: {x: 0.89463395, y: 0.89463395, z: 0.89463395}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,7 +463,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.49019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -903,8 +903,8 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
-    enabled: 0
-    type: 4
+    enabled: 1
+    type: 5
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -912,7 +912,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 0.13301706, y: 0.334549, z: 0.31990334}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -1667,8 +1667,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startFrame:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 0.9999
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1723,11 +1723,14 @@ ParticleSystem:
     tilesY: 1
     animationType: 0
     rowIndex: 0
-    cycles: 1
+    cycles: 0.0001
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: ae0e1b8e46e32994a9db8351588da56b, type: 3}
+    - sprite: {fileID: -1239075173, guid: b8c6e2ba81d10a944867c1267b69d2fa, type: 3}
+    - sprite: {fileID: -1647485895, guid: b8c6e2ba81d10a944867c1267b69d2fa, type: 3}
+    - sprite: {fileID: -854586943, guid: b8c6e2ba81d10a944867c1267b69d2fa, type: 3}
+    - sprite: {fileID: 435775663, guid: b8c6e2ba81d10a944867c1267b69d2fa, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
