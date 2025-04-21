@@ -455,6 +455,10 @@ public class SoundSystem : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public AudioMixerGroup GetSFXMixerGroup()
+    {
+        return sfxMixerGroup; // défini dans l’inspecteur ou chargé dynamiquement
+    }
 
     #endregion
 

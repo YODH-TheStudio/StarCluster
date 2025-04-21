@@ -48,6 +48,8 @@ public class PushPullObject : Interactable
         _pushAudioSource.loop = true;
         _pushAudioSource.playOnAwake = false;
 
+        _pushAudioSource.outputAudioMixerGroup = _soundSystem.GetSFXMixerGroup();
+
     }
     private void FixedUpdate()
     {
