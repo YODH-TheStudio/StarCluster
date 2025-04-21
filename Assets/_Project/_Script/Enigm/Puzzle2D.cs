@@ -90,6 +90,16 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+
+        string deviceModel = SystemInfo.deviceModel;
+        if (deviceModel.Contains("iPad") || deviceModel.Contains("Tablet"))
+        {
+            _puzzleCamera.transform.position = new Vector3(
+                _puzzleCamera.transform.position.x - 7f,
+                _puzzleCamera.transform.position.y,
+                _puzzleCamera.transform.position.z + 1
+            );
+        }
     }
 
     private void Touch_OnFingerMove(Finger TouchedFinger)
@@ -280,19 +290,22 @@ public class Puzzle2D : MonoBehaviour
                 switch (pointSizeEntry.size)
                 {
                     case PointSize.Petite:
-                        cube.transform.localScale = Vector3.one * 0.5f; 
+                        cube.transform.localScale = Vector3.one * 30.0f; 
                         break;
                     case PointSize.Moyenne:
-                        cube.transform.localScale = Vector3.one * 1f;    
+                        cube.transform.localScale = Vector3.one * 43.0f;    
                         break;
                     case PointSize.Grosse:
-                        cube.transform.localScale = Vector3.one * 2f;    
+                        cube.transform.localScale = Vector3.one * 65.0f;    
+                        break;
+                    default:
+                        cube.transform.localScale = Vector3.one * 30.0f; // Petite par défaut
                         break;
                 }
             }
             else
             {
-                cube.transform.localScale = Vector3.one * _cubeScale;  
+                cube.transform.localScale = Vector3.one * 30.0f;  
             }
 
             var rend = cube.GetComponent<Renderer>();
@@ -308,6 +321,7 @@ public class Puzzle2D : MonoBehaviour
                     {
                         GameObject startPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
                         startPrefab.transform.position = cube.transform.position + circuit.startPointOffset;
+
                     }
 
                     if (circuit.endPoint == pos)
@@ -345,8 +359,8 @@ public class Puzzle2D : MonoBehaviour
 
     private void Draw3DLine(Vector2 a, Vector2 b)
     {
-        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
-        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
+        Vector3 aPos = new Vector3(0.1f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
+        Vector3 bPos = new Vector3(0.1f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
@@ -415,8 +429,8 @@ public class Puzzle2D : MonoBehaviour
         }
 
         // Conversion des points en 3D
-        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
-        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
+        Vector3 aPos = new Vector3(0.1f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
+        Vector3 bPos = new Vector3(0.1f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
@@ -872,6 +886,7 @@ public class Puzzle2D : MonoBehaviour
 
     private void Update()
     {
+
         // Puzzle solved Logic *** 
         _puzzleSolved = true;
         _circuitValidationStatus.Clear(); 
