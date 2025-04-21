@@ -379,11 +379,6 @@ public class Puzzle2D : MonoBehaviour
 
         segment.transform.localScale = new Vector3(_redLineRadius, distance / 2f, _redLineRadius);
 
-        Renderer rend = segment.GetComponent<Renderer>();
-        if (rend != null)
-        {
-            rend.material.color = Color.red;
-        }
 
         _activeRedLines[(a, b)] = segment;
     }
@@ -452,7 +447,10 @@ public class Puzzle2D : MonoBehaviour
         Renderer rend = segment.GetComponent<Renderer>();
         if (rend != null)
         {
-            rend.material.color = color;
+            Material mat = rend.material;
+            mat.EnableKeyword("_EMISSION"); // Active l’émission
+            Color emissionColor = color * 1.0f ; // Exemple : intensity = 1.5f
+            mat.SetColor("_EmissionColor", emissionColor);
         }
 
         if (!_activeColoredLinesByColor.ContainsKey(color))

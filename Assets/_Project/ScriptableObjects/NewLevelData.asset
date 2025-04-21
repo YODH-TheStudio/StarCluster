@@ -173,7 +173,7 @@ MonoBehaviour:
     name: 'Circuit '
     startPointOffset: {x: 0, y: 0, z: 1.8}
     endPointOffset: {x: 0, y: 0, z: 1.6}
-  - circuitColor: {r: 0.5, g: 0.18957229, b: 0.0070754588, a: 1}
+  - circuitColor: {r: 0.4245283, g: 0.17787333, b: 0, a: 1}
     startPoint: {x: -44.5, y: 51.7}
     endPoint: {x: 400.76, y: 64}
     sign: 3
