@@ -942,6 +942,12 @@ MonoBehaviour:
       sceneType: 2
     - sceneName: DialogueUI
       sceneType: 2
+  - groupName: PuzzleTest
+    scenes:
+    - sceneName: Puzzle
+      sceneType: 5
+    - sceneName: PuzzleHUD
+      sceneType: 3
 --- !u!1 &1558495324
 GameObject:
   m_ObjectHideFlags: 0
