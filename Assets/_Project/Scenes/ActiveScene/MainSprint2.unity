@@ -535,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: catchupSpeed.x
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -4171,6 +4171,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3729327795937414911, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4460437406340593842, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_Height
@@ -4200,6 +4205,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681424134025940300, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681424134025940300, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6346620637386991314, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
