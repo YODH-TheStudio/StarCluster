@@ -54,7 +54,7 @@ public class CompanionAnchor : MonoBehaviour
             _companion.bounceSpeed = bounceSpeed.x;
             transform.localPosition = runPosition;
         }
-        else if((transform.position - _companion.transform.position).magnitude < 0.1f)
+        else if((new Vector2(transform.position.x, transform.position.z) - new Vector2(_companion.transform.position.x, _companion.transform.position.z)).magnitude < 0.5f)  // (transform.position - _companion.transform.position).magnitude < 0.5f)
         {
             _companion.catchupSpeed = catchupSpeed.y;
             _companion.bounceAmount = bounceAmount.y;

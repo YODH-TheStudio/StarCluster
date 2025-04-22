@@ -63,6 +63,8 @@ public class CompanionFollow : MonoBehaviour
             _navMeshAgent.destination = targetPosition;
             //_navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed;
             Vector3 dest = new Vector3(_navMeshAgent.nextPosition.x, _companionAnchor.transform.position.y, _navMeshAgent.nextPosition.z);
+            // Debug.DrawLine(transform.position, dest, Color.red, 0.1f);
+            // Debug.DrawLine(transform.position, _navMeshAgent.nextPosition, Color.yellow, 0.1f);
             transform.position = Vector3.SmoothDamp(transform.position, dest, ref velocity, catchupSpeed); //called on FixedUpdate after agent.SetDestination
         }
         else

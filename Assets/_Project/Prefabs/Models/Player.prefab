@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runPosition: {x: 0, y: 1, z: -1.5}
-  catchupSpeed: {x: 0.3, y: 1}
+  catchupSpeed: {x: 0.5, y: 2}
   orbitOffset: 0.5
   orbitRadius: {x: 2.5, y: 3.5}
   bounceAmount: {x: 0.1, y: 0.1}
@@ -148,12 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b614c03b0177164882790a49d962dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _turnSpeed: 540
-  _raycastDistance: 1.25
-  _playerAnimator: {fileID: 6262806267379485504}
-  _particleStartPos: {x: 0, y: 0, z: 0}
-  _isOnGrass: 0
+  speed: 250
+  turnSpeed: 360
+  raycastDistance: 1.25
+  playerAnimator: {fileID: 0}
+  particleStartPos: {x: 0, y: 0, z: 0}
+  isOnGrass: 0
 --- !u!114 &4286792488053355797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f216f33ef02974894d62968da64868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _raycastDistance: 1.25
+  raycastDistance: 1.25
 --- !u!114 &7453322195121593647
 MonoBehaviour:
   m_ObjectHideFlags: 0

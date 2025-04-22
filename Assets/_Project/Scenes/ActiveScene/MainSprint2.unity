@@ -524,6 +524,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
+      propertyPath: orbitOffset
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
+        type: 3}
       propertyPath: bounceSpeed.y
       value: 1.5
       objectReference: {fileID: 0}
@@ -535,7 +540,7 @@ PrefabInstance:
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: catchupSpeed.x
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
