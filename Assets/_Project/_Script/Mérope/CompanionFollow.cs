@@ -40,7 +40,7 @@ public class CompanionFollow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // Follow the player
         if (_player != null)
@@ -58,7 +58,7 @@ public class CompanionFollow : MonoBehaviour
             //transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, catchupSpeed);
             
             _navMeshAgent.destination = targetPosition;
-            _navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed * 3.0f;
+            _navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed;
         }
         else
         {

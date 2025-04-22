@@ -535,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: catchupSpeed.x
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6796275129284258465, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -4114,7 +4114,7 @@ PrefabInstance:
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 76.06
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -4124,7 +4124,7 @@ PrefabInstance:
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 23.31
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -4185,6 +4185,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BaseOffset
       value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460437406340593842, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460437406340593842, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5391342012880605458, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
