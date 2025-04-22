@@ -20,6 +20,8 @@ public class PushPullObject : Interactable
     private Rigidbody _rigidbody;
 
     private float _soundCooldown;
+    
+    [SerializeField] MeshRenderer _meshRenderer;
 
     #endregion
 
@@ -94,7 +96,7 @@ public class PushPullObject : Interactable
             // Find nearest position
             Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
             
-            StartCoroutine(PhaseAnimation(closestPosition));
+            StartCoroutine(MoveAnimation(closestPosition));
         }
     }
 
@@ -112,6 +114,10 @@ public class PushPullObject : Interactable
         _isOnPedestal = isOnPedestal;
         
         GlowSymbol();
+        
+        DetachObjectFromPlayer();
+        
+        GetComponent<PushPullObject>().enabled = false;
     }
     private Vector3 GetClosestPosition(Vector3 playerPosition)
     {
@@ -140,11 +146,13 @@ public class PushPullObject : Interactable
     {
         if (_isOnPedestal)
         {
-            // Glow the symbol
+            _meshRenderer.material.SetColor("_EmissionColor", Color.white);
+            _meshRenderer.material.SetFloat("_Glow", 3f);
         }
         else
         {
-            // Unglow the symbol
+            _meshRenderer.material.SetColor("_EmissionColor", Color.black);
+            _meshRenderer.material.SetFloat("_Glow", 0f);
         }
     }
     #endregion
@@ -186,7 +194,7 @@ public class PushPullObject : Interactable
     #endregion
 
     #region Coroutines
-    private IEnumerator PhaseAnimation(Vector3 start)
+    private IEnumerator MoveAnimation(Vector3 start)
     {
         PlayerScript playerScript = GameManager.Instance.GetPlayer();
 

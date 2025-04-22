@@ -106,16 +106,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private void FixedUpdate()
     {
 
-        if (_direction != Vector3.zero)
-        {
-            playerAnimator.SetBool(Moving, true);
-
-        }
-        else if (_direction == Vector3.zero)
-        {
-            playerAnimator.SetBool(Moving, false);
-        }
-
         if (_particle != null)
         {
             if (_direction != Vector3.zero)
@@ -145,6 +135,16 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
+
+            if (_direction != Vector3.zero)
+            {
+                playerAnimator.SetBool(Moving, true);
+
+            }
+            else if (_direction == Vector3.zero)
+            {
+                playerAnimator.SetBool(Moving, false);
+            }
 
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
             {
@@ -372,5 +372,14 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
     }
+    #endregion
+
+    #region Getters
+    
+    public Animator GetAnimator()
+    {
+        return playerAnimator;
+    } 
+
     #endregion
 }
