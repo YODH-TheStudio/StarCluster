@@ -19,6 +19,8 @@ public class PushPullObject : Interactable
     private Transform _stoneOriginalParent;
     private Rigidbody _rigidbody;
 
+    private VibrationManager _vibrationManager = null;
+
     private float _soundCooldown;
 
     private AudioSource _pushAudioSource;
@@ -50,6 +52,8 @@ public class PushPullObject : Interactable
 
         _pushAudioSource.outputAudioMixerGroup = _soundSystem.GetSFXMixerGroup();
 
+        _vibrationManager = FindObjectOfType<VibrationManager>();
+
     }
     private void FixedUpdate()
     {
@@ -66,11 +70,13 @@ public class PushPullObject : Interactable
         {
             _pushDirection = direction;
             MovePlayerAndObject(_pushDirection);
+            
         }
         else if (dot < -0.5f)  // pull
         {
             _pushDirection = -direction;
             MovePlayerAndObject(_pushDirection);
+            
         }
         else
         {
@@ -205,6 +211,12 @@ public class PushPullObject : Interactable
         {
             _pushAudioSource.Play();
             _isAudioPlaying = true;
+        }
+
+        if (_vibrationManager != null)
+        {
+            _vibrationManager.Vibrate(0.3f, 0.1f); 
+            Debug.Log("brrrr");
         }
 
     }
