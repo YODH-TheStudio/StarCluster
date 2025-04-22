@@ -550,7 +550,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 69.2
+      value: 77.11
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -560,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.4
+      value: 27.01
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -1697,8 +1697,13 @@ PrefabInstance:
     - target: {fileID: -5775953214266689368, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5775953214266689368, guid: f4a1904034b7e774e8a814a16c4fffbc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6586e6fd782ceaa43b3cbf05db6d398f, type: 2}
     - target: {fileID: -5775953214266689368, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -6375,7 +6380,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15622991, y: -0.37717223, z: 0.06471255, w: 0.9105744}
-  m_LocalPosition: {x: 104.734955, y: 22.002426, z: 67.88936}
+  m_LocalPosition: {x: 112.64496, y: 22.002426, z: 71.49936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11745,7 +11750,7 @@ Transform:
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15622991, y: -0.37717226, z: 0.064712554, w: 0.9105743}
-  m_LocalPosition: {x: 104.734955, y: 22.002426, z: 67.88936}
+  m_LocalPosition: {x: 112.64496, y: 22.002426, z: 71.49936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

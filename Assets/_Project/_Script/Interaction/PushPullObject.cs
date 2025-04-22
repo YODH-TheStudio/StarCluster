@@ -115,7 +115,13 @@ public class PushPullObject : Interactable
         
         GlowSymbol();
         
-        DetachObjectFromPlayer();
+        
+        if (_isGrab)
+        {
+            PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
+            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+            DetachObjectFromPlayer();
+        }
         
         GetComponent<PushPullObject>().enabled = false;
     }
@@ -146,13 +152,13 @@ public class PushPullObject : Interactable
     {
         if (_isOnPedestal)
         {
-            _meshRenderer.material.SetColor("_EmissionColor", Color.white);
-            _meshRenderer.material.SetFloat("_Glow", 3f);
+            _meshRenderer.material.EnableKeyword("_EMISSION");
+            _meshRenderer.material.SetColor("_EmissionColor", Color.white * 3);
         }
         else
         {
+            _meshRenderer.material.EnableKeyword("_EMISSION");
             _meshRenderer.material.SetColor("_EmissionColor", Color.black);
-            _meshRenderer.material.SetFloat("_Glow", 0f);
         }
     }
     #endregion
