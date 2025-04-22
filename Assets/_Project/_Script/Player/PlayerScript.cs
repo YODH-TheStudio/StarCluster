@@ -142,6 +142,40 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         isOnGrass = onGrass;
 
+        RaycastHit hit;
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f; 
+        float rayDistance = 2.0f; 
+
+        bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance);
+
+        Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.green);
+
+        if (!isGrounded)
+        {
+            Debug.Log("Pas de sol détecté, déplacement annulé.");
+            return; 
+        }
+        else
+        {
+            Debug.Log("Sol détecté, déplacement autorisé.");
+        }
+
+        Vector3 forwardRayOrigin = transform.position + Vector3.up * 0.5f; 
+        float forwardRayDistance = 5.0f;
+
+        bool isGroundInFront = Physics.Raycast(forwardRayOrigin, transform.forward, forwardRayDistance);
+
+        if (!isGroundInFront)
+        {
+            Debug.Log("Pas de sol devant, mouvement impossible.");
+            return; 
+        }
+        else
+        {
+            Debug.Log("Sol détecté devant le joueur.");
+        }
+
+
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
 
