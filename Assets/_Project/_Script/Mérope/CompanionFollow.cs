@@ -24,6 +24,8 @@ public class CompanionFollow : MonoBehaviour
 
     private GameObject _model;
 
+    private Vector3 velocity;
+
     #endregion
 
     #region Main Functions
@@ -35,12 +37,13 @@ public class CompanionFollow : MonoBehaviour
         _companionAnchor = _player.GetComponentInChildren<CompanionAnchor>();
         
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.updatePosition = false; // We will manually update the position
         
         _model = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Follow the player
         if (_player != null)
@@ -58,7 +61,9 @@ public class CompanionFollow : MonoBehaviour
             //transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, catchupSpeed);
             
             _navMeshAgent.destination = targetPosition;
-            _navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed;
+            //_navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed;
+            Vector3 dest = new Vector3(_navMeshAgent.nextPosition.x, _companionAnchor.transform.position.y, _navMeshAgent.nextPosition.z);
+            transform.position = Vector3.SmoothDamp(transform.position, dest, ref velocity, catchupSpeed); //called on FixedUpdate after agent.SetDestination
         }
         else
         {
