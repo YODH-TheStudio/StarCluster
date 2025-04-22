@@ -83,7 +83,7 @@ public class PhasableObject : Interactable
 
             if (distance <= phaseRadius)
             {
-                _soundSystem.PlaySoundFXClipByKey("Phase Elctrophase", transform.position);
+                _soundSystem.PlaySoundFXClipByKey("Phase Electrophase", transform.position);
 
                 // Prepare the animation
                 if (_objectCollider != null)

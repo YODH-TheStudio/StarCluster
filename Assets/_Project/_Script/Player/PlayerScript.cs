@@ -87,18 +87,17 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         _footstepSfxKeysGround = new string[] 
         { 
-        "Chemin Pasa", "Chemin Pasb", "Chemin Pasc", "Chemin Pasd",
-        "Chemin Pase","Chemin Pasf","Chemin Pasg",
-        "Chemin Pash","Chemin Pasi","Chemin Pasj"
+        "Chemin Pas A", "Chemin Pas B", "Chemin Pas C", "Chemin Pas D",
+        "Chemin Pas E","Chemin Pas F","Chemin Pas G",
+        "Chemin Pas H","Chemin Pas I","Chemin Pas J"
         };
-        Debug.Log(_footstepSfxKeysGround);
         
         _footstepSfxKeysGrass = new string[] 
         { 
-            "Feuillage Fpasa", "Feuillage Fpasb", "Feuillage Fpasc", "Feuillage Fpasd",
-            "Feuillage Fpase","Feuillage Fpasf","Feuillage Fpasg",
-            "Feuillage Fpash","Feuillage Fpasi","Feuillage Fpasj",
-            "Feuillage Fpask", "Feuillage Fpasl"
+            "Feuillage Fpas A", "Feuillage Fpas B", "Feuillage Fpas C", "Feuillage Fpas D",
+            "Feuillage Fpas E","Feuillage Fpas F","Feuillage Fpas G",
+            "Feuillage Fpas H","Feuillage Fpas I","Feuillage Fpas J",
+            "Feuillage Fpas K", "Feuillage Fpas L"
         };
     }
 
@@ -275,7 +274,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         if (footstepBank.Length <= 0) return;
         
         Vector3 spawnPosition = transform.position;
-        Debug.Log(footstepBank); 
 
         _soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
     }

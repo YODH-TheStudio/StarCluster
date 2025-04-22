@@ -67,7 +67,7 @@ public class PuzzlePedestal : MonoBehaviour
 
                         CheckPuzzleResolution();
                         
-                        Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
+                        //Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
                     }
                 }
                 else
