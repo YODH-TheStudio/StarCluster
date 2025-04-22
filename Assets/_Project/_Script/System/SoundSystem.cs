@@ -130,7 +130,7 @@ public class SoundSystem : MonoBehaviour
 
             key = key.Substring(0, index + 1);
 
-            Debug.Log(key);
+            //Debug.Log(key);
 
             SoundFX existingSound = _sfxList.Find(sound => sound.Key == key);
 
@@ -402,7 +402,7 @@ public class SoundSystem : MonoBehaviour
         var audioClip = GetSfxByKey(key);
         if (audioClip != null)
         {
-            Debug.Log($"Playing sound: {key}");
+            //Debug.Log($"Playing sound: {key}");
             PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
