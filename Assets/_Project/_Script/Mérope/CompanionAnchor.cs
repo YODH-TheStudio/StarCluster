@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CompanionAnchor : MonoBehaviour
@@ -7,7 +8,7 @@ public class CompanionAnchor : MonoBehaviour
     [SerializeField] private Vector3 runPosition = new Vector3(0, 1, -1.5f);
     
     /* Companion catchup speed, while running and orbiting */
-    [SerializeField] private Vector2 catchupSpeed =  new Vector2(0.3f, 1.0f);
+    [FormerlySerializedAs("catchupSpeed")] [SerializeField] private Vector2 catchupTime =  new Vector2(0.3f, 1.0f);
 
     public float orbitOffset = 0.5f;
     [SerializeField] private Vector2 orbitRadius = new Vector2(2.5f, 3.5f);
@@ -49,14 +50,14 @@ public class CompanionAnchor : MonoBehaviour
         // Check if the player is running
         if (_player.IsMoving())
         {
-            _companion.catchupSpeed = catchupSpeed.x;
+            _companion.catchupSpeed = catchupTime.x;
             _companion.bounceAmount = bounceAmount.x;
             _companion.bounceSpeed = bounceSpeed.x;
             transform.localPosition = runPosition;
         }
         else if((new Vector2(transform.position.x, transform.position.z) - new Vector2(_companion.transform.position.x, _companion.transform.position.z)).magnitude < 0.5f)  // (transform.position - _companion.transform.position).magnitude < 0.5f)
         {
-            _companion.catchupSpeed = catchupSpeed.y;
+            _companion.catchupSpeed = catchupTime.y;
             _companion.bounceAmount = bounceAmount.y;
             _companion.bounceSpeed = bounceSpeed.y;
             
