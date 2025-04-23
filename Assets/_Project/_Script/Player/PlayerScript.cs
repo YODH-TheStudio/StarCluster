@@ -167,7 +167,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
             Debug.Log("Pas de sol détecté dans la direction du mouvement.");
             _direction = Vector3.zero;
             playerAnimator.SetBool(Moving, false);
-           
         }
         
         if (!IsGroundedBelowPlayer())
@@ -336,20 +335,29 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     
     private bool IsMoveDirectionSafe(Vector3 moveDir)
     {
-        if (moveDir == Vector3.zero) return true;
+        // if (moveDir == Vector3.zero) return true;
+        //
+        // Vector3 moveDirIso = _isoMatrix.MultiplyPoint3x4(moveDir.normalized);
+        //
+        // foreach (var dir in _checkDirections)
+        // {
+        //     Vector3 dirIso = _isoMatrix.MultiplyPoint3x4(dir);
+        //     if (Vector3.Dot(dirIso, moveDirIso) > 0.9f)
+        //     {
+        //         if (!IsGroundInDirection(dirIso))
+        //             return false;
+        //     }
+        // }
+        // return true;
 
-        Vector3 moveDirIso = _isoMatrix.MultiplyPoint3x4(moveDir.normalized);
-
-        foreach (var dir in _checkDirections)
+        RaycastHit hit;
+        if(Physics.Linecast(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), out hit, ground))
         {
-            Vector3 dirIso = _isoMatrix.MultiplyPoint3x4(dir);
-            if (Vector3.Dot(dirIso, moveDirIso) > 0.9f)
-            {
-                if (!IsGroundInDirection(dirIso))
-                    return false;
-            }
+            Debug.DrawLine(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), Color.green);
+            return true;
         }
-        return true;
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), Color.red);
+        return false;
     }
     
     
