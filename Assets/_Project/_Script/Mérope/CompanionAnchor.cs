@@ -9,7 +9,7 @@ public class CompanionAnchor : MonoBehaviour
     /* Companion catchup speed, while running and orbiting */
     [SerializeField] private Vector2 catchupSpeed =  new Vector2(0.3f, 1.0f);
 
-    [SerializeField] private float orbitOffset = 0.5f;
+    public float orbitOffset = 0.5f;
     [SerializeField] private Vector2 orbitRadius = new Vector2(2.5f, 3.5f);
 
     /* Bounce magnitude, while running and orbiting */
@@ -19,6 +19,10 @@ public class CompanionAnchor : MonoBehaviour
     
     private CompanionFollow _companion;
     private PlayerScript _player;
+    
+    private float _delay = 0.5f;
+    private float _lastTime = 0f;
+    
 
     #endregion
 
@@ -37,7 +41,7 @@ public class CompanionAnchor : MonoBehaviour
             Debug.LogError("Companion not found");
         }
         
-        transform.position = runPosition;
+        transform.localPosition = runPosition;
     }
 
     private void Update()
@@ -50,14 +54,20 @@ public class CompanionAnchor : MonoBehaviour
             _companion.bounceSpeed = bounceSpeed.x;
             transform.localPosition = runPosition;
         }
-        else if((transform.position - _companion.transform.position).magnitude < 0.5f)
+        else if((new Vector2(transform.position.x, transform.position.z) - new Vector2(_companion.transform.position.x, _companion.transform.position.z)).magnitude < 0.5f)  // (transform.position - _companion.transform.position).magnitude < 0.5f)
         {
             _companion.catchupSpeed = catchupSpeed.y;
             _companion.bounceAmount = bounceAmount.y;
             _companion.bounceSpeed = bounceSpeed.y;
             
             // Move to another position
-            NewPos();
+            Debug.Log("New Position");
+            // cooldown
+            if(Time.time > _lastTime + _delay)
+            {
+                _lastTime = Time.time;
+                NewPos();
+            }
         }
     }
 
@@ -69,7 +79,26 @@ public class CompanionAnchor : MonoBehaviour
         int angle = Random.Range(0, 360);
         float distance = Random.Range(orbitRadius.x, orbitRadius.y);
         Vector3 newPosition = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
-        transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
+        Debug.DrawLine(GameManager.Instance.GetCompanion().transform.position, _player.transform.position + newPosition + new Vector3(0,orbitOffset,0), Color.red, 2f);
+        
+        RaycastHit hit;
+        if (Physics.Linecast(GameManager.Instance.GetCompanion().transform.position, _player.transform.position + newPosition + new Vector3(0,2,0), out hit, ~LayerMask.GetMask("Player", "Ignore Raycast")))
+        {
+            if (hit.collider != null)
+            {
+                Debug.Log("Hitpoint: " + hit.point);
+                transform.position = hit.point;
+            }
+            else
+            {
+                Debug.Log("no hit ");
+                transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
+            }
+        }
+        else
+        {
+            transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
+        }
     }
     #endregion
 }
