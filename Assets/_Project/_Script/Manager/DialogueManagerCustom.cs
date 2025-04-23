@@ -1,4 +1,6 @@
+using System;
 using MeetAndTalk;
+using MeetAndTalk.GlobalValue;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,10 +26,18 @@ public class DialogueManagerCustom : MonoBehaviour
     private DialogueUIManager _dialogueMiniUIManager;
     private DialogueManager _dialogueManager;
     private MeetAndTalk.Localization.LocalizationManager _localizationManager;
+    
+    GlobalValueManager manager;
 
     #endregion
 
     #region Main Functions
+
+    private void Awake()
+    {
+        manager = Resources.Load<GlobalValueManager>("GlobalValue");
+    }
+
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
@@ -175,5 +185,14 @@ public class DialogueManagerCustom : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region ChangeGlobaleValue
+
+    public void ChangeGlobaleValue(string key, string value)
+    {
+        manager.Set(key, value);
+    }
+
     #endregion
 }

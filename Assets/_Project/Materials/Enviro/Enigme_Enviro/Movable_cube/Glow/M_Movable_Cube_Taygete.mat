@@ -20,17 +20,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Movable_Cube_Electre
+  m_Name: M_Movable_Cube_Taygete
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _EMISSION
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _OCCLUSIONMAP
   - _PARALLAXMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -42,11 +43,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 791f9f5588a12314ab43565707409b4b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55c741e74b49fa54b969fb6abcab6342, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ef74dd457f3e5e748a48e2b9c3fa64ec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8cce95615b998e240aa57b5f99c189fc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -62,23 +63,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 334ca0e999a3150488d957a46aaca617, type: 3}
+        m_Texture: {fileID: 2800000, guid: f23af89fb75d8034ea69c5dc55ebb742, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 791f9f5588a12314ab43565707409b4b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55c741e74b49fa54b969fb6abcab6342, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 2c65dda37de73c74ab387fc3343fab82, type: 3}
+        m_Texture: {fileID: 2800000, guid: db8eab45ee713d1428141e3aadcbcaa9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: e1d5a33432a65ae4e85a74ad6036cc78, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8273e2cebebafa8428382033984ca588, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 7955f3ce2742aa34fa675916469783e6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 540257273115ed84da6a0541c2dfce77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -132,6 +133,6 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 11.984315, g: 11.984315, b: 11.984315, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

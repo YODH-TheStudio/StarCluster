@@ -22,6 +22,8 @@ public class PushPullObject : Interactable
     private float _soundCooldown;
     
     [SerializeField] MeshRenderer _meshRenderer;
+    
+    [SerializeField] private Material _glowMaterial;
 
     #endregion
 
@@ -152,13 +154,10 @@ public class PushPullObject : Interactable
     {
         if (_isOnPedestal)
         {
-            _meshRenderer.material.EnableKeyword("_EMISSION");
-            _meshRenderer.material.SetColor("_EmissionColor", Color.white * 3);
-        }
-        else
-        {
-            _meshRenderer.material.EnableKeyword("_EMISSION");
-            _meshRenderer.material.SetColor("_EmissionColor", Color.black);
+            if (_glowMaterial && _meshRenderer)
+            {
+                _meshRenderer.material = _glowMaterial;
+            }
         }
     }
     #endregion
@@ -172,14 +171,14 @@ public class PushPullObject : Interactable
         transform.SetParent(UserTransform);
         transform.position = originalWorldPosition;
         
-        UserTransform.GetComponent<PlayerScript>().FreezeRotation();
+        GameManager.Instance.GetPlayer().FreezeRotation();
     }
 
     private void DetachObjectFromPlayer()
     {
         transform.SetParent(_stoneOriginalParent);
         
-        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+        GameManager.Instance.GetPlayer().UnfreezeRotation();
     }
 
     #endregion

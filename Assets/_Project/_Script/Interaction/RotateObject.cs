@@ -20,7 +20,9 @@ public class RotateObject : Interactable
     [SerializeField] private Transform _lookTransform;
 
     [SerializeField] private float _maxRotation;
-    
+
+    [SerializeField] private float _rotationDuration = 3f;
+
     private Transform _playerOriginalParent;
     private Rigidbody _rigidbody;
 
@@ -35,40 +37,6 @@ public class RotateObject : Interactable
     private void Awake()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
-    }
-
-    void Start()
-    {
-        
-    }
-    private void FixedUpdate()
-    {
-        if (!_isGrab) return;
-        
-        
-        
-        // _soundCooldown -= Time.deltaTime;
-        //
-        // Vector3 playerMoveDirection = UserTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
-        // Vector3 direction = transform.position - UserTransform.position;
-        // direction.Normalize();
-        // float dot = Vector3.Dot(playerMoveDirection, direction);
-        //
-        // if (dot > 0.5f)  // push
-        // {
-        //     _pushDirection = direction;
-        //     MovePlayerAndObject(_pushDirection);
-        // }
-        // else if (dot < -0.5f)  // pull
-        // {
-        //     _pushDirection = -direction;
-        //     MovePlayerAndObject(_pushDirection);
-        // }
-        // else
-        // {
-        //     UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
-        // }
-        
     }
 
     #endregion
@@ -92,20 +60,6 @@ public class RotateObject : Interactable
         }
     }
     #endregion
-
-    // #region ColorSymbol
-    // private void GlowSymbol()
-    // {
-    //     if (_isOnPedestal)
-    //     {
-    //         // Glow the symbol
-    //     }
-    //     else
-    //     {
-    //         // Unglow the symbol
-    //     }
-    // }
-    // #endregion
 
     #region Attach/Detach
     private void AttachPlayerToObject()
@@ -134,22 +88,7 @@ public class RotateObject : Interactable
     }
 
     #endregion
-
-    // #region Movement
-    // private void MovePlayerAndObject(Vector3 direction)
-    // {
-    //     UserTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
-    //
-    //     if (_soundCooldown <= 0f)
-    //     {
-    //         _soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
-    //         _soundCooldown = 1f;
-    //     }
-    //
-    //     
-    // }
-    // #endregion
-
+    
     #region Coroutines
 
     private IEnumerator Animation(Vector3 start)
@@ -183,15 +122,14 @@ public class RotateObject : Interactable
     private IEnumerator RotateAnimation()
     {
         float time = 0;
-        float duration = 3f;
         Vector3 currentRotation = transform.localRotation.eulerAngles;
         float startYRotation = currentRotation.y;
 
         
-        while (time < duration)
+        while (time < _rotationDuration)
         {
             time += Time.deltaTime;
-            float t = time / duration;
+            float t = time / _rotationDuration;
 
             // Interpolate only the Y-axis rotation
             float currentYRotation = Mathf.Lerp(startYRotation, _maxRotation, t);
