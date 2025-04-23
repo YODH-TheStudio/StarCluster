@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -16,6 +17,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     [SerializeField] private float raycastDistance = 1.25f;
 
+    [SerializeField] private LayerMask ground;
+    
     private float _footstepTimer = 0f;
     private float _footstepInterval = 0.4f;
 
@@ -141,40 +144,12 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         }
 
         isOnGrass = onGrass;
-
-        RaycastHit hit;
-        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f; 
-        float rayDistance = 2.0f; 
-
-        bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance);
-
-        Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.green);
-
-        if (!isGrounded)
+        
+        if (_direction != Vector3.zero && !IsGroundAhead(_direction))
         {
-            Debug.Log("Pas de sol détecté, déplacement annulé.");
-            return; 
+            Debug.Log("Pas de sol détecté dans la direction du mouvement, mouvement bloqué !");
+            _direction = Vector3.zero; // On annule juste cette frame
         }
-        else
-        {
-            Debug.Log("Sol détecté, déplacement autorisé.");
-        }
-
-        Vector3 forwardRayOrigin = transform.position + Vector3.up * 0.5f; 
-        float forwardRayDistance = 5.0f;
-
-        bool isGroundInFront = Physics.Raycast(forwardRayOrigin, transform.forward, forwardRayDistance);
-
-        if (!isGroundInFront)
-        {
-            Debug.Log("Pas de sol devant, mouvement impossible.");
-            return; 
-        }
-        else
-        {
-            Debug.Log("Sol détecté devant le joueur.");
-        }
-
 
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
@@ -230,7 +205,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
                 Look();
             }
         }
-
     }
 
     #endregion
@@ -326,6 +300,37 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     #endregion
 
+    
+    
+    #region Ground Detection
+    private bool IsGroundAhead(Vector3 direction)
+    {
+        if (direction == Vector3.zero) return true;
+
+        Vector3 startOffset = direction.normalized * 0.8f;
+        Vector3 origin = transform.position + Vector3.down * 0.5f + startOffset;
+        float distance = 1f;
+
+        return Physics.Raycast(origin, Vector3.down, distance, ground);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        // Point de départ du raycast : au niveau des pieds + un peu devant
+        Vector3 startOffset = transform.forward * 0.8f;
+        Vector3 origin = transform.position + Vector3.down * 0.5f + startOffset;
+        float distance = 1f;
+
+        // Dessiner le rayon vers le bas
+        Gizmos.DrawRay(origin, Vector3.down * distance);
+        
+        Gizmos.DrawSphere(origin, 0.05f);
+    }
+    
+    #endregion
+    
     #region Grab Object
     public GameObject GetObjectGrabbed()
     {
