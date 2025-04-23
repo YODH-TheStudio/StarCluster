@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UI;
 
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -19,9 +13,7 @@ public class Puzzle2D : MonoBehaviour
     public Color _lineColor = Color.red;
 
     // Level data
-    [SerializeField] Canvas _canvas;
     public LevelData _levelData;
-    private GameObject _topMenuContainer;
 
     private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines = new Dictionary<(Vector2, Vector2), GameObject>();
     private Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor = new Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>>();
@@ -83,13 +75,10 @@ public class Puzzle2D : MonoBehaviour
 
         _segmentsParent = new GameObject("Segments3D").transform;
         _segmentsParent.SetParent(parentPuzzleGroup);
-
-        CreateTopMenu();
-
+        
         InstantiatePoints3D();
         InstantiateSegments();
-
-
+        
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
@@ -159,10 +148,6 @@ public class Puzzle2D : MonoBehaviour
         HandleMouseRelease();
     }
 
-
-
-
-
     private void SwitchCamera(bool activatePuzzleCamera)
     {
         if (_mainCamera == null || _cinemachineMainCamera == null || _puzzleCamera == null)
@@ -172,109 +157,6 @@ public class Puzzle2D : MonoBehaviour
         _mainCamera.gameObject.SetActive(!activatePuzzleCamera);
         _puzzleCamera.gameObject.SetActive(activatePuzzleCamera);
     }
-
-    // UI ***
-    private void CreateTopMenu()
-    {
-        _topMenuContainer = new GameObject("TopMenuContainer");
-        _topMenuContainer.transform.SetParent(_canvas.transform);
-
-        RectTransform topMenuRect = _topMenuContainer.AddComponent<RectTransform>();
-        topMenuRect.anchorMin = new Vector2(0.5f, 1);
-        topMenuRect.anchorMax = new Vector2(0.5f, 1);
-        topMenuRect.pivot = new Vector2(0.5f, 1);
-        topMenuRect.anchoredPosition = new Vector2(0, -20);
-        topMenuRect.sizeDelta = new Vector2(600, 50);
-
-        HorizontalLayoutGroup layoutGroup = _topMenuContainer.AddComponent<HorizontalLayoutGroup>();
-        layoutGroup.spacing = 10;
-        layoutGroup.childAlignment = TextAnchor.MiddleCenter;
-        layoutGroup.childForceExpandWidth = false;
-
-        for (int i = 0; i < _levelData._circuits.Count; i++)
-        {
-            CreateCircuitButton(i, _levelData._circuits[i]);
-        }
-
-        // Crée un objet pour le bouton
-        GameObject buttonObj = new GameObject("EraserButton", typeof(Button), typeof(RectTransform), typeof(Text));
-        buttonObj.transform.SetParent(_topMenuContainer.transform, false);
-
-        Button button = buttonObj.GetComponent<Button>();
-        Text buttonText = buttonObj.GetComponent<Text>();
-
-        // Crée un conteneur pour le texte
-        GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
-        textContainer.transform.SetParent(buttonObj.transform);
-        RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
-        textContainerRect.sizeDelta = new Vector2(200, 30);
-
-        // Crée un carré de couleur (fond blanc)
-        GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
-        colorSquare.transform.SetParent(textContainer.transform);
-        Image colorSquareImage = colorSquare.GetComponent<Image>();
-        colorSquareImage.color = Color.white; // Fond blanc
-
-        RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
-        colorSquareRect.sizeDelta = new Vector2(20, 20);  // Taille du carré (20x20)
-
-        // S'assurer que le carré est bien ancré et visible
-        colorSquareRect.anchorMin = new Vector2(0, 0.5f);
-        colorSquareRect.anchorMax = new Vector2(0, 0.5f);
-        colorSquareRect.anchoredPosition = new Vector2(0, 0); // Centrer le carré dans le conteneur
-
-        // Définir le texte sur le bouton
-        buttonText.text = "Gomme";  // Texte du bouton
-        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");  // Utilisation de LegacyRuntime.ttf
-
-        // Positionner le texte à côté du carré de couleur
-        RectTransform textRect = buttonText.GetComponent<RectTransform>();
-        textRect.anchoredPosition = new Vector2(30, 0);  // Décalage à droite du carré de couleur
-
-        // Ajouter le gestionnaire de clic pour activer/désactiver le mode gomme
-        button.onClick.AddListener(() =>
-        {
-            _eraserMode = !_eraserMode;
-            Debug.Log($"Mode gomme : {_eraserMode}");
-        });
-
-    }
-
-    private void CreateCircuitButton(int index, Circuit circuit)
-    {
-        GameObject buttonObj = new GameObject($"CircuitButton_{index}", typeof(Button), typeof(RectTransform), typeof(Text));
-        buttonObj.transform.SetParent(_topMenuContainer.transform);
-
-        Button button = buttonObj.GetComponent<Button>();
-        Text buttonText = buttonObj.GetComponent<Text>();
-
-        GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
-        textContainer.transform.SetParent(buttonObj.transform);
-        RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
-        textContainerRect.sizeDelta = new Vector2(200, 30);
-
-        GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
-        colorSquare.transform.SetParent(textContainer.transform);
-        Image colorSquareImage = colorSquare.GetComponent<Image>();
-        colorSquareImage.color = circuit.circuitColor;
-        RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
-        colorSquareRect.sizeDelta = new Vector2(20, 20);
-
-        buttonText.text = $" {circuit.name} {index + 1}";
-        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        RectTransform textRect = buttonText.GetComponent<RectTransform>();
-        textRect.anchoredPosition = new Vector2(30, 0);
-
-        button.onClick.AddListener(() => OnCircuitButtonClicked(index));
-    }
-
-    private void OnCircuitButtonClicked(int index)
-    {
-        _currentCircuitSelected = index;
-        _eraserMode = false;
-    }
-
-    // UI *
 
     // 3D Visual *** 
 
@@ -463,20 +345,8 @@ public class Puzzle2D : MonoBehaviour
 
         return segment;
     }
-
-
+    
     // 3D Visual *
-
-
-
-
-
-
-
-
-
-
-
 
     // Logic ***
 
