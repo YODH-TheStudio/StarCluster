@@ -4,9 +4,9 @@ using UnityEngine;
 public class ObjectFade: MonoBehaviour
 {
     #region Fields
-    [SerializeField] private float fadeSpeed = 2f;
+    [SerializeField] private float _fadeSpeed = 2f;
 
-    [SerializeField] private float fadeAmount = 0.25f;
+    [SerializeField] private float _fadeAmount = 0.25f;
 
     private PlayerScript _player;
     private Camera _mainCamera;
