@@ -45,6 +45,10 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private string[] _footstepSfxKeysGround;
     private string[] _footstepSfxKeysGrass;
 
+    private Vector3[] _checkDirections;
+
+    private Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
+    
     #endregion
 
     #region Classes 
@@ -102,18 +106,31 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
             "Feuillage Fpas H","Feuillage Fpas I","Feuillage Fpas J",
             "Feuillage Fpas K", "Feuillage Fpas L"
         };
+        
+        _checkDirections = new Vector3[]
+        {
+            Vector3.forward,
+            Vector3.back,
+            Vector3.left,
+            Vector3.right,
+            (Vector3.forward + Vector3.left).normalized,
+            (Vector3.forward + Vector3.right).normalized,
+            (Vector3.back + Vector3.left).normalized,
+            (Vector3.back + Vector3.right).normalized
+        };
+        
     }
 
 
     private void FixedUpdate()
     {
 
-        if (_direction != Vector3.zero)
+        if (_direction != Vector3.zero )
         {
             playerAnimator.SetBool(Moving, true);
 
         }
-        else if (_direction == Vector3.zero)
+        else if (_direction == Vector3.zero) 
         {
             playerAnimator.SetBool(Moving, false);
         }
@@ -145,10 +162,20 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         isOnGrass = onGrass;
         
-        if (_direction != Vector3.zero && !IsGroundAhead(_direction))
+        if (!IsMoveDirectionSafe(_direction))
         {
-            Debug.Log("Pas de sol détecté dans la direction du mouvement, mouvement bloqué !");
-            _direction = Vector3.zero; // On annule juste cette frame
+            Debug.Log("Pas de sol détecté dans la direction du mouvement.");
+            _direction = Vector3.zero;
+            playerAnimator.SetBool(Moving, false);
+           
+        }
+        
+        if (!IsGroundedBelowPlayer())
+        {
+            Debug.Log("Le joueur n'est plus au-dessus du sol. Correction de la vélocité.");
+            // Annule le mouvement horizontal pour empêcher la chute latérale
+            Vector3 currentVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = new Vector3(0f, currentVelocity.y, 0f);
         }
 
         if (MovementLimit != MovementLimitType.FullRestriction)
@@ -299,34 +326,52 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     }
 
     #endregion
-
-    
     
     #region Ground Detection
-    private bool IsGroundAhead(Vector3 direction)
+    private bool IsGroundInDirection(Vector3 worldDir)
     {
-        if (direction == Vector3.zero) return true;
-
-        Vector3 startOffset = direction.normalized * 0.8f;
-        Vector3 origin = transform.position + Vector3.down * 0.5f + startOffset;
-        float distance = 1f;
-
-        return Physics.Raycast(origin, Vector3.down, distance, ground);
+        Vector3 origin = transform.position + Vector3.down * 0.5f + worldDir * 1f;
+        return Physics.Raycast(origin, Vector3.down, 0.5f, ground);
     }
+    
+    private bool IsMoveDirectionSafe(Vector3 moveDir)
+    {
+        if (moveDir == Vector3.zero) return true;
+
+        Vector3 moveDirIso = _isoMatrix.MultiplyPoint3x4(moveDir.normalized);
+
+        foreach (var dir in _checkDirections)
+        {
+            Vector3 dirIso = _isoMatrix.MultiplyPoint3x4(dir);
+            if (Vector3.Dot(dirIso, moveDirIso) > 0.9f)
+            {
+                if (!IsGroundInDirection(dirIso))
+                    return false;
+            }
+        }
+        return true;
+    }
+    
     
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        if (_checkDirections == null) return;
 
-        // Point de départ du raycast : au niveau des pieds + un peu devant
-        Vector3 startOffset = transform.forward * 0.8f;
-        Vector3 origin = transform.position + Vector3.down * 0.5f + startOffset;
-        float distance = 1f;
+        Gizmos.color = Color.yellow;
 
-        // Dessiner le rayon vers le bas
-        Gizmos.DrawRay(origin, Vector3.down * distance);
-        
-        Gizmos.DrawSphere(origin, 0.05f);
+        foreach (var dir in _checkDirections)
+        {
+            Vector3 worldDir = _isoMatrix.MultiplyPoint3x4(dir);
+            Vector3 origin = transform.position + Vector3.down * 0.5f + worldDir * 1f;
+            Gizmos.DrawRay(origin, Vector3.down *0.5f);
+            Gizmos.DrawSphere(origin, 0.05f);
+        }
+    }
+    
+    private bool IsGroundedBelowPlayer()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+        return Physics.Raycast(origin, Vector3.down, 0.6f, ground);
     }
     
     #endregion
