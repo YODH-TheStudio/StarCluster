@@ -13,13 +13,16 @@ public class PlaySound : MonoBehaviour
     void Start()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
+        _soundSystem.GetSFXMixerGroup();
+       
     }
     #endregion
 
     #region Play Sond button 
     public void Play(string sfxKey)
     {
-        _soundSystem.PlaySoundFXClipByKey(sfxKey);
+        _soundSystem.PlaySoundFXClipByKey(sfxKey, transform.position);
+        
     }
     
      public void ChangeMusic(string musicKey)
