@@ -161,7 +161,7 @@ public class PushPullObject : Interactable
         
         GlowSymbol();
         
-        _soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
+        //_soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
         
         if (_isGrab)
         {
