@@ -22,12 +22,12 @@ MonoBehaviour:
     TargetNodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
   - BaseNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
     TargetNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
-  - BaseNodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
-    TargetNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
-  - BaseNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
-    TargetNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
   - BaseNodeGuid: e56dfcf5-7c5c-45c9-9314-f6a6b350727e
     TargetNodeGuid: ffa96b15-e2ae-4524-b8e5-34b1bdbe2710
+  - BaseNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
+    TargetNodeGuid: 618bd056-c7b5-40c4-8e55-4622ca238177
+  - BaseNodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+    TargetNodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
   StartNodeDatas:
   - NodeGuid: 1e44b7a7-ccf4-4f64-acc2-8840f5843dfc
     Position: {x: -350, y: 299}
@@ -37,7 +37,7 @@ MonoBehaviour:
     Position: {x: 407, y: 299}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
-    Emotion: Smile
+    Emotion: Happy
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -71,6 +71,25 @@ MonoBehaviour:
     - languageEnum: 1
       LanguageGenericType: 
     Duration: 2
+  - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
+    Position: {x: -124, y: 299}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Test num\xE9ro 1"
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 2
   - NodeGuid: c23bb342-c02d-41bf-9574-a1c349a2123c
     Position: {x: 152, y: 299}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
@@ -86,26 +105,7 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Toi \xEAtre nul, skill issue."
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 2
-  - NodeGuid: e0558c39-23f1-4d1d-b1f6-3a4835b4dcd7
-    Position: {x: -124, y: 299}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Default
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: Moi pas comprendre quoi faire.
+      LanguageGenericType: "Test num\xE9ro 2"
     - languageEnum: 1
       LanguageGenericType: 
     Duration: 2

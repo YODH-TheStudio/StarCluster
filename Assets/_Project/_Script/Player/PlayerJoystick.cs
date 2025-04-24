@@ -39,17 +39,16 @@ public class PlayerJoystick : MonoBehaviour
         background.gameObject.SetActive(false);
 
         _player = GameManager.Instance.GetPlayer();
+        
+        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
     private void Update()
     {
         _player.OnMove(_movementAmount);
     }
 
-
- 
     private void OnEnable()
     {
-        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;

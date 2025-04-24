@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PushPullObject : Interactable
@@ -21,10 +22,18 @@ public class PushPullObject : Interactable
 
     private float _soundCooldown;
     
+    private PlayerScript _playerScript;
+    
     [SerializeField] MeshRenderer _meshRenderer;
     
     [SerializeField] private Material _glowMaterial;
 
+    private static readonly int Pushing = Animator.StringToHash("IsPushing");
+
+    private static readonly int Pulling = Animator.StringToHash("IsPulling");
+
+    private static readonly int IsPushPull = Animator.StringToHash("IsPushPull");
+    
     #endregion
 
     #region Main Functions
@@ -41,6 +50,7 @@ public class PushPullObject : Interactable
         _offsetPosition.Add(new Vector3(0, 0, -GrabOffset));
         _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
         _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
+        _playerScript = GameManager.Instance.GetPlayer();
     }
     private void FixedUpdate()
     {
@@ -48,7 +58,7 @@ public class PushPullObject : Interactable
         
         _soundCooldown -= Time.deltaTime;
 
-        Vector3 playerMoveDirection = UserTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
+        Vector3 playerMoveDirection = _playerScript.GetLastMoveDirection();
         Vector3 direction = transform.position - UserTransform.position;
         direction.Normalize();
         float dot = Vector3.Dot(playerMoveDirection, direction);
@@ -56,16 +66,26 @@ public class PushPullObject : Interactable
         if (dot > 0.5f)  // push
         {
             _pushDirection = direction;
+        
+            _playerScript.GetAnimator().SetBool(Pushing, true);
+            _playerScript.GetAnimator().SetBool(Pulling, false);
+            
             MovePlayerAndObject(_pushDirection);
         }
         else if (dot < -0.5f)  // pull
         {
             _pushDirection = -direction;
+            
+            _playerScript.GetAnimator().SetBool(Pulling, true);
+            _playerScript.GetAnimator().SetBool(Pushing, false);
+        
             MovePlayerAndObject(_pushDirection);
         }
         else
         {
-            UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
+            _playerScript.SetMoveDirection(Vector3.zero);
+            _playerScript.GetAnimator().SetBool(Pushing, false);
+            _playerScript.GetAnimator().SetBool(Pulling, false);
         }
         
     }
@@ -85,12 +105,11 @@ public class PushPullObject : Interactable
     {
         _isGrab = !_isGrab;
         
-        PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
         Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
         
         if (!_isGrab)
         {
-            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+            _playerScript.MovementLimit = PlayerScript.MovementLimitType.None;
             DetachObjectFromPlayer();
         }
         else
@@ -117,15 +136,15 @@ public class PushPullObject : Interactable
         
         GlowSymbol();
         
+        _soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
         
         if (_isGrab)
         {
-            PlayerScript playerScriptComponent = UserTransform.GetComponent<PlayerScript>();
-            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+            _playerScript.MovementLimit = PlayerScript.MovementLimitType.None;
             DetachObjectFromPlayer();
         }
-        
-        GetComponent<PushPullObject>().enabled = false;
+
+        _isInteractable = false;
     }
     private Vector3 GetClosestPosition(Vector3 playerPosition)
     {
@@ -149,17 +168,41 @@ public class PushPullObject : Interactable
     }
     #endregion
 
-    #region ???
+    #region Glow
     private void GlowSymbol()
     {
         if (_isOnPedestal)
         {
             if (_glowMaterial && _meshRenderer)
             {
-                _meshRenderer.material = _glowMaterial;
+                Material[] materials = _meshRenderer.materials;
+                materials[0] = _glowMaterial;
+                _meshRenderer.materials = materials;
+                StartCoroutine(AtlassiumAnimation(3));
             }
         }
     }
+    
+    public void DeactivateAtlassium()
+    {
+        if (_meshRenderer)
+        {
+            Material[] materials = _meshRenderer.materials;
+            materials = new Material[1] { materials[0] };
+            _meshRenderer.materials = materials;
+        }
+    }
+
+    public void SetAtlassiumAlpha(float alpha)
+    {
+        if (_meshRenderer)
+        {
+            Material[] materials = _meshRenderer.materials;
+            materials[1].SetFloat("_Alpha", alpha);
+            _meshRenderer.materials = materials;
+        }
+    }
+    
     #endregion
 
     #region Attach/Detach
@@ -171,12 +214,18 @@ public class PushPullObject : Interactable
         transform.SetParent(UserTransform);
         transform.position = originalWorldPosition;
         
+        _playerScript.GetAnimator().SetBool(IsPushPull, true);
+        
         GameManager.Instance.GetPlayer().FreezeRotation();
     }
 
     private void DetachObjectFromPlayer()
     {
         transform.SetParent(_stoneOriginalParent);
+        
+        _playerScript.GetAnimator().SetBool(IsPushPull, false);
+        _playerScript.GetAnimator().SetBool(Pulling, false);
+        _playerScript.GetAnimator().SetBool(Pushing, false);
         
         GameManager.Instance.GetPlayer().UnfreezeRotation();
     }
@@ -186,7 +235,7 @@ public class PushPullObject : Interactable
     #region Movement
     private void MovePlayerAndObject(Vector3 direction)
     {
-        UserTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
+        _playerScript.SetMoveDirection(direction);
 
         if (_soundCooldown <= 0f)
         {
@@ -201,11 +250,9 @@ public class PushPullObject : Interactable
     #region Coroutines
     private IEnumerator MoveAnimation(Vector3 start)
     {
-        PlayerScript playerScript = GameManager.Instance.GetPlayer();
-
         // Distance between player and start
         float distance = Vector3.Distance(UserTransform.position, start);
-        yield return StartCoroutine(playerScript.MoveTo(start, distance / 2f));
+        yield return StartCoroutine(_playerScript.MoveTo(start, distance / 2f));
         
         // Rotate the player to face the object instantly
         Vector3 direction = transform.position - UserTransform.position;
@@ -214,8 +261,32 @@ public class PushPullObject : Interactable
         targetRotation.x = 0;
         UserTransform.rotation = targetRotation;
         
-        playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
+        _playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
     }
+    
+    private IEnumerator AtlassiumAnimation(float duration)
+    {
+        float elapsedTime = 0f;
+        Material[] materials = _meshRenderer.materials;
+        _meshRenderer.materials = materials;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float colorValue = Mathf.Lerp(0f, 1f, t);
+
+            materials[1].SetFloat("_ColorSlider", colorValue);
+            _meshRenderer.materials = materials;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure the final value is set
+        materials[1].SetFloat("_ColorSlider", 1f);
+        _meshRenderer.materials = materials;
+    }
+    
     #endregion
 }

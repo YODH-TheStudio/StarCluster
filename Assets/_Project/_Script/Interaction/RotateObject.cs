@@ -97,8 +97,8 @@ public class RotateObject : Interactable
         AttachPlayerToObject();
         yield return StartCoroutine(RotateAnimation());
         DetachObjectFromPlayer();
-        //deactivate the script
-        GetComponent<RotateObject>().enabled = false;
+        
+        _isInteractable = false;
         yield return null;
     }
     private IEnumerator MoveAnimation(Vector3 start)

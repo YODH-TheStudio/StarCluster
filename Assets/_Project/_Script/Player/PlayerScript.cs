@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
+public class PlayerScript : MonoBehaviour
 {
     #region Fields
     private static readonly int Moving = Animator.StringToHash("IsMoving");
@@ -11,7 +11,8 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     private SoundSystem _soundSystem;
     
     // Player Controller Variable 
-    [SerializeField] private float speed = 250.0f;
+    [SerializeField] private float speed = 7.0f;
+    [SerializeField] private float pushSpeed = 3.0f;
     [SerializeField] private float turnSpeed = 360.0f;
 
     [SerializeField] private float raycastDistance = 1.25f;
@@ -81,7 +82,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _rigidbody = GetComponent<Rigidbody>();
         Controller playerControls = new Controller();
         
-        playerControls.Player.SetCallbacks(this);
         _playerInteractionZone = GetComponent<PlayerInteractionZone>();
 
 
@@ -135,19 +135,9 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
-
-            if (_direction != Vector3.zero)
-            {
-                playerAnimator.SetBool(Moving, true);
-
-            }
-            else if (_direction == Vector3.zero)
-            {
-                playerAnimator.SetBool(Moving, false);
-            }
-
             if (MovementLimit == MovementLimitType.ForwardBackwardNoLook)
             {
+                playerAnimator.SetBool(Moving, false);
 
                 Vector3 northDirection = Vector3.forward;
                 Vector3 southDirection = Vector3.back;
@@ -185,10 +175,20 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
                 float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);
                 _limitedMoveDirection = closestDirection * forwardMove;
 
-                _rigidbody.MovePosition(_rigidbody.position + _limitedMoveDirection * (speed * Time.deltaTime));
+                _rigidbody.MovePosition(_rigidbody.position + _limitedMoveDirection * (pushSpeed * Time.deltaTime));
             }
             else
             {
+                if (_direction != Vector3.zero)
+                {
+                    playerAnimator.SetBool(Moving, true);
+
+                }
+                else if (_direction == Vector3.zero)
+                {
+                    playerAnimator.SetBool(Moving, false);
+                }
+
                 _rigidbody.MovePosition(_rigidbody.position + _direction * (speed * Time.deltaTime));
             }
 
@@ -218,18 +218,14 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _lastMoveDirection = _direction.normalized; 
     }
     
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnInteract()
     {
-        if (!context.started) return;
-        
         Interactable interactable = _playerInteractionZone.GetCurrentInteractable();
         
         if (interactable == null) return;
         
         interactable.SetUserTransform(this.transform);
         interactable.Interact();
-    
-
     }
 
     #endregion
@@ -292,26 +288,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    #endregion
-
-    #region Grab Object
-    public GameObject GetObjectGrabbed()
-    {
-        return _objectGrabbed;
-    }
-
-    public void SetObjectGrabbed(GameObject objectGrabbed)
-    {
-        _objectGrabbed = objectGrabbed;
-    }
-
-    #endregion
-
-    #region Animation
-    public bool IsMoving()
-    {
-        return _direction != Vector3.zero;
-    }
     #endregion
 
     #region Particle
@@ -380,6 +356,11 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
     {
         return playerAnimator;
     } 
+    
+    public bool IsMoving()
+    {
+        return _direction != Vector3.zero;
+    }
 
     #endregion
 }

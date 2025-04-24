@@ -20,11 +20,23 @@ MonoBehaviour:
   CustomizedName:
     ValueName: PlayerName
   UseGlobalValue: 0
-  textColor: {r: 0.6886792, g: 0.13318795, b: 0.2985044, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   Avatars:
-  - EmotionName: Default
+  - EmotionName: Normal
     Portrait:
-      SpriteImage: {fileID: 21300000, guid: a39ec007de29635409ccef383b704bd2, type: 3}
-  - EmotionName: Smile
+      SpriteImage: {fileID: 21300000, guid: 1fc8336ff7c805246b1bb7f852b60c33, type: 3}
+  - EmotionName: Happy
     Portrait:
-      SpriteImage: {fileID: 21300000, guid: 5516deb0e0e3bea45baca755eb99882f, type: 3}
+      SpriteImage: {fileID: 21300000, guid: 9d4a2420756ba184ea996d3fcfac550b, type: 3}
+  - EmotionName: Amused
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: ac8598fb79a50dc47aed288e456eae3b, type: 3}
+  - EmotionName: Anxious
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: f0a5ac30dfca8ff4190c2bac402c0dd2, type: 3}
+  - EmotionName: Sad
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: 1a3929482937b99469652d39551bb854, type: 3}
+  - EmotionName: Thinking
+    Portrait:
+      SpriteImage: {fileID: 21300000, guid: 6947309d7090d9d43b0e9d9e4412df59, type: 3}

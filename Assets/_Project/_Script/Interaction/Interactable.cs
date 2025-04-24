@@ -7,6 +7,8 @@ public abstract class Interactable : MonoBehaviour
     #region Fields
     // transform of interact user
     protected Transform UserTransform;
+    
+    protected bool _isInteractable = true;
 
     #endregion
 
@@ -20,6 +22,11 @@ public abstract class Interactable : MonoBehaviour
     public void SetUserTransform(Transform newTransform)
     {
         UserTransform = newTransform;
+    }
+    
+    public bool IsInteractable()
+    {
+        return _isInteractable;
     }
 
     #endregion
