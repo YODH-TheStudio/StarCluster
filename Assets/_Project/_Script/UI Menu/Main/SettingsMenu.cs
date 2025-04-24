@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SettingsMenu : Menu
 {
     #region Fields
-    private SoundSystem _soundSystem;
+    private SoundSystem _settingSoundSystem;
     private VibrationManager _vibrationManager;
     
     [SerializeField] private Slider masterSlider;
@@ -29,7 +29,7 @@ public class SettingsMenu : Menu
     #region Main Functions
     private void Start()
     {
-        _soundSystem = GameManager.GetSoundSystem();
+        _settingSoundSystem = GameManager.GetSoundSystem();
         _vibrationManager = GameManager.GetVibrationManager();
 
         LoadPlayerPrefs();
@@ -66,20 +66,20 @@ public class SettingsMenu : Menu
     public void MasterVolume()
     {
         _masterVolume = masterSlider.value;
-        _soundSystem.SetMasterVolume(_masterVolume);
+        _settingSoundSystem.SetMasterVolume(_masterVolume);
     }
 
     public void MusicVolume()
     {
         _musicVolume =  musicSlider.value;
-        _soundSystem.SetMusicVolume(_musicVolume);
-        _soundSystem.SetAmbianceVolume(_musicVolume);
+        _settingSoundSystem.SetMusicVolume(_musicVolume);
+        _settingSoundSystem.SetAmbianceVolume(_musicVolume);
     }
     
     public void SfxVolume()
     {
         _sfxVolume = sfxSlider.value;
-        _soundSystem.SetSfxVolume(_sfxVolume);
+        _settingSoundSystem.SetSfxVolume(_sfxVolume);
     }
 
     #endregion

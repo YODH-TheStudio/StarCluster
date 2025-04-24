@@ -20,6 +20,8 @@ public class PushPullObject : Interactable
     private Transform _stoneOriginalParent;
     private Rigidbody _rigidbody;
 
+    private VibrationManager _vibrationManager = null;
+
     private float _soundCooldown;
     
     private PlayerScript _playerScript;
@@ -34,6 +36,11 @@ public class PushPullObject : Interactable
 
     private static readonly int IsPushPull = Animator.StringToHash("IsPushPull");
     
+    private AudioSource _pushAudioSource;
+    [SerializeField] private AudioClip pushClip;
+
+    private bool _isAudioPlaying;
+
     #endregion
 
     #region Main Functions
@@ -51,6 +58,16 @@ public class PushPullObject : Interactable
         _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
         _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
         _playerScript = GameManager.Instance.GetPlayer();
+
+        _pushAudioSource = gameObject.AddComponent<AudioSource>();
+        _pushAudioSource.clip = pushClip;
+        _pushAudioSource.loop = true;
+        _pushAudioSource.playOnAwake = false;
+
+        _pushAudioSource.outputAudioMixerGroup = _soundSystem.GetSFXMixerGroup();
+
+        _vibrationManager = FindObjectOfType<VibrationManager>();
+
     }
     private void FixedUpdate()
     {
@@ -71,6 +88,7 @@ public class PushPullObject : Interactable
             _playerScript.GetAnimator().SetBool(Pulling, false);
             
             MovePlayerAndObject(_pushDirection);
+            
         }
         else if (dot < -0.5f)  // pull
         {
@@ -80,14 +98,21 @@ public class PushPullObject : Interactable
             _playerScript.GetAnimator().SetBool(Pushing, false);
         
             MovePlayerAndObject(_pushDirection);
+            
         }
         else
         {
             _playerScript.SetMoveDirection(Vector3.zero);
             _playerScript.GetAnimator().SetBool(Pushing, false);
             _playerScript.GetAnimator().SetBool(Pulling, false);
+            UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
+
+            if (_pushAudioSource.isPlaying)
+            {
+                _pushAudioSource.Stop();
+                _isAudioPlaying = false;
+            }
         }
-        
     }
 
     #endregion
@@ -228,6 +253,14 @@ public class PushPullObject : Interactable
         _playerScript.GetAnimator().SetBool(Pushing, false);
         
         GameManager.Instance.GetPlayer().UnfreezeRotation();
+        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+
+        if (_isAudioPlaying)
+        {
+            _pushAudioSource.Stop();
+            _isAudioPlaying = false;
+        }
+
     }
 
     #endregion
@@ -237,13 +270,18 @@ public class PushPullObject : Interactable
     {
         _playerScript.SetMoveDirection(direction);
 
-        if (_soundCooldown <= 0f)
+
+        if (!_pushAudioSource.isPlaying)
         {
-            _soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
-            _soundCooldown = 1f;
+            _pushAudioSource.Play();
+            _isAudioPlaying = true;
         }
 
-        
+        if (_vibrationManager != null)
+        {
+            _vibrationManager.Vibrate(0.3f, 0.1f); 
+        }
+
     }
     #endregion
 

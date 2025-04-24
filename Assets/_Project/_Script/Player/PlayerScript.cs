@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -17,6 +18,8 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private float raycastDistance = 1.25f;
 
+    [SerializeField] private LayerMask ground;
+    
     private float _footstepTimer = 0f;
     private float _footstepInterval = 0.4f;
 
@@ -43,6 +46,10 @@ public class PlayerScript : MonoBehaviour
     private string[] _footstepSfxKeysGround;
     private string[] _footstepSfxKeysGrass;
 
+    private Vector3[] _checkDirections;
+
+    private Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
+    
     #endregion
 
     #region Classes 
@@ -87,19 +94,31 @@ public class PlayerScript : MonoBehaviour
 
         _footstepSfxKeysGround = new string[] 
         { 
-        "Chemin Pasa", "Chemin Pasb", "Chemin Pasc", "Chemin Pasd",
-        "Chemin Pase","Chemin Pasf","Chemin Pasg",
-        "Chemin Pash","Chemin Pasi","Chemin Pasj"
+        "Chemin Pas A", "Chemin Pas B", "Chemin Pas C", "Chemin Pas D",
+        "Chemin Pas E","Chemin Pas F","Chemin Pas G",
+        "Chemin Pas H","Chemin Pas I","Chemin Pas J"
         };
-        Debug.Log(_footstepSfxKeysGround);
         
         _footstepSfxKeysGrass = new string[] 
         { 
-            "Feuillage Fpasa", "Feuillage Fpasb", "Feuillage Fpasc", "Feuillage Fpasd",
-            "Feuillage Fpase","Feuillage Fpasf","Feuillage Fpasg",
-            "Feuillage Fpash","Feuillage Fpasi","Feuillage Fpasj",
-            "Feuillage Fpask", "Feuillage Fpasl"
+            "Feuillage Fpas A", "Feuillage Fpas B", "Feuillage Fpas C", "Feuillage Fpas D",
+            "Feuillage Fpas E","Feuillage Fpas F","Feuillage Fpas G",
+            "Feuillage Fpas H","Feuillage Fpas I","Feuillage Fpas J",
+            "Feuillage Fpas K", "Feuillage Fpas L"
         };
+        
+        _checkDirections = new Vector3[]
+        {
+            Vector3.forward,
+            Vector3.back,
+            Vector3.left,
+            Vector3.right,
+            (Vector3.forward + Vector3.left).normalized,
+            (Vector3.forward + Vector3.right).normalized,
+            (Vector3.back + Vector3.left).normalized,
+            (Vector3.back + Vector3.right).normalized
+        };
+        
     }
 
 
@@ -132,6 +151,21 @@ public class PlayerScript : MonoBehaviour
         }
 
         isOnGrass = onGrass;
+        
+        if (!IsMoveDirectionSafe(_direction))
+        {
+            Debug.Log("Pas de sol détecté dans la direction du mouvement.");
+            _direction = Vector3.zero;
+            playerAnimator.SetBool(Moving, false);
+        }
+        
+        if (!IsGroundedBelowPlayer())
+        {
+            Debug.Log("Le joueur n'est plus au-dessus du sol. Correction de la vélocité.");
+            // Annule le mouvement horizontal pour empêcher la chute latérale
+            Vector3 currentVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = new Vector3(0f, currentVelocity.y, 0f);
+        }
 
         if (MovementLimit != MovementLimitType.FullRestriction)
         {
@@ -197,7 +231,6 @@ public class PlayerScript : MonoBehaviour
                 Look();
             }
         }
-
     }
 
     #endregion
@@ -271,7 +304,6 @@ public class PlayerScript : MonoBehaviour
         if (footstepBank.Length <= 0) return;
         
         Vector3 spawnPosition = transform.position;
-        Debug.Log(footstepBank); 
 
         _soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
     }
@@ -288,6 +320,84 @@ public class PlayerScript : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
+    #endregion
+    
+    #region Ground Detection
+    private bool IsGroundInDirection(Vector3 worldDir)
+    {
+        Vector3 origin = transform.position + Vector3.down * 0.5f + worldDir * 1f;
+        return Physics.Raycast(origin, Vector3.down, 0.5f, ground);
+    }
+    
+    private bool IsMoveDirectionSafe(Vector3 moveDir)
+    {
+        // if (moveDir == Vector3.zero) return true;
+        //
+        // Vector3 moveDirIso = _isoMatrix.MultiplyPoint3x4(moveDir.normalized);
+        //
+        // foreach (var dir in _checkDirections)
+        // {
+        //     Vector3 dirIso = _isoMatrix.MultiplyPoint3x4(dir);
+        //     if (Vector3.Dot(dirIso, moveDirIso) > 0.9f)
+        //     {
+        //         if (!IsGroundInDirection(dirIso))
+        //             return false;
+        //     }
+        // }
+        // return true;
+
+        RaycastHit hit;
+        if(Physics.Linecast(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), out hit, ground))
+        {
+            Debug.DrawLine(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), Color.green);
+            return true;
+        }
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x + moveDir.x, transform.position.y - 1.3f, transform.position.z + moveDir.z), Color.red);
+        return false;
+    }
+    
+    
+    private void OnDrawGizmos()
+    {
+        if (_checkDirections == null) return;
+
+        Gizmos.color = Color.yellow;
+
+        foreach (var dir in _checkDirections)
+        {
+            Vector3 worldDir = _isoMatrix.MultiplyPoint3x4(dir);
+            Vector3 origin = transform.position + Vector3.down * 0.5f + worldDir * 1f;
+            Gizmos.DrawRay(origin, Vector3.down *0.5f);
+            Gizmos.DrawSphere(origin, 0.05f);
+        }
+    }
+    
+    private bool IsGroundedBelowPlayer()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+        return Physics.Raycast(origin, Vector3.down, 0.6f, ground);
+    }
+    
+    #endregion
+    
+    #region Grab Object
+    public GameObject GetObjectGrabbed()
+    {
+        return _objectGrabbed;
+    }
+
+    public void SetObjectGrabbed(GameObject objectGrabbed)
+    {
+        _objectGrabbed = objectGrabbed;
+    }
+
+    #endregion
+
+    #region Animation
+    public bool IsMoving()
+    {
+        return _direction != Vector3.zero;
+    }
     #endregion
 
     #region Particle

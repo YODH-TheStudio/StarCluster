@@ -58,7 +58,7 @@ public class PlayerInteractionZone : MonoBehaviour
         {
             if(hit.collider.transform.GetComponent<Interactable>() && hit.collider.transform.GetComponent<Interactable>().IsInteractable())
             {
-                _vibrationManager.Vibrate(100f, 0.2f);
+                //_vibrationManager.Vibrate(100f, 0.2f);
                 _interactionButton.SetActive(true);
                 _currentInteractable = hit.collider.transform.GetComponent<Interactable>();
             }
