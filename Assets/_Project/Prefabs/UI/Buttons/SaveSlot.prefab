@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 6178143683376003211}
   - component: {fileID: 7305720368712365301}
   - component: {fileID: 3652044901273106859}
-  - component: {fileID: 9157814973471894196}
+  - component: {fileID: 6144818968759297857}
   m_Layer: 5
   m_Name: SaveSlot
   m_TagString: Untagged
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
---- !u!114 &9157814973471894196
+--- !u!114 &6144818968759297857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
