@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Diodes : MonoBehaviour
 {
-    [SerializeField] private List<Diode> diodes;
+    [SerializeField] public Dictionary<Diode, DiodeColor> diodes;
     private StarPuzzleManager _puzzleManager;
     
     

@@ -163,6 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 173285874}
   - component: {fileID: 173285875}
+  - component: {fileID: 173285876}
   m_Layer: 5
   m_Name: Diodes
   m_TagString: Untagged
@@ -220,6 +221,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &173285876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173285873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0a0b9ebe674694ab922a161bd07d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &251055039
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,13 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum DiodeColor
+{
+    Blue,
+    Green,
+    Brown,
+    Red,
+    Purple,
+}
 
 public class Diode : MonoBehaviour
 {
     private Image _image;
     private bool _isOn;
+    private DiodeColor DiodeColor { get; set; }
     [SerializeField] private Sprite off;
     [SerializeField] private Sprite on;
 
