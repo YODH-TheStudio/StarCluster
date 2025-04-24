@@ -393,13 +393,6 @@ public class PlayerScript : MonoBehaviour
 
     #endregion
 
-    #region Animation
-    public bool IsMoving()
-    {
-        return _direction != Vector3.zero;
-    }
-    #endregion
-
     #region Particle
     public void SpawnParticle(GameObject particle)
     {
