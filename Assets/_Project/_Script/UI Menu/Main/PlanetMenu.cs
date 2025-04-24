@@ -64,7 +64,7 @@ public class PlanetMenu : Menu
     {
         if (_isMoving) return;
         
-        _soundSystem.PlaySoundFXClipByKey("Ui Clica", transform.position); 
+        //_soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position); 
         
         _planetIndex = (_planetIndex + increment + PlanetNumber) % PlanetNumber; 
         Debug.Log(_planetIndex);

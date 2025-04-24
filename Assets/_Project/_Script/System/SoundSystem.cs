@@ -407,15 +407,15 @@ public class SoundSystem : MonoBehaviour
         }
     }
 
-    //public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
-    //{
-    //    AudioSource audioSource = GetAvailableAudioSource();
-    //    AudioClip audioClip = GetSFXByKey(key);
+    public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
+    {
+        AudioSource audioSource = GetAvailableAudioSource();
+        AudioClip audioClip = GetSfxByKey(key);
 
-    //    audioSource.clip = audioClip;
-    //    audioSource.volume = volume;
-    //    audioSource.Play();
-    //}
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+    }
 
     public void PlayRandomSoundFXClipByKeys(string[] keys, Vector3 spawnPosition, float volume = 1.0f)
     {
@@ -457,7 +457,7 @@ public class SoundSystem : MonoBehaviour
 
     public AudioMixerGroup GetSFXMixerGroup()
     {
-        return sfxMixerGroup; // défini dans l’inspecteur ou chargé dynamiquement
+        return sfxMixerGroup; // dï¿½fini dans lï¿½inspecteur ou chargï¿½ dynamiquement
     }
 
     #endregion

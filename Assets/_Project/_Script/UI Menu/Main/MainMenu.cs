@@ -22,9 +22,7 @@ public class MainMenu : Menu
     #region PlayGame
     public async void PlayGame()
     {
-        //GameManager.Instance._soundSystem.PlaySoundFXClipByKey("UI Clicp", transform.position);
-        
-        _soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position);
+        //_soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position);
 
         if (hasAlreadyPlayed)
         {

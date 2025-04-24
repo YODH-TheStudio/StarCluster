@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour
     
     public void DeactivateMenuState()
     {
-        _soundSystem.PlaySoundFXClipByKey("Ui Clic C", transform.position);
+       
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
     #endregion
@@ -44,7 +44,7 @@ public class Menu : MonoBehaviour
     #region Quit
     public void Quit()
     {
-        _soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position);
+ 
         Application.Quit();
     }
     #endregion
