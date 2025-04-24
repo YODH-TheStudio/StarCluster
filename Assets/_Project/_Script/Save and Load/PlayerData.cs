@@ -9,17 +9,6 @@ public class PlayerData
 {
     public float[] position;
     //public List<string> objects;
-
-    public enum DayState
-    {
-        Morning,
-        Noon,
-        Afternoon,
-        Evening,
-        Night
-    }
-    public int day;
-    public DayState currentDayState;
     
     public PlayerData()
     {

@@ -8,7 +8,13 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private DialogueData _dialogueData;
+    private SaveData _saveData;
     public int currentSlot = 1;
+
+    public SaveData GetSaveData()
+    {
+        return _saveData;
+    }
     
     // Load and save all
     public void SaveGame(int slot = 0){
@@ -38,7 +44,6 @@ public class SaveManager : MonoBehaviour
             //Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        
         Debug.Log("Loading game");
         LoadPlayer(slot);
         //LoadDialogueData();
@@ -83,8 +88,8 @@ public class SaveManager : MonoBehaviour
     }
     private void SaveInfo(int slot)
     {
-        SaveData data = new SaveData();
-        string jsonString = JsonUtility.ToJson(data);
+        _saveData = new SaveData();
+        string jsonString = JsonUtility.ToJson(_saveData);
         File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/info.json", jsonString);
     }
     private static void SavePlayer(int slot)
@@ -141,25 +146,34 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadPlayer(int slot){
-        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() +"/player.save";
+        // string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() +"/player.json";
+        // if(File.Exists(path)){
+        //     //load
+        //     BinaryFormatter formatter = new BinaryFormatter();
+        //     FileStream stream = new FileStream(path, FileMode.Open);
+        //
+        //     // Deserialize binary from stream
+        //     PlayerData data = (PlayerData) formatter.Deserialize(stream);
+        //
+        //     // Write this down to a file for debug
+        //     string dataString = JsonUtility.ToJson(data);
+        //     File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json", dataString);
+        //
+        //     stream.Close();
+        //     
+        //     Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
+        //     GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
+        // } else {
+        //     Debug.Log("Player save file not found in " + path);
+        // }
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
-            //load
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            // Deserialize binary from stream
-            PlayerData data = (PlayerData) formatter.Deserialize(stream);
-
-            // Write this down to a file for debug
-            string dataString = JsonUtility.ToJson(data);
-            File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json", dataString);
-
-            stream.Close();
-            
-            Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
+            string jsonString = File.ReadAllText(path);
+            Debug.Log("Loaded Player data: " + jsonString);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(jsonString);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
-            Debug.Log("Player save file not found in " + path);
+            Debug.Log("Save file not found at " + path);
         }
     }
     

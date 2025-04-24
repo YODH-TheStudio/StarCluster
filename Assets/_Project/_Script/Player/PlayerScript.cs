@@ -279,6 +279,7 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
 
     public void Teleport(float x, float y, float z)
     {
+        Debug.Log("Teleporting to: " + x + ", " + y + ", " + z);
         Vector3 newPosition = new Vector3(x, y, z);
         _controller.enabled = false;
         transform.position = newPosition;
@@ -298,8 +299,6 @@ public class PlayerScript : MonoBehaviour, Controller.IPlayerActions
             GameManager.Instance._soundSystem.PlayRandomSoundFXClipByKeys(footstepBank, spawnPosition);
         }
     }
-
-
 
     // Code to interact with object
     public bool IsGrabbing()

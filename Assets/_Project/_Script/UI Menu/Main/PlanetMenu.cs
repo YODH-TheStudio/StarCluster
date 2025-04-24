@@ -112,4 +112,24 @@ public class PlanetMenu : Menu
         _isMoving = false;
         onComplete?.Invoke();
     }
+    
+    public async void LoadSavedPlanet()
+    {
+        int slot = GameManager.GetSaveManager().currentSlot;
+
+        SaveManager.SaveData data = GameManager.GetSaveManager().GetSaveData(slot);
+        int planetIndex;
+        if (data == null)
+        {
+            planetIndex = 1;
+        }
+        else
+        {
+            planetIndex = GameManager.GetSaveManager().GetSaveData(slot).currentPlanet;
+        }
+        
+        Debug.Log(planetIndex);
+        await SceneLoader.LoadSceneGroup(planetIndex);
+        GameManager.GetSaveManager().LoadGame(slot);
+    }
 }

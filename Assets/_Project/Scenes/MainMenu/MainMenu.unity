@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 24995301}
   - component: {fileID: 24995300}
   m_Layer: 5
-  m_Name: Load Save Button
+  m_Name: Select Save Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2137,7 +2137,7 @@ PrefabInstance:
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -2152,12 +2152,12 @@ PrefabInstance:
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadGroupScene
+      value: LoadSavedPlanet
       objectReference: {fileID: 0}
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Menu, Assembly-CSharp
+      value: PlanetMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -2727,6 +2727,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Save 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712298258200805778, guid: aecd9121c43eec4418ebf4ed0cd75a48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7305720368712365301, guid: aecd9121c43eec4418ebf4ed0cd75a48,
         type: 3}

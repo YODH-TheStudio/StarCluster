@@ -928,10 +928,6 @@ MonoBehaviour:
     Scenes:
     - sceneName: MainMenu
       sceneType: 1
-  - groupName: Cinematic
-    Scenes:
-    - sceneName: Cinematic
-      sceneType: 4
   - groupName: FirstPlanet
     Scenes:
     - sceneName: MainSprint2
@@ -942,6 +938,10 @@ MonoBehaviour:
       sceneType: 3
     - sceneName: DialogueUI
       sceneType: 2
+  - groupName: Cinematic
+    Scenes:
+    - sceneName: Cinematic
+      sceneType: 4
 --- !u!1 &1558495324
 GameObject:
   m_ObjectHideFlags: 0
