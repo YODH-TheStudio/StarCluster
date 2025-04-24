@@ -2,16 +2,31 @@ using UnityEngine;
 
 public class PlaySound : MonoBehaviour
 {
+
+    #region  Fields
+
     private SoundSystem _soundSystem;
     
-    // Start is called before the first frame update
+    #endregion
+    
+    #region Main Functions
     void Start()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
     }
+    #endregion
 
-    public void Play(string SFXKey)
+    #region Play Sond button 
+    public void Play(string sfxKey)
     {
-        _soundSystem.PlaySoundFXClipByKey(SFXKey);
+        _soundSystem.PlaySoundFXClipByKey(sfxKey);
     }
+    
+     public void ChangeMusic(string musicKey)
+     {
+         _soundSystem.ChangeMusicByKey(musicKey);
+     }
+    
+    #endregion
+    
 }

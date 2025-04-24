@@ -1333,8 +1333,8 @@ MonoBehaviour:
     type: 2}
   startingMusic: {fileID: 0}
   startingAmbianceSound: {fileID: 0}
-  fadeInDuration: 0
-  fadeOutDuration: 0
+  fadeInDuration: 2
+  fadeOutDuration: 2
   soundFXObject: {fileID: 0}
   sfxPoolManager: {fileID: 109436405}
 --- !u!4 &2772743023017524590

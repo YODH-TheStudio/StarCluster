@@ -457,7 +457,7 @@ public class SoundSystem : MonoBehaviour
 
     public AudioMixerGroup GetSFXMixerGroup()
     {
-        return sfxMixerGroup; // d�fini dans l�inspecteur ou charg� dynamiquement
+        return sfxMixerGroup; 
     }
 
     #endregion

@@ -6,23 +6,13 @@ public class MainMenu : Menu
     #region Fields 
     [SerializeField] private bool hasAlreadyPlayed = true; // TODO : Use the bool from the loaded save
     [SerializeField] private GameObject planetMenu;
-    private SoundSystem _soundSystem;
-    #endregion
-
-    #region Main Function
-
-    protected void Start()
-    {
-        _soundSystem = GameManager.Instance.GetSoundSystem();
-    }
-
 
     #endregion
+    
 
     #region PlayGame
     public async void PlayGame()
     {
-        //_soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position);
 
         if (hasAlreadyPlayed)
         {
