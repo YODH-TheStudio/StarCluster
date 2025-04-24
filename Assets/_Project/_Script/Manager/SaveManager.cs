@@ -26,7 +26,7 @@ public class SaveManager : MonoBehaviour
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        Debug.Log("Saving game");
+        //Debug.Log("Saving game");
         SavePlayer(slot);
         //SaveDialogueData();
         SavePuzzleData(slot);
@@ -44,9 +44,8 @@ public class SaveManager : MonoBehaviour
             //Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        Debug.Log("Loading game");
+        //Debug.Log("Loading game");
         LoadPlayer(slot);
-        //LoadDialogueData();
         LoadPuzzleData(slot);
         LoadObjects(slot);
     }
@@ -57,7 +56,7 @@ public class SaveManager : MonoBehaviour
         if (Directory.Exists(path))
         {
             Directory.Delete(path, true);
-            Debug.Log("Deleted save at " + path);
+            //Debug.Log("Deleted save at " + path);
         }
         else
         {
@@ -169,7 +168,7 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            Debug.Log("Loaded Player data: " + jsonString);
+            //Debug.Log("Loaded Player data: " + jsonString);
             PlayerData data = JsonUtility.FromJson<PlayerData>(jsonString);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
@@ -199,7 +198,6 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/puzzles.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            Debug.Log("Loaded puzzle data: " + jsonString);
             SerializableDictionary<string, bool> data = JsonUtility.FromJson<SerializableDictionary<string, bool>>(jsonString);
             Dictionary<string, bool> dataDic = data.ToDictionary();
 
@@ -221,7 +219,6 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            Debug.Log("Loaded Objects data: " + jsonString);
             SerializableDictionary<string, Vector3> data = JsonUtility.FromJson<SerializableDictionary<string, Vector3>>(jsonString);
             Dictionary<string, Vector3> positionsDic = data.ToDictionary();
 
