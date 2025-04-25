@@ -1333,9 +1333,9 @@ MonoBehaviour:
     type: 2}
   sfxMixerGroup: {fileID: -7239697908820815027, guid: f7b2a2f36abbfe645a8e087f2114c50e,
     type: 2}
-  startingMusic: {fileID: 0}
+  startingMusic: {fileID: 8300000, guid: 0387a2653facd7a42afb91ffbe5a3a5c, type: 3}
   startingAmbianceSound: {fileID: 0}
-  fadeInDuration: 2
+  fadeInDuration: 1
   fadeOutDuration: 2
   soundFXObject: {fileID: 0}
   sfxPoolManager: {fileID: 109436405}
