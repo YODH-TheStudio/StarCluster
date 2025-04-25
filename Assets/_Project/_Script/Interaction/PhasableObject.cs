@@ -11,7 +11,7 @@ public class PhasableObject : Interactable
     // Animation
     [SerializeField] private GameObject _startPosition;
     [SerializeField] private GameObject _endPosition;
-    [SerializeField] private float PhaseDuration = 1.0f;
+    [SerializeField] private float PhaseDuration = 2.0f;
     [SerializeField] private float phaseRadius = 2.0f; // Restriction radius
 
     // Track a list of positions (Start, End) to phase

@@ -427,18 +427,21 @@ public class PlayerScript : MonoBehaviour
 
         MovementLimit = MovementLimitType.FullRestriction;
         
-        Vector3 direction = targetPosition - initialPosition;
+        
+        Vector3 target = new Vector3(targetPosition.x, initialPosition.y, targetPosition.z);
+        Vector3 initial = new Vector3(initialPosition.x, initialPosition.y, initialPosition.z);
+        Vector3 direction = target - initial;
         
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
-            Vector3 newPosition = Vector3.Lerp(initialPosition, targetPosition, t);
+            Vector3 newPosition = Vector3.Lerp(initial, target, t);
             newPosition.y = transform.position.y;
 
             _rigidbody.MovePosition(newPosition); // Use Rigidbody to move the player
 
-            LookAt(targetPosition + direction); // Look at the target position
+            LookAt(transform.position + direction); // Look at the target position
             
             yield return null; // Wait until the next frame
         }
