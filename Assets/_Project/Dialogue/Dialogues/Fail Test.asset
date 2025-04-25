@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: Fail Test
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 461a9661-4396-42c5-9951-a98773983ded
+    TargetNodeGuid: d35eeb7f-198a-471e-bd44-313d526e0b30
+  - BaseNodeGuid: d35eeb7f-198a-471e-bd44-313d526e0b30
+    TargetNodeGuid: 3e9e9f23-1bf5-44aa-a902-3e5fa9f8b8b2
+  StartNodeDatas:
+  - NodeGuid: 461a9661-4396-42c5-9951-a98773983ded
+    Position: {x: 54, y: 283}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: d35eeb7f-198a-471e-bd44-313d526e0b30
+    Position: {x: 256, y: 283}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Enerv\xE9e"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: NOOB
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 3e9e9f23-1bf5-44aa-a902-3e5fa9f8b8b2
+    Position: {x: 493, y: 283}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

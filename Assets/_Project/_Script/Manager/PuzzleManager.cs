@@ -27,7 +27,26 @@ public class PuzzleManager : MonoBehaviour
         // Save the game
         GameManager.Instance.GetSaveManager().SaveGame();
         Debug.Log("Autosave");
+        
+        CheckValidation();
     }
+    #endregion
+
+    #region CheckValidation
+
+    public void CheckValidation()
+    {
+        foreach (var puzzle in puzzleList)
+        {
+            if (!puzzle.GetFinish())
+            {
+                return;
+            }
+        }
+
+        AccessToFinalPuzzle();
+    }
+
     #endregion
 
     #region Final Puzzle

@@ -154,15 +154,12 @@ public class PlayerScript : MonoBehaviour
         
         if (!IsMoveDirectionSafe(_direction))
         {
-            Debug.Log("Pas de sol détecté dans la direction du mouvement.");
             _direction = Vector3.zero;
             playerAnimator.SetBool(Moving, false);
         }
         
         if (!IsGroundedBelowPlayer())
         {
-            Debug.Log("Le joueur n'est plus au-dessus du sol. Correction de la vélocité.");
-            // Annule le mouvement horizontal pour empêcher la chute latérale
             Vector3 currentVelocity = _rigidbody.velocity;
             _rigidbody.velocity = new Vector3(0f, currentVelocity.y, 0f);
         }

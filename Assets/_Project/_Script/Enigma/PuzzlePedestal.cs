@@ -100,14 +100,13 @@ public class PuzzlePedestal : MonoBehaviour
 
                 return;
             }
-        }
+        }   
 
         OnEnigmeSolved();
     }
 
     protected virtual void OnEnigmeSolved()
     {
-        Debug.Log("L'enigme est resolue!");
         if (_fusionPoint)
         {
             StartCoroutine(AtlassiumAnimation(3));
