@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PuzzleManager : MonoBehaviour
 
     [SerializeField] private PuzzleData finalPuzzle;
 
-    public event Action OnFinalPuzzleActive;
+    public UnityEvent OnFinalPuzzleActive;
     #endregion
 
     #region Validation

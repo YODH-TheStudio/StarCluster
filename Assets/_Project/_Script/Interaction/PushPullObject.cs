@@ -160,8 +160,11 @@ public class PushPullObject : Interactable
         _isOnPedestal = isOnPedestal;
         
         GlowSymbol();
-        
-        //_soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
+
+        if (_isGrab)
+        {
+            _soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
+        }
         
         if (_isGrab)
         {
@@ -255,6 +258,8 @@ public class PushPullObject : Interactable
         GameManager.Instance.GetPlayer().UnfreezeRotation();
         UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
 
+        _isGrab = false;
+        
         if (_isAudioPlaying)
         {
             _pushAudioSource.Stop();

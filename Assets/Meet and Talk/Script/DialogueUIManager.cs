@@ -69,7 +69,7 @@ namespace MeetAndTalk
 
             // Premium Feature: Type-Writing
             if(EnableTypeWriting) lastTypingTime = Time.time;
-            _textBox = textBoxLeft;
+            _textBox = textBoxRight;
         }
 
         private void OnValidate()
@@ -180,12 +180,12 @@ namespace MeetAndTalk
             if (Position == PortraitPosition.Primary || Position == PortraitPosition.PrimaryDist)
             {
                 nameTextBox = nameTextBoxLeft;
-                DialogueBoxLeft.SetActive(true);
                 DialogueBoxRight.SetActive(false);
-                NameLeft.SetActive(true);
+                DialogueBoxLeft.SetActive(true);
                 NameRight.SetActive(false);
-                textBoxLeft.gameObject.SetActive(true);
+                NameLeft.SetActive(true);
                 textBoxRight.gameObject.SetActive(false);
+                textBoxLeft.gameObject.SetActive(true);
                 _textBox = textBoxLeft;
             }else if (Position == PortraitPosition.Secoundary || Position == PortraitPosition.SecoundaryDist)
             {

@@ -29,6 +29,7 @@ public class RotateObject : Interactable
     private float _soundCooldown;
     
     private static readonly int Pushing = Animator.StringToHash("IsPushing");
+    private static readonly int PushPull = Animator.StringToHash("IsPushPull");
 
     #endregion
 
@@ -73,6 +74,7 @@ public class RotateObject : Interactable
         UserTransform.GetComponent<PlayerScript>().FreezeRotation();
         
         GameManager.Instance.GetPlayer().GetAnimator().SetBool(Pushing, true);
+        GameManager.Instance.GetPlayer().GetAnimator().SetBool(PushPull, true);
     }
 
     private void DetachObjectFromPlayer()
@@ -85,6 +87,7 @@ public class RotateObject : Interactable
         playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
         
         GameManager.Instance.GetPlayer().GetAnimator().SetBool(Pushing, false);
+        GameManager.Instance.GetPlayer().GetAnimator().SetBool(PushPull, false);
     }
 
     #endregion
