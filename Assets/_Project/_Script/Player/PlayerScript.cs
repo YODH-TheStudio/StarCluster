@@ -426,7 +426,9 @@ public class PlayerScript : MonoBehaviour
         Vector3 initialPosition = transform.position;
 
         MovementLimit = MovementLimitType.FullRestriction;
-
+        
+        Vector3 direction = targetPosition - initialPosition;
+        
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
@@ -436,12 +438,8 @@ public class PlayerScript : MonoBehaviour
 
             _rigidbody.MovePosition(newPosition); // Use Rigidbody to move the player
 
-            //LookAt(targetPosition); // Look at the target position
+            LookAt(targetPosition + direction); // Look at the target position
             
-            //Vector3 direction = (targetPosition - transform.position).normalized;
-            
-            //Debug.DrawRay(transform.position, direction * 2, Color.red); // Debug ray to visualize the direction
-
             yield return null; // Wait until the next frame
         }
 

@@ -1,0 +1,326 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: "8- Chemin deuxi\xE8me enigme fin"
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+  - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    TargetNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
+  - BaseNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
+    TargetNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
+  - BaseNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
+    TargetNodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
+  - BaseNodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
+    TargetNodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
+  - BaseNodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    TargetNodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+  - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+  - BaseNodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: 38, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
+    Position: {x: 1595, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Vu l'\xE9nergie qui r\xF4de ici, on doit \xEAtre au bon
+        endroit."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    Position: {x: 2077, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Si on regarde bien les socles, on dirait qu\u2019il y
+        a les m\xEAmes motifs que sur les pierres."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
+    Position: {x: 2767, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Amus\xE9"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Moi je pense qu\u2019ils vont exploser."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
+    Position: {x: 2998, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Tu me rassures\u2026"
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+    Position: {x: 219, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Pensive
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Eh, tu penses que c\u2019est normal que tu sois un peu
+        transparente\u202F?"
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    Position: {x: 462, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Je suis quasiment s\xFBr que non."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    Position: {x: 701, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Sus
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Ouf, tu me rassures, je pensais que tous les humains
+        \xE9tait bizarre, mais en fait c\u2019est juste toi."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    Position: {x: 924, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Sad
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Super sympa merci.
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    Position: {x: 1157, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Joyeuse
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Bah quoi c\u2019est un compliment, regarde tu peux faire
+        des trucs trop cool avec les objets. "
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    Position: {x: 1375, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Chacun sa d\xE9finition de cool, je dirais que c\u2019est
+        plus perturbant de pouvoir pousser des rochers qui font quinze fois mon poids."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    Position: {x: 1855, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Amus\xE9"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Vers ces blocs bizarres ? Eh regarde, il y a des formes
+        \xE9tranges dessus. "
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
+    Position: {x: 2310, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Amus\xE9"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Oui, tu as raison, tu penses pouvoir pousser le bloc
+        sur son socle, ils me paraissent vachement lourds quand m\xEAme. "
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
+    Position: {x: 2545, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Tu as vu comme ils brillent, je suis s\xFBr que je peux
+        me d\xE9brouiller pour tirer leur \xE9nergie et r\xE9ussir \xE0 les bouger. "
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 3235, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []
