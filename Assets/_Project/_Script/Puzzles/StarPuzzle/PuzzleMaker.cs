@@ -2,37 +2,20 @@
 using System.Linq;
 using UnityEngine;
 
-public class Puzzle2D : MonoBehaviour
+public class PuzzleMaker : MonoBehaviour
 {
     #region Fields
-    // Level data
     public LevelData _levelData;
 
     private Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor;
 
-    // Camera
-    [SerializeField] private Camera _puzzleCamera;
-    [SerializeField] private Cinemachine.CinemachineVirtualCamera _cinemachineMainCamera;
-    [SerializeField] private Camera _mainCamera;
-
-    //
     private Vector2? _currentSelected = null;
 
-    // 3D part
     private Dictionary<GameObject, Vector2> _cubePositions3D = new Dictionary<GameObject, Vector2>();
     private List<Transform> _pointObjects3D = new List<Transform>();
     private Transform _segmentsParent;
 
-    public Transform parentPuzzleGroup;
-
-    // Resolve
-    private bool _puzzleSolved = true;
-
-    // Drag and drop
-    private bool _isDragging = false;
-    private Transform _currentStartDragPoint;
-    private GameObject _tempCylinder;
-    private float _dragThreshold = 1f;
+    private Transform _parentPuzzleGroup;
 
     // Visual size and offset
     [Header("3D Display Settings")]
@@ -50,30 +33,23 @@ public class Puzzle2D : MonoBehaviour
     public GameObject _starPrefab; 
     public List<GameObject> _circuitShapePrefabs;
     public GameObject _segmentPrefab;
-
-
-    private Vector3 _fingerMP = Vector3.zero;
-
+    
     #endregion
 
     void Start()
     {
         _segmentsParent = this.transform;
-        _segmentsParent.SetParent(parentPuzzleGroup);
+        _segmentsParent.SetParent(_parentPuzzleGroup);
         
         InstantiatePoints3D();
         InstantiateSegments();
-
     }
-
-
-    // 3D Visual *** 
-
+    
     private void InstantiatePoints3D()
     {
         foreach (Vector2 pos in _levelData._points)
         {
-            GameObject cube = Instantiate(_starPrefab, parentPuzzleGroup);
+            GameObject cube = Instantiate(_starPrefab, _parentPuzzleGroup);
             cube.name = $"Point3D_{pos.x}_{pos.y}";
             cube.transform.position = new Vector3(0f, pos.y / _scaleFactorY + _yOffset, -pos.x / _scaleFactorX - _zOffset);
             cube.transform.localScale = Vector3.one * _cubeScale;
@@ -108,14 +84,14 @@ public class Puzzle2D : MonoBehaviour
                 {
                     if (circuit.startPoint == pos)
                     {
-                        GameObject startPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
+                        GameObject startPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], _parentPuzzleGroup);
                         startPrefab.transform.position = cube.transform.position + circuit.startPointOffset;
 
                     }
 
                     if (circuit.endPoint == pos)
                     {
-                        GameObject endPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
+                        GameObject endPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], _parentPuzzleGroup);
                         endPrefab.transform.position = cube.transform.position + circuit.endPointOffset;
                     }
                 }
@@ -150,13 +126,13 @@ public class Puzzle2D : MonoBehaviour
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
-        if (_segmentPrefab == null || parentPuzzleGroup == null)
+        if (_segmentPrefab == null || _parentPuzzleGroup == null)
         {
             Debug.LogWarning("segmentPrefab ou parentPuzzleGroup n’est pas assigné !");
             return;
         }
 
-        GameObject segment = Instantiate(_segmentPrefab, parentPuzzleGroup);
+        GameObject segment = Instantiate(_segmentPrefab, _parentPuzzleGroup);
         segment.name = "SegmentCylinder";
 
         segment.transform.position = aPos + dir / 2f;
@@ -212,14 +188,14 @@ public class Puzzle2D : MonoBehaviour
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
-        if (_segmentPrefab == null || parentPuzzleGroup == null)
+        if (_segmentPrefab == null || _parentPuzzleGroup == null)
         {
             Debug.LogWarning("segmentPrefab ou parentPuzzleGroup n’est pas assigné !");
             return null;
         }
 
         // Création du segment depuis le prefab
-        GameObject segment = Instantiate(_segmentPrefab, parentPuzzleGroup);
+        GameObject segment = Instantiate(_segmentPrefab, _parentPuzzleGroup);
         segment.name = "ColoredSegmentCylinder";
 
         segment.transform.position = aPos + dir / 2f;

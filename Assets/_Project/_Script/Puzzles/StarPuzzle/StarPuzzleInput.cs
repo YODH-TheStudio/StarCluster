@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class StarPuzzleInput : MonoBehaviour
 {
     [SerializeField] private StarPuzzleBoard puzzleBoard;
-    [SerializeField] private Camera puzzleCamera;
+    private Camera _puzzleCamera;
     
     private PuzzleStar _startStar;
     private PuzzleStar _currentHover;
+
+    private void Awake()
+    {
+        _puzzleCamera = Camera.main;
+    }
+    
 
     private void OnEnable()
     {
@@ -58,7 +65,7 @@ public class StarPuzzleInput : MonoBehaviour
 
     private PuzzleStar RaycastToStar(Vector2 screenPos)
     {
-        Ray ray = puzzleCamera.ScreenPointToRay(screenPos);
+        Ray ray = _puzzleCamera.ScreenPointToRay(screenPos);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             return hit.collider.GetComponent<PuzzleStar>();

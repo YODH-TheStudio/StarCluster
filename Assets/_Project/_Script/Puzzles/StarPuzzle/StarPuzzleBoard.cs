@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,11 @@ public class StarPuzzleBoard : MonoBehaviour
     private List<StarLink> _blueLinks;
     private List<StarLink> _brownLinks;
     private List<StarLink> _purpleLinks;
+
+    private void Start()
+    {
+        // CreatePuzzle();
+    }
 
     private void CheckWin()
     {
