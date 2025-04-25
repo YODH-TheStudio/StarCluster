@@ -284,7 +284,7 @@ public class PushPullObject : Interactable
 
         if (_vibrationManager != null)
         {
-            _vibrationManager.Vibrate(0.3f, 0.1f); 
+            _vibrationManager.Vibrate(0.0f, 0.1f); 
         }
 
     }
