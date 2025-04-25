@@ -8,6 +8,8 @@ public class TriggerZone : MonoBehaviour
     [SerializeField] private UnityEvent onTriggerEnterEvent;
     [SerializeField] private UnityEvent onDialogueEndEvent;
 
+    [SerializeField] private bool _destroyedAfterTrigger;
+
     #endregion
 
     #region End Dialogue event
@@ -54,6 +56,13 @@ public class TriggerZone : MonoBehaviour
         if (other.GetComponent<PlayerScript>() == null) return;
         
         onTriggerEnterEvent?.Invoke();
+
+        if (_destroyedAfterTrigger)
+        {
+            Destroy(this);
+            
+            GameManager.Instance.GetDialogueManager().ProcessEndDialogue -= OnEndDialogue;
+        }
     }
     #endregion
 }
