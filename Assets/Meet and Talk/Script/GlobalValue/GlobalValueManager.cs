@@ -291,7 +291,7 @@ namespace MeetAndTalk.GlobalValue
 
                     if (GUI.changed)
                     {
-                        // Jeúli tak, zastosuj zmiany tylko do IntValues
+                        // Je≈ìli tak, zastosuj zmiany tylko do IntValues
                         settings.ApplyModifiedPropertiesWithoutUndo();
                         EditorUtility.SetDirty(settings.targetObject);
                     }

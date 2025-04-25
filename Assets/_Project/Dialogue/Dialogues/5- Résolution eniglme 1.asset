@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: "5- R\xE9solution eniglme 1"
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: b5b04acd-8500-471c-8a1d-8aab64fd3d98
+    TargetNodeGuid: e6261d17-4b83-45e5-96de-c776b32452ba
+  - BaseNodeGuid: e6261d17-4b83-45e5-96de-c776b32452ba
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    TargetNodeGuid: b5b04acd-8500-471c-8a1d-8aab64fd3d98
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: 172, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    Position: {x: 616, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Triste
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Dans les faits, je n'ai pas servi \xE0 grand chose."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    Position: {x: 878, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Amused
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Si, je peux voir plus clairement ce qui cloche gr\xE2ce
+        \xE0 toi."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: b5b04acd-8500-471c-8a1d-8aab64fd3d98
+    Position: {x: 1378, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Sad
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Ok \xE7a me va, je n\u2019ai jamais \xE9t\xE9 dou\xE9
+        pour trouver des noms de toute mani\xE8re."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: e6261d17-4b83-45e5-96de-c776b32452ba
+    Position: {x: 1620, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Joyeuse
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Alors c\u2019est d\xE9cid\xE9, continuons \xE0 chercher
+        les autres points de fusion et lib\xE9rons \u201CLa Joie\u201D."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    Position: {x: 388, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Happy
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Wow, \xE7a a disparu, on dirait qu\u2019on a r\xE9ussi
+        \xE0 effacer cette \xE9nergie."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    Position: {x: 1132, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Amus\xE9"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "J\u2019ai une id\xE9e ! Appelons ces choses des points
+        de fusion."
+    - languageEnum: 1
+      LanguageGenericType: 
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 1877, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

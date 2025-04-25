@@ -5,9 +5,10 @@ using UnityEngine.Events;
 public class TriggerZone : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private DialogueContainerSO dialogue;
     [SerializeField] private UnityEvent onTriggerEnterEvent;
     [SerializeField] private UnityEvent onDialogueEndEvent;
+
+    [SerializeField] private bool _destroyedAfterTrigger;
 
     #endregion
 
@@ -22,7 +23,7 @@ public class TriggerZone : MonoBehaviour
     #endregion
 
     #region Start Dialogue
-    public void StartDialogue()
+    public void StartDialogue(DialogueContainerSO dialogue)
     {
         if (dialogue != null)
         {
@@ -36,7 +37,7 @@ public class TriggerZone : MonoBehaviour
         }
     }
     
-    public void StartMiniDialogue()
+    public void StartMiniDialogue(DialogueContainerSO dialogue)
     {
         if (dialogue != null)
         {
@@ -54,13 +55,13 @@ public class TriggerZone : MonoBehaviour
     {
         if (other.GetComponent<PlayerScript>() == null) return;
         
-        if (dialogue != null)
+        onTriggerEnterEvent?.Invoke();
+
+        if (_destroyedAfterTrigger)
         {
-            onTriggerEnterEvent?.Invoke();
-        }
-        else
-        {
-            Debug.LogError("DialogueContainer is null for trigger zone");
+            Destroy(this);
+            
+            GameManager.Instance.GetDialogueManager().ProcessEndDialogue -= OnEndDialogue;
         }
     }
     #endregion

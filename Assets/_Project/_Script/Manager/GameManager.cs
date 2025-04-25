@@ -40,7 +40,7 @@ public class GameManager : PersistentSingleton<GameManager>
     
     private void Start()
     {
-        Instance.SoundSystem.ChangeMusicByKey("Main");
+        Instance.SoundSystem.ChangeMusicByKey("Menu");
     }
     #endregion
 

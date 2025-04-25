@@ -20,14 +20,11 @@ public class CompanionFollow : MonoBehaviour
     [NonSerialized]
     public float bounceSpeed = 0.5f;
     
-    private NavMeshAgent _agent;
-    private Rigidbody _rb;
-
-    private Vector3 velocity;
-    
-    private List<Vector3> _path;
+    private NavMeshAgent _navMeshAgent;
 
     private GameObject _model;
+
+    private Vector3 velocity;
 
     #endregion
 
@@ -36,14 +33,13 @@ public class CompanionFollow : MonoBehaviour
     void Start()
     {
         _player = GameManager.Instance.GetPlayer();
-        _agent = GetComponent<NavMeshAgent>();
         
         _companionAnchor = _player.GetComponentInChildren<CompanionAnchor>();
         
-        _path = new List<Vector3>();
-        _model = transform.GetChild(0).gameObject;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.updatePosition = false; // We will manually update the position
         
-        _rb = GetComponent<Rigidbody>();
+        _model = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -62,7 +58,14 @@ public class CompanionFollow : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // Adjust rotation speed as needed
             }
 
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, catchupSpeed);
+            //transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, catchupSpeed);
+            
+            _navMeshAgent.destination = targetPosition;
+            //_navMeshAgent.speed = (transform.position - targetPosition).magnitude * catchupSpeed;
+            Vector3 dest = new Vector3(_navMeshAgent.nextPosition.x, _companionAnchor.transform.position.y, _navMeshAgent.nextPosition.z);
+            // Debug.DrawLine(transform.position, dest, Color.red, 0.1f);
+            // Debug.DrawLine(transform.position, _navMeshAgent.nextPosition, Color.yellow, 0.1f);
+            transform.position = Vector3.SmoothDamp(transform.position, dest, ref velocity, catchupSpeed); //called on FixedUpdate after agent.SetDestination
         }
         else
         {
@@ -73,7 +76,6 @@ public class CompanionFollow : MonoBehaviour
         if (_model != null)
         {
             float newY = Mathf.Sin(Time.time * bounceSpeed) * bounceAmount;
-
             _model.transform.localPosition = new Vector3(_model.transform.localPosition.x, Mathf.Lerp(_model.transform.localPosition.y, newY, 0.1f), _model.transform.localPosition.z);
         }
         else
@@ -86,7 +88,7 @@ public class CompanionFollow : MonoBehaviour
     #region Collisions
     void OnCollisionEnter(Collision other)
     {
-        _companionAnchor.NewPos();
+        //_companionAnchor.NewPos();
     }
     #endregion
 }

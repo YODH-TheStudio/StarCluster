@@ -240,6 +240,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1570200735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3834515976030972357, guid: 07e51cc628615de4f8223102834b6578,
+    type: 3}
+  m_PrefabInstance: {fileID: 8090905094986538882}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2054496242
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +277,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2129666791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5383195114306517194, guid: 07e51cc628615de4f8223102834b6578,
+    type: 3}
+  m_PrefabInstance: {fileID: 8090905094986538882}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6963852631310221266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7677933930509593830, guid: 07e51cc628615de4f8223102834b6578,
@@ -285,6 +297,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 394904293}
     m_Modifications:
+    - target: {fileID: 157807827277394413, guid: 07e51cc628615de4f8223102834b6578,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d4a2420756ba184ea996d3fcfac550b,
+        type: 3}
     - target: {fileID: 576209239383060640, guid: 07e51cc628615de4f8223102834b6578,
         type: 3}
       propertyPath: m_IsActive
@@ -382,9 +400,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2205303335475993344, guid: 07e51cc628615de4f8223102834b6578,
         type: 3}
+      propertyPath: SkipButton
+      value: 
+      objectReference: {fileID: 2129666791}
+    - target: {fileID: 2205303335475993344, guid: 07e51cc628615de4f8223102834b6578,
+        type: 3}
       propertyPath: textBoxLeft
       value: 
       objectReference: {fileID: 735719271}
+    - target: {fileID: 2205303335475993344, guid: 07e51cc628615de4f8223102834b6578,
+        type: 3}
+      propertyPath: GoBackButton
+      value: 
+      objectReference: {fileID: 1570200735}
     - target: {fileID: 2205303335475993344, guid: 07e51cc628615de4f8223102834b6578,
         type: 3}
       propertyPath: textBoxRight
@@ -480,6 +508,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3695205104370792233, guid: 07e51cc628615de4f8223102834b6578,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5230415616508266105, guid: 07e51cc628615de4f8223102834b6578,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -510,6 +543,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7411309023097314963, guid: 07e51cc628615de4f8223102834b6578,
+        type: 3}
+      propertyPath: dialogueMiniUIManager
+      value: 
+      objectReference: {fileID: 8090905094986538883}
     - target: {fileID: 7451088964142333367, guid: 07e51cc628615de4f8223102834b6578,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -660,6 +698,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e51cc628615de4f8223102834b6578, type: 3}
+--- !u!114 &8090905094986538883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 646240476422377211, guid: 07e51cc628615de4f8223102834b6578,
+    type: 3}
+  m_PrefabInstance: {fileID: 8090905094986538882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f5579e301c9f74ca2a2f9127927566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

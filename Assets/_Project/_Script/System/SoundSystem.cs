@@ -130,7 +130,7 @@ public class SoundSystem : MonoBehaviour
 
             key = key.Substring(0, index + 1);
 
-            Debug.Log(key);
+            //Debug.Log(key);
 
             SoundFX existingSound = _sfxList.Find(sound => sound.Key == key);
 
@@ -402,20 +402,20 @@ public class SoundSystem : MonoBehaviour
         var audioClip = GetSfxByKey(key);
         if (audioClip != null)
         {
-            Debug.Log($"Playing sound: {key}");
+            //Debug.Log($"Playing sound: {key}");
             PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
 
-    //public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
-    //{
-    //    AudioSource audioSource = GetAvailableAudioSource();
-    //    AudioClip audioClip = GetSFXByKey(key);
+    public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
+    {
+        AudioSource audioSource = GetAvailableAudioSource();
+        AudioClip audioClip = GetSfxByKey(key);
 
-    //    audioSource.clip = audioClip;
-    //    audioSource.volume = volume;
-    //    audioSource.Play();
-    //}
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+    }
 
     public void PlayRandomSoundFXClipByKeys(string[] keys, Vector3 spawnPosition, float volume = 1.0f)
     {
@@ -455,6 +455,10 @@ public class SoundSystem : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public AudioMixerGroup GetSFXMixerGroup()
+    {
+        return sfxMixerGroup; 
+    }
 
     #endregion
 

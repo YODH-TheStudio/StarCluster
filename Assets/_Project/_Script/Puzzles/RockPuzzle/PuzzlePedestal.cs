@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PuzzlePedestal : MonoBehaviour
@@ -46,7 +48,7 @@ public class PuzzlePedestal : MonoBehaviour
     }
     #endregion
 
-    #region Puzzel
+    #region Puzzle
     private void CheckObjectPosition()
     {
         foreach (var pair in _pedestalDataList)
@@ -66,8 +68,6 @@ public class PuzzlePedestal : MonoBehaviour
                         pair.pushPullObject.SetIsOnPedestal(true);
 
                         CheckPuzzleResolution();
-                        
-                        Debug.Log($"Objet {pair.puzzleObject.name} place correctement sur le socle.");
                     }
                 }
                 else
@@ -81,8 +81,6 @@ public class PuzzlePedestal : MonoBehaviour
                         {
                             _fusionPoint.SetState(false);
                         }
-                        
-                        Debug.Log($"Objet {pair.puzzleObject.name} retire du socle.");
                     }
                 }
             }
@@ -102,18 +100,101 @@ public class PuzzlePedestal : MonoBehaviour
 
                 return;
             }
-        }
+        }   
 
         OnEnigmeSolved();
     }
 
     protected virtual void OnEnigmeSolved()
     {
-        Debug.Log("L'enigme est resolue!");
         if (_fusionPoint)
         {
+            StartCoroutine(AtlassiumAnimation(3));
+            
             _fusionPoint.SetState(true);
         }
     }
+    #endregion
+
+    #region Atlassium
+
+    private void DeactivateAllAtlassium()
+    {
+        foreach (var pair in _pedestalDataList)
+        {
+            if (pair.pushPullObject != null)
+            {
+                pair.pushPullObject.DeactivateAtlassium();
+            }
+        }
+        
+        MeshRenderer _meshRenderer = GetComponent<MeshRenderer>();
+        
+        Material[] materials = _meshRenderer.materials;
+        materials = new Material[1] { materials[0] };
+        _meshRenderer.materials = materials;
+    }
+    
+    
+
+    #endregion
+
+    #region Coroutine
+
+    private IEnumerator AtlassiumAnimation(float duration)
+    {
+        MeshRenderer _meshRenderer = GetComponent<MeshRenderer>();
+        
+        float elapsedTime = 0f;
+        Material[] materials = _meshRenderer.materials;
+        _meshRenderer.materials = materials;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float colorValue = Mathf.Lerp(0f, 1f, t);
+
+            materials[1].SetFloat("_ColorSlider", colorValue);
+            _meshRenderer.materials = materials;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure the final value is set
+        materials[1].SetFloat("_ColorSlider", 1f);
+        _meshRenderer.materials = materials;
+
+        elapsedTime = 0f;
+        
+        float baseAlpha = materials[1].GetFloat("_Alpha");
+        
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float colorValue = Mathf.Lerp(baseAlpha, 0f, t);
+
+            materials[1].SetFloat("_Alpha", colorValue);
+            _meshRenderer.materials = materials;
+
+            foreach (var pair in _pedestalDataList)
+            {
+                if (pair.pushPullObject != null)
+                {
+                    pair.pushPullObject.SetAtlassiumAlpha(colorValue);
+                }
+            }
+            
+            yield return null; // Wait for the next frame
+        }
+        
+        // Ensure the final value is set
+        materials[1].SetFloat("_Alpha", 0f);
+        _meshRenderer.materials = materials;
+        
+        DeactivateAllAtlassium();
+    }
+
     #endregion
 }

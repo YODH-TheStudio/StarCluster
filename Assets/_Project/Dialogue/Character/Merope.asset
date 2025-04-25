@@ -20,7 +20,7 @@ MonoBehaviour:
   CustomizedName:
     ValueName: PlayerName
   UseGlobalValue: 0
-  textColor: {r: 0.8962264, g: 0.78525484, b: 0.20714669, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   Avatars:
   - EmotionName: "Amus\xE9"
     Portrait:

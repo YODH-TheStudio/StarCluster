@@ -96,8 +96,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3d8cf9ae4b1b82347b40bd6735c62283,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: cdb76246bc7c62049bd72d209c645020,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1335,10 +1337,10 @@ MonoBehaviour:
     type: 2}
   sfxMixerGroup: {fileID: -7239697908820815027, guid: f7b2a2f36abbfe645a8e087f2114c50e,
     type: 2}
-  startingMusic: {fileID: 0}
+  startingMusic: {fileID: 8300000, guid: 0387a2653facd7a42afb91ffbe5a3a5c, type: 3}
   startingAmbianceSound: {fileID: 0}
-  fadeInDuration: 0
-  fadeOutDuration: 0
+  fadeInDuration: 1
+  fadeOutDuration: 2
   soundFXObject: {fileID: 0}
   sfxPoolManager: {fileID: 109436405}
 --- !u!4 &2772743023017524590

@@ -64,7 +64,6 @@ public class SFXPoolManager : MonoBehaviour
             Debug.LogWarning("AudioClip is null!");
             return;
         }
-        Debug.Log("Clip à jouer : " + clip.name);
 
         AudioSource source = GetAvailableSource();
         if (source == null) return; // Sécurité au cas où la pool est vide

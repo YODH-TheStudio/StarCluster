@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -71, y: 87}
+  m_AnchoredPosition: {x: -172, y: 130}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7804344142495058191
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 54628aafa20f64b40ae661038ee7abf0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ac38c381df7a1143ad33a7d07f60a16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 2224464202643127052}
   - component: {fileID: 5553327181413111587}
   - component: {fileID: 8647538957568715530}
+  - component: {fileID: 7298089241097723516}
   m_Layer: 0
   m_Name: Canvas Input
   m_TagString: Untagged
@@ -192,6 +193,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7298089241097723516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209847089272910270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773e48f90f04b11448f606f0b65b6fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionButton: {fileID: 3832024571365300259}
 --- !u!1001 &4597323633518838422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +214,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4191795063154039907}
     m_Modifications:
+    - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: handle
+      value: 
+      objectReference: {fileID: 5669696487728005910}
     - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: _handle
@@ -212,9 +231,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 5669696489485367564}
+    - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
       propertyPath: _background
       value: 
       objectReference: {fileID: 5669696489485367564}
+    - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: allowedStates
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: movementRange
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4377196307259826110, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: _movementRange
@@ -369,17 +403,23 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f353d42d1db27ff42b78b28efd86b316,
+      objectReference: {fileID: 21300000, guid: 63cbb8c83becb4849a9af96b44dc77b2,
         type: 3}
     - target: {fileID: 8170153791961219459, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.5019608
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 17c64dc644259e14e830eca3362a0117,
+        type: 3}
+    - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
       propertyPath: m_Color.a
-      value: 0.5019608
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}

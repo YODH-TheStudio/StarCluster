@@ -6,6 +6,7 @@ public class Menu : MonoBehaviour
     #region Fields
     protected SceneLoader SceneLoader;
     protected GameManager GameManager;
+    private SoundSystem _soundSystem;
     private int _index;
     #endregion
 
@@ -14,17 +15,21 @@ public class Menu : MonoBehaviour
     {
         SceneLoader = PersistentSingleton<SceneLoader>.Instance;
         GameManager = PersistentSingleton<GameManager>.Instance;
+
+        _soundSystem = GameManager.Instance.GetSoundSystem();
     }
     #endregion
 
     #region Active/Deactivate Menu
     public void ActivateMenuState()
     {
+        _soundSystem.PlaySoundFXClipByKey("Ui Clic B", transform.position);
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Menu);
     } 
     
     public void DeactivateMenuState()
     {
+       
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
     #endregion
@@ -39,6 +44,7 @@ public class Menu : MonoBehaviour
     #region Quit
     public void Quit()
     {
+ 
         Application.Quit();
     }
     #endregion

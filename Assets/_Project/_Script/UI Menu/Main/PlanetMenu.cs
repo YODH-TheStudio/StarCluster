@@ -6,7 +6,6 @@ public class PlanetMenu : Menu
 {
     #region Fields
     private SaveManager _saveManager;
-    private SoundSystem _soundSystem;
     
     [SerializeField] private Image[] planets;
     [SerializeField] private RectTransform rectTransform;
@@ -25,7 +24,6 @@ public class PlanetMenu : Menu
     {
         base.Awake();
         
-        _soundSystem = GameManager.Instance.GetSoundSystem();
         SetPlanetLock();
         _rectWidth = rectTransform.rect.width;
         _planetWidth = _rectWidth / PlanetNumber;
@@ -64,7 +62,7 @@ public class PlanetMenu : Menu
     {
         if (_isMoving) return;
         
-        _soundSystem.PlaySoundFXClipByKey("Ui Clica", transform.position); 
+        //_soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position); 
         
         _planetIndex = (_planetIndex + increment + PlanetNumber) % PlanetNumber; 
         Debug.Log(_planetIndex);
