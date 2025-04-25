@@ -17,23 +17,39 @@ public class VibrationManager : MonoBehaviour
     #region Vibration
     public void Vibrate(float strength, float duration)
     {
-        if (!_canVibrate) return;
+        if (!_canVibrate || Application.platform != RuntimePlatform.Android)
+            return;
 
-        if (Application.platform != RuntimePlatform.Android) return;
-        
         long milliseconds = (long)(duration * 1000);
-        int amplitude = Mathf.Clamp((int)(strength * 255), 0, 255);
+        int amplitude = Mathf.Clamp((int)(strength * 255), 1, 255); 
 
         using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         using (AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
         using (AndroidJavaObject vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator"))
+        using (AndroidJavaClass buildVersion = new AndroidJavaClass("android.os.Build$VERSION"))
         {
+            int sdkInt = buildVersion.GetStatic<int>("SDK_INT");
             if (vibrator == null) return;
-            
-            using (AndroidJavaClass vibrationEffect = new AndroidJavaClass("android.os.VibrationEffect"))
+
+            if (sdkInt >= 26)
             {
-                AndroidJavaObject effect = vibrationEffect.CallStatic<AndroidJavaObject>("createOneShot", milliseconds, amplitude);
-                vibrator.Call("vibrate", effect);
+                using (AndroidJavaClass vibrationEffect = new AndroidJavaClass("android.os.VibrationEffect"))
+                {
+                    bool hasAmplitudeControl = vibrator.Call<bool>("hasAmplitudeControl");
+                    if (hasAmplitudeControl)
+                    {
+                        AndroidJavaObject effect = vibrationEffect.CallStatic<AndroidJavaObject>("createOneShot", milliseconds, amplitude);
+                        vibrator.Call("vibrate", effect);
+                    }
+                    else
+                    {
+                        vibrator.Call("vibrate", milliseconds);
+                    }
+                }
+            }
+            else
+            {
+                vibrator.Call("vibrate", milliseconds);
             }
         }
     }
@@ -45,8 +61,7 @@ public class VibrationManager : MonoBehaviour
     public void SwitchVibrationMode()
     {
         _canVibrate = !_canVibrate;
-        int vibrationBool = _canVibrate ? 1 : 0;
-        PlayerPrefs.SetInt("CanVibrate", vibrationBool);
+        PlayerPrefs.SetInt("CanVibrate", _canVibrate ? 1 : 0);
         PlayerPrefs.Save();
     }
 
