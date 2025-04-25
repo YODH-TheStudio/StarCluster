@@ -5523,7 +5523,7 @@ GameObject:
   - component: {fileID: 369661723}
   - component: {fileID: 369661722}
   - component: {fileID: 369661721}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5539,7 +5539,7 @@ Transform:
   m_GameObject: {fileID: 369661719}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 51.4, y: 4.93, z: 110}
+  m_LocalPosition: {x: 141, y: 4.93, z: 102.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12551,6 +12551,9 @@ MonoBehaviour:
   _lookTransform: {fileID: 298325623}
   _maxRotation: 90
   _rotationDuration: 3
+  _onInteractIfFinish:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &1124372471 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -5775953214266689368, guid: f4a1904034b7e774e8a814a16c4fffbc,
@@ -14214,8 +14217,7 @@ GameObject:
   - component: {fileID: 1254846514}
   - component: {fileID: 1254846517}
   - component: {fileID: 1254846516}
-  - component: {fileID: 1254846515}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sea_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14237,28 +14239,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1931097879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1254846515
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254846513}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1254846516
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20651,7 +20631,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 2080374847
+    m_Bits: 2113929279
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -20662,7 +20642,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: cf74cba66fa071247839a29c043c4aee, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8e0015867fb4de0469b0c38c0b1b5ac2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1927562187
 PrefabInstance:
@@ -21096,8 +21076,7 @@ GameObject:
   - component: {fileID: 1978527092}
   - component: {fileID: 1978527095}
   - component: {fileID: 1978527094}
-  - component: {fileID: 1978527093}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sea_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21119,28 +21098,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1931097879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1978527093
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978527091}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1978527094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22269,6 +22226,9 @@ MonoBehaviour:
   _lookTransform: {fileID: 964305503}
   _maxRotation: 175
   _rotationDuration: 3
+  _onInteractIfFinish:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2087372374
 BoxCollider:
   m_ObjectHideFlags: 0

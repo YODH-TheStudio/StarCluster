@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class RotateObject : Interactable
@@ -22,6 +23,8 @@ public class RotateObject : Interactable
     [SerializeField] private float _maxRotation;
 
     [SerializeField] private float _rotationDuration = 3f;
+
+    [SerializeField] private UnityEvent _onInteractIfFinish;
 
     private Transform _playerOriginalParent;
     private Rigidbody _rigidbody;
@@ -88,6 +91,8 @@ public class RotateObject : Interactable
         
         GameManager.Instance.GetPlayer().GetAnimator().SetBool(Pushing, false);
         GameManager.Instance.GetPlayer().GetAnimator().SetBool(PushPull, false);
+        
+        _onInteractIfFinish?.Invoke();
     }
 
     #endregion
