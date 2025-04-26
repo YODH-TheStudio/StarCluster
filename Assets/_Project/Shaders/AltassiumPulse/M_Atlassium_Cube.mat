@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.479
+    - _Alpha: 0.3
     - _Amplitude: 0.085
     - _ColorSlider: 0
     - _EdgeBlend: 0.5
