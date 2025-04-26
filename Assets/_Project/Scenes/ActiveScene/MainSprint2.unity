@@ -1690,7 +1690,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 68.9
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -1700,7 +1700,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.2
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -2192,7 +2192,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac48b5b43f274314eaa12a35d1e73c21,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1649056231}
   m_SourcePrefab: {fileID: 100100000, guid: ac48b5b43f274314eaa12a35d1e73c21, type: 3}
 --- !u!4 &23750466 stripped
 Transform:
@@ -3254,7 +3258,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 112.22
+      value: 100.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -3264,7 +3268,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 81.59
+      value: 83.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -3395,7 +3399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 198952946}
   _glowMaterial: {fileID: 2100000, guid: a7bd9184cac8dc349906da39cf234d1e, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &198952950
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -3877,7 +3881,7 @@ Transform:
   m_GameObject: {fileID: 234900756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.45, y: 5.97, z: 114.7}
+  m_LocalPosition: {x: 11.45, y: 5.97, z: 141.67}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5903,7 +5907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 403411725}
   _glowMaterial: {fileID: 2100000, guid: 314a01a2d6e2d7a48824b05c843c37f1, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &403411729
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6975,7 +6979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 444810808}
   _glowMaterial: {fileID: 2100000, guid: cf285d4d43e1f5440be66ef3ecc39314, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &444810812
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -8855,7 +8859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 629442185}
   _glowMaterial: {fileID: 2100000, guid: efaf7fd51f492eb4a9d03124c4ad1919, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &629442189
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -9687,7 +9691,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693449299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10480,7 +10484,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 86.24
+      value: 89.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -10490,7 +10494,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 78.19
+      value: 88.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -10621,7 +10625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 731839023}
   _glowMaterial: {fileID: 2100000, guid: b13667f4af02cdb44813e547b8ff31f0, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &731839027
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -10847,7 +10851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 733416321}
   _glowMaterial: {fileID: 2100000, guid: dc19514c4e7031b4297b047ed518e6a6, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &733416325
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -12111,7 +12115,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 97.74
+      value: 94.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -12121,7 +12125,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 67.97
+      value: 83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -12252,7 +12256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 830732528}
   _glowMaterial: {fileID: 2100000, guid: efaf7fd51f492eb4a9d03124c4ad1919, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &830732532
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -13530,7 +13534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 954331839}
   _glowMaterial: {fileID: 2100000, guid: cf285d4d43e1f5440be66ef3ecc39314, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &954331843
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -13882,7 +13886,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045256, y: -0.3726226, z: 0.08717231, w: 0.89959055}
-  m_LocalPosition: {x: 174.43495, y: 73.002426, z: -10.310641}
+  m_LocalPosition: {x: 107.63496, y: 73.002426, z: -25.710644}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14520,7 +14524,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 85.03
+      value: 89.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -14530,7 +14534,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 101.99
+      value: 96.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -14661,7 +14665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1008248878}
   _glowMaterial: {fileID: 2100000, guid: 39b3fec229517c846bdeb47303368aca, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &1008248882
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -17690,7 +17694,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7ce811c1194738f4e86f6893490c4ec7,
+          m_ObjectArgument: {fileID: 11400000, guid: 905b00a50e86cc5498a879f1a7bbb499,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -19031,7 +19035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1442702311}
   _glowMaterial: {fileID: 2100000, guid: 314a01a2d6e2d7a48824b05c843c37f1, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &1442702315
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -21295,7 +21299,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 88.39
+      value: 95.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -21305,7 +21309,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 110.44
+      value: 100.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a1904034b7e774e8a814a16c4fffbc,
         type: 3}
@@ -21436,7 +21440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1619747346}
   _glowMaterial: {fileID: 2100000, guid: dc19514c4e7031b4297b047ed518e6a6, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &1619747350
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -21865,7 +21869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1641270009}
   _glowMaterial: {fileID: 2100000, guid: a7bd9184cac8dc349906da39cf234d1e, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &1641270013
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -22091,7 +22095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1642168847}
   _glowMaterial: {fileID: 2100000, guid: 39b3fec229517c846bdeb47303368aca, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &1642168851
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -22353,6 +22357,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 410114339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1649056228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac48b5b43f274314eaa12a35d1e73c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 23750465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1649056231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649056228}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 912.8343, y: 177.72922, z: 587.9908}
+  m_Center: {x: 54.411907, y: -0.00022047984, z: -0.000018265322}
 --- !u!1001 &1651542674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23661,7 +23692,7 @@ Transform:
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045257, y: -0.37262258, z: 0.08717228, w: 0.89959055}
-  m_LocalPosition: {x: 174.43495, y: 73.002426, z: -10.310641}
+  m_LocalPosition: {x: 107.63496, y: 73.002426, z: -25.710644}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27446,16 +27477,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleList:
-  - fusionPoint: {fileID: 0}
+  - fusionPoint: {fileID: 1315021420}
     puzzleGameObjectList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - fusionPoint: {fileID: 0}
+    - {fileID: 1442702310}
+    - {fileID: 954331838}
+    - {fileID: 731839022}
+    - {fileID: 830732527}
+    - {fileID: 198952945}
+    - {fileID: 1008248877}
+    - {fileID: 1619747345}
+  - fusionPoint: {fileID: 234900759}
     puzzleGameObjectList: []
   finalPuzzle:
     fusionPoint: {fileID: 0}
@@ -27751,7 +27782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 2065051977}
   _glowMaterial: {fileID: 2100000, guid: b13667f4af02cdb44813e547b8ff31f0, type: 2}
-  pushClip: {fileID: 0}
+  pushClip: {fileID: 8300000, guid: 089fb6ab120da1840931f6828358e589, type: 3}
 --- !u!208 &2065051981
 NavMeshObstacle:
   m_ObjectHideFlags: 0
