@@ -49,6 +49,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3[] _checkDirections;
 
     private Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
+
+    private Vector3 _initialPosition;
     
     #endregion
 
@@ -119,11 +121,16 @@ public class PlayerScript : MonoBehaviour
             (Vector3.back + Vector3.right).normalized
         };
         
+        _initialPosition = transform.position;
     }
 
 
     private void FixedUpdate()
     {
+        if (transform.position.y < 0)
+        {
+            transform.position = _initialPosition;
+        }
 
         if (_particle != null)
         {
