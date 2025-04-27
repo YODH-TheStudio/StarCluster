@@ -703,6 +703,12 @@ PrefabInstance:
       propertyPath: planetMenu
       value: 
       objectReference: {fileID: 1973317089}
+    - target: {fileID: 2026282657887039455, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: _localizationManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 51c878b637fd373488f12ef9a2aa37d5,
+        type: 2}
     - target: {fileID: 2188743486102864271, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       propertyPath: m_AnchorMax.y

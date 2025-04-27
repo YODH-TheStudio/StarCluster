@@ -42,6 +42,8 @@ public class SettingsMenu : Menu
     
     private bool _canVibrate;
     private int _vibration;
+    
+    [SerializeField] private LocalizationManager _localizationManager;
     #endregion
 
     #region Main Functions
@@ -112,15 +114,13 @@ public class SettingsMenu : Menu
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
         PlayerPrefs.Save();
         
-        LocalizationManager lm = Resources.Load("Languages") as LocalizationManager;
-
         if (_currentLanguage == "English")
         {
-            lm.selectedLang = SystemLanguage.English;
+            _localizationManager.selectedLang = SystemLanguage.English;
         }
         else if (_currentLanguage == "French")
         {
-            lm.selectedLang = SystemLanguage.French;
+            _localizationManager.selectedLang = SystemLanguage.French;
         }
     }
     #endregion
