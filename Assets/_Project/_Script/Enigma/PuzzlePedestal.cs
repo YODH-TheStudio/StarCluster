@@ -17,6 +17,8 @@ public class PuzzlePedestal : MonoBehaviour
     [SerializeField]
     private float validationRadius = 1.5f;
 
+    [SerializeField] private MeshRenderer _mainStoneMesh;
+
     public bool IsSolved { get; private set; }
 
     [System.Serializable]
@@ -28,6 +30,7 @@ public class PuzzlePedestal : MonoBehaviour
         public GameObject pedestalObject;
         public bool isOnPedestal = false;
     }
+    
     #endregion
 
     #region Main Functions
@@ -128,11 +131,9 @@ public class PuzzlePedestal : MonoBehaviour
             }
         }
         
-        MeshRenderer _meshRenderer = GetComponent<MeshRenderer>();
-        
-        Material[] materials = _meshRenderer.materials;
+        Material[] materials = _mainStoneMesh.materials;
         materials = new Material[1] { materials[0] };
-        _meshRenderer.materials = materials;
+        _mainStoneMesh.materials = materials;
     }
     
     
@@ -143,11 +144,9 @@ public class PuzzlePedestal : MonoBehaviour
 
     private IEnumerator AtlassiumAnimation(float duration)
     {
-        MeshRenderer _meshRenderer = GetComponent<MeshRenderer>();
-        
         float elapsedTime = 0f;
-        Material[] materials = _meshRenderer.materials;
-        _meshRenderer.materials = materials;
+        Material[] materials = _mainStoneMesh.materials;
+        _mainStoneMesh.materials = materials;
 
         while (elapsedTime < duration)
         {
@@ -156,14 +155,14 @@ public class PuzzlePedestal : MonoBehaviour
             float colorValue = Mathf.Lerp(0f, 1f, t);
 
             materials[1].SetFloat("_ColorSlider", colorValue);
-            _meshRenderer.materials = materials;
+            _mainStoneMesh.materials = materials;
 
             yield return null; // Wait for the next frame
         }
 
         // Ensure the final value is set
         materials[1].SetFloat("_ColorSlider", 1f);
-        _meshRenderer.materials = materials;
+        _mainStoneMesh.materials = materials;
 
         elapsedTime = 0f;
         
@@ -176,7 +175,7 @@ public class PuzzlePedestal : MonoBehaviour
             float colorValue = Mathf.Lerp(baseAlpha, 0f, t);
 
             materials[1].SetFloat("_Alpha", colorValue);
-            _meshRenderer.materials = materials;
+            _mainStoneMesh.materials = materials;
 
             foreach (var pair in _pedestalDataList)
             {
@@ -191,7 +190,7 @@ public class PuzzlePedestal : MonoBehaviour
         
         // Ensure the final value is set
         materials[1].SetFloat("_Alpha", 0f);
-        _meshRenderer.materials = materials;
+        _mainStoneMesh.materials = materials;
         
         DeactivateAllAtlassium();
     }
