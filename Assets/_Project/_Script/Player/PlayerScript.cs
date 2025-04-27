@@ -422,6 +422,7 @@ public class PlayerScript : MonoBehaviour
     // Move the player to the target position in a given duration, with movement restriction
     public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
+        playerAnimator.SetBool(Moving, true);
         float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
 
@@ -448,6 +449,7 @@ public class PlayerScript : MonoBehaviour
 
         _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
+        playerAnimator.SetBool(Moving, false);
     }
     #endregion
 
