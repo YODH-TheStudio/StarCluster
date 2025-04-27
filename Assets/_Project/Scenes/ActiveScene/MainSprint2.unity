@@ -7365,7 +7365,7 @@ MonoBehaviour:
   _grabTransform: {fileID: 283515511}
   _lookTransform: {fileID: 265793304}
   _maxRotation: 175
-  _rotationDuration: 3
+  _rotationDuration: 4
   _onInteractIfFinish:
     m_PersistentCalls:
       m_Calls:
@@ -8496,7 +8496,7 @@ MonoBehaviour:
   _grabTransform: {fileID: 369560641}
   _lookTransform: {fileID: 139209132}
   _maxRotation: 90
-  _rotationDuration: 3
+  _rotationDuration: 4
   _onInteractIfFinish:
     m_PersistentCalls:
       m_Calls:

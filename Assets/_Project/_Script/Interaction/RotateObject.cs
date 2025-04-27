@@ -9,7 +9,8 @@ public class RotateObject : Interactable
 {
     #region Fields
     private SoundSystem _soundSystem;
-    
+    private VibrationManager _vibrationManager;
+
     private bool _isOnPedestal;
     private bool _isGrab;
     private Vector3 _pushDirection;
@@ -42,6 +43,7 @@ public class RotateObject : Interactable
     private void Awake()
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
+        _vibrationManager = GameManager.Instance.GetVibrationManager();
     }
 
     #endregion
@@ -136,11 +138,14 @@ public class RotateObject : Interactable
         Vector3 currentRotation = transform.localRotation.eulerAngles;
         float startYRotation = currentRotation.y;
 
-        
+        _soundSystem.PlaySoundFXClipByKey("Rock Slide B", transform.position);
+
         while (time < _rotationDuration)
         {
             time += Time.deltaTime;
             float t = time / _rotationDuration;
+
+            _vibrationManager.Vibrate(0.1f, 0.1f);
 
             // Interpolate only the Y-axis rotation
             float currentYRotation = Mathf.Lerp(startYRotation, _maxRotation, t);
