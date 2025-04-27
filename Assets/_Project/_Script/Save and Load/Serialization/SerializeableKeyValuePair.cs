@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class SerializableKeyValuePair<TKey, TValue>
 {
-    public TKey key;
-    public TValue value;
+    public TKey Key;
+    public TValue Value;
 
-    public SerializableKeyValuePair(TKey tKey, TValue tValue)
+    public SerializableKeyValuePair(TKey key, TValue value)
     {
-        key = tKey;
-        value = tValue;
+        Key = key;
+        Value = value;
     }
 }
 
@@ -32,7 +33,7 @@ public class SerializableDictionary<TKey, TValue>
         Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
         foreach (var kvp in items)
         {
-            dict[kvp.key] = kvp.value;
+            dict[kvp.Key] = kvp.Value;
         }
         return dict;
     }
