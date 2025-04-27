@@ -34,7 +34,6 @@ public class RotateObject : Interactable
     
     private static readonly int Pushing = Animator.StringToHash("IsPushing");
     private static readonly int PushPull = Animator.StringToHash("IsPushPull");
-    private static readonly int Moving = Animator.StringToHash("IsMoving");
 
     #endregion
 
@@ -104,9 +103,7 @@ public class RotateObject : Interactable
 
     private IEnumerator Animation(Vector3 start)
     {
-        GameManager.Instance.GetPlayer().GetAnimator().SetBool(Moving, true);
         yield return StartCoroutine(MoveAnimation(start));
-        GameManager.Instance.GetPlayer().GetAnimator().SetBool(Moving, false);
         AttachPlayerToObject();
         yield return StartCoroutine(RotateAnimation());
         DetachObjectFromPlayer();
