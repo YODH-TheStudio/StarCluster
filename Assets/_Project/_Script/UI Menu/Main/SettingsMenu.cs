@@ -7,11 +7,14 @@ using UnityEngine.UI;
 
 public class SettingsMenu : Menu
 {
+
+    #region Enum
     public enum PreviousMenu
     {
         MainMenu,
         PlanetMenu
     }
+    #endregion
 
     #region Fields
     private SoundSystem _settingSoundSystem;
@@ -40,7 +43,6 @@ public class SettingsMenu : Menu
     private int _vibration;
     #endregion
 
-
     #region Main Functions
     private void Start()
     {
@@ -51,7 +53,7 @@ public class SettingsMenu : Menu
     }
     #endregion
 
-
+    #region Previous Menu function
     public void OpenFrom(PreviousMenu menu)
     {
         _previousMenu = menu;
@@ -83,7 +85,7 @@ public class SettingsMenu : Menu
         }
     }
 
-
+    #endregion
 
     #region Player Prefs
     private void LoadPlayerPrefs()
