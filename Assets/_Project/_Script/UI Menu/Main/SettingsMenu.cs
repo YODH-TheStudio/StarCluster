@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MeetAndTalk.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -110,6 +111,17 @@ public class SettingsMenu : Menu
         PlayerPrefs.SetString("Language", _currentLanguage);
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
         PlayerPrefs.Save();
+        
+        LocalizationManager lm = Resources.Load("Languages") as LocalizationManager;
+
+        if (_currentLanguage == "English")
+        {
+            lm.selectedLang = SystemLanguage.English;
+        }
+        else if (_currentLanguage == "French")
+        {
+            lm.selectedLang = SystemLanguage.French;
+        }
     }
     #endregion
 
