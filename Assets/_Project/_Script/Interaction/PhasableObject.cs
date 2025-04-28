@@ -124,6 +124,8 @@ public class PhasableObject : Interactable
     {
         float dist = Vector3.Distance(_playerScript.transform.position, phasePair.start);
         
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Phasing);
+        
         _playerScript.GetAnimator().SetBool(Moving, true);
         yield return StartCoroutine(_playerScript.MoveTo(phasePair.start, dist / 2f));
 
@@ -137,6 +139,8 @@ public class PhasableObject : Interactable
         yield return StartCoroutine(_playerScript.MoveTo(phasePair.end, PhaseDuration));
         _playerScript.GetAnimator().SetBool(Phasing, false);
 
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        
         // Activate the collider
         if (_objectCollider != null)
         {

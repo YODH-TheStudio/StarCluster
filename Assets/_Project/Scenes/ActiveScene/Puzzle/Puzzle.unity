@@ -679,6 +679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774719522}
   - component: {fileID: 1774719521}
+  - component: {fileID: 1774719523}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -741,6 +742,23 @@ Transform:
   - {fileID: 1675748360}
   m_Father: {fileID: 1653555698}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &1774719523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774719520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: bf4ba8c4f8de00349a56f97cf7ab5fef, type: 2}
 --- !u!1 &1790606618
 GameObject:
   m_ObjectHideFlags: 0
