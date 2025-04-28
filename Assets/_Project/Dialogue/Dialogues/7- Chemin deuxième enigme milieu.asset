@@ -19,6 +19,8 @@ MonoBehaviour:
   MaxChoiceOptionPerNode: 8
   NodeLinkDatas:
   - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     TargetNodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
   - BaseNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
     TargetNodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
@@ -62,7 +64,7 @@ MonoBehaviour:
     Position: {x: 1595, y: 274}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
-    Emotion: Normal
+    Emotion: Thinking
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -82,7 +84,7 @@ MonoBehaviour:
     Position: {x: 1855, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: "Amus\xE9"
+    Emotion: "Fi\xE8re"
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -102,7 +104,7 @@ MonoBehaviour:
     Position: {x: 2077, y: 274}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
-    Emotion: Normal
+    Emotion: Thinking
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -121,7 +123,7 @@ MonoBehaviour:
     Position: {x: 2310, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: "Amus\xE9"
+    Emotion: "L\xE9vitation"
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -141,7 +143,7 @@ MonoBehaviour:
     Position: {x: 2775, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: "Amus\xE9"
+    Emotion: Triste
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -161,7 +163,7 @@ MonoBehaviour:
     Position: {x: 2998, y: 274}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
-    Emotion: Normal
+    Emotion: Sad
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 

@@ -173,34 +173,16 @@ public class GameManager : PersistentSingleton<GameManager>
     
     private void Touch_OnFingerMove(Finger touchedFinger)
     {
-        if (OnFingerMove == null)
-        {
-            return;
-        }
-        print("Finger Move");
-        print(OnFingerMove.GetInvocationList().Count());
         OnFingerMove?.Invoke(touchedFinger);
     }
     
     private void Touch_OnFingerUp(Finger touchedFinger)
     {
-        if (OnFingerUp == null)
-        {
-            return;
-        }
-        print("Finger Up");
-        print(OnFingerUp.GetInvocationList().Count());
         OnFingerUp?.Invoke(touchedFinger);
     }
     
     private void Touch_OnFingerDown(Finger touchedFinger)
     {
-        if (OnFingerDown == null)
-        {
-            return;
-        }
-        print("Finger Down");
-        print(OnFingerDown.GetInvocationList().Count());
         OnFingerDown?.Invoke(touchedFinger);
     }
 

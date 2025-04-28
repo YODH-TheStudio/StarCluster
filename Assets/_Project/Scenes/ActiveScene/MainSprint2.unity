@@ -2718,7 +2718,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.6
+      value: 31.24
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -2728,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.539
+      value: 99.8
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -8321,12 +8321,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1945274245}
-  - {fileID: 1554663935}
   - {fileID: 426260359}
   - {fileID: 693449300}
-  - {fileID: 738274364}
   - {fileID: 1368556208}
-  - {fileID: 618831347}
+  - {fileID: 637006739}
   - {fileID: 662985379}
   m_Father: {fileID: 2065579858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8432,8 +8430,9 @@ GameObject:
   - component: {fileID: 426260362}
   - component: {fileID: 426260361}
   - component: {fileID: 426260360}
+  - component: {fileID: 426260364}
   m_Layer: 0
-  m_Name: Dialogue Trigger Test (2)
+  m_Name: Dialogue Trigger Test 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8485,7 +8484,7 @@ MonoBehaviour:
   onDialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  _destroyedAfterTrigger: 1
+  _deactivateAfterTrigger: 1
 --- !u!65 &426260361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8557,6 +8556,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426260358}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &426260364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426260358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_3
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1 &430785657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cab432499e6050e49ac178acd88e0fa2,
@@ -10551,17 +10566,17 @@ PrefabInstance:
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.36
+      value: 24.53
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.92
+      value: 6.94
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.454
+      value: 48.65
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -11265,144 +11280,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.644781, y: 1.2304857, z: 0.61649567}
   m_Center: {x: -0.004766479, y: 0.00012388872, z: -0.014322062}
---- !u!1 &618831346
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 618831347}
-  - component: {fileID: 618831351}
-  - component: {fileID: 618831350}
-  - component: {fileID: 618831349}
-  - component: {fileID: 618831348}
-  m_Layer: 0
-  m_Name: Dialogue Trigger Test (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &618831347
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618831346}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 10.35, y: 6.97, z: 55.29}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 414209622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &618831348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618831346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61ab4fa2305a944b8ca5eb06368c8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 618831348}
-        m_TargetAssemblyTypeName: TriggerZone, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 108259fb70960dd40bb5d451041b0dd8,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _destroyedAfterTrigger: 0
---- !u!65 &618831349
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618831346}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &618831350
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618831346}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &618831351
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618831346}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &629442183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11748,6 +11625,161 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1252483952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &637006738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637006739}
+  - component: {fileID: 637006744}
+  - component: {fileID: 637006743}
+  - component: {fileID: 637006742}
+  - component: {fileID: 637006741}
+  - component: {fileID: 637006740}
+  m_Layer: 0
+  m_Name: Dialogue Trigger Test 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637006739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.000000014901161}
+  m_LocalPosition: {x: -12.3, y: 6.97, z: -13}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 414209622}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &637006740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_7
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
+--- !u!114 &637006741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c61ab4fa2305a944b8ca5eb06368c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 637006741}
+        m_TargetAssemblyTypeName: TriggerZone, Assembly-CSharp
+        m_MethodName: StartDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 4326bae9e1ad5e249bca17e46146ac67,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _deactivateAfterTrigger: 1
+--- !u!65 &637006742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 14.19}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &637006743
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &637006744
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637006738}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &657493396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68e3e2e7e9aba134eb552f829bb58068,
@@ -11779,8 +11811,9 @@ GameObject:
   - component: {fileID: 662985382}
   - component: {fileID: 662985381}
   - component: {fileID: 662985380}
+  - component: {fileID: 662985384}
   m_Layer: 0
-  m_Name: Dialogue Trigger Test (7)
+  m_Name: Dialogue Trigger Test 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11795,7 +11828,7 @@ Transform:
   m_GameObject: {fileID: 662985378}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 67.17, y: 6.97, z: -9.98}
+  m_LocalPosition: {x: 78.72, y: 6.97, z: -9.98}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -11821,7 +11854,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
+          m_ObjectArgument: {fileID: 11400000, guid: 49faf6d46149e534b9fa7602a955fdb4,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -11832,7 +11865,7 @@ MonoBehaviour:
   onDialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  _destroyedAfterTrigger: 1
+  _deactivateAfterTrigger: 1
 --- !u!65 &662985381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11904,6 +11937,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662985378}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &662985384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662985378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_8
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1 &665785766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68e3e2e7e9aba134eb552f829bb58068,
@@ -12444,8 +12493,9 @@ GameObject:
   - component: {fileID: 693449303}
   - component: {fileID: 693449302}
   - component: {fileID: 693449301}
+  - component: {fileID: 693449305}
   m_Layer: 0
-  m_Name: Dialogue Trigger Test (3)
+  m_Name: Dialogue Trigger Test 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12460,7 +12510,7 @@ Transform:
   m_GameObject: {fileID: 693449299}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -82.84, y: 6.97, z: 24.13}
+  m_LocalPosition: {x: -64.98, y: 6.97, z: 24.13}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -12486,7 +12536,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
+          m_ObjectArgument: {fileID: 11400000, guid: 778f7c9f8b41e234198c2d3bc8ddcd1a,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -12497,7 +12547,7 @@ MonoBehaviour:
   onDialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  _destroyedAfterTrigger: 1
+  _deactivateAfterTrigger: 1
 --- !u!65 &693449302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12569,6 +12619,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693449299}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &693449305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693449299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_4
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1 &697338650
 GameObject:
   m_ObjectHideFlags: 0
@@ -13985,144 +14051,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3190887, y: 0.41698554, z: 0.29016536}
   m_Center: {x: 0.0014619157, y: -0.0016197268, z: 0.00093657547}
---- !u!1 &738274363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 738274364}
-  - component: {fileID: 738274368}
-  - component: {fileID: 738274367}
-  - component: {fileID: 738274366}
-  - component: {fileID: 738274365}
-  m_Layer: 0
-  m_Name: Dialogue Trigger Test (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &738274364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738274363}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 17.75, y: 6.97, z: 55.29}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 414209622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &738274365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738274363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61ab4fa2305a944b8ca5eb06368c8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 738274365}
-        m_TargetAssemblyTypeName: TriggerZone, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 108259fb70960dd40bb5d451041b0dd8,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _destroyedAfterTrigger: 0
---- !u!65 &738274366
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738274363}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &738274367
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738274363}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &738274368
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738274363}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &756020301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17789,7 +17717,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045256, y: -0.3726226, z: 0.08717231, w: 0.89959055}
-  m_LocalPosition: {x: 118.99584, y: 72.97343, z: -31.851643}
+  m_LocalPosition: {x: 110.63584, y: 72.97343, z: 20.409359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22856,6 +22784,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1315021419}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: StartDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 7ce811c1194738f4e86f6893490c4ec7,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1368556207}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 637006738}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!65 &1315021421
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23457,13 +23422,14 @@ GameObject:
   - component: {fileID: 1368556211}
   - component: {fileID: 1368556210}
   - component: {fileID: 1368556209}
+  - component: {fileID: 1368556213}
   m_Layer: 0
-  m_Name: Dialogue Trigger Test (5)
+  m_Name: Dialogue Trigger Test 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1368556208
 Transform:
   m_ObjectHideFlags: 0
@@ -23472,13 +23438,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368556207}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -15.02, y: 6.97, z: -16.03}
+  m_LocalRotation: {x: -0, y: -0.7071079, z: -0, w: 0.70710576}
+  m_LocalPosition: {x: -99.12, y: 6.97, z: -5.87}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 414209622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &1368556209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23499,7 +23465,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
+          m_ObjectArgument: {fileID: 11400000, guid: 4326bae9e1ad5e249bca17e46146ac67,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -23510,7 +23476,7 @@ MonoBehaviour:
   onDialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  _destroyedAfterTrigger: 1
+  _deactivateAfterTrigger: 1
 --- !u!65 &1368556210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23582,6 +23548,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368556207}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1368556213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368556207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_6
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1001 &1374748649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26487,144 +26469,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2065579858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1554663934
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1554663935}
-  - component: {fileID: 1554663939}
-  - component: {fileID: 1554663938}
-  - component: {fileID: 1554663937}
-  - component: {fileID: 1554663936}
-  m_Layer: 0
-  m_Name: Dialogue Trigger Test (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1554663935
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554663934}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 27.04, y: 6.97, z: 55.29}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 414209622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554663936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554663934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61ab4fa2305a944b8ca5eb06368c8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1554663936}
-        m_TargetAssemblyTypeName: TriggerZone, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 108259fb70960dd40bb5d451041b0dd8,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _destroyedAfterTrigger: 0
---- !u!65 &1554663937
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554663934}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1554663938
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554663934}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1554663939
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554663934}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1568514240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30237,7 +30081,7 @@ Transform:
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045257, y: -0.37262258, z: 0.08717228, w: 0.89959055}
-  m_LocalPosition: {x: 118.99584, y: 72.97343, z: -31.851643}
+  m_LocalPosition: {x: 110.63584, y: 72.97343, z: 20.409359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33087,8 +32931,9 @@ GameObject:
   - component: {fileID: 1945274248}
   - component: {fileID: 1945274247}
   - component: {fileID: 1945274246}
+  - component: {fileID: 1945274250}
   m_Layer: 0
-  m_Name: Dialogue Trigger Test
+  m_Name: Dialogue Trigger Test 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33129,7 +32974,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
+          m_ObjectArgument: {fileID: 11400000, guid: d2f74bd0af572e847a7b7dbd137f257c,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -33140,7 +32985,7 @@ MonoBehaviour:
   onDialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
-  _destroyedAfterTrigger: 1
+  _deactivateAfterTrigger: 1
 --- !u!65 &1945274247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33212,6 +33057,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945274244}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1945274250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945274244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Trigger_Dialogue_1
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1 &1961642737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10b13771118027f4fb8b79e6bedba8e6,
@@ -37635,7 +37496,7 @@ Transform:
   m_GameObject: {fileID: 7683583691383833574}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710576, y: 0.70710784, z: 0.0000020862658, w: 0.000002086272}
-  m_LocalPosition: {x: -3.796, y: 2.881, z: 18.755}
+  m_LocalPosition: {x: 22.363, y: 5.02, z: 72.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
