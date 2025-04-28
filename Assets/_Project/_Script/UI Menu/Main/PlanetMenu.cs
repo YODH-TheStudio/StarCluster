@@ -99,8 +99,6 @@ public class PlanetMenu : Menu
         }
         base.LoadGroupScene(index);
     }
-    
-    
 #endregion
 
     #region Coroutine
