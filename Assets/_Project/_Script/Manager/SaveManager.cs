@@ -101,6 +101,7 @@ public class SaveManager : MonoBehaviour
     }
     private static void SavePlayer(int slot)
     {
+        //Debug.LogWarning("SAVING PLAYER");
         PlayerData data = new PlayerData();
         string jsonString = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json", jsonString);
@@ -170,7 +171,7 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            //Debug.Log("Loaded Player data: " + jsonString);
+            // Debug.Log("Loaded Player data: " + jsonString);
             PlayerData data = JsonUtility.FromJson<PlayerData>(jsonString);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
