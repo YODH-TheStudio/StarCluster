@@ -5,7 +5,7 @@
         #region Fields
         public Puzzle2D puzzle;
 
-        public Vector2 linked2DPoint;
+        public Vector2 linked2DPoint = new Vector2();
 
         #endregion
 

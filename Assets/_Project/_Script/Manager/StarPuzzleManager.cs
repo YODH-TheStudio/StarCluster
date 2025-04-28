@@ -5,21 +5,18 @@ using UnityEngine;
 
 public class StarPuzzleManager : Singleton<StarPuzzleManager>
 {
+    [SerializeField] private FusionPoint fusionPoint;
     public CinemachineVirtualCamera PuzzleCamera {get; set;}
     public Canvas PuzzleCanvas { get; set; }
     public Canvas DiodesCanvas { get; set; }
 
     public List<bool> Circuits { get; set; }
-    private bool _isFinished;
     public bool isPuzzleActive;
     
-
     private new void Awake()
     {
         base.Awake();
     }
-    
-    
     
     public void SwitchCamera()
     {
@@ -36,7 +33,12 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
         PuzzleCanvas.gameObject.SetActive(!PuzzleCanvas.gameObject.activeSelf);
         DiodesCanvas.gameObject.SetActive(!DiodesCanvas.gameObject.activeSelf);
     }
-    
+
+    public void PuzzleComplete()
+    {
+        fusionPoint.SetState(true);
+        SwitchCamera();
+    }
     private IEnumerator FadeToBlack(bool puzzleActive)
     {
         // Fade In or Out of camera to open / close the puzzle

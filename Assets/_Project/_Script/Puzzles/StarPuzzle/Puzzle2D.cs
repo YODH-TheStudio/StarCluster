@@ -20,8 +20,8 @@ public class Puzzle2D : MonoBehaviour
     public LevelData _levelData;
     private GameObject _topMenuContainer;
 
-    private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines;
-    private Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor;
+    private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines = new Dictionary<(Vector2, Vector2), GameObject>();
+    private Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor = new Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>>();
 
     // Camera
     [SerializeField] private CinemachineVirtualCamera _puzzleCamera;
@@ -38,7 +38,7 @@ public class Puzzle2D : MonoBehaviour
     public Transform parentPuzzleGroup;
 
     // Resolve
-    private bool _puzzleSolved = true;
+    private bool _puzzleSolved;
 
     // Drag and drop
     private bool _isDragging = false;
@@ -79,6 +79,8 @@ public class Puzzle2D : MonoBehaviour
     }
     private void Start()
     {
+        StarPuzzleManager.Instance.Circuits = new List<bool>(new bool[_levelData._circuits.Count]);
+    
         _segmentsParent = new GameObject("Segments3D").transform;
         _segmentsParent.SetParent(parentPuzzleGroup);
         
@@ -862,12 +864,15 @@ public class Puzzle2D : MonoBehaviour
         {
             Circuit currentCircuit = _levelData._circuits[i];
             bool isValidConnection = IsChainConnectingPoints(currentCircuit.circuitColor, currentCircuit.startPoint, currentCircuit.endPoint);
-            StarPuzzleManager.Instance.Circuits.Add(isValidConnection);
+            
+            StarPuzzleManager.Instance.Circuits[i] = isValidConnection;
             _circuitValidationStatus[i] = isValidConnection;
-            Debug.Log(_circuitValidationStatus);
         }
-        Debug.Log(_circuitValidationStatus);
-        
-        _puzzleSolved =  _circuitValidationStatus.Values.All(v => v);
+
+        if (_circuitValidationStatus.Values.All(v => v))
+        {
+            _puzzleSolved = true;
+            StarPuzzleManager.Instance.PuzzleComplete();
+        }
     }
 }
