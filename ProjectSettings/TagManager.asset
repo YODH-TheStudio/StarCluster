@@ -15,7 +15,6 @@ TagManager:
   - Ignore VFX
   - Water
   - UI
-  - Ignore NavMesh
   - 
   - 
   - 
@@ -33,7 +32,8 @@ TagManager:
   - 
   - 
   - 
-  - Terrain
+  - 
+  - 
   - Ground
   - Player
   - Camera
