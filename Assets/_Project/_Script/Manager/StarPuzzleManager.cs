@@ -19,8 +19,18 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
         base.Awake();
     }
     
+    
+    
     public void SwitchCamera()
     {
+        if (isPuzzleActive)
+        {
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        }
+        else
+        {
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Puzzle);
+        }
         isPuzzleActive = !PuzzleCamera.gameObject.activeSelf;
         PuzzleCamera.gameObject.SetActive(!PuzzleCamera.gameObject.activeSelf);
         PuzzleCanvas.gameObject.SetActive(!PuzzleCanvas.gameObject.activeSelf);
