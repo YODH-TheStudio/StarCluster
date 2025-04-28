@@ -10,14 +10,23 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
     }
     SubShader
     {
+        
+            // All pixels in this SubShader pass the stencil test only if the current value of the stencil buffer is less than 2
+             // You would typically do this if you wanted to only draw to areas of the render target that were not "masked out"
+             Stencil
+             {
+                 Ref 2
+                 Comp Less
+             }
+             
         Tags {"Queue" = "Geometry+200" "RenderType" = "GrassBillBoard" "IgnoreProjector" = "True" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "SimpleLit" }//"DisableBatching"="True"
         Cull Off
         LOD 200
 
         Pass
-        {
+        {             
             AlphaToMask On
-
+            
             HLSLPROGRAM
             #pragma target 2.0
 
@@ -55,10 +64,10 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
         }
 
         Pass
-        {
+        {             
             Name "DepthOnly"
             Tags{"LightMode" = "DepthOnly"}
-
+            
             ZWrite On
             ColorMask R
             Cull Off
@@ -92,7 +101,7 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
 
             ZWrite On
             Cull Off
-
+            
             HLSLPROGRAM
             #pragma target 2.0
 
