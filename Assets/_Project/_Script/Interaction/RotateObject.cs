@@ -43,6 +43,11 @@ public class RotateObject : Interactable
     {
         _soundSystem = GameManager.Instance.GetSoundSystem();
         _vibrationManager = GameManager.Instance.GetVibrationManager();
+        
+        if (transform.rotation.y == _maxRotation)
+        {
+            _isInteractable = false;
+        }
     }
 
     #endregion

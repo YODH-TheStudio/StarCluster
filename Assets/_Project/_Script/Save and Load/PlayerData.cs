@@ -19,11 +19,14 @@ public class PlayerData
        // objects = new string[slotsCount];
 
        PlayerScript player = GameManager.Instance.GetPlayer();
-       
-        position = new float[3];
-        position[0] = player.transform.position.x;
-        position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z;
+
+       if (player != null)
+       {
+           position = new float[3];
+           position[0] = player.transform.position.x;
+           position[1] = player.transform.position.y;
+           position[2] = player.transform.position.z;
+       }
 
         // // Get items in inventory
         // Debug.Log("Saving inventory");
