@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -12,6 +13,10 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
 
     public List<bool> Circuits { get; set; }
     public bool isPuzzleActive;
+    private bool _isFinishedPuzzle;
+    
+    public event Action OnPuzzleEnter;
+    public event Action OnPuzzleExit;
     
     private new void Awake()
     {
@@ -20,13 +25,14 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
     
     public void SwitchCamera()
     {
+        if (_isFinishedPuzzle) return;
         if (isPuzzleActive)
         {
-            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+            OnPuzzleExit?.Invoke();
         }
         else
         {
-            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Puzzle);
+            OnPuzzleEnter?.Invoke();
         }
         isPuzzleActive = !PuzzleCamera.gameObject.activeSelf;
         PuzzleCamera.gameObject.SetActive(!PuzzleCamera.gameObject.activeSelf);
@@ -36,8 +42,10 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
 
     public void PuzzleComplete()
     {
+        Debug.Log("PuzzleComplete");
         fusionPoint.SetState(true);
         SwitchCamera();
+        _isFinishedPuzzle = true;
     }
     private IEnumerator FadeToBlack(bool puzzleActive)
     {

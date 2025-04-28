@@ -3701,7 +3701,7 @@ Transform:
   m_GameObject: {fileID: 234900756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.8, y: 5.97, z: 59.8}
+  m_LocalPosition: {x: 10, y: 6, z: 114}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -13874,7 +13874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unparentOnAwake: 0
-  fusionPoint: {fileID: 0}
+  fusionPoint: {fileID: 234900759}
   isPuzzleActive: 0
 --- !u!1001 &1084274555
 PrefabInstance:
