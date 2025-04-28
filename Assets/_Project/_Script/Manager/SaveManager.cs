@@ -44,7 +44,7 @@ public class SaveManager : MonoBehaviour
             //Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        //Debug.Log("Loading game");
+        Debug.Log("Loading save at: " + path);
         LoadPlayer(slot);
         LoadPuzzleData(slot);
         LoadObjects(slot);
