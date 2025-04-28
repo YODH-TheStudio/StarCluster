@@ -4796,6 +4796,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-3
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &198952955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7576,6 +7579,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-7
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &403411734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8678,6 +8684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-6
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &444810817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10122,7 +10131,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 900122506}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1787409887545080749, guid: 8e0d9d31727896b4893eae564cc0c199,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1526562110}
   m_SourcePrefab: {fileID: 100100000, guid: 8e0d9d31727896b4893eae564cc0c199, type: 3}
 --- !u!1 &589767004 stripped
 GameObject:
@@ -10348,6 +10361,7 @@ GameObject:
   - component: {fileID: 605726339}
   - component: {fileID: 605726338}
   - component: {fileID: 605726342}
+  - component: {fileID: 605726343}
   m_Layer: 31
   m_Name: Pillar
   m_TagString: Untagged
@@ -10514,6 +10528,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &605726343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605726336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: RotateablePillar
+  SavePos: 0
+  SaveRot: 1
+  SaveEnabled: 0
 --- !u!1 &617011268 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 79114a0f2d44ae943a26867d3451b235,
@@ -10905,6 +10935,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-4
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &629442194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12733,6 +12766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-5
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &731839032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12980,6 +13016,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-1
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &733416330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14894,6 +14933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-4
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &830732537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16251,6 +16293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-6
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &954331848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17456,6 +17501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-2
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &1008248887
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22528,6 +22576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-7
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &1442702320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23463,6 +23514,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f57947e38c2db439316cecc7b58a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1526562110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142699286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Merope
+  SavePos: 1
+  SaveRot: 1
+  SaveEnabled: 1
 --- !u!1 &1537139484
 GameObject:
   m_ObjectHideFlags: 0
@@ -25103,6 +25170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube1-1
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &1619747355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25671,6 +25741,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-3
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &1641270018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25918,6 +25991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-2
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &1642168856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32093,6 +32169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifier: Cube2-5
+  SavePos: 1
+  SaveRot: 0
+  SaveEnabled: 0
 --- !u!65 &2065051986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34550,6 +34629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7701910356035388988}
+  - component: {fileID: 7701910356035388989}
   m_Layer: 0
   m_Name: "Stuck M\xE9rope"
   m_TagString: Untagged
@@ -34573,6 +34653,22 @@ Transform:
   - {fileID: 3309725105541418958}
   m_Father: {fileID: 552402640}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -90}
+--- !u!114 &7701910356035388989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683583691383833574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa2522ff18d4475a942f06ea75d1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: StuckMerope
+  SavePos: 0
+  SaveRot: 0
+  SaveEnabled: 1
 --- !u!1 &7930243153743543558
 GameObject:
   m_ObjectHideFlags: 0

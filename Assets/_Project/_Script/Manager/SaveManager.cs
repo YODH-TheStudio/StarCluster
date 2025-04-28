@@ -85,6 +85,14 @@ public class SaveManager : MonoBehaviour
         public string saveTime = DateTime.Now.ToString("g");
         public string playtime = "0:00:00";
     }
+    [System.Serializable]
+    public class SaveableObjectsData
+    {
+        public SerializableDictionary<string, Vector3> positions;
+        public SerializableDictionary<string, Quaternion> rotations;
+        public SerializableDictionary<string, bool> enabled;
+    }
+    
     private void SaveInfo(int slot)
     {
         _saveData = new SaveData();
@@ -116,16 +124,30 @@ public class SaveManager : MonoBehaviour
 
     private static void SaveObjects(int slot)
     {
-        SavePosition[] objects = GameObject.FindObjectsOfType<SavePosition>();
+        SaveableObject[] objects = Resources.FindObjectsOfTypeAll<SaveableObject>();
         
+        // Save positions
         Dictionary<string, Vector3> positionsDic = new Dictionary<string, Vector3>();
-        foreach (SavePosition saveable in objects)
-        {
-            positionsDic.Add(saveable.identifier, saveable.transform.position);
-        }
-        SerializableDictionary<string, Vector3> positions = new SerializableDictionary<string, Vector3>(positionsDic);
+        Dictionary<string, Quaternion> rotationsDic = new Dictionary<string, Quaternion>();
+        Dictionary<string, bool> enabledDic = new Dictionary<string, bool>();
         
-        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
+        Dictionary<string, SaveableObjectsData> saveableObjectsDic = new Dictionary<string, SaveableObjectsData>();
+        
+        foreach (SaveableObject saveable in objects)
+        {
+            if(saveable.SavePos)
+                positionsDic.Add(saveable.identifier, saveable.transform.position);
+            if(saveable.SaveRot)
+                rotationsDic.Add(saveable.identifier, saveable.transform.rotation);
+            if(saveable.SaveEnabled)
+                enabledDic.Add(saveable.identifier, saveable.gameObject.activeSelf);
+        }
+        SaveableObjectsData saveableObjectsData = new SaveableObjectsData();
+        saveableObjectsData.positions = new SerializableDictionary<string, Vector3>(positionsDic);
+        saveableObjectsData.rotations = new SerializableDictionary<string, Quaternion>(rotationsDic);
+        saveableObjectsData.enabled = new SerializableDictionary<string, bool>(enabledDic);
+        
+        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(saveableObjectsData));
     }
     #endregion
     
@@ -145,26 +167,6 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadPlayer(int slot){
-        // string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() +"/player.json";
-        // if(File.Exists(path)){
-        //     //load
-        //     BinaryFormatter formatter = new BinaryFormatter();
-        //     FileStream stream = new FileStream(path, FileMode.Open);
-        //
-        //     // Deserialize binary from stream
-        //     PlayerData data = (PlayerData) formatter.Deserialize(stream);
-        //
-        //     // Write this down to a file for debug
-        //     string dataString = JsonUtility.ToJson(data);
-        //     File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json", dataString);
-        //
-        //     stream.Close();
-        //     
-        //     Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
-        //     GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
-        // } else {
-        //     Debug.Log("Player save file not found in " + path);
-        // }
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
@@ -219,18 +221,74 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            SerializableDictionary<string, Vector3> data = JsonUtility.FromJson<SerializableDictionary<string, Vector3>>(jsonString);
-            Dictionary<string, Vector3> positionsDic = data.ToDictionary();
+            SaveableObjectsData data = JsonUtility.FromJson<SaveableObjectsData>(jsonString);
+            Dictionary<string, Vector3> positionsDic = data.positions.ToDictionary();
+            Dictionary<string, Quaternion> rotationsDic = data.rotations.ToDictionary();
+            Dictionary<string, bool> enabledDic = data.enabled.ToDictionary();
 
-            foreach (KeyValuePair<string, Vector3> kvp in positionsDic)
+            // Get all saveable objects
+            SaveableObject[] objects = Resources.FindObjectsOfTypeAll<SaveableObject>();
+            foreach (SaveableObject saveable in objects)
             {
-                if (kvp.Key != null)
+                if (saveable.SavePos)
                 {
-                    // Set the position of the object
-                    GameObject obj = GameObject.Find(kvp.Key);
-                    obj.transform.position = kvp.Value;
+                    // load pos
+                    Debug.Log("Loading position for " + saveable.identifier);
+                    if (positionsDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.transform.position = positionsDic[saveable.identifier];
+                    }
+                }
+                if (saveable.SaveRot)
+                {
+                    // load pos
+                    Debug.Log("Loading rotation for " + saveable.identifier);
+                    if (rotationsDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.transform.rotation = rotationsDic[saveable.identifier];
+                    }
+                }
+                if (saveable.SaveEnabled)
+                {
+                    // load pos
+                    Debug.Log("Loading enabled for " + saveable.identifier);
+                    if (enabledDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.gameObject.SetActive(enabledDic[saveable.identifier]);
+                    }
                 }
             }
+            
+            // // Load positions
+            // foreach (KeyValuePair<string, Vector3> kvp in positionsDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.transform.position = kvp.Value;
+            //     }
+            // }
+            // // Load rotations
+            // foreach (KeyValuePair<string, Quaternion> kvp in rotationsDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.transform.rotation = kvp.Value;
+            //     }
+            // }
+            // // Load active
+            // foreach (KeyValuePair<string, bool> kvp in enabledDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.gameObject.SetActive(kvp.Value);
+            //     }
+            // }
         } else {
             Debug.Log("Save file not found at " + path);
         }

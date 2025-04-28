@@ -16,15 +16,6 @@ public class SavesMenu : Menu
     #endregion
 
     #region Main Functions
-    // private new void Awake()
-    // {
-    //     // setup slot text
-    //     if (planetIcons.Count != 7)
-    //     {
-    //         Debug.LogError("Planet icons not set up correctly");
-    //     }
-    //     RefreshSlotsData();
-    // }
 
     private void Start()
     {
