@@ -14,7 +14,6 @@ public class Diode : MonoBehaviour
 {
     private Image _image;
     private bool _isOn;
-    private DiodeColor DiodeColor { get; set; }
     [SerializeField] private Sprite off;
     [SerializeField] private Sprite on;
 
@@ -29,7 +28,7 @@ public class Diode : MonoBehaviour
         _isOn = false;
     }
 
-    private void SetDiode(bool state)
+    public void SetDiode(bool state)
     {
         _image.sprite = state ? on : off;
     }

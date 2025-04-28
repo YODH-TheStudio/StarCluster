@@ -1,28 +1,35 @@
 using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class StarPuzzleManager : MonoBehaviour
+public class StarPuzzleManager : Singleton<StarPuzzleManager>
 {
-    private CinemachineVirtualCamera _virtualCamera;
-    [SerializeField] private CinemachineVirtualCamera puzzleCamera;
+    public CinemachineVirtualCamera PuzzleCamera {get; set;}
+    public Canvas PuzzleCanvas { get; set; }
+    public Canvas DiodesCanvas { get; set; }
 
-    private void Awake()
+    public List<bool> Circuits { get; set; }
+    private bool _isFinished;
+    public bool isPuzzleActive;
+    
+
+    private new void Awake()
     {
-        // _virtualCamera = ;
-        puzzleCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        base.Awake();
     }
-
     
+    public void SwitchCamera()
+    {
+        isPuzzleActive = !PuzzleCamera.gameObject.activeSelf;
+        PuzzleCamera.gameObject.SetActive(!PuzzleCamera.gameObject.activeSelf);
+        PuzzleCanvas.gameObject.SetActive(!PuzzleCanvas.gameObject.activeSelf);
+        DiodesCanvas.gameObject.SetActive(!DiodesCanvas.gameObject.activeSelf);
+    }
     
-    
-    
-    private IEnumerator FadeToBlack(bool isPuzzleActive)
+    private IEnumerator FadeToBlack(bool puzzleActive)
     {
         // Fade In or Out of camera to open / close the puzzle
         yield return new WaitForSecondsRealtime(0.1f);
-        _virtualCamera.gameObject.SetActive(!isPuzzleActive);
-        puzzleCamera.gameObject.SetActive(isPuzzleActive);
-        //set active Canvas from HUD Scene
     }
 }
