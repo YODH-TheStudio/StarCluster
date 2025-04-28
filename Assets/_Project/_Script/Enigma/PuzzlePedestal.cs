@@ -89,7 +89,6 @@ public class PuzzlePedestal : MonoBehaviour
             }
         }
     }
-
     private void CheckPuzzleResolution()
     {
         foreach (var pedestal in _pedestalDataList)
