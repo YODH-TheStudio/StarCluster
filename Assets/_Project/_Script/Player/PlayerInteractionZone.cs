@@ -12,6 +12,10 @@ public class PlayerInteractionZone : MonoBehaviour
     private VibrationManager _vibrationManager = null;
     
     private Interactable _currentInteractable = null;
+    
+    [SerializeField] private StateManager.PlayerState allowedStates;
+
+    private bool _isStateAllowed;
 
     private Vector3 _ray1;
     private Vector3 _ray2;
@@ -35,11 +39,13 @@ public class PlayerInteractionZone : MonoBehaviour
         _ray3.Normalize();
         _ray4 = new Vector3(-1f, 0, -1);
         _ray4.Normalize();
+        
+        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
 
     private void FixedUpdate()
     {
-        if (_interactionButton == null)
+        if (_interactionButton == null || _isStateAllowed)
         {
             return;
         }
@@ -85,5 +91,23 @@ public class PlayerInteractionZone : MonoBehaviour
     {
         return _currentInteractable;
     }
+    #endregion
+
+    #region StateChange
+
+    
+    private void HandleStateChanged(StateManager.PlayerState newState)
+    {
+        //check if the new state is in the allowed states
+        if (allowedStates.HasFlag(newState))
+        {
+            _isStateAllowed = true;
+            _interactionButton.SetActive(false);
+        }else
+        {
+            _isStateAllowed = false;
+        }
+    }
+
     #endregion
 }

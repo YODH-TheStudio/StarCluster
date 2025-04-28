@@ -1,10 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
+using MeetAndTalk.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class SettingsMenu : Menu
 {
+
+    #region Enum
+    public enum PreviousMenu
+    {
+        MainMenu,
+        PlanetMenu
+    }
+    #endregion
+
     #region Fields
     private SoundSystem _settingSoundSystem;
     private VibrationManager _vibrationManager;
@@ -14,16 +26,24 @@ public class SettingsMenu : Menu
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Toggle vibrationToggle;
 
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject planetMenu;
+
     private readonly List<string> _languages= new List<string> { "English", "French" };
     private string _currentLanguage;
     private int _currentLanguageIndex;
     
+
+    public PreviousMenu _previousMenu;
+
     [Range(0,1)]private float _masterVolume;
     [Range(0,1)]private float _musicVolume;
     [Range(0,1)]private float _sfxVolume;
     
     private bool _canVibrate;
     private int _vibration;
+    
+    [SerializeField] private LocalizationManager _localizationManager;
     #endregion
 
     #region Main Functions
@@ -34,6 +54,40 @@ public class SettingsMenu : Menu
 
         LoadPlayerPrefs();
     }
+    #endregion
+
+    #region Previous Menu function
+    public void OpenFrom(PreviousMenu menu)
+    {
+        _previousMenu = menu;
+        Debug.LogWarning($"Open Settings Menu from {_previousMenu}");
+        gameObject.SetActive(true);
+    }
+
+    public void OpenFromMainMenu()
+    {
+        OpenFrom(PreviousMenu.MainMenu);
+    }
+
+    public void OpenFromPlanetMenu()
+    {
+        OpenFrom(PreviousMenu.PlanetMenu);
+    }
+
+    public void OnBackButton() 
+    {
+        gameObject.SetActive(false);
+        switch (_previousMenu)
+        {
+            case PreviousMenu.MainMenu:
+                mainMenu.SetActive(true);
+                break;
+            case PreviousMenu.PlanetMenu:
+                planetMenu.SetActive(true);
+                break;
+        }
+    }
+
     #endregion
 
     #region Player Prefs
@@ -59,6 +113,15 @@ public class SettingsMenu : Menu
         PlayerPrefs.SetString("Language", _currentLanguage);
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
         PlayerPrefs.Save();
+        
+        if (_currentLanguage == "English")
+        {
+            _localizationManager.selectedLang = SystemLanguage.English;
+        }
+        else if (_currentLanguage == "French")
+        {
+            _localizationManager.selectedLang = SystemLanguage.French;
+        }
     }
     #endregion
 

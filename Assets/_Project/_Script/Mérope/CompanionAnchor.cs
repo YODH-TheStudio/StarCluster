@@ -8,7 +8,7 @@ public class CompanionAnchor : MonoBehaviour
     [SerializeField] private Vector3 runPosition = new Vector3(0, 1, -1.5f);
     
     /* Companion catchup speed, while running and orbiting */
-    [FormerlySerializedAs("catchupSpeed")] [SerializeField] private Vector2 catchupTime =  new Vector2(0.3f, 1.0f);
+    [SerializeField] private Vector2 catchupTime =  new Vector2(0.3f, 1.0f);
 
     public float orbitOffset = 0.5f;
     [SerializeField] private Vector2 orbitRadius = new Vector2(2.5f, 3.5f);
@@ -37,16 +37,21 @@ public class CompanionAnchor : MonoBehaviour
         {
             Debug.LogError("Player not found");
         }
-        if(_companion == null)
-        {
-            Debug.LogError("Companion not found");
-        }
         
         transform.localPosition = runPosition;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        if (_companion == null)
+        {
+            _companion = GameManager.Instance.GetCompanion();
+            if (_companion == null)
+            {
+                return;
+            }
+        }
+        
         // Check if the player is running
         if (_player.IsMoving())
         {

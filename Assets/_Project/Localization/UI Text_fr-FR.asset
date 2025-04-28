@@ -23,11 +23,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 529404600320
-    m_Localized: "Param\xE8tres"
+    m_Localized: PARAMETRES
     m_Metadata:
       m_Items: []
   - m_Id: 434971340251136
-    m_Localized: Quitter
+    m_Localized: QUITTER
     m_Metadata:
       m_Items: []
   - m_Id: 435027137077248
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 435804698124288
-    m_Localized: Volume de la musique
+    m_Localized: Volume musique
     m_Metadata:
       m_Items: []
   - m_Id: 435942510370816
@@ -51,11 +51,35 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 436113377927168
-    m_Localized: Volume des effets
+    m_Localized: Volume effets
     m_Metadata:
       m_Items: []
   - m_Id: 436185981329408
     m_Localized: Vibrations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6571296715988992
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6571628292497408
+    m_Localized: SAUVEGARDES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6576980060823552
+    m_Localized: "S\xE9l\xE9ctionner"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577072750747648
+    m_Localized: Supprimer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577710377230336
+    m_Localized: SAUVEGARDES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9941805862842368
+    m_Localized: Menu principal
     m_Metadata:
       m_Items: []
   references:

@@ -41,6 +41,8 @@ public class PushPullObject : Interactable
 
     private bool _isAudioPlaying;
 
+    private bool _isAnimating;
+
     #endregion
 
     #region Main Functions
@@ -128,6 +130,10 @@ public class PushPullObject : Interactable
     #region Push/Pull
     private void TogglePushPull()
     {
+        if (_isAnimating)
+        {
+            return;
+        }
         _isGrab = !_isGrab;
         
         Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
@@ -141,8 +147,13 @@ public class PushPullObject : Interactable
         {
             // Find nearest position
             Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
+
+            if (PossibleToGrab(closestPosition))
+            {
+                _isAnimating = true;
+                StartCoroutine(MoveAnimation(closestPosition));
+            }
             
-            StartCoroutine(MoveAnimation(closestPosition));
         }
     }
 
@@ -150,7 +161,9 @@ public class PushPullObject : Interactable
     {
         // Shoot a raycast to check if the object is in the way
         RaycastHit hit;
-        if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
+        Debug.DrawLine(UserTransform.position, destinationPosition, Color.red, 1f);
+        if (!Physics.Linecast(UserTransform.position, destinationPosition, out hit)) return true;
+        // if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
         
         return hit.collider.gameObject == null;
     }
@@ -284,7 +297,7 @@ public class PushPullObject : Interactable
 
         if (_vibrationManager != null)
         {
-            _vibrationManager.Vibrate(0.0f, 0.1f); 
+            _vibrationManager.Vibrate(0.2f, 0.1f); 
         }
 
     }
@@ -306,6 +319,7 @@ public class PushPullObject : Interactable
         
         _playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
+        _isAnimating = false;
     }
     
     private IEnumerator AtlassiumAnimation(float duration)

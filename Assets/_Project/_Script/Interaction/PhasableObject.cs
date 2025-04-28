@@ -83,7 +83,6 @@ public class PhasableObject : Interactable
 
             if (distance <= phaseRadius)
             {
-                _soundSystem.PlaySoundFXClipByKey("Phase Electrophase", transform.position);
 
                 // Prepare the animation
                 if (_objectCollider != null)
@@ -131,6 +130,9 @@ public class PhasableObject : Interactable
         
         _playerScript.GetAnimator().SetBool(Moving, false);
         _playerScript.GetAnimator().SetBool(Phasing, true);
+        
+        _soundSystem.PlaySoundFXClipByKey("Phase Electrophase", transform.position);
+        
         // Move the player and wait until the end of the phase
         yield return StartCoroutine(_playerScript.MoveTo(phasePair.end, PhaseDuration));
         _playerScript.GetAnimator().SetBool(Phasing, false);
