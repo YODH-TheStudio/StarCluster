@@ -308,9 +308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ae808440b778342a0b0bfe2a2d3a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetNameText: {fileID: 5493393101439882131}
-  saveDateText: {fileID: 8813183436048796220}
-  planetIconImage: {fileID: 7955942817994781882}
+  _planetNameTxt: {fileID: 5493393101439882131}
+  _saveDateTxt: {fileID: 8813183436048796220}
+  _planetIcon: {fileID: 7955942817994781882}
 --- !u!1 &7095906860617593061
 GameObject:
   m_ObjectHideFlags: 0

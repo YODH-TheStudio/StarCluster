@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,34 +13,29 @@ public class SavesMenu : Menu
     
     
     [SerializeField] private List<SaveDataDisplayer> slots;
-    // [SerializeField] private GameObject _saveSlot1;
-    // [SerializeField] private GameObject _saveSlot2;
-    // [SerializeField] private GameObject _saveSlot3;
     #endregion
 
     #region Main Functions
-    private new void Awake()
+    // private new void Awake()
+    // {
+    //     // setup slot text
+    //     if (planetIcons.Count != 7)
+    //     {
+    //         Debug.LogError("Planet icons not set up correctly");
+    //     }
+    //     RefreshSlotsData();
+    // }
+
+    private void Start()
     {
         // setup slot text
-        if (planetIcons.Count != _planetNames.Count)
+        if (planetIcons.Count != 7)
         {
             Debug.LogError("Planet icons not set up correctly");
         }
         RefreshSlotsData();
     }
-    #endregion
 
-    #region Planets Names
-    private readonly List<string> _planetNames = new List<string>()
-    { 
-        "PLANET_JOY",
-        "PLANET_EMPATHY",
-        "PLANET_SADNESS",
-        "PLANET_COMICAL",
-        "PLANET_BOREDOM",
-        "PLANET_MELANCHOLY",
-        "PLANET_SEEDY"
-    };
     #endregion
 
     #region Save Data
@@ -57,9 +53,9 @@ public class SavesMenu : Menu
             }
             else
             {
-                slots[i].Set(_planetNames[slotInfo.currentPlanet],
+                slots[i].Set("PLANET_" + slotInfo.currentPlanet,
                     slotInfo.saveTime,
-                    planetIcons[slotInfo.currentPlanet]);
+                    planetIcons[slotInfo.currentPlanet-1]);
             }
         }
     }
