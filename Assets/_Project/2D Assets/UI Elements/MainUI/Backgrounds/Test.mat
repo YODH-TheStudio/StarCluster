@@ -62,6 +62,6 @@ Material:
     - _Oppacity: 0.4
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.05
+    - _Speed: 0.03
     m_Colors: []
   m_BuildTextureStacks: []
