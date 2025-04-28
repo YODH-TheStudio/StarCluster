@@ -11,6 +11,7 @@ public class StateManager : MonoBehaviour
         Dialogue = 8,
         Phasing = 16,
         PushPull = 32,
+        Puzzle = 64
     }
     
     private PlayerState _playerState;

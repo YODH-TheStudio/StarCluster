@@ -1039,6 +1039,10 @@ MonoBehaviour:
       sceneType: 3
     - sceneName: GameplayUI
       sceneType: 2
+    - sceneName: Puzzle
+      sceneType: 5
+    - sceneName: PuzzleHUD
+      sceneType: 3
     - sceneName: DialogueUI
       sceneType: 2
 --- !u!1 &1558495324

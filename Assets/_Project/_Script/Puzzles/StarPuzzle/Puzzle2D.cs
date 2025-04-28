@@ -1,11 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 
@@ -19,87 +16,129 @@ public class Puzzle2D : MonoBehaviour
     public Color _lineColor = Color.red;
 
     // Level data
-    [SerializeField] Canvas _canvas;
+    [SerializeField] private Canvas canvas;
     public LevelData _levelData;
     private GameObject _topMenuContainer;
 
     private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines = new Dictionary<(Vector2, Vector2), GameObject>();
     private Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor = new Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>>();
 
-    // Camera
-    [SerializeField] private Camera _puzzleCamera;
-    [SerializeField] private Cinemachine.CinemachineVirtualCamera _cinemachineMainCamera;
-    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private CinemachineVirtualCamera _puzzleCamera;
+    private Camera _mainCamera;
 
-    //
-    private Vector2? _currentSelected = null;
+    private Vector2? _currentSelected;
 
-    // 3D part
     private Dictionary<GameObject, Vector2> _cubePositions3D = new Dictionary<GameObject, Vector2>();
     private List<Transform> _pointObjects3D = new List<Transform>();
+    
     private Transform _segmentsParent;
-
     public Transform parentPuzzleGroup;
 
-    // Resolve
-    private bool _puzzleSolved = true;
+    private bool _puzzleSolved;
 
-    // Drag and drop
     private bool _isDragging = false;
     private Transform _currentStartDragPoint;
     private GameObject _tempCylinder;
     private float _dragThreshold = 1f;
 
-    // Visual size and offset
     [Header("3D Display Settings")]
     [SerializeField] private float _scaleFactorX = 30f;
     [SerializeField] private float _scaleFactorY = 30f;
-    [SerializeField] private float _yOffset = 10f;
-    [SerializeField] private float _zOffset = 54f;
 
     [SerializeField] private float _cubeScale = 0.5f;
     [SerializeField] private float _redLineRadius = 0.1f;
     [SerializeField] private float _coloredLineRadius = 0.2f;
 
-    // Circuit / Eraser
     private Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
     private int _currentCircuitSelected = 0;
     private bool _eraserMode = false;
 
-    // Prefab of Stars/ Prefab of Circuit Shape
     [Header("Prefabs")]
     public GameObject _starPrefab; 
     public List<GameObject> _circuitShapePrefabs;
     public GameObject _segmentPrefab;
-
-
+    
     private Vector3 _fingerMP = Vector3.zero;
 
+    private Vector3 mouseWorldPosition;
+
+    public event Action OnChildrenChanged;
+
+    private int _lastChildCount;
+    
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        OpenPuzzle();
-
+        StarPuzzleManager.Instance.PuzzleCanvas = canvas;
+        StarPuzzleManager.Instance.PuzzleCamera = _puzzleCamera;
+        _mainCamera = Camera.main;
+    }
+    private void Start()
+    {
+        StarPuzzleManager.Instance.Circuits = new List<bool>(new bool[_levelData._circuits.Count]);
+    
         _segmentsParent = new GameObject("Segments3D").transform;
         _segmentsParent.SetParent(parentPuzzleGroup);
-
+        
+        canvas.gameObject.SetActive(false);
+        _puzzleCamera.gameObject.SetActive(false);
+        
         CreateTopMenu();
 
         InstantiatePoints3D();
         InstantiateSegments();
+        
+        Vector3 rotation = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 180, transform.rotation.eulerAngles.z);
+        RotatePuzzle(rotation);
 
+        SetupChildWatcher();
+    }
 
+    private void SetupChildWatcher()
+    {
+        _lastChildCount = parentPuzzleGroup.childCount;
+        OnChildrenChanged += HandleChildrenChanged;
+    }
+    
+    private void OnEnable()
+    {
+        if (StarPuzzleManager.HasInstance)
+        {
+            StarPuzzleManager.Instance.OnPuzzleEnter += HandlePuzzleEnter;
+            StarPuzzleManager.Instance.OnPuzzleExit += HandlePuzzleExit;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (StarPuzzleManager.HasInstance)
+        {
+            StarPuzzleManager.Instance.OnPuzzleEnter -= HandlePuzzleEnter;
+            StarPuzzleManager.Instance.OnPuzzleExit -= HandlePuzzleExit;
+        }
+    }
+
+    private void HandlePuzzleEnter()
+    {
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Puzzle);
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
     }
-
+    
+    private void HandlePuzzleExit()
+    {
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
+    }
+    
     private void Touch_OnFingerMove(Finger TouchedFinger)
     {
         _fingerMP = TouchedFinger.screenPosition;
 
-        // On mouse move
         UpdateDragging();
     }
 
@@ -107,7 +146,7 @@ public class Puzzle2D : MonoBehaviour
     {
         _fingerMP = TouchedFinger.screenPosition;
 
-        Vector3 hitPosition = GetMouseHitPosition(_puzzleCamera);
+        Vector3 hitPosition = GetMouseHitPosition(_mainCamera);
         Debug.Log("HITPOSITION : " + hitPosition);
 
         float minDistance = Mathf.Infinity;
@@ -140,8 +179,6 @@ public class Puzzle2D : MonoBehaviour
 
     private void Touch_OnFingerUp(Finger TouchedFinger)
     {
-        Debug.Log("RELACHEMENT");
-
         if (!_isDragging)
             return;
 
@@ -149,25 +186,11 @@ public class Puzzle2D : MonoBehaviour
         HandleMouseRelease();
     }
 
-
-
-
-
-    private void SwitchCamera(bool activatePuzzleCamera)
-    {
-        if (_mainCamera == null || _cinemachineMainCamera == null || _puzzleCamera == null)
-            return;
-
-        _cinemachineMainCamera.gameObject.SetActive(!activatePuzzleCamera);
-        _mainCamera.gameObject.SetActive(!activatePuzzleCamera);
-        _puzzleCamera.gameObject.SetActive(activatePuzzleCamera);
-    }
-
     // UI ***
     private void CreateTopMenu()
     {
         _topMenuContainer = new GameObject("TopMenuContainer");
-        _topMenuContainer.transform.SetParent(_canvas.transform);
+        _topMenuContainer.transform.SetParent(canvas.transform);
 
         RectTransform topMenuRect = _topMenuContainer.AddComponent<RectTransform>();
         topMenuRect.anchorMin = new Vector2(0.5f, 1);
@@ -186,42 +209,35 @@ public class Puzzle2D : MonoBehaviour
             CreateCircuitButton(i, _levelData._circuits[i]);
         }
 
-        // Crée un objet pour le bouton
         GameObject buttonObj = new GameObject("EraserButton", typeof(Button), typeof(RectTransform), typeof(Text));
         buttonObj.transform.SetParent(_topMenuContainer.transform, false);
 
         Button button = buttonObj.GetComponent<Button>();
         Text buttonText = buttonObj.GetComponent<Text>();
 
-        // Crée un conteneur pour le texte
         GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
         textContainer.transform.SetParent(buttonObj.transform);
         RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
         textContainerRect.sizeDelta = new Vector2(200, 30);
 
-        // Crée un carré de couleur (fond blanc)
         GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
         colorSquare.transform.SetParent(textContainer.transform);
         Image colorSquareImage = colorSquare.GetComponent<Image>();
-        colorSquareImage.color = Color.white; // Fond blanc
+        colorSquareImage.color = Color.white;
 
         RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
-        colorSquareRect.sizeDelta = new Vector2(20, 20);  // Taille du carré (20x20)
+        colorSquareRect.sizeDelta = new Vector2(20, 20);
 
-        // S'assurer que le carré est bien ancré et visible
         colorSquareRect.anchorMin = new Vector2(0, 0.5f);
         colorSquareRect.anchorMax = new Vector2(0, 0.5f);
-        colorSquareRect.anchoredPosition = new Vector2(0, 0); // Centrer le carré dans le conteneur
+        colorSquareRect.anchoredPosition = new Vector2(0, 0);
 
-        // Définir le texte sur le bouton
-        buttonText.text = "Gomme";  // Texte du bouton
-        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");  // Utilisation de LegacyRuntime.ttf
+        buttonText.text = "Gomme";
+        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
-        // Positionner le texte à côté du carré de couleur
         RectTransform textRect = buttonText.GetComponent<RectTransform>();
-        textRect.anchoredPosition = new Vector2(30, 0);  // Décalage à droite du carré de couleur
+        textRect.anchoredPosition = new Vector2(30, 0);
 
-        // Ajouter le gestionnaire de clic pour activer/désactiver le mode gomme
         button.onClick.AddListener(() =>
         {
             _eraserMode = !_eraserMode;
@@ -263,18 +279,14 @@ public class Puzzle2D : MonoBehaviour
         _currentCircuitSelected = index;
         _eraserMode = false;
     }
-
-    // UI *
-
-    // 3D Visual *** 
-
+    
     private void InstantiatePoints3D()
     {
         foreach (Vector2 pos in _levelData._points)
         {
             GameObject cube = Instantiate(_starPrefab, parentPuzzleGroup);
             cube.name = $"Point3D_{pos.x}_{pos.y}";
-            cube.transform.position = new Vector3(0f, pos.y / _scaleFactorY + _yOffset, -pos.x / _scaleFactorX - _zOffset);
+            cube.transform.position = new Vector3(0f + transform.position.x ,(pos.y / _scaleFactorY) + transform.position.y, (-pos.x / _scaleFactorX) + transform.position.z);
             cube.transform.localScale = Vector3.one * _cubeScale;
 
             PointSizeEntry pointSizeEntry = _levelData.pointSizes.FirstOrDefault(p => p.pointPosition == pos);
@@ -282,27 +294,24 @@ public class Puzzle2D : MonoBehaviour
             {
                 switch (pointSizeEntry.size)
                 {
-                    case PointSize.Petite:
-                        cube.transform.localScale = Vector3.one * 0.5f; 
-                        break;
                     case PointSize.Moyenne:
-                        cube.transform.localScale = Vector3.one * 1f;    
+                        cube.transform.localScale = Vector3.one * 43.0f;    
                         break;
                     case PointSize.Grosse:
-                        cube.transform.localScale = Vector3.one * 2f;    
+                        cube.transform.localScale = Vector3.one * 65.0f;    
+                        break;
+                    default:
+                        cube.transform.localScale = Vector3.one * 30.0f;
                         break;
                 }
             }
             else
             {
-                cube.transform.localScale = Vector3.one * _cubeScale;  
+                cube.transform.localScale = Vector3.one * 30.0f;  
             }
 
             var rend = cube.GetComponent<Renderer>();
 
-            if (rend) rend.material.color = _pointColor;
-
-            // Change shape depend on if start point or end point exist for this point
             foreach (var circuit in _levelData._circuits)
             {
                 if (int.TryParse(circuit.sign, out int prefabIndex) && prefabIndex > 0 && prefabIndex <= _circuitShapePrefabs.Count)
@@ -311,6 +320,7 @@ public class Puzzle2D : MonoBehaviour
                     {
                         GameObject startPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
                         startPrefab.transform.position = cube.transform.position + circuit.startPointOffset;
+
                     }
 
                     if (circuit.endPoint == pos)
@@ -321,7 +331,7 @@ public class Puzzle2D : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"⚠️ Circuit avec sign '{circuit.sign}' : Sign non valide ou hors limites.");
+                    Debug.LogWarning($"Circuit with sign '{circuit.sign}' : sign invalid or out of bound");
                 }
             }
 
@@ -329,7 +339,7 @@ public class Puzzle2D : MonoBehaviour
 
             _pointObjects3D.Add(cube.transform);
             _cubePositions3D[cube] = pos;
-
+            
             var clickScript = cube.AddComponent<ClickablePointComponent>();
             clickScript.puzzle = this;
             clickScript.linked2DPoint = pos;
@@ -348,15 +358,15 @@ public class Puzzle2D : MonoBehaviour
 
     private void Draw3DLine(Vector2 a, Vector2 b)
     {
-        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
-        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
+        Vector3 aPos = new Vector3(0.1f + transform.position.x, (a.y / _scaleFactorY) + transform.position.y, (-a.x / _scaleFactorX) + transform.position.z);
+        Vector3 bPos = new Vector3(0.1f + transform.position.x, (b.y / _scaleFactorY) + transform.position.y, (-b.x / _scaleFactorX) + transform.position.z);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
         if (_segmentPrefab == null || parentPuzzleGroup == null)
         {
-            Debug.LogWarning("segmentPrefab ou parentPuzzleGroup n’est pas assigné !");
+            Debug.LogWarning("segmentPrefab or parentPuzzleGroup isn't assigned");
             return;
         }
 
@@ -367,14 +377,6 @@ public class Puzzle2D : MonoBehaviour
         segment.transform.up = dir.normalized;
 
         segment.transform.localScale = new Vector3(_redLineRadius, distance / 2f, _redLineRadius);
-
-        Renderer rend = segment.GetComponent<Renderer>();
-        if (rend != null)
-        {
-            rend.material.color = Color.red;
-        }
-
-        _activeRedLines[(a, b)] = segment;
     }
 
 
@@ -391,11 +393,11 @@ public class Puzzle2D : MonoBehaviour
             {
                 if (existingColor == color)
                 {
-                    Debug.Log($"⚠️ Segment déjà existant entre {a} et {b} avec la même couleur.");
+                    Debug.Log($"Segment already existing between {a} and {b} with the same color.");
                     return null;
                 }
 
-                Debug.Log($"🗑️ Segment entre {a} et {b} existant avec une autre couleur ({existingColor}). Suppression...");
+                Debug.Log($"Segment between {a} and {b} already exist with another color ({existingColor}). Suppression...");
                 Destroy(existingObj);
                 segmentDict.Remove((a, b));
                 break;
@@ -406,42 +408,38 @@ public class Puzzle2D : MonoBehaviour
             {
                 if (existingColor == color)
                 {
-                    Debug.Log($"⚠️ Segment déjà existant entre {b} et {a} avec la même couleur.");
+                    Debug.Log($"Segment already existing between {a} and {b} with the same color.");
                     return null;
                 }
 
-                Debug.Log($"🗑️ Segment entre {b} et {a} existant avec une autre couleur ({existingColor}). Suppression...");
+                Debug.Log($"Segment between {a} and {b} already exist with another color ({existingColor}). Suppression...");
                 Destroy(existingObj);
                 segmentDict.Remove((b, a));
                 break;
             }
         }
-
-        // Conversion des points en 3D
-        Vector3 aPos = new Vector3(0f, (a.y / _scaleFactorY) + _yOffset, (-a.x / _scaleFactorX) - _zOffset);
-        Vector3 bPos = new Vector3(0f, (b.y / _scaleFactorY) + _yOffset, (-b.x / _scaleFactorX) - _zOffset);
+        
+        Vector3 aPos = new Vector3(0.1f, a.y / _scaleFactorY, -a.x / _scaleFactorX);
+        Vector3 bPos = new Vector3(0.1f, b.y / _scaleFactorY, -b.x / _scaleFactorX);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
-        if (_segmentPrefab == null || parentPuzzleGroup == null)
-        {
-            Debug.LogWarning("segmentPrefab ou parentPuzzleGroup n’est pas assigné !");
-            return null;
-        }
-
-        // Création du segment depuis le prefab
         GameObject segment = Instantiate(_segmentPrefab, parentPuzzleGroup);
         segment.name = "ColoredSegmentCylinder";
-
-        segment.transform.position = aPos + dir / 2f;
+        
+        segment.transform.localPosition = aPos + dir / 2f;
         segment.transform.up = dir.normalized;
+        segment.transform.rotation = Quaternion.Euler(segment.transform.rotation.eulerAngles.x, segment.transform.rotation.eulerAngles.y + 225f, segment.transform.rotation.eulerAngles.z);
         segment.transform.localScale = new Vector3(_coloredLineRadius, distance / 2f, _coloredLineRadius);
 
         Renderer rend = segment.GetComponent<Renderer>();
         if (rend != null)
         {
-            rend.material.color = color;
+            Material mat = rend.material;
+            mat.EnableKeyword("_EMISSION");
+            Color emissionColor = color * 1.0f ;
+            mat.SetColor("_EmissionColor", emissionColor);
         }
 
         if (!_activeColoredLinesByColor.ContainsKey(color))
@@ -451,24 +449,12 @@ public class Puzzle2D : MonoBehaviour
 
         return segment;
     }
-
-
-    // 3D Visual *
-
-
-
-
-
-
-
-
-
-
-
-
-    // Logic ***
-
-    private Vector3 mouseWorldPosition;
+    private void RotatePuzzle(Vector3 rotation)
+    {
+        parentPuzzleGroup.localEulerAngles = rotation;
+    }
+    
+    
 
     private void UpdateDragging()
     {
@@ -477,7 +463,7 @@ public class Puzzle2D : MonoBehaviour
         {
             Vector3 mouse3D = Vector3.zero;
             Vector3 mouseScreen = _fingerMP;
-            Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
+            Ray ray = _mainCamera.ScreenPointToRay(mouseScreen);
             Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 20f);
             RaycastHit[] hits = Physics.RaycastAll(ray);
 
@@ -541,7 +527,7 @@ public class Puzzle2D : MonoBehaviour
 
         Vector3 mouseScreen = _fingerMP;
 
-        Ray ray = _puzzleCamera.ScreenPointToRay(mouseScreen);
+        Ray ray = _mainCamera.ScreenPointToRay(mouseScreen);
 
         Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 20f);
         RaycastHit[] hits = Physics.RaycastAll(ray);
@@ -728,27 +714,7 @@ public class Puzzle2D : MonoBehaviour
 
         return Color.white;
     }
-
-    // Logic *
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     public bool HasCommonPoint((Vector2, Vector2) segment1, (Vector2, Vector2) segment2)
     {
         if (segment1.Item1 == segment2.Item1 || segment1.Item1 == segment2.Item2)
@@ -873,40 +839,35 @@ public class Puzzle2D : MonoBehaviour
         return mouse3D;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Puzzle solved Logic *** 
-        _puzzleSolved = true;
+        if (parentPuzzleGroup.transform.childCount == _lastChildCount) return;
+        
+        _lastChildCount = parentPuzzleGroup.transform.childCount;
+        OnChildrenChanged?.Invoke();
+    }
+
+    private void HandleChildrenChanged()
+    {
+        CheckPuzzleSolved();
+    }
+    
+    private void CheckPuzzleSolved()
+    {
         _circuitValidationStatus.Clear(); 
         for (int i = 0; i < _levelData._circuits.Count; i++)
         {
             Circuit currentCircuit = _levelData._circuits[i];
             bool isValidConnection = IsChainConnectingPoints(currentCircuit.circuitColor, currentCircuit.startPoint, currentCircuit.endPoint);
-
+            
+            StarPuzzleManager.Instance.Circuits[i] = isValidConnection;
             _circuitValidationStatus[i] = isValidConnection;
-
-            if (!isValidConnection)
-            {
-                _puzzleSolved = false;
-            }
         }
-        // *
 
-        if (_puzzleSolved)
+        if (_circuitValidationStatus.Values.All(v => v))
         {
-            Debug.Log("Le puzzle est réussi !");
+            _puzzleSolved = true;
+            StarPuzzleManager.Instance.PuzzleComplete();
         }
     }
-
-    private void OpenPuzzle()
-    {
-        SwitchCamera(true);
-    }
-
-    private void ClosePuzzle()
-    {
-        SwitchCamera(false);
-    }
-
-
 }
