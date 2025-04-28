@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackgroundTexture:
-        m_Texture: {fileID: 2800000, guid: bf43b4a42dfaa70449476d1b4932aeda, type: 3}
+        m_Texture: {fileID: 2800000, guid: f34785e8827a947448c65240252ec594, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_5ce440492cb841c2ae627be7a24ac6aa_Texture_1_Texture2D:
@@ -53,7 +53,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SecondarySpeed: 0
-    - _Speed: 0.01
+    - _Speed: 0.005
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &147364709438078811
