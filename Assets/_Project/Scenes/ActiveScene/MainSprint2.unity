@@ -13874,6 +13874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unparentOnAwake: 0
+  fusionPoint: {fileID: 0}
   isPuzzleActive: 0
 --- !u!1001 &1084274555
 PrefabInstance:

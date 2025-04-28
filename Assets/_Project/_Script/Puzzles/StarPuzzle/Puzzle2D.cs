@@ -317,6 +317,10 @@ public class Puzzle2D : MonoBehaviour
 
             _pointObjects3D.Add(cube.transform);
             _cubePositions3D[cube] = pos;
+            
+            var clickScript = cube.AddComponent<ClickablePointComponent>();
+            clickScript.puzzle = this;
+            clickScript.linked2DPoint = pos;
         }
     }
 

@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 376807834}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 376807834}
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
@@ -573,8 +573,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18610574, y: 0.0056158877, z: -0.0010637506, w: 0.9825131}
-  m_LocalPosition: {x: -0.17329311, y: 5.9566946, z: -15.158527}
+  m_LocalRotation: {x: 0.15622984, y: 0.37717226, z: -0.064712524, w: 0.9105744}
+  m_LocalPosition: {x: -10, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
