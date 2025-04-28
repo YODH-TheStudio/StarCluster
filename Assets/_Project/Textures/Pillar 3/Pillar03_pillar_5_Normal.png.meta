@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/_Project/Textures/Stem/stem_standardSurface1_Roughness.png.meta
-guid: fa4d63aaa7f9446409bc5c7b43a8592e
-========
-guid: 931e3b19a7bcfc8419db93abee0d53e1
->>>>>>>> origin/Light:Assets/_Project/Textures/Stem/Pillar02_pillar_2_Height.png.meta
+guid: 5c39b761e7d058c4aac39d2c9ae94050
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,7 +7,7 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -58,7 +54,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 1
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1

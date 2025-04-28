@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/_Project/Textures/Stem/stem_standardSurface1_Roughness.png.meta
-guid: fa4d63aaa7f9446409bc5c7b43a8592e
-========
-guid: 931e3b19a7bcfc8419db93abee0d53e1
->>>>>>>> origin/Light:Assets/_Project/Textures/Stem/Pillar02_pillar_2_Height.png.meta
+guid: a3c1f4c812acfb44aa48350f6e0c76c3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

@@ -15,6 +15,7 @@ Material:
   - _EMISSION
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
+  - _OCCLUSIONMAP
   - _PARALLAXMAP
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -29,11 +30,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 90534a5516e6112498951064e371e4ba, type: 3}
+        m_Texture: {fileID: 2800000, guid: 319c048f35376f64bb9c676d8a0f77ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 834cb7d045e65224a8bf395d12e6c751, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5c39b761e7d058c4aac39d2c9ae94050, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -49,23 +50,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: a0dd92414c0357844bf948af5d392cec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8aa8100fc1032d44a9f35bb121689010, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 90534a5516e6112498951064e371e4ba, type: 3}
+        m_Texture: {fileID: 2800000, guid: 319c048f35376f64bb9c676d8a0f77ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 4ad25491ada66be4a8ceac8c44eb2b19, type: 3}
+        m_Texture: {fileID: 2800000, guid: ba40210601007dc4186d0d36fa40b589, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4d2e1f9905e0a045b88b4a1649655bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: e11cd8178e096e0459f8f7a372f2c6f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4cb2ec6d0a341364b8b9e5ab5e0da275, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -119,10 +120,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 7.4642644, g: 7.4642644, b: 7.4642644, a: 1}
+    - _EmissionColor: {r: 8, g: 8, b: 8, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3925212784448838318
+--- !u!114 &4390671957887020889
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
