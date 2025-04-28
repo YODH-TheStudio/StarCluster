@@ -4148,6 +4148,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -7043,6 +7048,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris (07)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
@@ -15371,6 +15381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -18239,6 +18254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -18856,6 +18876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
@@ -21180,6 +21205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -21282,6 +21312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
@@ -22529,6 +22564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris (06)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
@@ -25463,6 +25503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -26806,6 +26851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
@@ -32791,7 +32841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1921556639}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: ----- Lycoris -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35494,6 +35544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
+      propertyPath: m_Layer
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -35590,6 +35645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lycoris (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9fcb9c85bd60c4b8ba80e6784daf17,
         type: 3}
