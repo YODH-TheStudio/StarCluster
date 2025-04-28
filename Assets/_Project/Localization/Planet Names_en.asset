@@ -19,35 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 9772228608
-    m_Localized: Joy
+    m_Localized: JOY
     m_Metadata:
       m_Items: []
   - m_Id: 56651964416
-    m_Localized: Empathy
+    m_Localized: EMPATHY
     m_Metadata:
       m_Items: []
   - m_Id: 242086338560
-    m_Localized: Sadness
+    m_Localized: SADNESS
     m_Metadata:
       m_Items: []
   - m_Id: 372894097408
-    m_Localized: Comical
+    m_Localized: COMICAL
     m_Metadata:
       m_Items: []
   - m_Id: 442033004544
-    m_Localized: Boredom
+    m_Localized: BOREDOM
     m_Metadata:
       m_Items: []
   - m_Id: 505748676608
-    m_Localized: Melancholy
+    m_Localized: MELANCHOLY
     m_Metadata:
       m_Items: []
   - m_Id: 565618171904
-    m_Localized: Seedy
+    m_Localized: SEEDY
     m_Metadata:
       m_Items: []
   - m_Id: 6135041515520
-    m_Localized: Empty
+    m_Localized: EMPTY
     m_Metadata:
       m_Items: []
   references:

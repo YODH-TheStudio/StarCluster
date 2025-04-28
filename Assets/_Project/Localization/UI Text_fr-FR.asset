@@ -35,27 +35,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 435145718439936
-    m_Localized: Continuer
+    m_Localized: CONTINUER
     m_Metadata:
       m_Items: []
   - m_Id: 435713501372416
-    m_Localized: Langue
+    m_Localized: LANGUE
     m_Metadata:
       m_Items: []
   - m_Id: 435804698124288
-    m_Localized: Volume musique
+    m_Localized: VOLUME MUSIQUE
     m_Metadata:
       m_Items: []
   - m_Id: 435942510370816
-    m_Localized: Volume principal
+    m_Localized: VOLUME PRINCIPAL
     m_Metadata:
       m_Items: []
   - m_Id: 436113377927168
-    m_Localized: Volume effets
+    m_Localized: VOLUME EFFETS
     m_Metadata:
       m_Items: []
   - m_Id: 436185981329408
-    m_Localized: Vibrations
+    m_Localized: VIBRATION
     m_Metadata:
       m_Items: []
   - m_Id: 6571296715988992
@@ -67,11 +67,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6576980060823552
-    m_Localized: "S\xE9l\xE9ctionner"
+    m_Localized: "S\xC9L\xC9CTIONNER"
     m_Metadata:
       m_Items: []
   - m_Id: 6577072750747648
-    m_Localized: Supprimer
+    m_Localized: SUPPRIMER
     m_Metadata:
       m_Items: []
   - m_Id: 6577710377230336
@@ -79,7 +79,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9941805862842368
-    m_Localized: Menu principal
+    m_Localized: MENU PRINCIPAL
     m_Metadata:
       m_Items: []
   references:

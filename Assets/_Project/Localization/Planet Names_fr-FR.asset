@@ -19,35 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 9772228608
-    m_Localized: Joie
+    m_Localized: JOIE
     m_Metadata:
       m_Items: []
   - m_Id: 56651964416
-    m_Localized: Empathie
+    m_Localized: EMPATHIE
     m_Metadata:
       m_Items: []
   - m_Id: 242086338560
-    m_Localized: Tristesse
+    m_Localized: TRISTESSE
     m_Metadata:
       m_Items: []
   - m_Id: 372894097408
-    m_Localized: Comique
+    m_Localized: COMIQUE
     m_Metadata:
       m_Items: []
   - m_Id: 442033004544
-    m_Localized: Ennui
+    m_Localized: ENNUI
     m_Metadata:
       m_Items: []
   - m_Id: 505748676608
-    m_Localized: "M\xE9lancolie"
+    m_Localized: "M\xC9LANCOLIE"
     m_Metadata:
       m_Items: []
   - m_Id: 565618171904
-    m_Localized: Glauque
+    m_Localized: GLAUQUE
     m_Metadata:
       m_Items: []
   - m_Id: 6135041515520
-    m_Localized: Vide
+    m_Localized: VIDE
     m_Metadata:
       m_Items: []
   references:
