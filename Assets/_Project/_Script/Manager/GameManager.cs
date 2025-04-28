@@ -1,4 +1,8 @@
+using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -12,6 +16,10 @@ public class GameManager : PersistentSingleton<GameManager>
     private DialogueManagerCustom DialogueManager { get; set; }
     private PuzzleManager PuzzleManager { get; set; }
     private SaveManager SaveManager { get; set; }
+    
+    public event Action<Finger> OnFingerMove;
+    public event Action<Finger> OnFingerUp;
+    public event Action<Finger> OnFingerDown;
     #endregion
 
     #region Main Functions
@@ -40,6 +48,10 @@ public class GameManager : PersistentSingleton<GameManager>
     
     private void Start()
     {
+        EnhancedTouchSupport.Enable();
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         Instance.SoundSystem.ChangeMusicByKey("Menu");
     }
     #endregion
@@ -157,6 +169,43 @@ public class GameManager : PersistentSingleton<GameManager>
 
     #endregion
 
+    #region Input
+    
+    private void Touch_OnFingerMove(Finger touchedFinger)
+    {
+        if (OnFingerMove == null)
+        {
+            return;
+        }
+        print("Finger Move");
+        print(OnFingerMove.GetInvocationList().Count());
+        OnFingerMove?.Invoke(touchedFinger);
+    }
+    
+    private void Touch_OnFingerUp(Finger touchedFinger)
+    {
+        if (OnFingerUp == null)
+        {
+            return;
+        }
+        print("Finger Up");
+        print(OnFingerUp.GetInvocationList().Count());
+        OnFingerUp?.Invoke(touchedFinger);
+    }
+    
+    private void Touch_OnFingerDown(Finger touchedFinger)
+    {
+        if (OnFingerDown == null)
+        {
+            return;
+        }
+        print("Finger Down");
+        print(OnFingerDown.GetInvocationList().Count());
+        OnFingerDown?.Invoke(touchedFinger);
+    }
+
+    #endregion
+    
     #region Save/Load
     private void OnApplicationQuit()
     {

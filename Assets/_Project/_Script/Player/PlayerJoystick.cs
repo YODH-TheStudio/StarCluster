@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -39,8 +40,6 @@ public class PlayerJoystick : MonoBehaviour
         background.gameObject.SetActive(false);
 
         _player = GameManager.Instance.GetPlayer();
-        
-        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
     private void Update()
     {
@@ -49,19 +48,22 @@ public class PlayerJoystick : MonoBehaviour
 
     private void OnEnable()
     {
-        EnhancedTouchSupport.Enable();
-        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
-        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
+        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
+        GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
+        GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
+        
+        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
 
     private void OnDisable()
     {
-        ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
-        ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
-        ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
-        EnhancedTouchSupport.Disable();
+        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
+        GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
+        GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
+        
+        GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
     }
+
     #endregion
 
     #region StateChange
@@ -71,17 +73,18 @@ public class PlayerJoystick : MonoBehaviour
         //check if the new state is in the allowed states
         if (allowedStates.HasFlag(newState))
         {
-            ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-            ETouch.Touch.onFingerUp += Touch_OnFingerUp;
-            ETouch.Touch.onFingerMove += Touch_OnFingerMove;
+            GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
+            GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
+            GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
         }else
         {
-            ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
-            ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
-            ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
+            GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
+            GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
+            GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
             CancelJoystick();
         }
     }
+    
     #endregion
 
     #region Touch
@@ -104,7 +107,7 @@ public class PlayerJoystick : MonoBehaviour
             CancelJoystick();
         }
     }
-
+    
     private void CancelJoystick()
     {
         _movementFinger = null;

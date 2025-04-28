@@ -108,8 +108,6 @@ public class RotateObject : Interactable
         AttachPlayerToObject();
         yield return StartCoroutine(RotateAnimation());
         DetachObjectFromPlayer();
-        
-        _isInteractable = false;
         yield return null;
     }
     private IEnumerator MoveAnimation(Vector3 start)

@@ -7608,7 +7608,7 @@ GameObject:
   - component: {fileID: 406021352}
   - component: {fileID: 406021354}
   - component: {fileID: 406021353}
-  m_Layer: 24
+  m_Layer: 4
   m_Name: Sea_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10392,19 +10392,6 @@ MonoBehaviour:
   _onInteractIfFinish:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605726342}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 87a73e32a548bc94fa78d19e16c5402e,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7683583691383833574}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -10430,6 +10417,19 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 605726342}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: StartDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 87a73e32a548bc94fa78d19e16c5402e,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!65 &605726339
 BoxCollider:
@@ -11088,7 +11088,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 49faf6d46149e534b9fa7602a955fdb4,
+          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -11659,7 +11659,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 778f7c9f8b41e234198c2d3bc8ddcd1a,
+          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -12127,7 +12127,7 @@ MonoBehaviour:
     pedestalObject: {fileID: 1648424468}
     isOnPedestal: 0
   validationRadius: 1
-  _mainStoneMesh: {fileID: 0}
+  _mainStoneMesh: {fileID: 1025644503}
 --- !u!114 &713424948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16463,7 +16463,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 2113929279
+    m_Bits: 2113929263
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -17720,6 +17720,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 2, z: 0.8}
   m_Center: {x: -0.00000002980233, y: 0.3985268, z: -0.019980406}
+--- !u!23 &1025644503 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 06297cdb7c82d624ab3e0815c7bd5257,
+    type: 3}
+  m_PrefabInstance: {fileID: 1025644499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1027960833
 GameObject:
   m_ObjectHideFlags: 0
@@ -21242,7 +21248,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 108259fb70960dd40bb5d451041b0dd8,
+          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
@@ -26955,7 +26961,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac48b5b43f274314eaa12a35d1e73c21,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1739086311}
   m_SourcePrefab: {fileID: 100100000, guid: ac48b5b43f274314eaa12a35d1e73c21, type: 3}
 --- !u!4 &1739086309 stripped
 Transform:
@@ -26963,6 +26973,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1739086308}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1739086310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac48b5b43f274314eaa12a35d1e73c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1739086308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1739086311
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739086310}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 799.5601, y: 177.72925, z: 587.99097}
+  m_Center: {x: 111.04706, y: -0.00045531278, z: 0.00010926157}
 --- !u!1 &1739297225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e6d6ed4098a3d434cb8aaae9ca8ce972,
@@ -30286,7 +30323,7 @@ MonoBehaviour:
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d2f74bd0af572e847a7b7dbd137f257c,
+          m_ObjectArgument: {fileID: 11400000, guid: 844dc1a2092c4b24aa283b200c772a13,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
           m_IntArgument: 0
