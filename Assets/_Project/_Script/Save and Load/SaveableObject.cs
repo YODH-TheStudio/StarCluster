@@ -2,9 +2,13 @@
 using UnityEngine;
 
 
-public class SavePosition : MonoBehaviour
+public class SaveableObject : MonoBehaviour
 {
     public string identifier;
+
+    public bool SavePos = true;
+    public bool SaveRot = false;
+    public bool SaveEnabled = false;
 
     private void Awake()
     {
@@ -12,7 +16,6 @@ public class SavePosition : MonoBehaviour
         if (string.IsNullOrEmpty(identifier))
         {
             // generate a unique identifier
-            
             identifier = Guid.NewGuid().ToString();
         }
         // check if a gameObject has the same name
