@@ -62,6 +62,7 @@ public class RotateObject : Interactable
         
         if (_isGrab)
         {
+            _isInteractable = false;
             StartCoroutine(Animation(_grabTransform.position));
         }
     }

@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
 
     public void SetMoveDirection(Vector3 newDirection)
     {
-        _limitedMoveDirection = newDirection;
+        _direction = newDirection;
     }
 
     #endregion
@@ -210,10 +210,10 @@ public class PlayerScript : MonoBehaviour
                 }
 
                 // Limit movement only on object direction and object inverse direction
-                float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);
-                _limitedMoveDirection = closestDirection * forwardMove;
+                float forwardMove = Vector3.Dot(_direction, closestDirection);
+                _direction = closestDirection * forwardMove;
 
-                _rigidbody.MovePosition(_rigidbody.position + _limitedMoveDirection * (pushSpeed * Time.deltaTime));
+                _rigidbody.MovePosition(_rigidbody.position + _direction * (pushSpeed * Time.deltaTime));
             }
             else
             {

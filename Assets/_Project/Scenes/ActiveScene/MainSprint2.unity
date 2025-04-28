@@ -1743,7 +1743,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8
+      value: -82.55
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -1753,7 +1753,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.6
+      value: 68.61
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -7539,6 +7539,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d0c72a6f91cc28f45a140712f7e82db5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d14d945b11efade498acf8a8fd607e06, type: 2}
     - target: {fileID: 919132149155446097, guid: d0c72a6f91cc28f45a140712f7e82db5,
         type: 3}
       propertyPath: m_Name
@@ -14940,7 +14945,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045256, y: -0.3726226, z: 0.08717231, w: 0.89959055}
-  m_LocalPosition: {x: 104.734955, y: 73.002426, z: -22.910645}
+  m_LocalPosition: {x: 22.984953, y: 73.002426, z: 43.09936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19078,39 +19083,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9618e03e97af76545a848db395591625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFinished: 0
+  _isFinished: 1
   _onInteractIfPuzzleNotFinish:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1315021419}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a71ea12f1e89f6841a64c58042faea88,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onInteractIfPuzzleFinish:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1315021419}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: StartDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 905b00a50e86cc5498a879f1a7bbb499,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: MeetAndTalk.DialogueContainerSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2053295097}
         m_TargetAssemblyTypeName: PuzzleManager, Assembly-CSharp
         m_MethodName: ValidatePuzzle
@@ -25770,7 +25749,7 @@ Transform:
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045257, y: -0.37262258, z: 0.08717228, w: 0.89959055}
-  m_LocalPosition: {x: 104.734955, y: 73.002426, z: -22.910645}
+  m_LocalPosition: {x: 22.984953, y: 73.002426, z: 43.09936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
