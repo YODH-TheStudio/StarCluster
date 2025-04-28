@@ -11,8 +11,8 @@ CBUFFER_START(UnityPerMaterial)
     half4 _EmissionColor;
     half _Cutoff;
     half _Shininess;
-    float3 _PlayerPosition; // Player position for grass displacement
-    float3 _Terrain; // Terrain position
+    float3 PlayerPosition; // Player position for grass displacement
+    float3 TerrainPosition; // Terrain position
 CBUFFER_END
 
 #define _Surface 0.0 // Grass is always opaque
@@ -92,21 +92,22 @@ half4 TerrainWaveGrass (inout float4 vertex, float waveAmount, half4 color)
     waveMove.z = dot (s, _waveZmove);
 
     vertex.xz -= waveMove.xz * _WaveAndDistance.z;
-
+    
     // apply color animation
     half3 waveColor = lerp (real3(0.5, 0.5, 0.5), _WavingTint.rgb, lighting);
-
+    
     // Fade the grass out before detail distance.
     // Saturate because Radeon HD drivers on OS X 10.4.10 don't saturate vertex colors properly.
     half3 offset = vertex.xyz - _CameraPosition.xyz;
     color.a = saturate (2 * (_WaveAndDistance.w - dot (offset, offset)) * _CameraPosition.w);
 
     float4 newVertex = vertex;
-    newVertex.y += _Terrain.y;
+    newVertex.xyz += TerrainPosition.xyz;
+    //newVertex.y += TerrainPosition.y;
     
     // Displace grass under the player
-    float dist = distance(_PlayerPosition.xyz, newVertex.xyz);
-    float grassDisplacementFalloff = 0.7;
+    float dist = distance(PlayerPosition.xyz, newVertex.xyz);
+    float grassDisplacementFalloff = 1.7;
     float influence = saturate(1.0 - dist * grassDisplacementFalloff);
     //influence = sin(_Time.y * 2.0);
     vertex.y -= influence; // Vertical displacement

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SendPositionToShader : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private string shaderPropertyName = "_PlayerPosition";
+    [SerializeField] private string shaderPropertyName = "PlayerPosition";
 
     #endregion
 
