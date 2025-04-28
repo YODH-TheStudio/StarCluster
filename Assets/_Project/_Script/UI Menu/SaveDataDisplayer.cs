@@ -8,7 +8,6 @@ using UnityEngine.Localization.Components;
 
 public class SaveDataDisplayer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI saveDateText;
     [SerializeField] private TextMeshProUGUI _planetNameTxt;
     [SerializeField] private TextMeshProUGUI _saveDateTxt;
     [SerializeField] private RawImage _planetIcon;
