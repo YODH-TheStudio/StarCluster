@@ -192,7 +192,13 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();
-        Instance.GetSaveManager().SaveGame();
+        // Check if in the main menu, in that case don't save the game
+        //Debug.Log("Application Quit: PlayerState is" + GetStateManager().GetState());
+        if (GetStateManager().GetState() != StateManager.PlayerState.Menu)
+        {
+            Debug.LogWarning("Saving game on quit");
+            Instance.GetSaveManager().SaveGame();
+        }
     }
     #endregion
 }
