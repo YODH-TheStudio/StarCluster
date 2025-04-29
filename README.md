@@ -1,20 +1,21 @@
 # StarCluster
-
 ```
-NOMENCLATURE :
+----- NAMING CONVENTION -----
 
-Constante : PRIVATE_CONSTANT_SNAKE_PASCAL_CASE
+/ * CODE * /
 
-champ Static : s_camelCase
+Constant : PRIVATE_CONSTANT_SNAKE_PASCAL_CASE
 
-Nom de classe : PascalCase
+Static Field  : s_camelCase
 
-Variable privée : int _camelCase
-variable protected : int _camelCase
-Variable publique : int PascalCase
+Class Name : PascalCase
 
-variable delegate : IntEvent
-variable event : OnNomdelEvent
+Private variable : int _camelCase
+Protected variable : int PascalCase
+Public variable : int camelCase
+
+Delegate variable : IntEvent
+Event variable : OnNameOfEvent
 
 private int MethodPascalCase(int paramCamelCase = 1)
     {
@@ -22,21 +23,19 @@ private int MethodPascalCase(int paramCamelCase = 1)
         return variableCamelCase;
     }
 
-Création d'Assets / Object dans unity : initial du type_nom (M_monMaterial) sauf pour scène et script
+/ * GITHUB COMMIT * /
 
-Commit Github:
+-[ADD] New feature
+-[UPD] Update feature
+-[FIX] Fix de feature
+-[REF] Refactor/Rework code
+-[CLEAN] Clean code
+-[DOC] Documentation code
 
-[ADD] New feature
-[UPD] Update feature
-[FIX] Fix de feature
-[REF] Refactor/Rework code
-[CLEAN] Clean code
-[DOC] Documentation code
+(Espacially for gameplay developper)
+-[MAP] Level design
+-[BAL] Balancing the game
 
-Espacially for gameplay developper
-[MAP] Level design
-[BAL] Balancing the game
-
-Only Git master
-[MERGE] Commits de merge
+(Only Git master)
+-[MERGE] Commits de merge
 ```
