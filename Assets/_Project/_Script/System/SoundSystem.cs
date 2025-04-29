@@ -341,6 +341,15 @@ public class SoundSystem : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void StopMusicSource()
+    {
+        if (_currentMusicSource != null && _currentMusicSource.outputAudioMixerGroup == musicMixerGroup)
+        {
+            StartCoroutine(FadeOutAudio(_currentMusicSource, fadeOutDuration));
+            _currentMusicSource = null;
+        }
+    }
+
     #endregion
 
     #region Ambiances

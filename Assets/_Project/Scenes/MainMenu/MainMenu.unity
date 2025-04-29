@@ -1996,7 +1996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.66667, y: -138.1}
+  m_AnchoredPosition: {x: 50.666668, y: -138.1}
   m_SizeDelta: {x: 99, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286855054
@@ -18066,7 +18066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31598311c39ae948825106e95fafd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAlreadyPlayed: 1
+  hasAlreadyPlayed: 0
   planetMenu: {fileID: 1973317089}
 --- !u!1 &1788039294
 GameObject:
@@ -18363,6 +18363,9 @@ MonoBehaviour:
   - {fileID: 2029887327}
   - {fileID: 2023056132}
   - {fileID: 255598071}
+  clonePlanets:
+  - {fileID: 772597750}
+  - {fileID: 1342542648}
   rectTransform: {fileID: 1144906606}
 --- !u!1 &2023056130
 GameObject:
