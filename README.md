@@ -6,21 +6,21 @@
 
 Constant : PRIVATE_CONSTANT_SNAKE_PASCAL_CASE
 
-Static Field  : s_camelCase
+Static Field  : s_lowerCamelCase
 
-Class Name : PascalCase
+Class Name : UpperCamelCase
 
-Private variable : int _camelCase
-Protected variable : int PascalCase
-Public variable : int camelCase
+Private variable : int _lowerCamelCase
+Protected variable : int UpperCamelCase
+Public variable : int lowerCamelCase
 
 Delegate variable : IntEvent
 Event variable : OnNameOfEvent
 
-private int MethodPascalCase(int paramCamelCase = 1)
+private int MethodPascalCase(int paramLowerCamelCase = 1)
     {
-        int variableCamelCase = paramCamelCase++;
-        return variableCamelCase;
+        int variableLowerCamelCase = paramLowerCamelCase++;
+        return variableLowerCamelCase;
     }
 
 / * GITHUB COMMIT * /
