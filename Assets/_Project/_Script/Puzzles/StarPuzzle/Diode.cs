@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class Diode : MonoBehaviour
 {
     private Image _image;
-    [SerializeField] private float offAlpha;
-    [SerializeField] private float onAlpha;
+    [Range(0,1)][SerializeField] private float offAlpha;
+    [Range(0,1)][SerializeField] private float onAlpha;
     private bool IsOn{ get; set;}
     
     private void Awake()

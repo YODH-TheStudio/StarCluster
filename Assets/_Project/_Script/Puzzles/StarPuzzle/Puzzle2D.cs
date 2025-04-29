@@ -108,7 +108,6 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
-        puzzleCamera.gameObject.SetActive(true);
     }
     
     private void HandlePuzzleExit()
@@ -117,7 +116,6 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
         ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
-        puzzleCamera.gameObject.SetActive(false);
     }
     
     private void Touch_OnFingerMove(Finger touchedFinger)
@@ -194,7 +192,7 @@ public class Puzzle2D : MonoBehaviour
                         break;
                 }
             }
-            else
+            else   
             {
                 cube.transform.localScale = Vector3.one * 30.0f;  
             }
