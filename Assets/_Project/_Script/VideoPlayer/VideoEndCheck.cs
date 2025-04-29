@@ -71,14 +71,12 @@ public class VideoEndCheck : MonoBehaviour
     #region Main Functions
     private async void OnVideoEnd(VideoPlayer vp)
     {
-        Debug.Log("Video Ended");
         _soundSystem.ChangeMusicByKey("Hope");
         await _sceneLoader.LoadSceneGroup(2);
     }
 
     public async void OnEnd()
     {
-        Debug.Log("Video Ended");
         _soundSystem.ChangeMusicByKey("Hope");
         await _sceneLoader.LoadSceneGroup(2);
     }

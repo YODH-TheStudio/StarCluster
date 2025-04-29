@@ -84,12 +84,10 @@ public class CompanionAnchor : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                Debug.Log("Hitpoint: " + hit.point);
                 transform.position = hit.point;
             }
             else
             {
-                Debug.Log("no hit ");
                 transform.position = _player.transform.position + newPosition + new Vector3(0,orbitOffset,0);
             }
         }

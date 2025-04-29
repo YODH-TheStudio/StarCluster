@@ -95,7 +95,6 @@ public class PhasableObject : Interactable
         }
 
         // If no pair phase is active (not transition possible)
-        Debug.Log("Player is out of phase radius. Phase transition denied.");
     }
 
     #endregion

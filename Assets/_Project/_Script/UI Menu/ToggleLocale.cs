@@ -81,12 +81,10 @@ namespace UnityEngine.Localization.Samples
         
             if (LocalizationSettings.SelectedLocale.Identifier.CultureInfo.TwoLetterISOLanguageName == "en")
             {
-                print("english");
                 lm.selectedLang = SystemLanguage.English;
             }
             else if (LocalizationSettings.SelectedLocale.Identifier.CultureInfo.TwoLetterISOLanguageName == "fr")
             {
-                print("french");
                 lm.selectedLang = SystemLanguage.French;
             }
         }
