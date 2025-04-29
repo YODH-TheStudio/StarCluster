@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2224464202643127052}
   - component: {fileID: 5553327181413111587}
   - component: {fileID: 8647538957568715530}
-  - component: {fileID: 7298089241097723516}
+  - component: {fileID: 5390769377187837539}
   m_Layer: 0
   m_Name: Canvas Input
   m_TagString: Untagged
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7298089241097723516
+--- !u!114 &5390769377187837539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,7 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773e48f90f04b11448f606f0b65b6fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionButton: {fileID: 3832024571365300259}
+  interactionButton: {fileID: 0}
+  gameobjectPosition:
+  - {x: 0, y: 0, z: 0}
+  - {x: 333, y: -59, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!1001 &4597323633518838422
 PrefabInstance:
   m_ObjectHideFlags: 0
