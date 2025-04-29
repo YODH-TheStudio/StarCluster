@@ -1,22 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum DiodeColor
-{
-    Blue,
-    Green,
-    Brown,
-    Red,
-    Purple,
-}
-
 public class Diode : MonoBehaviour
 {
     private Image _image;
-    private bool _isOn;
-    [SerializeField] private Sprite off;
-    [SerializeField] private Sprite on;
-
+    [SerializeField] private float offAlpha;
+    [SerializeField] private float onAlpha;
+    private bool IsOn{ get; set;}
+    
     private void Awake()
     {
         _image = GetComponent<Image>();
@@ -24,17 +15,13 @@ public class Diode : MonoBehaviour
 
     private void Start()
     {
-        _image.sprite = off;
-        _isOn = false;
+        IsOn = false;
     }
 
     public void SetDiode(bool state)
     {
-        _image.sprite = state ? on : off;
-    }
-
-    public bool GetIsOn()
-    {
-        return _isOn;
+        Color newColor = _image.color;
+        newColor.a = state ? onAlpha : offAlpha;
+        _image.color = newColor;
     }
 }

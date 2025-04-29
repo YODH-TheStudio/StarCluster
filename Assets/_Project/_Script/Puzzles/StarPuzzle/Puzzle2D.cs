@@ -4,7 +4,6 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.Serialization;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class Puzzle2D : MonoBehaviour
@@ -12,18 +11,13 @@ public class Puzzle2D : MonoBehaviour
     private static readonly int s_emissionColor = Shader.PropertyToID("_EmissionColor");
 
     #region Fields
-    
-    public Color pointColor = Color.green;
-    public Color lineColor = Color.red;
-
     public LevelData levelData;
-
-    private Dictionary<(Vector2, Vector2), GameObject> _activeRedLines = new Dictionary<(Vector2, Vector2), GameObject>();
-    private readonly Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor = new Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>>();
 
     [SerializeField] private CinemachineVirtualCamera puzzleCamera;
     private Camera _mainCamera;
-
+    
+    private readonly Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>> _activeColoredLinesByColor = new Dictionary<Color, Dictionary<(Vector2, Vector2), GameObject>>();
+    
     private readonly Dictionary<GameObject, Vector2> _cubePositions3D = new Dictionary<GameObject, Vector2>();
     private readonly List<Transform> _pointObjects3D = new List<Transform>();
     
@@ -35,7 +29,6 @@ public class Puzzle2D : MonoBehaviour
     private GameObject _tempCylinder;
     private const float DragThreshold = 1f;
 
-
     [Header("3D Display Settings")]
     [SerializeField] private float scaleFactorX = 30f;
     [SerializeField] private float scaleFactorY = 30f;
@@ -45,8 +38,6 @@ public class Puzzle2D : MonoBehaviour
     [SerializeField] private float coloredLineRadius = 0.2f;
 
     private Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
-    private int _currentCircuitSelected = 0;
-    private bool _eraserMode = false;
 
     [Header("Prefabs")]
     public GameObject starPrefab; 
@@ -54,20 +45,21 @@ public class Puzzle2D : MonoBehaviour
     public GameObject segmentPrefab;
     
     private Vector3 _fingerMP = Vector3.zero;
-
     private Vector3 _mouseWorldPosition;
 
     public event Action OnChildrenChanged;
-
     private int _lastChildCount;
-    
+
+    private DrawingColors _drawingColor;
     #endregion
 
     private void Awake()
     {
         StarPuzzleManager.Instance.PuzzleCamera = puzzleCamera;
+        _drawingColor = StarPuzzleManager.Instance.DrawingColor;
         _mainCamera = Camera.main;
     }
+    
     private void Start()
     {
         StarPuzzleManager.Instance.Circuits = new List<bool>(new bool[levelData._circuits.Count]);
@@ -98,7 +90,6 @@ public class Puzzle2D : MonoBehaviour
         {
             StarPuzzleManager.Instance.OnPuzzleEnter += HandlePuzzleEnter;
             StarPuzzleManager.Instance.OnPuzzleExit += HandlePuzzleExit;
-            puzzleCamera.gameObject.SetActive(true);
         }
     }
 
@@ -108,7 +99,6 @@ public class Puzzle2D : MonoBehaviour
         {
             StarPuzzleManager.Instance.OnPuzzleEnter -= HandlePuzzleEnter;
             StarPuzzleManager.Instance.OnPuzzleExit -= HandlePuzzleExit;
-            puzzleCamera.gameObject.SetActive(false);
         }
     }
 
@@ -118,6 +108,7 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+        puzzleCamera.gameObject.SetActive(true);
     }
     
     private void HandlePuzzleExit()
@@ -126,6 +117,7 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
         ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
+        puzzleCamera.gameObject.SetActive(false);
     }
     
     private void Touch_OnFingerMove(Finger touchedFinger)
@@ -140,7 +132,6 @@ public class Puzzle2D : MonoBehaviour
         _fingerMP = touchedFinger.screenPosition;
 
         Vector3 hitPosition = GetMouseHitPosition(_mainCamera);
-        Debug.Log("HITPOSITION : " + hitPosition);
 
         float minDistance = Mathf.Infinity;
         GameObject closestObject = null;
@@ -176,12 +167,6 @@ public class Puzzle2D : MonoBehaviour
 
         _isDragging = false;
         HandleMouseRelease();
-    }
-
-    private void OnCircuitButtonClicked(int index)
-    {
-        _currentCircuitSelected = index;
-        _eraserMode = false;
     }
     
     private void InstantiatePoints3D()
@@ -280,16 +265,11 @@ public class Puzzle2D : MonoBehaviour
 
         segment.transform.localScale = new Vector3(redLineRadius, distance / 2f, redLineRadius);
     }
-
-
+    
     private void DrawColored3DSegment(Vector2 a, Vector2 b, Color color)
     {
-        // check if there is a segment with any color
-        foreach (var kvp in _activeColoredLinesByColor)
+        foreach (var (existingColor, segmentDict) in _activeColoredLinesByColor)
         {
-            var segmentDict = kvp.Value;
-            var existingColor = kvp.Key;
-
             // AB
             if (segmentDict.TryGetValue((a, b), out GameObject existingObj))
             {
@@ -348,6 +328,7 @@ public class Puzzle2D : MonoBehaviour
         _activeColoredLinesByColor[color][(a, b)] = segment;
 
     }
+    
     private void RotatePuzzle(Vector3 rotation)
     {
         parentPuzzleGroup.localEulerAngles = rotation;
@@ -506,8 +487,27 @@ public class Puzzle2D : MonoBehaviour
 
             if (isSegmentRed)
             {
-                Color circuitColor = GetCircuitColor();
-                if (_eraserMode)
+                Color circuitColor;
+                switch (_drawingColor)
+                {
+                    case DrawingColors.Red:
+                        circuitColor = Color.red;
+                        break;
+                    case DrawingColors.Blue:
+                        circuitColor = Color.blue;
+                        break;
+                    case DrawingColors.Brown:
+                        circuitColor = Color.yellow;
+                        break;
+                    case DrawingColors.Purple:
+                        circuitColor = Color.magenta;
+                        break;
+                    default:
+                        circuitColor = Color.green;
+                        break;
+                }
+                
+                if (_drawingColor == DrawingColors.Eraser)
                 {
                     foreach (var kvp in _activeColoredLinesByColor)
                     {
@@ -517,14 +517,12 @@ public class Puzzle2D : MonoBehaviour
                         // AB
                         if (segmentDict.TryGetValue((startLinked2DPoint, linked2DPoint), out GameObject existingObj))
                         {
-                            Debug.Log("Erase");
                             RemoveColoredLine(startLinked2DPoint, linked2DPoint, existingColor);
                             break;
                         }
                         // BA
                         else if (segmentDict.TryGetValue((linked2DPoint, startLinked2DPoint), out existingObj))
                         {
-                            Debug.Log("Erase");
                             RemoveColoredLine(linked2DPoint, startLinked2DPoint, existingColor);
                             break;
                         }
@@ -587,12 +585,9 @@ public class Puzzle2D : MonoBehaviour
         }
     }
 
-    private Color GetCircuitColor()
+    private DrawingColors GetCircuitColor()
     {
-        if (_currentCircuitSelected < levelData._circuits.Count)
-            return levelData._circuits[_currentCircuitSelected].circuitColor;
-
-        return Color.white;
+        return _drawingColor;
     }
     
     private bool HasCommonPoint((Vector2, Vector2) segment1, (Vector2, Vector2) segment2)
@@ -656,32 +651,31 @@ public class Puzzle2D : MonoBehaviour
 
         foreach (var chain in chains)
         {
-            if (chain.Count > 1)
-            {
-                Vector2 firstSegmentStart = chain[0].Item1;
-                Vector2 firstSegmentEnd = chain[0].Item2;
-                Vector2 lastSegmentStart = chain[chain.Count - 1].Item1; 
-                Vector2 lastSegmentEnd = chain[chain.Count - 1].Item2; 
+            if (chain.Count <= 1) continue;
+            
+            Vector2 firstSegmentStart = chain[0].Item1;
+            Vector2 firstSegmentEnd = chain[0].Item2;
+            Vector2 lastSegmentStart = chain[chain.Count - 1].Item1; 
+            Vector2 lastSegmentEnd = chain[chain.Count - 1].Item2; 
 
-                bool isFirstSegmentConnected = (firstSegmentStart == startPoint || firstSegmentStart == endPoint) || (firstSegmentEnd == startPoint || firstSegmentEnd == endPoint);
-                bool isLastSegmentConnected = (lastSegmentStart == startPoint || lastSegmentStart == endPoint) || (lastSegmentEnd == startPoint || lastSegmentEnd == endPoint);
+            bool isFirstSegmentConnected = (firstSegmentStart == startPoint || firstSegmentStart == endPoint) || (firstSegmentEnd == startPoint || firstSegmentEnd == endPoint);
+            bool isLastSegmentConnected = (lastSegmentStart == startPoint || lastSegmentStart == endPoint) || (lastSegmentEnd == startPoint || lastSegmentEnd == endPoint);
 
-                if (!isFirstSegmentConnected || !isLastSegmentConnected) continue;
+            if (!isFirstSegmentConnected || !isLastSegmentConnected) continue;
                 
-                bool firstSegmentHasStartPoint = (firstSegmentStart == startPoint || firstSegmentEnd == startPoint);
-                bool lastSegmentHasEndPoint = (lastSegmentStart == endPoint || lastSegmentEnd == endPoint);
-                bool firstSegmentHasEndPoint = (firstSegmentStart == endPoint || firstSegmentEnd == endPoint);
-                bool lastSegmentHasStartPoint = (lastSegmentStart == startPoint || lastSegmentEnd == startPoint);
+            bool firstSegmentHasStartPoint = (firstSegmentStart == startPoint || firstSegmentEnd == startPoint);
+            bool lastSegmentHasEndPoint = (lastSegmentStart == endPoint || lastSegmentEnd == endPoint);
+            bool firstSegmentHasEndPoint = (firstSegmentStart == endPoint || firstSegmentEnd == endPoint);
+            bool lastSegmentHasStartPoint = (lastSegmentStart == startPoint || lastSegmentEnd == startPoint);
 
-                bool isValidConnection = (firstSegmentHasStartPoint && lastSegmentHasEndPoint) || (firstSegmentHasEndPoint && lastSegmentHasStartPoint);
+            bool isValidConnection = (firstSegmentHasStartPoint && lastSegmentHasEndPoint) || (firstSegmentHasEndPoint && lastSegmentHasStartPoint);
 
-                if (isValidConnection)
-                {
-                    Debug.Log("Segments are connected");
-                    return true;
-                }
-                Debug.Log("Segments aren't connected");
+            if (isValidConnection)
+            {
+                Debug.Log("Segments are connected");
+                return true;
             }
+            Debug.Log("Segments aren't connected");
         }
 
         return false;
@@ -697,18 +691,15 @@ public class Puzzle2D : MonoBehaviour
 
         RaycastHit[] hits = Physics.RaycastAll(ray, rayLength);
 
-        if (hits.Length > 0)
+        if (hits.Length <= 0) return mouse3D;
+        
+        foreach (RaycastHit hit in hits)
         {
-            foreach (RaycastHit hit in hits)
+            if (hit.collider.CompareTag(targetTag))
             {
-                if (hit.collider.CompareTag(targetTag))
-                {
-                    return hit.point;
-                }
+                return hit.point;
             }
         }
-
-
         return mouse3D;
     }
 

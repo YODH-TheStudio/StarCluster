@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
+public enum DrawingColors
+{
+    Green,
+    Blue,
+    Red,
+    Brown,
+    Purple,
+    Eraser
+}
 public class StarPuzzleManager : Singleton<StarPuzzleManager>
 {
     [SerializeField] private FusionPoint fusionPoint;
@@ -13,6 +22,7 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
     public List<bool> Circuits { get; set; }
     public bool isPuzzleActive;
     private bool _isFinishedPuzzle;
+    public DrawingColors DrawingColor { get; set; }
     
     public event Action OnPuzzleEnter;
     public event Action OnPuzzleExit;

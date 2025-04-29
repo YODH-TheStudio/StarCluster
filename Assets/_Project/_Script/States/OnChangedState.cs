@@ -10,8 +10,7 @@ public class OnChangedState : MonoBehaviour
     [SerializeField] private UnityEvent onAllowedState;
     [SerializeField] private UnityEvent onNotAllowedState;
     
-    // Start is called before the first frame update
-    void OnEnable()
+    private void OnEnable()
     {
         GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
@@ -19,12 +18,6 @@ public class OnChangedState : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     private void HandleStateChanged(StateManager.PlayerState state)
