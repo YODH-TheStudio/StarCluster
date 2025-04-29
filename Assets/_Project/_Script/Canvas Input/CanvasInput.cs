@@ -19,7 +19,6 @@ public class CanvasInput : MonoBehaviour
     private Canvas _canvas;
 
     private HandDominanceManager _handDominanceManager;
-    private Canvas _canvas;
 
     #endregion
 

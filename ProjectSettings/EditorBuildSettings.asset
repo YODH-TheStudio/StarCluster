@@ -16,10 +16,10 @@ EditorBuildSettings:
     guid: 7aa738227b3ddbd4281babe8d2209302
   - enabled: 1
     path: Assets/_Project/Scenes/ActiveScene/MainSprint2.unity
-    guid: 6822c70a76540d248a44f4f65e377c87
+    guid: 2e67f262c1218c44cb4325806dcb9459
   - enabled: 1
-    path: Assets/_Project/Scenes/UserInterface/GameplayUI1.unity
-    guid: b5c505ca3c2888544b89cd153dcb200b
+    path: Assets/_Project/Scenes/UserInterface/GameplayUI.unity
+    guid: 86cb892f9ca28fe44a200a89aeac71be
   - enabled: 1
     path: Assets/_Project/Scenes/HUD/GameplayHUD.unity
     guid: dec838ff6d6f0ec48a951ea4cc472144
