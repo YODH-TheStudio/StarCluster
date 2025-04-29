@@ -4,6 +4,7 @@ using UnityEngine;
 public class SaveAndLoad : MonoBehaviour
 {
     [SerializeField] private bool loadOnSceneStart = false;
+    
     private void Start()
     {
         if (loadOnSceneStart)

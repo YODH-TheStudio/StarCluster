@@ -88,5 +88,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3629c6f5b61754c950809abe33fd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  off: {fileID: 21300000, guid: b2382a069d4ea5d4483465b374c07a75, type: 3}
-  on: {fileID: 21300000, guid: 32260146324c4534cb78ac5dcde2b833, type: 3}
+  offAlpha: 0
+  onAlpha: 0

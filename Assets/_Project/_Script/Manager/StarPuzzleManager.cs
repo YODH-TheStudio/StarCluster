@@ -37,6 +37,7 @@ public class StarPuzzleManager : Singleton<StarPuzzleManager>
         }
         isPuzzleActive = !PuzzleCamera.gameObject.activeSelf;
         PuzzleCanvas.gameObject.SetActive(!PuzzleCanvas.gameObject.activeSelf);
+        PuzzleCamera.gameObject.SetActive(!PuzzleCamera.gameObject.activeSelf);
     }
 
     public void PuzzleComplete()

@@ -11,6 +11,11 @@ public class Puzzle2D : MonoBehaviour
     private static readonly int s_emissionColor = Shader.PropertyToID("_EmissionColor");
 
     #region Fields
+
+    private SoundSystem _soundSystem;
+
+    private string[] _validSFXkey;
+
     public LevelData levelData;
 
     [SerializeField] private CinemachineVirtualCamera puzzleCamera;
@@ -58,6 +63,14 @@ public class Puzzle2D : MonoBehaviour
         StarPuzzleManager.Instance.PuzzleCamera = puzzleCamera;
         _drawingColor = StarPuzzleManager.Instance.DrawingColor;
         _mainCamera = Camera.main;
+
+        _soundSystem = GameManager.Instance.GetSoundSystem();
+
+        _validSFXkey = new string[]
+        {
+        "Chimes Chime B", "Chimes Chime C", "Chimes Chime D", "Chimes Chime E"
+        };
+
     }
     
     private void Start()
@@ -108,7 +121,6 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         ETouch.Touch.onFingerDown += Touch_OnFingerDown;
         ETouch.Touch.onFingerUp += Touch_OnFingerUp;
-        puzzleCamera.gameObject.SetActive(true);
     }
     
     private void HandlePuzzleExit()
@@ -117,7 +129,6 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
         ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
-        puzzleCamera.gameObject.SetActive(false);
     }
     
     private void Touch_OnFingerMove(Finger touchedFinger)
@@ -194,7 +205,7 @@ public class Puzzle2D : MonoBehaviour
                         break;
                 }
             }
-            else
+            else   
             {
                 cube.transform.localScale = Vector3.one * 30.0f;  
             }
@@ -515,6 +526,7 @@ public class Puzzle2D : MonoBehaviour
                     Debug.Log($"Connexion validated with point : {targetPoint.name} (2D: {linked2DPoint})");
 
                     DrawColored3DSegment(startLinked2DPoint, linked2DPoint, circuitColor);
+                    _soundSystem.PlayRandomSoundFXClipByKeys(_validSFXkey, transform.position);
 
                 }
                 Destroy(_tempCylinder);
