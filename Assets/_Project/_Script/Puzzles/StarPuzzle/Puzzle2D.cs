@@ -4,7 +4,6 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UI;
 
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -41,26 +40,27 @@ public class Puzzle2D : MonoBehaviour
     private GameObject _tempCylinder;
     private float _dragThreshold = 1f;
 
+    
     [Header("3D Display Settings")]
-    [SerializeField] private float _scaleFactorX = 30f;
-    [SerializeField] private float _scaleFactorY = 30f;
+    [SerializeField] private float scaleFactorX = 30f;
+    [SerializeField] private float scaleFactorY = 30f;
 
-    [SerializeField] private float _cubeScale = 0.5f;
-    [SerializeField] private float _redLineRadius = 0.1f;
-    [SerializeField] private float _coloredLineRadius = 0.2f;
+    [SerializeField] private float cubeScale = 0.5f;
+    [SerializeField] private float redLineRadius = 0.1f;
+    [SerializeField] private float coloredLineRadius = 0.2f;
 
     private Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
     private int _currentCircuitSelected = 0;
     private bool _eraserMode = false;
 
     [Header("Prefabs")]
-    public GameObject _starPrefab; 
-    public List<GameObject> _circuitShapePrefabs;
-    public GameObject _segmentPrefab;
+    public GameObject starPrefab; 
+    public List<GameObject> circuitShapePrefabs;
+    public GameObject segmentPrefab;
     
     private Vector3 _fingerMP = Vector3.zero;
 
-    private Vector3 mouseWorldPosition;
+    private Vector3 _mouseWorldPosition;
 
     public event Action OnChildrenChanged;
 
@@ -83,8 +83,6 @@ public class Puzzle2D : MonoBehaviour
         
         canvas.gameObject.SetActive(false);
         _puzzleCamera.gameObject.SetActive(false);
-        
-        CreateTopMenu();
 
         InstantiatePoints3D();
         InstantiateSegments();
@@ -135,16 +133,16 @@ public class Puzzle2D : MonoBehaviour
         ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
     }
     
-    private void Touch_OnFingerMove(Finger TouchedFinger)
+    private void Touch_OnFingerMove(Finger touchedFinger)
     {
-        _fingerMP = TouchedFinger.screenPosition;
+        _fingerMP = touchedFinger.screenPosition;
 
         UpdateDragging();
     }
 
-    private void Touch_OnFingerDown(Finger TouchedFinger)
+    private void Touch_OnFingerDown(Finger touchedFinger)
     {
-        _fingerMP = TouchedFinger.screenPosition;
+        _fingerMP = touchedFinger.screenPosition;
 
         Vector3 hitPosition = GetMouseHitPosition(_mainCamera);
         Debug.Log("HITPOSITION : " + hitPosition);
@@ -177,101 +175,13 @@ public class Puzzle2D : MonoBehaviour
         }
     }
 
-    private void Touch_OnFingerUp(Finger TouchedFinger)
+    private void Touch_OnFingerUp(Finger touchedFinger)
     {
         if (!_isDragging)
             return;
 
         _isDragging = false;
         HandleMouseRelease();
-    }
-
-    // UI ***
-    private void CreateTopMenu()
-    {
-        _topMenuContainer = new GameObject("TopMenuContainer");
-        _topMenuContainer.transform.SetParent(canvas.transform);
-
-        RectTransform topMenuRect = _topMenuContainer.AddComponent<RectTransform>();
-        topMenuRect.anchorMin = new Vector2(0.5f, 1);
-        topMenuRect.anchorMax = new Vector2(0.5f, 1);
-        topMenuRect.pivot = new Vector2(0.5f, 1);
-        topMenuRect.anchoredPosition = new Vector2(0, -20);
-        topMenuRect.sizeDelta = new Vector2(600, 50);
-
-        HorizontalLayoutGroup layoutGroup = _topMenuContainer.AddComponent<HorizontalLayoutGroup>();
-        layoutGroup.spacing = 10;
-        layoutGroup.childAlignment = TextAnchor.MiddleCenter;
-        layoutGroup.childForceExpandWidth = false;
-
-        for (int i = 0; i < _levelData._circuits.Count; i++)
-        {
-            CreateCircuitButton(i, _levelData._circuits[i]);
-        }
-
-        GameObject buttonObj = new GameObject("EraserButton", typeof(Button), typeof(RectTransform), typeof(Text));
-        buttonObj.transform.SetParent(_topMenuContainer.transform, false);
-
-        Button button = buttonObj.GetComponent<Button>();
-        Text buttonText = buttonObj.GetComponent<Text>();
-
-        GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
-        textContainer.transform.SetParent(buttonObj.transform);
-        RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
-        textContainerRect.sizeDelta = new Vector2(200, 30);
-
-        GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
-        colorSquare.transform.SetParent(textContainer.transform);
-        Image colorSquareImage = colorSquare.GetComponent<Image>();
-        colorSquareImage.color = Color.white;
-
-        RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
-        colorSquareRect.sizeDelta = new Vector2(20, 20);
-
-        colorSquareRect.anchorMin = new Vector2(0, 0.5f);
-        colorSquareRect.anchorMax = new Vector2(0, 0.5f);
-        colorSquareRect.anchoredPosition = new Vector2(0, 0);
-
-        buttonText.text = "Gomme";
-        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-
-        RectTransform textRect = buttonText.GetComponent<RectTransform>();
-        textRect.anchoredPosition = new Vector2(30, 0);
-
-        button.onClick.AddListener(() =>
-        {
-            _eraserMode = !_eraserMode;
-            Debug.Log($"Mode gomme : {_eraserMode}");
-        });
-
-    }
-
-    private void CreateCircuitButton(int index, Circuit circuit)
-    {
-        GameObject buttonObj = new GameObject($"CircuitButton_{index}", typeof(Button), typeof(RectTransform), typeof(Text));
-        buttonObj.transform.SetParent(_topMenuContainer.transform);
-
-        Button button = buttonObj.GetComponent<Button>();
-        Text buttonText = buttonObj.GetComponent<Text>();
-
-        GameObject textContainer = new GameObject("TextContainer", typeof(RectTransform));
-        textContainer.transform.SetParent(buttonObj.transform);
-        RectTransform textContainerRect = textContainer.GetComponent<RectTransform>();
-        textContainerRect.sizeDelta = new Vector2(200, 30);
-
-        GameObject colorSquare = new GameObject("ColorSquare", typeof(Image));
-        colorSquare.transform.SetParent(textContainer.transform);
-        Image colorSquareImage = colorSquare.GetComponent<Image>();
-        colorSquareImage.color = circuit.circuitColor;
-        RectTransform colorSquareRect = colorSquare.GetComponent<RectTransform>();
-        colorSquareRect.sizeDelta = new Vector2(20, 20);
-
-        buttonText.text = $" {circuit.name} {index + 1}";
-        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        RectTransform textRect = buttonText.GetComponent<RectTransform>();
-        textRect.anchoredPosition = new Vector2(30, 0);
-
-        button.onClick.AddListener(() => OnCircuitButtonClicked(index));
     }
 
     private void OnCircuitButtonClicked(int index)
@@ -284,10 +194,10 @@ public class Puzzle2D : MonoBehaviour
     {
         foreach (Vector2 pos in _levelData._points)
         {
-            GameObject cube = Instantiate(_starPrefab, parentPuzzleGroup);
+            GameObject cube = Instantiate(starPrefab, parentPuzzleGroup);
             cube.name = $"Point3D_{pos.x}_{pos.y}";
-            cube.transform.position = new Vector3(0f + transform.position.x ,(pos.y / _scaleFactorY) + transform.position.y, (-pos.x / _scaleFactorX) + transform.position.z);
-            cube.transform.localScale = Vector3.one * _cubeScale;
+            cube.transform.position = new Vector3(0f + transform.position.x ,(pos.y / scaleFactorY) + transform.position.y, (-pos.x / scaleFactorX) + transform.position.z);
+            cube.transform.localScale = Vector3.one * cubeScale;
 
             PointSizeEntry pointSizeEntry = _levelData.pointSizes.FirstOrDefault(p => p.pointPosition == pos);
             if (pointSizeEntry != null)
@@ -314,18 +224,18 @@ public class Puzzle2D : MonoBehaviour
 
             foreach (var circuit in _levelData._circuits)
             {
-                if (int.TryParse(circuit.sign, out int prefabIndex) && prefabIndex > 0 && prefabIndex <= _circuitShapePrefabs.Count)
+                if (int.TryParse(circuit.sign, out int prefabIndex) && prefabIndex > 0 && prefabIndex <= circuitShapePrefabs.Count)
                 {
                     if (circuit.startPoint == pos)
                     {
-                        GameObject startPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
+                        GameObject startPrefab = Instantiate(circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
                         startPrefab.transform.position = cube.transform.position + circuit.startPointOffset;
 
                     }
 
                     if (circuit.endPoint == pos)
                     {
-                        GameObject endPrefab = Instantiate(_circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
+                        GameObject endPrefab = Instantiate(circuitShapePrefabs[prefabIndex - 1], parentPuzzleGroup);
                         endPrefab.transform.position = cube.transform.position + circuit.endPointOffset;
                     }
                 }
@@ -358,31 +268,31 @@ public class Puzzle2D : MonoBehaviour
 
     private void Draw3DLine(Vector2 a, Vector2 b)
     {
-        Vector3 aPos = new Vector3(0.1f + transform.position.x, (a.y / _scaleFactorY) + transform.position.y, (-a.x / _scaleFactorX) + transform.position.z);
-        Vector3 bPos = new Vector3(0.1f + transform.position.x, (b.y / _scaleFactorY) + transform.position.y, (-b.x / _scaleFactorX) + transform.position.z);
+        Vector3 aPos = new Vector3(0.1f + transform.position.x, (a.y / scaleFactorY) + transform.position.y, (-a.x / scaleFactorX) + transform.position.z);
+        Vector3 bPos = new Vector3(0.1f + transform.position.x, (b.y / scaleFactorY) + transform.position.y, (-b.x / scaleFactorX) + transform.position.z);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
-        if (_segmentPrefab == null || parentPuzzleGroup == null)
+        if (segmentPrefab == null || parentPuzzleGroup == null)
         {
             Debug.LogWarning("segmentPrefab or parentPuzzleGroup isn't assigned");
             return;
         }
 
-        GameObject segment = Instantiate(_segmentPrefab, parentPuzzleGroup);
+        GameObject segment = Instantiate(segmentPrefab, parentPuzzleGroup);
         segment.name = "SegmentCylinder";
 
         segment.transform.position = aPos + dir / 2f;
         segment.transform.up = dir.normalized;
 
-        segment.transform.localScale = new Vector3(_redLineRadius, distance / 2f, _redLineRadius);
+        segment.transform.localScale = new Vector3(redLineRadius, distance / 2f, redLineRadius);
     }
 
 
     private GameObject DrawColored3DSegment(Vector2 a, Vector2 b, Color color)
     {
-        // Vérification d'existence du segment avec n'importe quelle couleur
+        // check if there is a segment with any color
         foreach (var kvp in _activeColoredLinesByColor)
         {
             var segmentDict = kvp.Value;
@@ -411,7 +321,7 @@ public class Puzzle2D : MonoBehaviour
                     Debug.Log($"Segment already existing between {a} and {b} with the same color.");
                     return null;
                 }
-
+            
                 Debug.Log($"Segment between {a} and {b} already exist with another color ({existingColor}). Suppression...");
                 Destroy(existingObj);
                 segmentDict.Remove((b, a));
@@ -419,19 +329,19 @@ public class Puzzle2D : MonoBehaviour
             }
         }
         
-        Vector3 aPos = new Vector3(0.1f, a.y / _scaleFactorY, -a.x / _scaleFactorX);
-        Vector3 bPos = new Vector3(0.1f, b.y / _scaleFactorY, -b.x / _scaleFactorX);
+        Vector3 aPos = new Vector3(0.1f, a.y / scaleFactorY, -a.x / scaleFactorX);
+        Vector3 bPos = new Vector3(0.1f, b.y / scaleFactorY, -b.x / scaleFactorX);
 
         Vector3 dir = bPos - aPos;
         float distance = dir.magnitude;
 
-        GameObject segment = Instantiate(_segmentPrefab, parentPuzzleGroup);
+        GameObject segment = Instantiate(segmentPrefab, parentPuzzleGroup);
         segment.name = "ColoredSegmentCylinder";
         
         segment.transform.localPosition = aPos + dir / 2f;
         segment.transform.up = dir.normalized;
         segment.transform.rotation = Quaternion.Euler(segment.transform.rotation.eulerAngles.x, segment.transform.rotation.eulerAngles.y + 225f, segment.transform.rotation.eulerAngles.z);
-        segment.transform.localScale = new Vector3(_coloredLineRadius, distance / 2f, _coloredLineRadius);
+        segment.transform.localScale = new Vector3(coloredLineRadius, distance / 2f, coloredLineRadius);
 
         Renderer rend = segment.GetComponent<Renderer>();
         if (rend != null)
@@ -515,7 +425,7 @@ public class Puzzle2D : MonoBehaviour
         if (_isDragging)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(mouseWorldPosition, 0.1f);
+            Gizmos.DrawSphere(_mouseWorldPosition, 0.1f);
         }
     }
 
