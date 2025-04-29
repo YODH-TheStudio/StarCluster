@@ -18083,7 +18083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31598311c39ae948825106e95fafd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAlreadyPlayed: 1
+  hasAlreadyPlayed: 0
   planetMenu: {fileID: 1973317089}
 --- !u!1 &1788039294
 GameObject:

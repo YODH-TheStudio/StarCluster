@@ -14,6 +14,8 @@ public class VideoEndCheck : MonoBehaviour
     private SceneLoader _sceneLoader;
     private GameManager _gameManager;
     private SoundSystem _soundSystem;
+
+    [SerializeField] private GameObject skipButton;
     #endregion
 
     #region Main Functions
@@ -34,6 +36,14 @@ public class VideoEndCheck : MonoBehaviour
         _soundSystem.ChangeMusicByKey("Hope");
         await _sceneLoader.LoadSceneGroup(2);
     }
+    
+    public async void OnEnd()
+    {
+        Debug.Log("Video Ended");
+        _soundSystem.ChangeMusicByKey("Hope");
+        await _sceneLoader.LoadSceneGroup(2);
+    }
+    
     #endregion
 
 }
