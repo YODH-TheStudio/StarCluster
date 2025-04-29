@@ -9,7 +9,7 @@ public class StarPuzzleHUD : MonoBehaviour
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
-        StarPuzzleManager.Instance.DiodesCanvas = _canvas;
+        StarPuzzleManager.Instance.PuzzleCanvas = _canvas;
     }
 
     private void Start()

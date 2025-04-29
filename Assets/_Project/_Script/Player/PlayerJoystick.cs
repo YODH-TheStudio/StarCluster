@@ -61,7 +61,11 @@ public class PlayerJoystick : MonoBehaviour
         GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
         GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
         
-        GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
+        StateManager stateManager = GameManager.Instance.GetStateManager();
+        if (stateManager != null)
+        {
+            stateManager.OnStateChanged -= HandleStateChanged;
+        }
     }
 
     #endregion

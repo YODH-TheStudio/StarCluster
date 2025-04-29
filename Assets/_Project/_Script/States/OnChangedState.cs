@@ -17,7 +17,11 @@ public class OnChangedState : MonoBehaviour
     
     private void OnDisable()
     {
-        GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
+        StateManager stateManager = GameManager.Instance.GetStateManager();
+        if (stateManager != null)
+        {
+            stateManager.OnStateChanged -= HandleStateChanged;
+        }
     }
     
     private void HandleStateChanged(StateManager.PlayerState state)

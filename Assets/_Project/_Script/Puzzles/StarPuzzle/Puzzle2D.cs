@@ -487,26 +487,8 @@ public class Puzzle2D : MonoBehaviour
 
             if (isSegmentRed)
             {
-                Color circuitColor;
-                switch (_drawingColor)
-                {
-                    case DrawingColors.Red:
-                        circuitColor = Color.red;
-                        break;
-                    case DrawingColors.Blue:
-                        circuitColor = Color.blue;
-                        break;
-                    case DrawingColors.Brown:
-                        circuitColor = Color.yellow;
-                        break;
-                    case DrawingColors.Purple:
-                        circuitColor = Color.magenta;
-                        break;
-                    default:
-                        circuitColor = Color.green;
-                        break;
-                }
-                
+                Color circuitColor = GetColorFromDrawingColor();
+
                 if (_drawingColor == DrawingColors.Eraser)
                 {
                     foreach (var kvp in _activeColoredLinesByColor)
@@ -555,6 +537,32 @@ public class Puzzle2D : MonoBehaviour
         }
 
         _tempCylinder = null;
+    }
+
+    private Color GetColorFromDrawingColor()
+    {
+        Color circuitColor;
+        _drawingColor = StarPuzzleManager.Instance.DrawingColor;
+        switch (_drawingColor)
+        {
+            case DrawingColors.Red:
+                circuitColor = Color.red;
+                break;
+            case DrawingColors.Blue:
+                circuitColor = Color.blue;
+                break;
+            case DrawingColors.Brown:
+                circuitColor = Color.yellow;
+                break;
+            case DrawingColors.Purple:
+                circuitColor = Color.magenta;
+                break;
+            default:
+                circuitColor = Color.green;
+                break;
+        }
+
+        return circuitColor;
     }
 
     public void OnPointClicked3D(Vector2 point, Transform startTransform)
@@ -727,7 +735,7 @@ public class Puzzle2D : MonoBehaviour
             StarPuzzleManager.Instance.Circuits[i] = isValidConnection;
             _circuitValidationStatus[i] = isValidConnection;
         }
-
+        
         if (_circuitValidationStatus.Values.All(v => v))
         {
             StarPuzzleManager.Instance.PuzzleComplete();
