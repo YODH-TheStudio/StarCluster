@@ -41,6 +41,8 @@ public class PushPullObject : Interactable
 
     private bool _isAudioPlaying;
 
+    private bool _isAnimating;
+
     #endregion
 
     #region Main Functions
@@ -128,6 +130,10 @@ public class PushPullObject : Interactable
     #region Push/Pull
     private void TogglePushPull()
     {
+        if (_isAnimating)
+        {
+            return;
+        }
         _isGrab = !_isGrab;
         
         Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
@@ -144,6 +150,7 @@ public class PushPullObject : Interactable
 
             if (PossibleToGrab(closestPosition))
             {
+                _isAnimating = true;
                 StartCoroutine(MoveAnimation(closestPosition));
             }
             
@@ -290,7 +297,7 @@ public class PushPullObject : Interactable
 
         if (_vibrationManager != null)
         {
-            _vibrationManager.Vibrate(0.0f, 0.1f); 
+            _vibrationManager.Vibrate(0.2f, 0.1f); 
         }
 
     }
@@ -312,6 +319,7 @@ public class PushPullObject : Interactable
         
         _playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
+        _isAnimating = false;
     }
     
     private IEnumerator AtlassiumAnimation(float duration)

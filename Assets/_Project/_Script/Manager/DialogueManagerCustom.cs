@@ -40,10 +40,14 @@ public class DialogueManagerCustom : MonoBehaviour
 
     private void OnEnable()
     {
-        EnhancedTouchSupport.Enable();
-        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
     }
-    
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
+    }
+
     public void SetDialogueManager(DialogueManager dialogueManager)
     {
         _dialogueManager = dialogueManager;

@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 7aa738227b3ddbd4281babe8d2209302
   - enabled: 1
     path: Assets/_Project/Scenes/ActiveScene/MainSprint2.unity
-    guid: 5a3680572d3bf274ca07f244b3098350
+    guid: 6822c70a76540d248a44f4f65e377c87
   - enabled: 1
     path: Assets/_Project/Scenes/UserInterface/GameplayUI.unity
     guid: b5c505ca3c2888544b89cd153dcb200b
@@ -27,8 +27,11 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/UserInterface/DialogueUI.unity
     guid: 461c44372da7b8b4483f18703e32ef0e
   - enabled: 1
-    path: Assets/_Project/Scenes/ActiveScene/Puzzle.unity
-    guid: b4184db31a2457846810d1b42101ef90
+    path: Assets/_Project/Scenes/ActiveScene/Puzzle/Puzzle.unity
+    guid: 6d976cd4a8b1dd54bb5b91e1c8706f37
+  - enabled: 1
+    path: Assets/_Project/Scenes/HUD/PuzzleHUD.unity
+    guid: fd0ce39fb8a1a1c449d25f60974dff75
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: 552234cfbb7485b4394b3ecce8f41da5, type: 2}

@@ -66,7 +66,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+<<<<<<<< HEAD:Assets/_Project/Materials/Enviro/Ivy/M_Ivy.mat
         m_Texture: {fileID: 2800000, guid: 03e12e6b8af9aad4f895a721096ac9e6, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: 790ec3383bd1db3448d8b555682b575b, type: 3}
+>>>>>>>> origin/CasseTete3D-2:Assets/_Project/Materials/CasseTete/PlanePuzzleMaterial.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

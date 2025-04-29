@@ -2,27 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    #region Fields
     private DialogueData _dialogueData;
+    private SaveData _saveData;
     public int currentSlot = 1;
-    #endregion
 
-    #region Main Functions
+    public SaveData GetSaveData()
+    {
+        return _saveData;
+    }
+    
     // Load and save all
     public void SaveGame(int slot = 0){
         if(slot == 0)
             slot = currentSlot;
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/";
         if (Directory.Exists(path) == false)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        Debug.Log("Saving game");
+        //Debug.Log("Saving game");
         SavePlayer(slot);
         //SaveDialogueData();
         SavePuzzleData(slot);
@@ -33,28 +37,26 @@ public class SaveManager : MonoBehaviour
         if(slot == 0)
             slot = currentSlot;
         
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/";
         if (Directory.Exists(path) == false)
         {
-            SaveGame(slot);
+            //SaveGame(slot);
             //Directory.CreateDirectory(Path.GetDirectoryName(path));
             //Debug.Log("Creating save file at " + path);
         }
-        
-        Debug.Log("Loading game");
+        Debug.Log("Loading save at: " + path);
         LoadPlayer(slot);
-        //LoadDialogueData();
         LoadPuzzleData(slot);
         LoadObjects(slot);
     }
 
     public void DeleteSave(int slot)
     {
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString();
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString();
         if (Directory.Exists(path))
         {
             Directory.Delete(path, true);
-            Debug.Log("Deleted save at " + path);
+            //Debug.Log("Deleted save at " + path);
         }
         else
         {
@@ -72,35 +74,43 @@ public class SaveManager : MonoBehaviour
     //     //DialogueData.choicesMade.Add(choiceName);
     //     _dialogueData.addChoiceMade(choiceName);
     // }
-    #endregion
-
+    
     #region Save
     [System.Serializable]
     public class SaveData
     {
         public int unlockedPlanets = 1;
         public int currentPlanet = 1;
-        public int unlockedPleiades = 0;
+        public int unlockedPleiads = 0;
         public string saveTime = DateTime.Now.ToString("g");
         public string playtime = "0:00:00";
     }
+    [System.Serializable]
+    public class SaveableObjectsData
+    {
+        public SerializableDictionary<string, Vector3> positions;
+        public SerializableDictionary<string, Quaternion> rotations;
+        public SerializableDictionary<string, bool> enabled;
+    }
+    
     private void SaveInfo(int slot)
     {
-        SaveData data = new SaveData();
-        string jsonString = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json", jsonString);
+        _saveData = new SaveData();
+        string jsonString = JsonUtility.ToJson(_saveData);
+        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/info.json", jsonString);
     }
     private static void SavePlayer(int slot)
     {
+        //Debug.LogWarning("SAVING PLAYER");
         PlayerData data = new PlayerData();
         string jsonString = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.json", jsonString);
+        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json", jsonString);
     }
     
     // private static void SaveDialogueData(int slot){
     //     DialogueData data = GameManager.Instance.GetComponent<DialogueData>();
     //     string jsonString = JsonUtility.ToJson(data);
-    //     File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/dialogues.json", jsonString);
+    //     File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/dialogues.json", jsonString);
     // }
     private static void SavePuzzleData(int slot){
         FusionPoint[] fusionPoints = GameObject.FindObjectsOfType<FusionPoint>();
@@ -110,28 +120,35 @@ public class SaveManager : MonoBehaviour
             fusionPointsDic.Add(fp.name, fp.GetState());
         }
         SerializableDictionary<string, bool> data = new SerializableDictionary<string, bool>(fusionPointsDic);
-        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/puzzles.json", JsonUtility.ToJson(data));
+        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/puzzles.json", JsonUtility.ToJson(data));
     }
 
     private static void SaveObjects(int slot)
     {
-        SavePosition[] objects = GameObject.FindObjectsOfType<SavePosition>();
+        SaveableObject[] objects = Resources.FindObjectsOfTypeAll<SaveableObject>();
         
+        // Save positions
         Dictionary<string, Vector3> positionsDic = new Dictionary<string, Vector3>();
-        foreach (SavePosition saveable in objects)
-        {
-            positionsDic.Add(saveable.identifier, saveable.transform.position);
-        }
-        SerializableDictionary<string, Vector3> positions = new SerializableDictionary<string, Vector3>(positionsDic);
+        Dictionary<string, Quaternion> rotationsDic = new Dictionary<string, Quaternion>();
+        Dictionary<string, bool> enabledDic = new Dictionary<string, bool>();
         
-        File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(positions));
-    }
-
-    private static void SaveProgress(int slot)
-    {
-        int unlockedPlanets = 1;
-        int lastTimePlayed = 0;
-        int playTime = 0;
+        Dictionary<string, SaveableObjectsData> saveableObjectsDic = new Dictionary<string, SaveableObjectsData>();
+        
+        foreach (SaveableObject saveable in objects)
+        {
+            if(saveable.SavePos)
+                positionsDic.Add(saveable.identifier, saveable.transform.position);
+            if(saveable.SaveRot)
+                rotationsDic.Add(saveable.identifier, saveable.transform.rotation);
+            if(saveable.SaveEnabled)
+                enabledDic.Add(saveable.identifier, saveable.gameObject.activeSelf);
+        }
+        SaveableObjectsData saveableObjectsData = new SaveableObjectsData();
+        saveableObjectsData.positions = new SerializableDictionary<string, Vector3>(positionsDic);
+        saveableObjectsData.rotations = new SerializableDictionary<string, Quaternion>(rotationsDic);
+        saveableObjectsData.enabled = new SerializableDictionary<string, bool>(enabledDic);
+        
+        File.WriteAllText(Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json", JsonUtility.ToJson(saveableObjectsData));
     }
     #endregion
     
@@ -139,7 +156,7 @@ public class SaveManager : MonoBehaviour
 
     public SaveData GetSaveData(int slot)
     {
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/info.json";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/info.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(jsonString);
@@ -151,30 +168,19 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadPlayer(int slot){
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() +"/player.save";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
-            //load
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            // Deserialize binary from stream
-            PlayerData data = (PlayerData) formatter.Deserialize(stream);
-
-            // Write this down to a file for debug
-            string dataString = JsonUtility.ToJson(data);
-            File.WriteAllText(Application.persistentDataPath + "/Slot" + slot.ToString() + "/player.json", dataString);
-
-            stream.Close();
-            
-            Debug.Log("Loading playerPos: " + data.position[0] + ", " + data.position[1] + ", " + data.position[2]);
+            string jsonString = File.ReadAllText(path);
+            // Debug.Log("Loaded Player data: " + jsonString);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(jsonString);
             GameManager.Instance.GetPlayer().Teleport(data.position[0], data.position[1], data.position[2]);
         } else {
-            Debug.LogWarning("Player save file not found in " + path);
+            Debug.Log("Save file not found at " + path);
         }
     }
     
     // private static DialogueData LoadDialogueData(int slot){
-    //     string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/dialogues.json";
+    //     string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/dialogues.json";
     //     if(File.Exists(path)){
     //         //load
     //         string jsonString = File.ReadAllText(path);
@@ -192,10 +198,9 @@ public class SaveManager : MonoBehaviour
     // }
     
     private static void LoadPuzzleData(int slot){
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/puzzles.json";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/puzzles.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            Debug.Log("Loaded puzzle data: " + jsonString);
             SerializableDictionary<string, bool> data = JsonUtility.FromJson<SerializableDictionary<string, bool>>(jsonString);
             Dictionary<string, bool> dataDic = data.ToDictionary();
 
@@ -209,49 +214,85 @@ public class SaveManager : MonoBehaviour
                 }
             }
         } else {
-            Debug.LogError("Save file not found at " + path);
+            Debug.Log("Save file not found at " + path);
         }
     }
     
     private static void LoadObjects(int slot){
-        string path = Application.persistentDataPath + "/Slot" + slot.ToString() + "/objects.json";
+        string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/objects.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);
-            Debug.Log("Loaded Objects data: " + jsonString);
-            SerializableDictionary<string, Vector3> data = JsonUtility.FromJson<SerializableDictionary<string, Vector3>>(jsonString);
-            Dictionary<string, Vector3> positionsDic = data.ToDictionary();
+            SaveableObjectsData data = JsonUtility.FromJson<SaveableObjectsData>(jsonString);
+            Dictionary<string, Vector3> positionsDic = data.positions.ToDictionary();
+            Dictionary<string, Quaternion> rotationsDic = data.rotations.ToDictionary();
+            Dictionary<string, bool> enabledDic = data.enabled.ToDictionary();
 
-            foreach (KeyValuePair<string, Vector3> kvp in positionsDic)
+            // Get all saveable objects
+            SaveableObject[] objects = Resources.FindObjectsOfTypeAll<SaveableObject>();
+            foreach (SaveableObject saveable in objects)
             {
-                if (kvp.Key != null)
+                if (saveable.SavePos)
                 {
-                    // Set the position of the object
-                    GameObject obj = GameObject.Find(kvp.Key);
-                    obj.transform.position = kvp.Value;
+                    // load pos
+                    Debug.Log("Loading position for " + saveable.identifier);
+                    if (positionsDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.transform.position = positionsDic[saveable.identifier];
+                    }
+                }
+                if (saveable.SaveRot)
+                {
+                    // load pos
+                    Debug.Log("Loading rotation for " + saveable.identifier);
+                    if (rotationsDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.transform.rotation = rotationsDic[saveable.identifier];
+                    }
+                }
+                if (saveable.SaveEnabled)
+                {
+                    // load pos
+                    Debug.Log("Loading enabled for " + saveable.identifier);
+                    if (enabledDic.ContainsKey(saveable.identifier))
+                    {
+                        saveable.gameObject.SetActive(enabledDic[saveable.identifier]);
+                    }
                 }
             }
+            
+            // // Load positions
+            // foreach (KeyValuePair<string, Vector3> kvp in positionsDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.transform.position = kvp.Value;
+            //     }
+            // }
+            // // Load rotations
+            // foreach (KeyValuePair<string, Quaternion> kvp in rotationsDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.transform.rotation = kvp.Value;
+            //     }
+            // }
+            // // Load active
+            // foreach (KeyValuePair<string, bool> kvp in enabledDic)
+            // {
+            //     if (kvp.Key != null)
+            //     {
+            //         // Set the position of the object
+            //         GameObject obj = GameObject.Find(kvp.Key);
+            //         obj.gameObject.SetActive(kvp.Value);
+            //     }
+            // }
         } else {
-            Debug.LogError("Save file not found at " + path);
+            Debug.Log("Save file not found at " + path);
         }
-    }
-
-    public int GetUnlockedPlanets(int slot)
-    {
-        // Placeholder
-        int unlockedPlanets = 1;
-        return unlockedPlanets;
-    }
-    public int GetLastTimePlayed(int slot)
-    {
-        // Placeholder
-        int lastTimePlayed = 1;
-        return lastTimePlayed;
-    }
-    public int GetPlayTime(int slot)
-    {
-        // Placeholder
-        int playTime = 1;
-        return playTime;
     }
     #endregion
 }

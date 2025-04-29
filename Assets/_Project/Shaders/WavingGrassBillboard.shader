@@ -15,9 +15,9 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
         LOD 200
 
         Pass
-        {
+        {             
             AlphaToMask On
-
+            
             HLSLPROGRAM
             #pragma target 2.0
 
@@ -55,10 +55,10 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
         }
 
         Pass
-        {
+        {             
             Name "DepthOnly"
             Tags{"LightMode" = "DepthOnly"}
-
+            
             ZWrite On
             ColorMask R
             Cull Off
@@ -92,7 +92,7 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
 
             ZWrite On
             Cull Off
-
+            
             HLSLPROGRAM
             #pragma target 2.0
 

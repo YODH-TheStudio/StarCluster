@@ -49,26 +49,7 @@ MonoBehaviour:
       LanguageGenericType: "Eh toi l\xE0-bas, viens par ici, j\u2019ai besoin d\u2019aide
         !!"
     - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
-  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    Position: {x: 616, y: 274}
-    Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
-    PortraitPosition: 3
-    Emotion: Normal
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Pas s\xFBr que je puisse de toute mani\xE8re."
-    - languageEnum: 1
-      LanguageGenericType: 
+      LanguageGenericType: Hey you over there, come here, I need help!!
     Duration: 0
   - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
     Position: {x: 388, y: 274}
@@ -87,7 +68,26 @@ MonoBehaviour:
     - languageEnum: 0
       LanguageGenericType: "Je vais te sortir de l\xE0 bouge pas."
     - languageEnum: 1
-      LanguageGenericType: 
+      LanguageGenericType: "I\u2019ll get you out of here, just wait for me."
+    Duration: 0
+  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    Position: {x: 616, y: 274}
+    Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
+    PortraitPosition: 3
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Pas s\xFBr que je puisse de toute mani\xE8re."
+    - languageEnum: 1
+      LanguageGenericType: "Not like I have a choice anyway\u2026"
     Duration: 0
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []

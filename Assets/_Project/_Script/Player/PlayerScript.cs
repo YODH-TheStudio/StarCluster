@@ -49,6 +49,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3[] _checkDirections;
 
     private Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45.0f, 0));
+
+    private Vector3 _initialPosition;
     
     #endregion
 
@@ -76,7 +78,7 @@ public class PlayerScript : MonoBehaviour
 
     public void SetMoveDirection(Vector3 newDirection)
     {
-        _limitedMoveDirection = newDirection;
+        _direction = newDirection;
     }
 
     #endregion
@@ -119,11 +121,16 @@ public class PlayerScript : MonoBehaviour
             (Vector3.back + Vector3.right).normalized
         };
         
+        _initialPosition = transform.position;
     }
 
 
     private void FixedUpdate()
     {
+        if (transform.position.y < 0)
+        {
+            transform.position = _initialPosition;
+        }
 
         if (_particle != null)
         {
@@ -203,10 +210,10 @@ public class PlayerScript : MonoBehaviour
                 }
 
                 // Limit movement only on object direction and object inverse direction
-                float forwardMove = Vector3.Dot(_limitedMoveDirection, closestDirection);
-                _limitedMoveDirection = closestDirection * forwardMove;
+                float forwardMove = Vector3.Dot(_direction, closestDirection);
+                _direction = closestDirection * forwardMove;
 
-                _rigidbody.MovePosition(_rigidbody.position + _limitedMoveDirection * (pushSpeed * Time.deltaTime));
+                _rigidbody.MovePosition(_rigidbody.position + _direction * (pushSpeed * Time.deltaTime));
             }
             else
             {
@@ -422,6 +429,7 @@ public class PlayerScript : MonoBehaviour
     // Move the player to the target position in a given duration, with movement restriction
     public IEnumerator MoveTo(Vector3 targetPosition, float duration)
     {
+        playerAnimator.SetBool(Moving, true);
         float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
 
@@ -448,6 +456,7 @@ public class PlayerScript : MonoBehaviour
 
         _rigidbody.MovePosition(targetPosition); // Ensure the final position is set
         MovementLimit = MovementLimitType.None;
+        playerAnimator.SetBool(Moving, false);
     }
     #endregion
 

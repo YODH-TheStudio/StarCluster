@@ -1,13 +1,15 @@
-[System.Serializable]
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using System.IO;
+using Unity.VisualScripting;
+
+[System.Serializable] // This attribute allows the class to be serialized and saved to a file
 public class PlayerData
 {
-    #region Fields
     public float[] position;
     //public List<string> objects;
-
-    #endregion
-
-    #region Player Data
+    
     public PlayerData()
     {
         //objects = new List<string>();
@@ -17,9 +19,10 @@ public class PlayerData
        // objects = new string[slotsCount];
 
        PlayerScript player = GameManager.Instance.GetPlayer();
-       position = new float[3];
+
        if (player != null)
-       { 
+       {
+           position = new float[3];
            position[0] = player.transform.position.x;
            position[1] = player.transform.position.y;
            position[2] = player.transform.position.z;
@@ -33,6 +36,13 @@ public class PlayerData
         //     Debug.Log("Saving item: " + item.itemName);
         //     objects.Add(item.itemName);
         // }
+
+        // Save current day
+        //day = GameManager.Instance.GetComponent<StateMachine>().day;
+        //currentDayState = (DayState)GameManager.Instance.stateMachine.currentDayState;
+         
+        // Write this down to a file for debug
+        //string dataString = JsonUtility.ToJson(objects);
+        //File.WriteAllText(Application.persistentDataPath + "/objects.json", dataString);
     }
-    #endregion
 }

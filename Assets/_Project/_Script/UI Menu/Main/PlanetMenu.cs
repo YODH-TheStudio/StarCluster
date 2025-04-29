@@ -23,6 +23,8 @@ public class PlanetMenu : Menu
     protected override void Awake()
     {
         base.Awake();
+
+        _unlockedPlanets = 1; 
         
         SetPlanetLock();
         _rectWidth = rectTransform.rect.width;
@@ -62,8 +64,6 @@ public class PlanetMenu : Menu
     {
         if (_isMoving) return;
         
-        //_soundSystem.PlaySoundFXClipByKey("Ui Clic A", transform.position); 
-        
         _planetIndex = (_planetIndex + increment + PlanetNumber) % PlanetNumber; 
         Debug.Log(_planetIndex);
         if (increment >= 1)
@@ -81,13 +81,23 @@ public class PlanetMenu : Menu
         {
             var planet = planets[i].GetComponent<UnlockedSprite>();
 
-            planet.SetIsUnlocked(i <= _unlockedPlanets);
+            planet.SetIsUnlocked(i < _unlockedPlanets);
         }
     }
 
     private void Snap(int increment)
     {
         rectTransform.anchoredPosition = increment > 0 ? new Vector2(increment * _planetWidth * (PlanetNumber - 5), rectTransform.anchoredPosition.y) : new Vector2(increment * _planetWidth * (PlanetNumber - 3), rectTransform.anchoredPosition.y);
+    }
+    
+    public override async void LoadGroupScene(int index)
+    {
+        if (_planetIndex != 0)
+        {
+            Debug.LogWarning("Impossible de charger : cette planète est verrouillée !");
+            return;
+        }
+        base.LoadGroupScene(index);
     }
 #endregion
 

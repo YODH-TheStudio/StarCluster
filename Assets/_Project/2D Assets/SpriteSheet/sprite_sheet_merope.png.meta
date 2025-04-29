@@ -1,0 +1,860 @@
+fileFormatVersion: 2
+guid: d2cace497f5feeb40812c9d207fb8108
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sprite_sheet_merope_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8310ce9553bb0147a58de8bd87fc5ad
+      internalID: -1328444883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_1
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5039acd750bc054c885b5ac718aa670
+      internalID: -1062165442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_2
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef9460e1970ce684d837f5eeff5ee86b
+      internalID: -96144263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_3
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a0d839a3ec780f4290bdb45b4a9679c
+      internalID: 1776225513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_4
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 376de391b1fe6b14aaeb8bd84266c937
+      internalID: 1128657626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_5
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 3800
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa7b4f67d680d18428cc012f945e761a
+      internalID: 1548009028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b5de4d676fb98e4e983529b48aa3d35
+      internalID: -1829147964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_7
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb55278202634f44d8f3345022a094e1
+      internalID: 2032704656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_8
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6ce9f5dceceb1a45828edd5b53af844
+      internalID: -906118763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_9
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21576b172e276d4ebef3542ebe49f6f
+      internalID: 393776352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_10
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59dde275fdb2df64884d99995e0623d9
+      internalID: 240433923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_11
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 3040
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8bfe68b201fa14eb3b615114944a8f
+      internalID: -1257012207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e903aa49415c1849ba151a225001e92
+      internalID: -826754555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_13
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58784d6214b31414a91457aa0696862b
+      internalID: -729189198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_14
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1e70a5163d0754abdb4cd81e026a76
+      internalID: 1222441771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_15
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170b2537aec1ce2429b22caf95eea556
+      internalID: 954153852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_16
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347222119433a3b4790525920fecc9fe
+      internalID: 1208506429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_17
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 2280
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8d96dae5208e044bcfc47400a3c863
+      internalID: 1914688099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562cfdd10744b674aa90a4a6448e41ee
+      internalID: -1428922737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_19
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e91738a6da0094581a718ba6259bdd
+      internalID: 945113504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_20
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b64320bf933d04cbc288a16d2895c0
+      internalID: -1778409727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_21
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20bb84e03e934324ea01f4fc6193c7a3
+      internalID: -1781854823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_22
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a1c3f4991ef2f44bcc86738b363498
+      internalID: -1262145893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_23
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 1520
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c2b7d70170ce1b418bc8ba238abf39f
+      internalID: -1704947458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e824af63c2a162d4ea60d2b8c3fe9f7f
+      internalID: -1034784784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_25
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9520432999285846ad26730e1a0cfbe
+      internalID: 650834448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_26
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5614e1a7f31f21c4aa85d8221ebcde91
+      internalID: 1971662941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_27
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f87f5ab2a13674dba2a7bcb158ab51
+      internalID: -891313156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_28
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4ef7b18ac141414a90bd9a52371fcf8
+      internalID: -1004178863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_29
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 760
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d263ec23c29c9e4383dd1fbd8bc4f52
+      internalID: 1776056053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 684376c8d581ee3429400020a739b3d0
+      internalID: -807933477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet_merope_31
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 585
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 710413af992fb8a419ab144628799097
+      internalID: 1966468701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7be298a44a7fa5d47aaed3db3515ce0e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sprite_sheet_merope_0: -1328444883
+      sprite_sheet_merope_1: -1062165442
+      sprite_sheet_merope_10: 240433923
+      sprite_sheet_merope_11: -1257012207
+      sprite_sheet_merope_12: -826754555
+      sprite_sheet_merope_13: -729189198
+      sprite_sheet_merope_14: 1222441771
+      sprite_sheet_merope_15: 954153852
+      sprite_sheet_merope_16: 1208506429
+      sprite_sheet_merope_17: 1914688099
+      sprite_sheet_merope_18: -1428922737
+      sprite_sheet_merope_19: 945113504
+      sprite_sheet_merope_2: -96144263
+      sprite_sheet_merope_20: -1778409727
+      sprite_sheet_merope_21: -1781854823
+      sprite_sheet_merope_22: -1262145893
+      sprite_sheet_merope_23: -1704947458
+      sprite_sheet_merope_24: -1034784784
+      sprite_sheet_merope_25: 650834448
+      sprite_sheet_merope_26: 1971662941
+      sprite_sheet_merope_27: -891313156
+      sprite_sheet_merope_28: -1004178863
+      sprite_sheet_merope_29: 1776056053
+      sprite_sheet_merope_3: 1776225513
+      sprite_sheet_merope_30: -807933477
+      sprite_sheet_merope_31: 1966468701
+      sprite_sheet_merope_32: -351506393
+      sprite_sheet_merope_33: -284619301
+      sprite_sheet_merope_34: 1107080753
+      sprite_sheet_merope_4: 1128657626
+      sprite_sheet_merope_5: 1548009028
+      sprite_sheet_merope_6: -1829147964
+      sprite_sheet_merope_7: 2032704656
+      sprite_sheet_merope_8: -906118763
+      sprite_sheet_merope_9: 393776352
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

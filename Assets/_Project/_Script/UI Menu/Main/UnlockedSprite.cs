@@ -16,7 +16,7 @@ public class UnlockedSprite : MonoBehaviour
 
     private void Start()
     {
-        _image.color = _isUnlocked ? new Color(70, 70, 70, 255) : new Color(255, 255, 255, 255);
+        _image.color = _isUnlocked ? new Color(1f, 1f, 1f, 1f) : new Color(0.3f, 0.3f, 0.3f, 1f);
     }
     #endregion
 
