@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
-  m_Name: "2- Apr\xE8s lib\xE9ration M\xE9rope"
+  m_Name: "EE- Enerv\xE9"
   m_EditorClassIdentifier: 
   AllowDialogueSave: 0
   BlockingReopeningDialogue: 0
@@ -18,92 +18,33 @@ MonoBehaviour:
   LimitChoiceOptionPerNode: 0
   MaxChoiceOptionPerNode: 8
   NodeLinkDatas:
-  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+  - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
   - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
     TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
   - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
-    TargetNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
-  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    TargetNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-  - BaseNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-  - BaseNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
-    TargetNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
-  - BaseNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
+    TargetNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+  - BaseNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+    TargetNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+  - BaseNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
     TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
   StartNodeDatas:
   - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    Position: {x: -51, y: 274}
+    Position: {x: 256, y: 274}
     startID: 
   DialogueNodeDatas:
-  - NodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-    Position: {x: 145, y: 274}
-    Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
-    PortraitPosition: 3
-    Emotion: Normal
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Thanks a lot, I feel like I\u2019ve been here for ages."
-    - languageEnum: 1
-      LanguageGenericType: "Merci beaucoup, j\u2019ai l\u2019impression que \xE7a
-        fait une \xE9ternit\xE9 que je suis ici."
-    Duration: 0
-  - NodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
-    Position: {x: 2009, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Anxious
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: ......
-    - languageEnum: 1
-      LanguageGenericType: .......
-    Duration: 0
-  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    Position: {x: 389, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: No problem, but I have to ask, who are you?
-    - languageEnum: 1
-      LanguageGenericType: "De rien et pardon de dire \xE7a comme \xE7a, mais tu
-        es quoi exactement ?\r"
-    Duration: 0
-  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    Position: {x: 617, y: 274}
+  - NodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    Position: {x: 701, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
     Emotion: Pensive
@@ -117,14 +58,12 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "I am M\xE9rope, uh I think. At least I think that\u2019s
-        my name."
+      LanguageGenericType: You're right, it looks weird
     - languageEnum: 1
-      LanguageGenericType: "Je m\u2019appelle M\xE9rope, enfin je crois. C\u2019est
-        le nom que je pense avoir en tout cas."
+      LanguageGenericType: Oh c'est vrai elle est bizarre
     Duration: 0
-  - NodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-    Position: {x: 855, y: 274}
+  - NodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    Position: {x: 1248, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
     Emotion: "L\xE9vitation"
@@ -138,35 +77,15 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "I\u2019m a pleiad, I was thrown here after the Big Boom."
+      LanguageGenericType: ...
     - languageEnum: 1
-      LanguageGenericType: "Je suis une pl\xE9iade, j\u2019ai \xE9t\xE9 envoy\xE9
-        ici apr\xE8s le gros boom."
-    Duration: 0
-  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    Position: {x: 1087, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "The Big Boom? What\u2019s that?"
-    - languageEnum: 1
-      LanguageGenericType: Le gros boom ?
+      LanguageGenericType: ...
     Duration: 0
   - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    Position: {x: 1319, y: 274}
+    Position: {x: 1772, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: Joyeuse
+    Emotion: "Enerv\xE9e"
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -177,14 +96,34 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: Well, from what I recall some big flying thing just went
-        boom.
+      LanguageGenericType: What a stupid hunk of rock, we'll see if it dares look
+        at me like that after I grind it to dust!
     - languageEnum: 1
-      LanguageGenericType: "Oui de ce que je me souviens, c'\xE9tait un gros truc
-        qui vole puis d\u2019un coup boom.\r\n"
+      LanguageGenericType: "Quel pierre stupide elle va voir ce qu'elle va voir je
+        vais la r\xE9duire en poussi\xE8re !!"
     Duration: 0
-  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
-    Position: {x: 1541, y: 274}
+  - NodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+    Position: {x: 2588, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Sad
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Wow, calm down please, go back to your normal form I don't
+        want to fight you!
+    - languageEnum: 1
+      LanguageGenericType: Oula reprend vite ton ancienne apparence s'il te plait
+    Duration: 10
+  - NodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    Position: {x: 462, y: 274}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
     Emotion: Thinking
@@ -198,15 +137,15 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Oh, that must\u2019ve been ORION."
+      LanguageGenericType: Mmh, that rock has a strange glow to it.
     - languageEnum: 1
-      LanguageGenericType: "Oh, tu parles d\u2019ORION\u2026"
+      LanguageGenericType: "tien cette pierre \xE9met une lueur \xE9trange"
     Duration: 0
-  - NodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
-    Position: {x: 1774, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: Triste
+  - NodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    Position: {x: 978, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -217,19 +156,78 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Maybe. Why do you seem so sad, you remind me of one of
-        my sisters.\r"
+      LanguageGenericType: Wait Merope, don't touch it!
     - languageEnum: 1
-      LanguageGenericType: "Sans doute. Pourquoi tu as l'air si triste\u202F? Tu
-        me rappelles une de mes s\u0153urs."
+      LanguageGenericType: "Attend M\xE9rope ! N'y touche pas"
     Duration: 0
+  - NodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    Position: {x: 1508, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Happy
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Woah! You totally changed!
+    - languageEnum: 1
+      LanguageGenericType: Woaw tu as changer de forme
+    Duration: 0
+  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    Position: {x: 2029, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Your look reminds me of something but I can't quite remember
+        what...
+    - languageEnum: 1
+      LanguageGenericType: Cette apparence me rappel quel que chose mais je me demande
+        quoi...
+    Duration: 0
+  - NodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+    Position: {x: 2327, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Enerv\xE9e"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Uh? You got a problem staring at me like that?? You wanna
+        fight???
+    - languageEnum: 1
+      LanguageGenericType: "Eh tu as un probl\xE8me \xE0 me fixer comme \xE7a ??
+        Tu veux te battre c'est \xE7a ??!!"
+    Duration: 10
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []
   TimerChoiceNodeDatas: []
   AdvancedTimeChoiceNodeDatas: []
   EndNodeDatas:
   - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
-    Position: {x: 2236, y: 274}
+    Position: {x: 2817, y: 274}
     EndNodeType: 0
     Dialogue: {fileID: 0}
     startID: 

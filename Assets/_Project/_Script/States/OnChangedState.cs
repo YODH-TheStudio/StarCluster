@@ -12,6 +12,17 @@ public class OnChangedState : MonoBehaviour
     void OnEnable()
     {
         GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
+        
+        if (allowedStates.HasFlag(GameManager.Instance.GetStateManager().GetState()))
+        {
+            print("a");
+            onAllowedState?.Invoke();
+        }
+        else
+        {
+            print("b");
+            onNotAllowedState?.Invoke();
+        }
     }
     
     private void OnDisable()

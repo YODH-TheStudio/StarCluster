@@ -40,7 +40,7 @@ namespace Systems.SceneManagement
                 if (reloadDupScenes == false && loadedScenes.Contains(sceneData.sceneName)) continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.sceneName, LoadSceneMode.Additive);
-                await Task.Delay(TimeSpan.FromSeconds(0f)); // Add delay time in loading screen
+                await Task.Delay(TimeSpan.FromSeconds(1f)); // Add delay time in loading screen
 
                 operationGroup.Operations.Add(operation);
 
@@ -94,11 +94,13 @@ namespace Systems.SceneManagement
                 OnSceneUnloaded.Invoke(scene);
             }
 
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Loading);
             // Wait until all AsyncOperations in a group are done
             while (!operationGroup.IsDone)
             {
                 await Task.Delay(100);
             }
+            GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
         }
 
         private readonly struct AsyncOperationGroup

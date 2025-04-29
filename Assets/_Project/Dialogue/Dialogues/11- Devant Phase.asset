@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
-  m_Name: "6- Chemin deuxi\xE8me enigme"
+  m_Name: 11- Devant Phase
   m_EditorClassIdentifier: 
   AllowDialogueSave: 0
   BlockingReopeningDialogue: 0
@@ -19,27 +19,27 @@ MonoBehaviour:
   MaxChoiceOptionPerNode: 8
   NodeLinkDatas:
   - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-  - BaseNodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
-    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    TargetNodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
-  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+  - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+  - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
     TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
-  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
   StartNodeDatas:
   - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    Position: {x: -51, y: 274}
+    Position: {x: 275, y: 274}
     startID: 
   DialogueNodeDatas:
-  - NodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
-    Position: {x: 639, y: 274}
+  - NodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    Position: {x: 462, y: 274}
     Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
     PortraitPosition: 1
-    Emotion: Anxious
+    Emotion: Thinking
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -50,71 +50,12 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Mais je crois que non, je suis la seule \xE0 avoir surv\xE9cu."
+      LanguageGenericType: Wow, all rocks are glowy here or what?
     - languageEnum: 1
-      LanguageGenericType: "Mais je crois que non, je suis la seule \xE0 avoir surv\xE9cu."
+      LanguageGenericType: Mais tous les cailloux brillent ici ou quoi.
     Duration: 0
-  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    Position: {x: 388, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Sad
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Je pourrais te poser la m\xEAme question."
-    - languageEnum: 1
-      LanguageGenericType: "Je pourrais te poser la m\xEAme question."
-    Duration: 0
-  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    Position: {x: 888, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: Triste
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Je suis d\xE9sol\xE9, \xE7a a d\xFB \xEAtre horrible."
-    - languageEnum: 1
-      LanguageGenericType: "Je suis d\xE9sol\xE9, \xE7a a d\xFB \xEAtre horrible."
-    Duration: 0
-  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    Position: {x: 1150, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Anxious
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Tout s'est pass\xE9 en une seconde, je ne sais m\xEAme
-        pas ce qu\u2019ils ont ressenti."
-    - languageEnum: 1
-      LanguageGenericType: "Tout s'est pass\xE9 en une seconde, je ne sais m\xEAme
-        pas ce qu\u2019ils ont ressenti."
-    Duration: 0
-  - NodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-    Position: {x: 145, y: 274}
+  - NodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    Position: {x: 701, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
     Emotion: Pensive
@@ -128,13 +69,68 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: 'Dit, tu es toute seule ? Tu sais si il y en a d''autres
-        comme toi, autre part ?
-
-'
+      LanguageGenericType: "Yeah, we\u2019ve seen a lot of glowy rocks\u2026 but
+        this one is already blue? The others started purple\u2026"
     - languageEnum: 1
-      LanguageGenericType: "Dit, tu es toute seule ? Tu sais s'il y en a d'autres
-        comme toi, autre part ?\r"
+      LanguageGenericType: "C\u2019est vrai que \xE7a commence \xE0 faire beaucoup,
+        mais celui-l\xE0 est d\xE9j\xE0 bleu."
+    Duration: 0
+  - NodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    Position: {x: 1375, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Happy
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Might as well try it.
+    - languageEnum: 1
+      LanguageGenericType: "Au point o\xF9 j\u2019en suis, essayons."
+    Duration: 0
+  - NodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    Position: {x: 924, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Do you think I could go through it?
+    - languageEnum: 1
+      LanguageGenericType: "Dit, tu crois que je peux passer \xE0 travers ?"
+    Duration: 0
+  - NodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    Position: {x: 1158, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Emerveill\xE9e"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Haha, I like that idea.
+    - languageEnum: 1
+      LanguageGenericType: "L\u2019id\xE9e me pla\xEEt alors c\u2019est vrai."
     Duration: 0
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []
@@ -142,7 +138,7 @@ MonoBehaviour:
   AdvancedTimeChoiceNodeDatas: []
   EndNodeDatas:
   - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
-    Position: {x: 1387, y: 274}
+    Position: {x: 1618, y: 274}
     EndNodeType: 0
     Dialogue: {fileID: 0}
     startID: 

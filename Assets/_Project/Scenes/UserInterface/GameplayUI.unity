@@ -1819,7 +1819,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1763526727}
+      objectReference: {fileID: 1763526725}
     - target: {fileID: 7077751410687228018, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -2168,10 +2168,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1647789789}
-    - targetCorrespondingSourceObject: {fileID: 3357261654927818880, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1763526727}
     - targetCorrespondingSourceObject: {fileID: 8343911818285473944, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       insertIndex: -1
@@ -2227,35 +2223,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1763526725 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1153766391306161218, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+  m_CorrespondingSourceObject: {fileID: 5750269702278756612, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
     type: 3}
   m_PrefabInstance: {fileID: 1763526721}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1763526726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3357261654927818880, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1763526721}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1763526727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763526726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d95b549130caa174c9498f9cff9ce95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageText: {fileID: 1763526725}
 --- !u!1 &1895685800 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5303027498726547190, guid: b947c51fc0d9adb41b6458bb4d3f19ff,

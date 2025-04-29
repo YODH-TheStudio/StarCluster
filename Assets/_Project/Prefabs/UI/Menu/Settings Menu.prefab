@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 5508072559706756225}
   - component: {fileID: 890485487269541903}
   - component: {fileID: 7077751410687228018}
+  - component: {fileID: 5750269702278756612}
   m_Layer: 5
   m_Name: Language Button
   m_TagString: Untagged
@@ -703,6 +704,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5750269702278756612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357261654927818880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95b549130caa174c9498f9cff9ce95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageText: {fileID: 1153766391306161218}
+  _localizationManager: {fileID: 11400000, guid: 51c878b637fd373488f12ef9a2aa37d5,
+    type: 2}
 --- !u!1 &3840965559810448906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1782,9 @@ MonoBehaviour:
   musicSlider: {fileID: 7046118414541612763}
   sfxSlider: {fileID: 6834262638604019726}
   vibrationToggle: {fileID: 4769583377906926309}
+  mainMenu: {fileID: 0}
+  planetMenu: {fileID: 0}
+  _previousMenu: 0
 --- !u!1 &8343911818285473944
 GameObject:
   m_ObjectHideFlags: 0

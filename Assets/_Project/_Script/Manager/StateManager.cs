@@ -10,7 +10,7 @@ public class StateManager : MonoBehaviour
         Menu = 4,
         Dialogue = 8,
         Phasing = 16,
-        PushPull = 32,
+        Loading = 32,
         Puzzle = 64
     }
     

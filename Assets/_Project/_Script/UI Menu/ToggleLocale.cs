@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MeetAndTalk.Localization;
 using TMPro;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -75,6 +76,19 @@ namespace UnityEngine.Localization.Samples
 
             // Resubscribe to SelectedLocaleChanged so that we can stay in sync with changes that may be made by other scripts.
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
+            
+            LocalizationManager lm = Resources.Load("Languages") as LocalizationManager;
+        
+            if (LocalizationSettings.SelectedLocale.Identifier.CultureInfo.TwoLetterISOLanguageName == "en")
+            {
+                print("english");
+                lm.selectedLang = SystemLanguage.English;
+            }
+            else if (LocalizationSettings.SelectedLocale.Identifier.CultureInfo.TwoLetterISOLanguageName == "fr")
+            {
+                print("french");
+                lm.selectedLang = SystemLanguage.French;
+            }
         }
 
         void LocalizationSettings_SelectedLocaleChanged(Locale locale)
