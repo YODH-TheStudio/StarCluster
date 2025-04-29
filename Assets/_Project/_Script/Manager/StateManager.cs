@@ -17,29 +17,26 @@ public class StateManager : MonoBehaviour
     private PlayerState _playerState;
     private PlayerState _previousState;
     
-    // Event triggered when changing state
     public event Action<PlayerState> OnStateChanged;
 
     #endregion
 
     #region Main Functions
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _playerState = PlayerState.Idle;
     }
     #endregion
 
     #region Sates
-    // Method to change state
     public void ChangeState(PlayerState newState)
     {
         if (_playerState != newState)
         {
-            _previousState = _playerState; // Save previous state
+            _previousState = _playerState;
             _playerState = newState;
             
-            OnStateChanged?.Invoke(_playerState); // Fire the event
+            OnStateChanged?.Invoke(_playerState);
         }
     }
     

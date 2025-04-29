@@ -44,7 +44,6 @@ public class Menu : MonoBehaviour
     #region Quit
     public void Quit()
     {
- 
         Application.Quit();
     }
     #endregion

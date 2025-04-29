@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CanvasInput : MonoBehaviour
@@ -18,9 +19,12 @@ public class CanvasInput : MonoBehaviour
     private Canvas _canvas;
 
     private HandDominanceManager _handDominanceManager;
+    private Canvas _canvas;
+
     #endregion
 
     #region Main Functions
+
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();

@@ -452,26 +452,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac48dcb57fcbb1f4eb51e999ff7d35d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointColor: {r: 0, g: 1, b: 0, a: 1}
-  _lineColor: {r: 1, g: 0, b: 0, a: 1}
-  canvas: {fileID: 763145545}
-  _levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
-  _puzzleCamera: {fileID: 1774719521}
+  pointColor: {r: 0, g: 1, b: 0, a: 1}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
+  puzzleCamera: {fileID: 1774719521}
   parentPuzzleGroup: {fileID: 376807834}
-  _scaleFactorX: 25
-  _scaleFactorY: 25
-  _cubeScale: 0.5
-  _redLineRadius: 0.1
-  _coloredLineRadius: 0.2
-  _starPrefab: {fileID: 4429274604440573194, guid: b936802fe7ac5fd4aa501d888c189ba3,
+  scaleFactorX: 30
+  scaleFactorY: 30
+  cubeScale: 0.5
+  redLineRadius: 0.1
+  coloredLineRadius: 0.2
+  starPrefab: {fileID: 4429274604440573194, guid: b936802fe7ac5fd4aa501d888c189ba3,
     type: 3}
-  _circuitShapePrefabs:
+  circuitShapePrefabs:
   - {fileID: 4429274604440573194, guid: 02e10747e91916344859348f45d6918f, type: 3}
   - {fileID: 4429274604440573194, guid: 72285341891a3eb4e9268af2cc8be0a1, type: 3}
   - {fileID: 4429274604440573194, guid: 53146a376d0a32d4aa40a0e799ab35ab, type: 3}
   - {fileID: 4429274604440573194, guid: 8b137dee39d40cd4490670f233515549, type: 3}
   - {fileID: 4429274604440573194, guid: b64b9ba7bdaa40c478239ba372e2210b, type: 3}
-  _segmentPrefab: {fileID: 4429274604440573194, guid: 6cf6994c38a0b7d48bd4253d2edce662,
+  segmentPrefab: {fileID: 4429274604440573194, guid: 6cf6994c38a0b7d48bd4253d2edce662,
     type: 3}
 --- !u!4 &1216459803
 Transform:
@@ -499,7 +498,7 @@ GameObject:
   - component: {fileID: 1401830048}
   - component: {fileID: 1401830049}
   m_Layer: 0
-  m_Name: plane
+  m_Name: Detection Plane
   m_TagString: CTRP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

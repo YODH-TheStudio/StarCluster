@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class StarPuzzleHUD : MonoBehaviour
 {
+    private Canvas _canvas;
     [SerializeField] private Diodes diodes;
-    [SerializeField] private Canvas canvas;
 
     private void Awake()
     {
-        StarPuzzleManager.Instance.DiodesCanvas = canvas;
+        _canvas = GetComponent<Canvas>();
+        StarPuzzleManager.Instance.PuzzleCanvas = _canvas;
     }
 
     private void Start()
     {
-        canvas.gameObject.SetActive(false);
+        _canvas.gameObject.SetActive(false);
     }
 
     public void QuitPuzzle()
