@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using System.IO;
-using Unity.VisualScripting;
 
 [System.Serializable] // This attribute allows the class to be serialized and saved to a file
 public class PlayerData

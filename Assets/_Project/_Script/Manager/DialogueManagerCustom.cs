@@ -1,10 +1,8 @@
-using System;
 using MeetAndTalk;
 using MeetAndTalk.GlobalValue;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine;
 using UnityEngine.Events;
-using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public delegate void Notify();
 
