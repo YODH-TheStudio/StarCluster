@@ -20,7 +20,8 @@ public class SettingsMenu : Menu
     #region Fields
     private SoundSystem _settingSoundSystem;
     private VibrationManager _vibrationManager;
-    
+    private HandDominanceManager _handDominanceManager;
+
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
@@ -41,7 +42,6 @@ public class SettingsMenu : Menu
     [Range(0,1)]private float _musicVolume;
     [Range(0,1)]private float _sfxVolume;
     
-    private bool _canVibrate;
     private int _vibration;
     
     [SerializeField] private LocalizationManager _localizationManager;
@@ -52,8 +52,12 @@ public class SettingsMenu : Menu
     {
         _settingSoundSystem = GameManager.GetSoundSystem();
         _vibrationManager = GameManager.GetVibrationManager();
+        _handDominanceManager = GameManager.GetHandDominanceManager();
 
         LoadPlayerPrefs();
+
+        vibrationToggle.isOn = _vibrationManager.GetVibrationMode();
+        handToggle.isOn = _handDominanceManager.GetHandDominance();
     }
     #endregion
 
@@ -149,17 +153,17 @@ public class SettingsMenu : Menu
     #endregion
 
     #region Vibration
-    public void SetVibration()
+    public void SetVibration(bool vibrate)
     {
-        _vibrationManager.SwitchVibrationMode();
-        _canVibrate = _vibrationManager.GetVibrationMode();
+        _vibrationManager.SwitchVibrationMode(vibrate);
     }
     #endregion
-    
+
     #region Hand Dominance
-    public void SetHandDominance()
+    public void SetHandDominance(bool IsLeftHanded)
     {
-        //TODO Change hand mode
+        _handDominanceManager.SwitchHandDominance(IsLeftHanded);
+        Debug.Log(_handDominanceManager.GetHandDominance());
     }
     #endregion
 }

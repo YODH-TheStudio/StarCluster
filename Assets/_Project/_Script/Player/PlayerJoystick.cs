@@ -21,10 +21,12 @@ public class PlayerJoystick : MonoBehaviour
     private Camera _cam;
     private Vector2 _handleStartPosition;
 
+    private HandDominanceManager _handDominanceManager;
+
     #endregion
 
     #region Main Functions
-    protected virtual void Start()
+    private void initialise()
     {
         _baseRect = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
@@ -38,8 +40,16 @@ public class PlayerJoystick : MonoBehaviour
         handle.pivot = center;
         handle.anchoredPosition = Vector2.zero;
         background.gameObject.SetActive(false);
+    }
+
+    protected virtual void Start()
+    {
+        initialise();
 
         _player = GameManager.Instance.GetPlayer();
+        _handDominanceManager = GameManager.Instance.GetHandDominanceManager();
+
+        _handDominanceManager.onUpdate += initialise;
     }
     private void Update()
     {
@@ -64,6 +74,10 @@ public class PlayerJoystick : MonoBehaviour
         GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
     }
 
+    private void OnDestroy()
+    {
+        _handDominanceManager.onUpdate -= initialise;
+    }
     #endregion
 
     #region StateChange
@@ -90,15 +104,31 @@ public class PlayerJoystick : MonoBehaviour
     #region Touch
     private void Touch_OnFingerDown(Finger touchedFinger)
     {
-        if(_movementFinger == null && touchedFinger.screenPosition.x <= Screen.width / 2f)
+        if (_handDominanceManager.GetHandDominance())
         {
-            _movementFinger = touchedFinger;
-            _movementAmount = Vector2.zero;
-            background.gameObject.SetActive(true);
-            background.anchoredPosition = ScreenPointToAnchoredPosition(touchedFinger.screenPosition);
-            _handleStartPosition = Vector2.zero;
-            handle.anchoredPosition = _handleStartPosition;
+            if (_movementFinger == null && touchedFinger.screenPosition.x >= Screen.width / 2f)
+            {
+                _movementFinger = touchedFinger;
+                _movementAmount = Vector2.zero;
+                background.gameObject.SetActive(true);
+                background.anchoredPosition = ScreenPointToAnchoredPosition(touchedFinger.screenPosition);
+                _handleStartPosition = Vector2.zero;
+                handle.anchoredPosition = _handleStartPosition;
+            }
         }
+        else
+        {
+            if (_movementFinger == null && touchedFinger.screenPosition.x <= Screen.width / 2f)
+            {
+                _movementFinger = touchedFinger;
+                _movementAmount = Vector2.zero;
+                background.gameObject.SetActive(true);
+                background.anchoredPosition = ScreenPointToAnchoredPosition(touchedFinger.screenPosition);
+                _handleStartPosition = Vector2.zero;
+                handle.anchoredPosition = _handleStartPosition;
+            }
+        }
+        
     }
     private void Touch_OnFingerUp(Finger touchedFinger)
     {

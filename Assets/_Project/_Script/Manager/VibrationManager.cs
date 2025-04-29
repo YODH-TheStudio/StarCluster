@@ -58,11 +58,11 @@ public class VibrationManager : MonoBehaviour
     {
         _canVibrate = PlayerPrefs.GetInt("CanVibrate", 1) == 1;
     }
-    public void SwitchVibrationMode()
+    public void SwitchVibrationMode(bool vibrate)
     {
-        _canVibrate = !_canVibrate;
-        PlayerPrefs.SetInt("CanVibrate", _canVibrate ? 1 : 0);
+        PlayerPrefs.SetInt("CanVibrate", vibrate ? 1 : 0);
         PlayerPrefs.Save();
+        _canVibrate = PlayerPrefs.GetInt("CanVibrate", 1) == 1;
     }
 
     public bool GetVibrationMode()

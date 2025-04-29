@@ -11,6 +11,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private CompanionFollow _companion;
     
     private VibrationManager VibrationManager { get; set; }
+    private HandDominanceManager HandDominanceManager { get; set; }
     private SoundSystem SoundSystem { get; set; }
     private StateManager StateManager { get; set; }
     private DialogueManagerCustom DialogueManager { get; set; }
@@ -28,6 +29,11 @@ public class GameManager : PersistentSingleton<GameManager>
         if (VibrationManager == null)
         {
             FindVibrationManager();
+        }
+
+        if (HandDominanceManager == null)
+        {
+            FindHandDominanceManager();
         }
 
         if (SoundSystem == null)
@@ -79,6 +85,11 @@ public class GameManager : PersistentSingleton<GameManager>
         VibrationManager = FindObjectOfType<VibrationManager>();
     }
 
+    private void FindHandDominanceManager()
+    {
+        HandDominanceManager = FindObjectOfType<HandDominanceManager>();
+    }
+
     private void FindSoundManager()
     {
         SoundSystem = FindObjectOfType<SoundSystem>();
@@ -121,6 +132,15 @@ public class GameManager : PersistentSingleton<GameManager>
             FindVibrationManager();
         }
         return VibrationManager;
+    }
+
+    public HandDominanceManager GetHandDominanceManager()
+    {
+        if (HandDominanceManager == null)
+        {
+            FindHandDominanceManager();
+        }
+        return HandDominanceManager;
     }
 
     public StateManager GetStateManager()
