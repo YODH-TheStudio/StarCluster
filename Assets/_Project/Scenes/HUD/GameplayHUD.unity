@@ -612,6 +612,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1508000376}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1508000379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 248284728731999528, guid: a4f8473cf92594d4a9125beeb0ab26f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1508000376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508000378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c459721b39f314e90adb840efcb8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1522167067
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +720,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1508000379}
+        m_TargetAssemblyTypeName: PlayerJoystick, Assembly-CSharp
+        m_MethodName: OnStateAllowed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onNotAllowedState:
     m_PersistentCalls:
       m_Calls:
@@ -715,6 +739,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1508000379}
+        m_TargetAssemblyTypeName: PlayerJoystick, Assembly-CSharp
+        m_MethodName: OnStateNotAllowed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

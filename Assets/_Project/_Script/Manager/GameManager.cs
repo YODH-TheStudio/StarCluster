@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -16,10 +15,6 @@ public class GameManager : PersistentSingleton<GameManager>
     private DialogueManagerCustom DialogueManager { get; set; }
     private PuzzleManager PuzzleManager { get; set; }
     private SaveManager SaveManager { get; set; }
-    
-    public event Action<Finger> OnFingerMove;
-    public event Action<Finger> OnFingerUp;
-    public event Action<Finger> OnFingerDown;
     #endregion
 
     #region Main Functions
@@ -57,9 +52,6 @@ public class GameManager : PersistentSingleton<GameManager>
         Application.targetFrameRate = 60;
         
         EnhancedTouchSupport.Enable();
-        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
-        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
-        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
         Instance.SoundSystem.ChangeMusicByKey("Menu");
     }
     #endregion
@@ -190,27 +182,8 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
     #endregion
-
-    #region Input
     
-    private void Touch_OnFingerMove(Finger touchedFinger)
-    {
-        OnFingerMove?.Invoke(touchedFinger);
-    }
-    
-    private void Touch_OnFingerUp(Finger touchedFinger)
-    {
-        OnFingerUp?.Invoke(touchedFinger);
-    }
-    
-    private void Touch_OnFingerDown(Finger touchedFinger)
-    {
-        OnFingerDown?.Invoke(touchedFinger);
-    }
-
-    #endregion
-    
-    #region Save/Load
+    #region Save/Load   
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();

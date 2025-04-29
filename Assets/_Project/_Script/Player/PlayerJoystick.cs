@@ -56,16 +56,16 @@ public class PlayerJoystick : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
-        GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
-        GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
-        GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
-        GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
+        ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
     }
 
     private void OnDestroy()
@@ -78,16 +78,16 @@ public class PlayerJoystick : MonoBehaviour
 
     public void OnStateAllowed()
     {
-        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
-        GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
-        GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp += Touch_OnFingerUp;
+        ETouch.Touch.onFingerMove += Touch_OnFingerMove;
     }
     
     public void OnStateNotAllowed()
     {
-        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
-        GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
-        GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
+        ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
+        ETouch.Touch.onFingerUp -= Touch_OnFingerUp;
+        ETouch.Touch.onFingerMove -= Touch_OnFingerMove;
         CancelJoystick();
     }
     

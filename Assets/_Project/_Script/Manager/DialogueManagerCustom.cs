@@ -3,6 +3,8 @@ using MeetAndTalk.GlobalValue;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public delegate void Notify();
 
@@ -38,12 +40,12 @@ public class DialogueManagerCustom : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
+        ETouch.Touch.onFingerDown += Touch_OnFingerDown;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
+        ETouch.Touch.onFingerDown -= Touch_OnFingerDown;
     }
 
     public void SetDialogueManager(DialogueManager dialogueManager)

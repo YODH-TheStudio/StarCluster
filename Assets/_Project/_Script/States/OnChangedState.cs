@@ -15,19 +15,22 @@ public class OnChangedState : MonoBehaviour
         
         if (allowedStates.HasFlag(GameManager.Instance.GetStateManager().GetState()))
         {
-            print("a");
             onAllowedState?.Invoke();
         }
         else
         {
-            print("b");
             onNotAllowedState?.Invoke();
         }
     }
     
     private void OnDisable()
     {
-        GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
+        StateManager stateManager = GameManager.Instance.GetStateManager();
+        
+        if (stateManager != null)
+        {
+            stateManager.OnStateChanged -= HandleStateChanged;
+        }
     }
 
     // Update is called once per frame
