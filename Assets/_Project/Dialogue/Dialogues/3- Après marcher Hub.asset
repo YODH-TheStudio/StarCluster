@@ -19,35 +19,21 @@ MonoBehaviour:
   MaxChoiceOptionPerNode: 8
   NodeLinkDatas:
   - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-  - BaseNodeGuid: b5b04acd-8500-471c-8a1d-8aab64fd3d98
-    TargetNodeGuid: e6261d17-4b83-45e5-96de-c776b32452ba
-  - BaseNodeGuid: e6261d17-4b83-45e5-96de-c776b32452ba
-    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
-  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    TargetNodeGuid: b5b04acd-8500-471c-8a1d-8aab64fd3d98
-  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
   - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
     TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
   - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
     TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
   - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
     TargetNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-  - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
-    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
   - BaseNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
     TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+  - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
   StartNodeDatas:
   - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     Position: {x: -51, y: 274}

@@ -69,7 +69,7 @@ namespace MeetAndTalk
 
             // Premium Feature: Type-Writing
             if(EnableTypeWriting) lastTypingTime = Time.time;
-            _textBox = textBoxLeft;
+            _textBox = textBoxRight;
         }
 
         private void OnValidate()
