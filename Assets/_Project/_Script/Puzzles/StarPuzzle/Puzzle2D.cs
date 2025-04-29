@@ -11,6 +11,12 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 public class Puzzle2D : MonoBehaviour
 {
     #region Fields
+
+    private SoundSystem _soundSystem;
+
+    private string[] _validSFXkey;
+
+
     // Colors
     public Color _pointColor = Color.green;
     public Color _lineColor = Color.red;
@@ -73,6 +79,14 @@ public class Puzzle2D : MonoBehaviour
         StarPuzzleManager.Instance.PuzzleCanvas = canvas;
         StarPuzzleManager.Instance.PuzzleCamera = _puzzleCamera;
         _mainCamera = Camera.main;
+
+        _soundSystem = GameManager.Instance.GetSoundSystem();
+
+        _validSFXkey = new string[]
+        {
+        "Chimes Chime B", "Chimes Chime C", "Chimes Chime D", "Chimes Chime E"
+        };
+
     }
     private void Start()
     {
@@ -651,6 +665,7 @@ public class Puzzle2D : MonoBehaviour
                     Debug.Log($"✔️ Connexion validée avec le point : {targetPoint.name} (2D: {linked2DPoint})");
 
                     DrawColored3DSegment(startLinked2DPoint, linked2DPoint, circuitColor);
+                    _soundSystem.PlayRandomSoundFXClipByKeys(_validSFXkey, transform.position);
 
                 }
                 _currentSelected = null;
