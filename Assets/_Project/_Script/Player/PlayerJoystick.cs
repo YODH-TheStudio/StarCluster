@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -11,7 +10,6 @@ public class PlayerJoystick : MonoBehaviour
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
     [SerializeField] private float movementRange;
-    [SerializeField] private StateManager.PlayerState allowedStates;
 
     private PlayerScript _player = null;
     private Finger _movementFinger;
@@ -61,8 +59,6 @@ public class PlayerJoystick : MonoBehaviour
         GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
         GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
         GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
-        
-        GameManager.Instance.GetStateManager().OnStateChanged += HandleStateChanged;
     }
 
     private void OnDisable()
@@ -70,8 +66,6 @@ public class PlayerJoystick : MonoBehaviour
         GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
         GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
         GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
-        
-        GameManager.Instance.GetStateManager().OnStateChanged -= HandleStateChanged;
     }
 
     private void OnDestroy()
@@ -82,21 +76,19 @@ public class PlayerJoystick : MonoBehaviour
 
     #region StateChange
 
-    private void HandleStateChanged(StateManager.PlayerState newState)
+    public void OnStateAllowed()
     {
-        //check if the new state is in the allowed states
-        if (allowedStates.HasFlag(newState))
-        {
-            GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
-            GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
-            GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
-        }else
-        {
-            GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
-            GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
-            GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
-            CancelJoystick();
-        }
+        GameManager.Instance.OnFingerDown += Touch_OnFingerDown;
+        GameManager.Instance.OnFingerUp += Touch_OnFingerUp;
+        GameManager.Instance.OnFingerMove += Touch_OnFingerMove;
+    }
+    
+    public void OnStateNotAllowed()
+    {
+        GameManager.Instance.OnFingerDown -= Touch_OnFingerDown;
+        GameManager.Instance.OnFingerUp -= Touch_OnFingerUp;
+        GameManager.Instance.OnFingerMove -= Touch_OnFingerMove;
+        CancelJoystick();
     }
     
     #endregion

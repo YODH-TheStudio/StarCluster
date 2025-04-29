@@ -31,7 +31,7 @@ public class SettingsMenu : Menu
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject planetMenu;
 
-    private readonly List<string> _languages= new List<string> { "English", "French" };
+    private readonly List<string> _languages= new List<string> { "French", "English" };
     private string _currentLanguage;
     private int _currentLanguageIndex;
     
@@ -43,8 +43,6 @@ public class SettingsMenu : Menu
     [Range(0,1)]private float _sfxVolume;
     
     private int _vibration;
-    
-    [SerializeField] private LocalizationManager _localizationManager;
     #endregion
 
     #region Main Functions
@@ -118,15 +116,6 @@ public class SettingsMenu : Menu
         PlayerPrefs.SetString("Language", _currentLanguage);
         PlayerPrefs.SetInt("LanguageIndex", _currentLanguageIndex);
         PlayerPrefs.Save();
-        
-        if (_currentLanguage == "English")
-        {
-            _localizationManager.selectedLang = SystemLanguage.English;
-        }
-        else if (_currentLanguage == "French")
-        {
-            _localizationManager.selectedLang = SystemLanguage.French;
-        }
     }
     #endregion
 

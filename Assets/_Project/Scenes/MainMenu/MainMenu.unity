@@ -1373,10 +1373,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 78169479}
-    - targetCorrespondingSourceObject: {fileID: 3357261654927818880, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 713754664}
     - targetCorrespondingSourceObject: {fileID: 8343911818285473944, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       insertIndex: -1
@@ -7343,6 +7339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
+      propertyPath: m_fontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
+        type: 3}
       propertyPath: m_margin.w
       value: 16.19528
       objectReference: {fileID: 0}
@@ -8325,37 +8326,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ae808440b778342a0b0bfe2a2d3a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &713754662 stripped
+--- !u!114 &713754664 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1153766391306161218, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+  m_CorrespondingSourceObject: {fileID: 5750269702278756612, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
     type: 3}
   m_PrefabInstance: {fileID: 78169464}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &713754663 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3357261654927818880, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 78169464}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &713754664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713754663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d95b549130caa174c9498f9cff9ce95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageText: {fileID: 713754662}
 --- !u!1 &762959689
 GameObject:
   m_ObjectHideFlags: 0
@@ -14347,7 +14329,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -14372,7 +14354,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -14692,7 +14674,7 @@ MonoBehaviour:
     MARKETING\r\n\r\nSOCIAL MEDIA MANAGER\r\n\r\nCOMMUNITY MANAGER\r\n\r\nPRODUCT
     MANAGERS\r\n\t\t\t\r\n\r\nFINANCIAL ANALYST\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD
     TV\n\r\nMOTION DESIGNER\r\n\r\nCINEMATIC ARTIST\r\n\t\t\t\r\n\t\t\t\r\nEDITOR\r\n\t\r\n\r\nMAKING
-    OF REALISATOR\r\n\r\nCAMERAMAN\n\nCOMPOSITEURS\n\n\nVOIX\n\n\n\n\n\n\n\n\n"
+    OF REALISATOR\r\n\r\nCAMERAMAN\n\nCOMPOSITORS\n\n\nVOICES\n\n\n\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fee42b592575af54ab22c4701d03dc25, type: 2}
   m_sharedMaterial: {fileID: 263543897046493209, guid: fee42b592575af54ab22c4701d03dc25,
@@ -15374,7 +15356,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -15389,7 +15371,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -16312,7 +16294,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSize
-      value: 15.75
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -16322,7 +16304,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_margin.x
-      value: 15.901905
+      value: 19.16821
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -16332,7 +16314,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_margin.z
-      value: 19.070507
+      value: 32.096382
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -16382,7 +16364,7 @@ PrefabInstance:
     - target: {fileID: 5567370607431660559, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6892667087847427153, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -17164,7 +17146,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
@@ -17179,7 +17161,7 @@ PrefabInstance:
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4870005977894789779, guid: 7158e23f740203f459eeca3359e26b7b,
         type: 3}

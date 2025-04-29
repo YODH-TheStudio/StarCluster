@@ -49,8 +49,8 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
 
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassInput.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassPasses.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassInput.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassPasses.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassPasses.hlsl"
             ENDHLSL
         }
 
@@ -80,8 +80,8 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
 
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassInput.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassPasses.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassInput.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassPasses.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassPasses.hlsl"
             ENDHLSL
         }
 
@@ -110,8 +110,8 @@ Shader "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
 
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassInput.hlsl"
             //#include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/WavingGrassDepthNormalsPass.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassInput.hlsl"
-            #include "Assets/_Project/Shaders/WavingGrassDepthNormalsPass.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassInput.hlsl"
+            #include "Assets/_Project/Shaders/Enviro/Grass/WavingGrassDepthNormalsPass.hlsl"
             ENDHLSL
         }
     }

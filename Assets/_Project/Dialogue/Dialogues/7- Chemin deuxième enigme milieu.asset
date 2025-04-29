@@ -20,6 +20,8 @@ MonoBehaviour:
   NodeLinkDatas:
   - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     TargetNodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
+  - BaseNodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
   - BaseNodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
     TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
   - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
@@ -32,91 +34,11 @@ MonoBehaviour:
     TargetNodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
   - BaseNodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
     TargetNodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
-  - BaseNodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
-    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
   StartNodeDatas:
   - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     Position: {x: 1381, y: 274}
     startID: 
   DialogueNodeDatas:
-  - NodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
-    Position: {x: 2545, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Normal
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Tant qu\u2019il n\u2019y a pas de pl\xE9iades de la destruction."
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
-  - NodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
-    Position: {x: 1595, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Et toi alors, tu es seule ? Tu as parl\xE9 de tes soeurs
-        tout \xE0 l\u2019heure."
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
-  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    Position: {x: 1855, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: "Fi\xE8re"
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Effectivement, on est 7 et franchement tu as de la chance
-        parce que tu as d\xE9got\xE9 la plus cool."
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
-  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
-    Position: {x: 2077, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Y\u2019a des pl\xE9iades m\xE9chantes ?"
-    - languageEnum: 1
-      LanguageGenericType: 
-    Duration: 0
   - NodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
     Position: {x: 2310, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
@@ -132,10 +54,30 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Non non non, mais on peut dire qu\u2019on se laisse aller
-        \xE0 certaines \xE9motions.\r\n"
+      LanguageGenericType: "No no no, that\u2019s not what I meant. It\u2019s just
+        that we let our emotions run wild sometimes."
     - languageEnum: 1
-      LanguageGenericType: 
+      LanguageGenericType: "Non non non, mais on peut dire qu\u2019on se laisse aller
+        \xE0 certaines \xE9motions.\r"
+    Duration: 0
+  - NodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
+    Position: {x: 2545, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "As long as there\u2019s no Pleiad of Destruction\u2026"
+    - languageEnum: 1
+      LanguageGenericType: "Tant qu\u2019il n\u2019y a pas de pl\xE9iades de la destruction."
     Duration: 0
   - NodeGuid: 2a217673-2acf-42c1-8e19-b3e910b2831f
     Position: {x: 2775, y: 274}
@@ -152,10 +94,71 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
+      LanguageGenericType: "Sadly not, that would\u2019ve been fun"
+    - languageEnum: 1
       LanguageGenericType: "Mmm dommage, personnellement j\u2019aurais trouv\xE9
         \xE7a dr\xF4le."
+    Duration: 0
+  - NodeGuid: 8ef4a1fb-0da7-4c7b-8229-ed19308d3344
+    Position: {x: 1595, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
     - languageEnum: 1
-      LanguageGenericType: 
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: What about you, are you alone? You said you had sisters
+        earlier.
+    - languageEnum: 1
+      LanguageGenericType: "Et toi alors, tu es seule ? Tu as parl\xE9 de tes s\u0153urs
+        tout \xE0 l\u2019heure."
+    Duration: 0
+  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    Position: {x: 1855, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Fi\xE8re"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Indeed, we are seven sisters, and frankly you got lucky
+        cause you stumbled upon the coolest one.
+    - languageEnum: 1
+      LanguageGenericType: "Effectivement, on est 7 et franchement tu as de la chance
+        parce que tu as d\xE9got\xE9 la plus cool."
+    Duration: 0
+  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    Position: {x: 2077, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "You mean there are evil Pleiads?\r"
+    - languageEnum: 1
+      LanguageGenericType: "Y\u2019a des pl\xE9iades m\xE9chantes ?"
     Duration: 0
   - NodeGuid: 6655a6b9-6543-45c6-bfc5-9293b8b91ca2
     Position: {x: 2998, y: 274}
@@ -172,9 +175,9 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Pas vraiment\u2026"
+      LanguageGenericType: "I don\u2019t think so\u2026"
     - languageEnum: 1
-      LanguageGenericType: 
+      LanguageGenericType: "Pas vraiment\u2026"
     Duration: 0
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []

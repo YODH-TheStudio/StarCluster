@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: 11- Devant Phase
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+  - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+  - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: 275, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    Position: {x: 462, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Wow, all rocks are glowy here or what?
+    - languageEnum: 1
+      LanguageGenericType: Mais tous les cailloux brillent ici ou quoi.
+    Duration: 0
+  - NodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    Position: {x: 701, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Pensive
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Yeah, we\u2019ve seen a lot of glowy rocks\u2026 but
+        this one is already blue? The others started purple\u2026"
+    - languageEnum: 1
+      LanguageGenericType: "C\u2019est vrai que \xE7a commence \xE0 faire beaucoup,
+        mais celui-l\xE0 est d\xE9j\xE0 bleu."
+    Duration: 0
+  - NodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    Position: {x: 1375, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Happy
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Might as well try it.
+    - languageEnum: 1
+      LanguageGenericType: "Au point o\xF9 j\u2019en suis, essayons."
+    Duration: 0
+  - NodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    Position: {x: 924, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Do you think I could go through it?
+    - languageEnum: 1
+      LanguageGenericType: "Dit, tu crois que je peux passer \xE0 travers ?"
+    Duration: 0
+  - NodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    Position: {x: 1158, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Emerveill\xE9e"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Haha, I like that idea.
+    - languageEnum: 1
+      LanguageGenericType: "L\u2019id\xE9e me pla\xEEt alors c\u2019est vrai."
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 1618, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

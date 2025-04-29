@@ -20,20 +20,20 @@ MonoBehaviour:
   NodeLinkDatas:
   - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
-    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    TargetNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-  - BaseNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
   - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
     TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
   - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
     TargetNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
+  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    TargetNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
+  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+  - BaseNodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
+    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
   - BaseNodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
     TargetNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
   - BaseNodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
@@ -43,66 +43,6 @@ MonoBehaviour:
     Position: {x: -51, y: 274}
     startID: 
   DialogueNodeDatas:
-  - NodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
-    Position: {x: 855, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: "L\xE9vitation"
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Je suis une pl\xE9iade, j\u2019ai \xE9t\xE9 envoy\xE9
-        ici apr\xE8s le gros boom."
-    - languageEnum: 1
-      LanguageGenericType: "I\u2019m a pleiad, I was thrown here after the Big Boom."
-    Duration: 0
-  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
-    Position: {x: 1087, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: Le gros boom ?
-    - languageEnum: 1
-      LanguageGenericType: "The Big Boom ? What\u2019s that ?"
-    Duration: 0
-  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    Position: {x: 1319, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: Joyeuse
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Oui de ce que je me souviens, c'\xE9tait un gros truc
-        qui vole puis d\u2019un coup boom."
-    - languageEnum: 1
-      LanguageGenericType: Well, from what I recall some big flying thing just went
-        boom.
-    Duration: 0
   - NodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
     Position: {x: 145, y: 274}
     Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
@@ -118,91 +58,10 @@ MonoBehaviour:
       LanguageGenericType: {fileID: 0}
     TextType:
     - languageEnum: 0
-      LanguageGenericType: "Merci beaucoup, j\u2019ai l\u2019impression que \xE7a
-        fait une \xE9ternit\xE9 que je suis ici.\r"
-    - languageEnum: 1
       LanguageGenericType: "Thanks a lot, I feel like I\u2019ve been here for ages."
-    Duration: 0
-  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
-    Position: {x: 389, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
     - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "De rien et pardon de dire \xE7a comme \xE7a, mais tu
-        es quoi exactement ?"
-    - languageEnum: 1
-      LanguageGenericType: No problem, but I have to ask, who are you ?
-    Duration: 0
-  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
-    Position: {x: 616, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: Pensive
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Je m\u2019appelle M\xE9rope, enfin je crois. C\u2019est
-        le nom que je pense avoir en tout cas."
-    - languageEnum: 1
-      LanguageGenericType: "I am M\xE9rope, uh I think. At least I think that\u2019s
-        my name."
-    Duration: 0
-  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
-    Position: {x: 1541, y: 274}
-    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
-    PortraitPosition: 1
-    Emotion: Thinking
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: "Oh, tu parles d\u2019ORION\u2026"
-    - languageEnum: 1
-      LanguageGenericType: "Oh, that must\u2019ve been ORION."
-    Duration: 0
-  - NodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
-    Position: {x: 1774, y: 274}
-    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
-    PortraitPosition: 3
-    Emotion: Triste
-    SecoundCharacter: {fileID: 0}
-    SecoundPortraitPosition: 0
-    SecoundEmotion: 
-    AudioClips:
-    - languageEnum: 0
-      LanguageGenericType: {fileID: 0}
-    - languageEnum: 1
-      LanguageGenericType: {fileID: 0}
-    TextType:
-    - languageEnum: 0
-      LanguageGenericType: Sans doute. Pourquoi tu as l'air si triste ? Tu me rappelles
-        une de mes soeurs.
-    - languageEnum: 1
-      LanguageGenericType: Maybe. Why do you seem so sad, you remind me of one of
-        my sisters.
+      LanguageGenericType: "Merci beaucoup, j\u2019ai l\u2019impression que \xE7a
+        fait une \xE9ternit\xE9 que je suis ici."
     Duration: 0
   - NodeGuid: 1dc9c43f-902d-468f-9fc4-417327ef6c70
     Position: {x: 2009, y: 274}
@@ -222,6 +81,147 @@ MonoBehaviour:
       LanguageGenericType: ......
     - languageEnum: 1
       LanguageGenericType: .......
+    Duration: 0
+  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    Position: {x: 389, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: No problem, but I have to ask, who are you?
+    - languageEnum: 1
+      LanguageGenericType: "De rien et pardon de dire \xE7a comme \xE7a, mais tu
+        es quoi exactement ?\r"
+    Duration: 0
+  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    Position: {x: 617, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Pensive
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "I am M\xE9rope, uh I think. At least I think that\u2019s
+        my name."
+    - languageEnum: 1
+      LanguageGenericType: "Je m\u2019appelle M\xE9rope, enfin je crois. C\u2019est
+        le nom que je pense avoir en tout cas."
+    Duration: 0
+  - NodeGuid: d8eeac53-3e70-4872-93ca-b9cf37e8564e
+    Position: {x: 855, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "L\xE9vitation"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "I\u2019m a pleiad, I was thrown here after the Big Boom."
+    - languageEnum: 1
+      LanguageGenericType: "Je suis une pl\xE9iade, j\u2019ai \xE9t\xE9 envoy\xE9
+        ici apr\xE8s le gros boom."
+    Duration: 0
+  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    Position: {x: 1087, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "The Big Boom? What\u2019s that?"
+    - languageEnum: 1
+      LanguageGenericType: Le gros boom ?
+    Duration: 0
+  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    Position: {x: 1319, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Joyeuse
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Well, from what I recall some big flying thing just went
+        boom.
+    - languageEnum: 1
+      LanguageGenericType: "Oui de ce que je me souviens, c'\xE9tait un gros truc
+        qui vole puis d\u2019un coup boom.\r\n"
+    Duration: 0
+  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    Position: {x: 1541, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Thinking
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Oh, that must\u2019ve been ORION."
+    - languageEnum: 1
+      LanguageGenericType: "Oh, tu parles d\u2019ORION\u2026"
+    Duration: 0
+  - NodeGuid: 4a68af0b-4d69-4a73-ba2e-dfa392e29880
+    Position: {x: 1774, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Triste
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Maybe. Why do you seem so sad, you remind me of one of
+        my sisters.\r"
+    - languageEnum: 1
+      LanguageGenericType: "Sans doute. Pourquoi tu as l'air si triste\u202F? Tu
+        me rappelles une de mes s\u0153urs."
     Duration: 0
   DialogueChoiceNodeDatas: []
   AdvancedChoiceNodeDatas: []

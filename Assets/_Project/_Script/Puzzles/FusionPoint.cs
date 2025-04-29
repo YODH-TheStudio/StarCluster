@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -40,6 +38,7 @@ public class FusionPoint : Interactable
         {
             _onInteractIfPuzzleFinish.Invoke();
             _animator.SetBool(IsOpen, true);
+            _isInteractable = false;
         }
         else
         {
@@ -58,6 +57,11 @@ public class FusionPoint : Interactable
     #region Setteur
     public void SetState(bool finish)
     {
+        if (_isFinished)
+        {
+            _animator.SetBool(IsOpen, true);
+            _isInteractable = false;
+        }
         _isFinished = finish;
     }
     #endregion

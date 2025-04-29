@@ -35,12 +35,15 @@ public class ObjectFade: MonoBehaviour
         _distanceCamToPlayer = Vector3.Distance(_player.transform.position, _mainCamera.transform.position);
         _directionCamToPlayer = (_player.transform.position -  _mainCamera.transform.position).normalized;
 
+        Vector3 startPosition = _mainCamera.transform.position + (-_directionCamToPlayer * _distanceCamToPlayer * 9);
+        Debug.DrawRay(startPosition, _directionCamToPlayer * _distanceCamToPlayer * 10, Color.red);
+        
         RaycastHit hit;
-        if (!Physics.Raycast(_mainCamera.transform.position, _directionCamToPlayer, out hit, _distanceCamToPlayer)) return;
+        if (!Physics.Raycast(startPosition, _directionCamToPlayer, out hit, _distanceCamToPlayer * 10)) return;
         
         if (!hit.transform.gameObject.CompareTag("Player"))
         {
-            SendRaycast();
+            SendRaycast(startPosition);
 
             List<GameObject> toUnfade = new List<GameObject>();
             foreach (GameObject value in _oldHits)
@@ -52,7 +55,6 @@ public class ObjectFade: MonoBehaviour
                         toUnfade.Add(value);
                     }
                 }
-                    
             }
 
             UnfadeObject(toUnfade);
@@ -82,10 +84,11 @@ public class ObjectFade: MonoBehaviour
     #endregion
 
     #region Raycast
-    private void SendRaycast()
+    private void SendRaycast(Vector3 startPosition)
     {
         _hits.Clear();
-        RaycastHit[] hits = Physics.RaycastAll(_mainCamera.transform.position, _directionCamToPlayer, _distanceCamToPlayer);
+        Debug.DrawRay(startPosition, _directionCamToPlayer * _distanceCamToPlayer * 10, Color.blue);
+        RaycastHit[] hits = Physics.RaycastAll(startPosition, _directionCamToPlayer, _distanceCamToPlayer * 10);
         if (hits != null && _hits != null) 
         {
             foreach(RaycastHit hit in hits)

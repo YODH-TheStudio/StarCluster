@@ -1,0 +1,305 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: EE- Emo
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: bf0e996b-2210-4142-aac0-e65a8fd270df
+  - BaseNodeGuid: bf0e996b-2210-4142-aac0-e65a8fd270df
+    TargetNodeGuid: e1cfc6ba-14b4-47f1-ba44-a2cfb18e28a0
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    TargetNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+  - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+  - BaseNodeGuid: e1cfc6ba-14b4-47f1-ba44-a2cfb18e28a0
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+  - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+    TargetNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+  - BaseNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+  - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  - BaseNodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: 38, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    Position: {x: 701, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Emerveill\xE9e"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: It looks cool, I wanna drink some!
+    - languageEnum: 1
+      LanguageGenericType: "\xE7a \xE0 l'air bon! je veut en boire"
+    Duration: 0
+  - NodeGuid: bf0e996b-2210-4142-aac0-e65a8fd270df
+    Position: {x: 969, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Amus\xE9"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: '"drink"'
+    - languageEnum: 1
+      LanguageGenericType: '"bois"'
+    Duration: 10
+  - NodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+    Position: {x: 462, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Happy
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Mmh, that's Monster Energy, an energy drink from Earth.
+    - languageEnum: 1
+      LanguageGenericType: "C'est de la Monster une boisson \xE9nergisante de ma
+        plan\xE8te."
+    Duration: 0
+  - NodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
+    Position: {x: 2448, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Emo
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Dark, depressing loneliness that eats at your soul.
+    - languageEnum: 1
+      LanguageGenericType: "Une solitude sombre et d\xE9primante qui ronge l'\xE2me."
+    Duration: 10
+  - NodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+    Position: {x: 2719, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Emo
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: The World is against me, I have no friends, and I never
+        will.
+    - languageEnum: 1
+      LanguageGenericType: Le monde est contre moi, je n'ai aucuns amis.
+    Duration: 10
+  - NodeGuid: 98f4d11f-5976-425d-9345-9f3d442024e1
+    Position: {x: 219, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Pensive
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Uhh what's that thing over there?
+    - languageEnum: 1
+      LanguageGenericType: "Euuh c'est quoi ce truc l\xE0-bas ?"
+    Duration: 0
+  - NodeGuid: e1cfc6ba-14b4-47f1-ba44-a2cfb18e28a0
+    Position: {x: 1200, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: "Fatigu\xE9es"
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Whew, I'm feeling weird, what's happening to me??
+    - languageEnum: 1
+      LanguageGenericType: "Oulah je me sens bizarre\u2026 Qu'est ce qui m'arrive
+        ?!"
+    Duration: 10
+  - NodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+    Position: {x: 1424, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Anxious
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Merope? Are you alright? You look different.
+    - languageEnum: 1
+      LanguageGenericType: "Euuh \xE7a va M\xE9rope ? tu as l'air diff\xE9rente"
+    Duration: 0
+  - NodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    Position: {x: 1673, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Emo
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Life is nothing but relentless misery. What good is enduring
+        Life's trials, if we all turn to ashes in the end?
+    - languageEnum: 1
+      LanguageGenericType: "La vie n'est qu'\xE9ternelle souffrance. A quoi bon continuer
+        \xE0 nous d\xE9battre, nous finirons tous par y passer au final."
+    Duration: 0
+  - NodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    Position: {x: 1926, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Sad
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Okayyy? So Monster does that to a Pleiad I guess?
+    - languageEnum: 1
+      LanguageGenericType: "okayyy\u2026 La monster fais donc ce genre d'effet sur
+        les pl\xE9iade"
+    Duration: 0
+  - NodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    Position: {x: 2188, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Emo
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 'Life is pain. Life is only pain. We''re all taught to
+        believe in happy fairytale endings. But there''s only blackness. '
+    - languageEnum: 1
+      LanguageGenericType: "La vie est souffrance. La vie n'est que souffrance. On
+        nous apprend \xE0 croire aux fins heureuses des contes de f\xE9es. Mais il
+        n'y a que noirceur. "
+    Duration: 0
+  - NodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+    Position: {x: 3021, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Sighs I hope the effects of that drink will wear off quickly...
+    - languageEnum: 1
+      LanguageGenericType: "J'esp\xE8re que l'effet s'estompera vite"
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 3293, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []
