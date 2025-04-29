@@ -17,8 +17,7 @@ public class VibrationManager : MonoBehaviour
     #region Vibration
     public void Vibrate(float strength, float duration)
     {
-        if (!_canVibrate || Application.platform != RuntimePlatform.Android)
-            return;
+        if (!_canVibrate || Application.platform != RuntimePlatform.Android) return;
 
         long milliseconds = (long)(duration * 1000);
         int amplitude = Mathf.Clamp((int)(strength * 255), 1, 255); 
