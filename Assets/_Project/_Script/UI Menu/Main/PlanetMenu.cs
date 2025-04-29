@@ -8,6 +8,7 @@ public class PlanetMenu : Menu
     private SaveManager _saveManager;
     
     [SerializeField] private Image[] planets;
+    [SerializeField] private Image[] clonePlanets;
     [SerializeField] private RectTransform rectTransform;
     private float _rectWidth;
     private float _planetWidth;
@@ -17,6 +18,7 @@ public class PlanetMenu : Menu
     private int _unlockedPlanets;
 
     private bool _isMoving = false;
+
     #endregion
 
     #region Main Functions
