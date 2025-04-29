@@ -19,6 +19,9 @@ public class ShaderGlobalsDebugger : MonoBehaviour
         
         Vector3 dist = playerPosition - terrainPosition;
         GUILayout.Label($"Distance: {dist}");
+        
+        Vector4[] cubePositions = Shader.GetGlobalVectorArray("CubesPositions");
+        GUILayout.Label($"CubePositions: {cubePositions}");
     }
 
     void OnDrawGizmos()

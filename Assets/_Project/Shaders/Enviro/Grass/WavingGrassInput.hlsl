@@ -11,8 +11,9 @@ CBUFFER_START(UnityPerMaterial)
     half4 _EmissionColor;
     half _Cutoff;
     half _Shininess;
-    float3 PlayerPosition; // Player position for grass displacement
-    float3 TerrainPosition; // Terrain position
+    float4 PlayerPosition; // Player position for grass displacement
+    float4 CubesPositions[14]; // Cube positions for grass displacement
+    float4 TerrainPosition; // Terrain position
 CBUFFER_END
 
 #define _Surface 0.0 // Grass is always opaque
@@ -106,11 +107,22 @@ half4 TerrainWaveGrass (inout float4 vertex, float waveAmount, half4 color)
     //newVertex.y += TerrainPosition.y;
     
     // Displace grass under the player
-    float dist = distance(PlayerPosition.xyz, newVertex.xyz);
-    float grassDisplacementFalloff = 1.7;
-    float influence = saturate(1.0 - dist * grassDisplacementFalloff);
-    //influence = sin(_Time.y * 2.0);
-    vertex.y -= influence; // Vertical displacement
+    float distPlayer = distance(PlayerPosition.xyz, newVertex.xyz);
+    float grassDisplacementFalloffPlayer = 0.7;
+    float influencePlayer = saturate(1.0 - distPlayer * grassDisplacementFalloffPlayer);
+    vertex.y -= influencePlayer; // Vertical displacement
+
+    // Do the same for the cubes
+    for (int i = 0; i < 14; i++)
+    {
+        float3 cubePos = CubesPositions[i];
+    
+        // Displace grass under the player
+        float distCube = distance(cubePos.xyz, newVertex.xyz);
+        float grassDisplacementFalloffCube = 0.5;
+        float influenceCube = saturate(1.0 - distCube * grassDisplacementFalloffCube) * 2.0;
+        vertex.y -= influenceCube; // Vertical displacement
+    }
 
     return half4(2 * waveColor * color.rgb, color.a);
 }
