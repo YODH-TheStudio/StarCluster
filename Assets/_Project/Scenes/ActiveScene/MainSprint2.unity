@@ -10904,7 +10904,7 @@ PrefabInstance:
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.53
+      value: 23.13
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -10914,7 +10914,7 @@ PrefabInstance:
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 48.65
+      value: 70.79
       objectReference: {fileID: 0}
     - target: {fileID: 1769100823669407351, guid: 8e0d9d31727896b4893eae564cc0c199,
         type: 3}
@@ -13603,7 +13603,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 8, z: 4}
+  m_Size: {x: 5, y: 8, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &713447564 stripped
 GameObject:
@@ -18367,7 +18367,7 @@ Camera:
   far clip plane: 500
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -23793,7 +23793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9618e03e97af76545a848db395591625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFinished: 1
+  _isFinished: 0
   _onInteractIfPuzzleNotFinish:
     m_PersistentCalls:
       m_Calls: []
@@ -23868,7 +23868,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 8, z: 4}
+  m_Size: {x: 5, y: 8, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1319598385 stripped
 GameObject:
@@ -31374,7 +31374,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1526070876}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 8
+    OrthographicSize: 7
     NearClipPlane: -50
     FarClipPlane: 500
     Dutch: 0
