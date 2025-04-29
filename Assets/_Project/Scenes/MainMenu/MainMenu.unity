@@ -730,6 +730,11 @@ PrefabInstance:
       objectReference: {fileID: 1618282605}
     - target: {fileID: 2026282657887039455, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
+      propertyPath: handToggle
+      value: 
+      objectReference: {fileID: 1481140557}
+    - target: {fileID: 2026282657887039455, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
       propertyPath: planetMenu
       value: 
       objectReference: {fileID: 1973317089}
@@ -16562,6 +16567,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1481140557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518500476191613581, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 78169464}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1488023378
 GameObject:
   m_ObjectHideFlags: 0

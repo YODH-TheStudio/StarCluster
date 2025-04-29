@@ -25,6 +25,7 @@ public class SettingsMenu : Menu
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Toggle vibrationToggle;
+    [SerializeField] private Toggle handToggle;
 
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject planetMenu;
@@ -152,6 +153,13 @@ public class SettingsMenu : Menu
     {
         _vibrationManager.SwitchVibrationMode();
         _canVibrate = _vibrationManager.GetVibrationMode();
+    }
+    #endregion
+    
+    #region Hand Dominance
+    public void SetHandDominance()
+    {
+        //TODO Change hand mode
     }
     #endregion
 }

@@ -82,6 +82,10 @@ MonoBehaviour:
     m_Localized: MAIN MENU
     m_Metadata:
       m_Items: []
+  - m_Id: 10539688461369344
+    m_Localized: LEFT-HANDED MODE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
