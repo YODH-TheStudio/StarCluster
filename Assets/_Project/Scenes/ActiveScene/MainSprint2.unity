@@ -2718,7 +2718,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.49
+      value: 26.43
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -2728,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.34
+      value: 44.43
       objectReference: {fileID: 0}
     - target: {fileID: 7274927809848512391, guid: f9aa99616444f83478f2aecd56ed730e,
         type: 3}
@@ -5804,6 +5804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &234900759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9914,6 +9917,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &463485894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11577,6 +11583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &605726343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13541,6 +13550,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919132148794604900}
+        m_TargetAssemblyTypeName: EndAnimation, Assembly-CSharp
+        m_MethodName: GoToMenuCredit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &713424949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13588,11 +13612,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 8, z: 5}
+  m_Size: {x: 5, y: 9.14, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &713447564 stripped
 GameObject:
@@ -18381,7 +18405,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045254, y: -0.3726226, z: 0.08717229, w: 0.89959055}
-  m_LocalPosition: {x: 44.88584, y: 30.973425, z: 27.949356}
+  m_LocalPosition: {x: 45.825844, y: 30.973425, z: 25.039356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23916,6 +23940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8372118ff3a49a51ba932c6ed335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1315021420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31511,7 +31538,7 @@ Transform:
   m_GameObject: {fileID: 1774719520}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21045256, y: -0.37262258, z: 0.08717229, w: 0.89959055}
-  m_LocalPosition: {x: 44.88584, y: 30.973425, z: 27.949356}
+  m_LocalPosition: {x: 45.825844, y: 30.973425, z: 25.039356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37782,6 +37809,7 @@ GameObject:
   - component: {fileID: 713424947}
   - component: {fileID: 919132148794604899}
   - component: {fileID: 919132148794604898}
+  - component: {fileID: 919132148794604900}
   m_Layer: 0
   m_Name: Fusion_Point_3
   m_TagString: Untagged
@@ -37862,6 +37890,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &919132148794604900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148794604897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e124440f5d876e4fb9351ca641115cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &969969630798190923
 Transform:
   m_ObjectHideFlags: 0
