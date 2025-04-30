@@ -8,7 +8,7 @@ namespace Systems.SceneManagement
     #region Classes
     public class SceneLoader : MonoBehaviour
     {
-        [SerializeField] private Image loadingBar;
+        [SerializeField] private Slider loadingBar;
         [SerializeField] private float fillSpeed = 0.5f;
         [SerializeField] private Camera loadingCamera;
         [SerializeField] private Canvas loadingCanvas;
@@ -35,17 +35,17 @@ namespace Systems.SceneManagement
         {
             if (!_isLoading) return;
 
-            float currentFillAmount = loadingBar.fillAmount;
+            float currentFillAmount = loadingBar.value;
             float progressDifference = Mathf.Abs(currentFillAmount - _targetProgress);
 
             float dynamicFillSpeed = progressDifference * fillSpeed;
 
-            loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicFillSpeed);
+            loadingBar.value = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
 
         public async Task LoadSceneGroup(int index)
         {
-            loadingBar.fillAmount = 0f;
+            loadingBar.value = 0f;
             _targetProgress = 1f;
 
             if (index < 0 || index >= sceneGroups.Length)
