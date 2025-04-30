@@ -24,11 +24,17 @@ public class Diode : MonoBehaviour
     public void SetDiode(bool state)
     {
         Color newColor = _image.color;
+        
         if (!IsOn && state)
         {
             _soundSystem.PlaySoundFXClipByKey("Chimes Chime A", transform.position);
-
+            IsOn = true;
         }
+        else if (!state)
+        {
+            IsOn = false;
+        }
+        
         newColor.a = state ? onAlpha : offAlpha;
         _image.color = newColor;
     }

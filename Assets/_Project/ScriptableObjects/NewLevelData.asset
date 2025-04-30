@@ -173,20 +173,20 @@ MonoBehaviour:
     name: 'Circuit '
     startPointOffset: {x: 0, y: 0, z: 1.8}
     endPointOffset: {x: 0, y: 0, z: 1.6}
-  - circuitColor: {r: 1, g: 0, b: 0, a: 1}
-    startPoint: {x: -44.5, y: 51.7}
-    endPoint: {x: 400.76, y: 64}
+  - circuitColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    startPoint: {x: 4.3, y: 80.8}
+    endPoint: {x: -39.07, y: -182.44}
     sign: 3
     name: 'Circuit '
     startPointOffset: {x: 0, y: 1, z: 0}
-    endPointOffset: {x: 0, y: 0, z: -1}
-  - circuitColor: {r: 1, g: 1, b: 0, a: 1}
-    startPoint: {x: 4.3, y: 80.8}
-    endPoint: {x: -39.07, y: -182.44}
+    endPointOffset: {x: 0, y: 0, z: -1.3}
+  - circuitColor: {r: 1, g: 0, b: 0, a: 1}
+    startPoint: {x: -44.5, y: 51.7}
+    endPoint: {x: 400.76, y: 64}
     sign: 4
     name: 'Circuit '
     startPointOffset: {x: 0, y: 1, z: 0}
-    endPointOffset: {x: 0, y: 0, z: -1.3}
+    endPointOffset: {x: 0, y: 0, z: -1}
   - circuitColor: {r: 1, g: 0, b: 1, a: 1}
     startPoint: {x: 47.8, y: 120.8}
     endPoint: {x: 140.2, y: -181.4}
