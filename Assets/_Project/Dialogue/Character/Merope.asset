@@ -57,4 +57,4 @@ MonoBehaviour:
       SpriteImage: {fileID: 21300000, guid: 4a610c27221cfa6478601fa81d9a3b9c, type: 3}
   - EmotionName: Emo
     Portrait:
-      SpriteImage: {fileID: 21300000, guid: 9576f2aea2131804383495c88a2ebdd1, type: 3}
+      SpriteImage: {fileID: 21300000, guid: 947e5c1371642fb41a97028690c20ecc, type: 3}

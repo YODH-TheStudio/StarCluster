@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class InteractionButton : MonoBehaviour
 {
+    #region Field
+
     private PlayerScript _playerScript;
-    
-    private void Start()
-    {
-        _playerScript = GameManager.Instance.GetPlayer();
-    }
-    
-    public void Interact()
-    {
-        _playerScript.OnInteract();
-    }
+
+    #endregion
+
+    #region Main Functions
+
+        private void Start()
+        {
+            _playerScript = GameManager.Instance.GetPlayer();
+        }
+        
+        public void Interact()
+        {
+            _playerScript.OnInteract();
+        }
+
+    #endregion
 }

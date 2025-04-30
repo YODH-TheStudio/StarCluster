@@ -7,14 +7,20 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    #region Field
+
     private DialogueData _dialogueData;
     private SaveData _saveData;
     public int currentSlot = 1;
 
+    #endregion
+    
     public SaveData GetSaveData()
     {
         return _saveData;
     }
+    
+    #region Main Functions
     
     // Load and save all
     public void SaveGame(int slot = 0){
@@ -63,6 +69,8 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("No save at " + path);
         }
     }
+    
+    #endregion
 
     // Dialogues and choices data
     // public void addCompletedDialogue(string dialogueName){
