@@ -418,7 +418,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -452,8 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac48dcb57fcbb1f4eb51e999ff7d35d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointColor: {r: 0, g: 1, b: 0, a: 1}
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
   levelData: {fileID: 11400000, guid: ee35bba6cbf589243843a055aaf10a5b, type: 2}
   puzzleCamera: {fileID: 1774719521}
   parentPuzzleGroup: {fileID: 376807834}

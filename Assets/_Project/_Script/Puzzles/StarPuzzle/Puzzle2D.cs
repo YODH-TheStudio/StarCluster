@@ -43,6 +43,7 @@ public class Puzzle2D : MonoBehaviour
     [SerializeField] private float coloredLineRadius = 0.2f;
 
     private readonly Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
+    List<bool> _checks = new List<bool>();
 
     [Header("Prefabs")]
     public GameObject starPrefab; 
@@ -51,9 +52,6 @@ public class Puzzle2D : MonoBehaviour
     
     private Vector3 _fingerMP = Vector3.zero;
     private Vector3 _mouseWorldPosition;
-
-    public event Action OnChildrenChanged;
-    private int _lastChildCount;
 
     private DrawingColors _drawingColor;
     #endregion
@@ -87,14 +85,6 @@ public class Puzzle2D : MonoBehaviour
         
         Vector3 rotation = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 180, transform.rotation.eulerAngles.z);
         RotatePuzzle(rotation);
-
-        SetupChildWatcher();
-    }
-
-    private void SetupChildWatcher()
-    {
-        _lastChildCount = parentPuzzleGroup.childCount;
-        OnChildrenChanged += HandleChildrenChanged;
     }
     
     private void OnEnable()
@@ -549,6 +539,7 @@ public class Puzzle2D : MonoBehaviour
         }
 
         _tempCylinder = null;
+        CheckPuzzleSolved();
     }
 
     private Color GetColorFromDrawingColor()
@@ -722,27 +713,15 @@ public class Puzzle2D : MonoBehaviour
         }
         return mouse3D;
     }
-
-    private void FixedUpdate()
-    {
-        if (parentPuzzleGroup.transform.childCount == _lastChildCount) return;
-        
-        _lastChildCount = parentPuzzleGroup.transform.childCount;
-        OnChildrenChanged?.Invoke();
-    }
-
-    private void HandleChildrenChanged()
-    {
-        CheckPuzzleSolved();
-    }
     
     private void CheckPuzzleSolved()
     {
+        _checks.Clear();
         for (int i = 0; i < levelData._circuits.Count; i++)
         {
             Circuit currentCircuit = levelData._circuits[i];
             bool isValidConnection = IsChainConnectingPoints(currentCircuit.circuitColor, currentCircuit.startPoint, currentCircuit.endPoint);
-            
+            _checks.Add(isValidConnection);
             StarPuzzleManager.Instance.Circuits[i] = isValidConnection;
             _circuitValidationStatus[i] = isValidConnection;
         }

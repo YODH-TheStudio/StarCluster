@@ -159,35 +159,35 @@ MonoBehaviour:
   - pointA: {x: -52.7, y: -129.04}
     pointB: {x: -39.07, y: -182.44}
   _circuits:
-  - circuitColor: {r: 0, g: 0.7075472, b: 0.12268998, a: 1}
+  - circuitColor: {r: 0, g: 1, b: 0, a: 1}
     startPoint: {x: -405.6, y: 103.4}
     endPoint: {x: 32.7, y: -29.1}
     sign: 1
     name: 'Circuit '
     startPointOffset: {x: 0, y: 0, z: 1}
     endPointOffset: {x: 0, y: 0.7, z: -1.1}
-  - circuitColor: {r: 0, g: 0.075142145, b: 1, a: 1}
+  - circuitColor: {r: 0, g: 0, b: 1, a: 1}
     startPoint: {x: -115.66, y: 52}
     endPoint: {x: -326.7, y: -71.16}
     sign: 2
     name: 'Circuit '
     startPointOffset: {x: 0, y: 0, z: 1.8}
     endPointOffset: {x: 0, y: 0, z: 1.6}
-  - circuitColor: {r: 0.4245283, g: 0.17787333, b: 0, a: 1}
+  - circuitColor: {r: 1, g: 0, b: 0, a: 1}
     startPoint: {x: -44.5, y: 51.7}
     endPoint: {x: 400.76, y: 64}
     sign: 3
     name: 'Circuit '
     startPointOffset: {x: 0, y: 1, z: 0}
     endPointOffset: {x: 0, y: 0, z: -1}
-  - circuitColor: {r: 1, g: 0.05450766, b: 0, a: 1}
+  - circuitColor: {r: 1, g: 1, b: 0, a: 1}
     startPoint: {x: 4.3, y: 80.8}
     endPoint: {x: -39.07, y: -182.44}
     sign: 4
     name: 'Circuit '
     startPointOffset: {x: 0, y: 1, z: 0}
     endPointOffset: {x: 0, y: 0, z: -1.3}
-  - circuitColor: {r: 0.69152355, g: 0, b: 1, a: 1}
+  - circuitColor: {r: 1, g: 0, b: 1, a: 1}
     startPoint: {x: 47.8, y: 120.8}
     endPoint: {x: 140.2, y: -181.4}
     sign: 5
