@@ -42,7 +42,7 @@ public class Puzzle2D : MonoBehaviour
     [SerializeField] private float redLineRadius = 0.1f;
     [SerializeField] private float coloredLineRadius = 0.2f;
 
-    private Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
+    private readonly Dictionary<int, bool> _circuitValidationStatus = new Dictionary<int, bool>();
 
     [Header("Prefabs")]
     public GameObject starPrefab; 
@@ -738,7 +738,6 @@ public class Puzzle2D : MonoBehaviour
     
     private void CheckPuzzleSolved()
     {
-        _circuitValidationStatus.Clear(); 
         for (int i = 0; i < levelData._circuits.Count; i++)
         {
             Circuit currentCircuit = levelData._circuits[i];

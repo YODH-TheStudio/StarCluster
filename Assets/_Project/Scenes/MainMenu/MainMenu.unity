@@ -616,7 +616,7 @@ PrefabInstance:
     - target: {fileID: 1700411703628212323, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 25
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1700411703628212323, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
@@ -918,6 +918,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423857452251374800, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423857452251374800, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4642662501806062619, guid: b947c51fc0d9adb41b6458bb4d3f19ff,
         type: 3}
@@ -1712,7 +1722,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\n\r\n\n\n\n\r\n\n\n\n\n\n\r\n\n\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nGTECH\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nGART\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nGBS\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nART
-    TV\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t\t\t\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\n\n\n\n\n\n\n\n\r\n\n\n\n\n\n\r\n\r\n"
+    TV\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t\t\t\r\n\r\n\r\n\r\n\n\n\rSPECIAL THANKS\n\r\n\n\r\n\r\n\n\n\n\n\n\n\n\n\r\n\n\n\n\n\n\r\n\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fee42b592575af54ab22c4701d03dc25, type: 2}
   m_sharedMaterial: {fileID: 263543897046493209, guid: fee42b592575af54ab22c4701d03dc25,
@@ -14666,15 +14676,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\n\n\n\n\n\n\nLEAD PROJET\r\n\r\n\r\nNARRATIVE DESIGNER\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD
-    DEVELOPER\r\n\r\nDEVELOPERS\r\n\t\t\r\n\t\t\r\n\t\t\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD
-    3D\r\n\r\nLEAD 2D\n\r\nARTISTIC DIRECTOR\r\n\r\nILLUSTRATOR ARTISTS\r\n\t\t\t\r\n\t\t\t\r\n\r\nCONCEPT
+  m_text: "\r\n\r\n\r\n\n\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nLEAD PROJET\r\n\r\n\r\nNARRATIVE
+    DESIGNER\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD DEVELOPER\r\n\r\nDEVELOPERS\r\n\t\t\r\n\t\t\r\n\t\t\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD
+    3D\r\n\r\nLEAD 2D\r\n\r\nARTISTIC DIRECTOR\r\n\r\nILLUSTRATOR ARTISTS\r\n\t\t\t\r\n\t\t\t\r\n\r\nCONCEPT
     ARTISTS\r\n\t\t\t\r\n\t\t\t\r\n\r\nCHARACTER ARTIST\r\n\r\nENVIRONMENT ARTISTS\r\n\t\t\t\r\n\r\nGRAPHIC
     DESIGNER\r\n\r\nTEXTURE ARTIST\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD MARKETING\r\n\r\nSUB-LEAD
     MARKETING\r\n\r\nSOCIAL MEDIA MANAGER\r\n\r\nCOMMUNITY MANAGER\r\n\r\nPRODUCT
     MANAGERS\r\n\t\t\t\r\n\r\nFINANCIAL ANALYST\r\n\r\n\r\n\t\t\t\t\t\r\n\r\n\r\nLEAD
-    TV\n\r\nMOTION DESIGNER\r\n\r\nCINEMATIC ARTIST\r\n\t\t\t\r\n\t\t\t\r\nEDITOR\r\n\t\r\n\r\nMAKING
-    OF REALISATOR\r\n\r\nCAMERAMAN\n\nCOMPOSITORS\n\n\nVOICES\n\n\n\n\n\n\n\n\n"
+    TV\r\n\r\nMOTION DESIGNER\r\n\r\nCINEMATIC ARTIST\r\n\t\t\t\r\n\t\t\t\r\nEDITOR\r\n\t\r\n\r\n\r\n\r\n\r\n\r\n\n\nCOMPOSERS\r\n\r\n\r\nJAPANESE
+    VOICE\r\n\r\nENGLISH VOICE\r\n\r\nVOICE\r\n\r\nVOICE\r\n\nVOICE\r\n\r\nVOICE\r\n\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fee42b592575af54ab22c4701d03dc25, type: 2}
   m_sharedMaterial: {fileID: 263543897046493209, guid: fee42b592575af54ab22c4701d03dc25,
@@ -18692,18 +18702,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\n\n\n\n\n\n\r\nNOAH SERRANO\r\n\r\n\r\nNOAH SERRANO\r\n\r\n\r\n\r\n\r\n\r\nDANY
-    JORGE AFONSO\r\n\r\nWILLIAM BAILLEUL\r\nNOHAM COULON\r\nLOAN ALIX\r\nGWENDAL
-    REBOUL\r\n\r\n\r\n\r\n\r\n\r\nNOAH SERRANO\r\n\r\nWILLIAM VITRY\r\n\r\nWILLIAM
-    VITRY \r\n\r\nWILLIAM VITRY\r\nL\xC9NA PACALON\r\nNAO KHUTH\r\n\r\nWILLIAM VITRY\r\nL\xC9NA
-    PACALON\r\nNAO KHUTH\r\n\r\nMATH\xC9O DA SILVA\r\n\r\nDYLLAN MOREAU\r\nLOUKA
-    DA SILVA\r\n\r\nLOUKA DA SILVA\r\n\r\nMAHYRIS MELIH\r\n\r\n\r\n\r\n\r\n\r\nCAR\xC8NE
+  m_text: "\r\n\r\n\r\n\n\n\n\n\n\n\r\n\r\n\n\n\r\n\r\n\r\n\r\n\r\nNOAH SERRANO\r\n\r\n\r\nNOAH
+    SERRANO\r\n\r\n\r\n\r\n\r\n\r\nDANY JORGE AFONSO\r\n\r\nWILLIAM BAILLEUL\r\nNOHAM
+    COULON\r\nLOAN ALIX\r\nGWENDAL REBOUL\r\n\r\n\r\n\r\n\r\n\r\nNOAH SERRANO\r\n\r\nWILLIAM
+    VITRY\r\n\r\nWILLIAM VITRY \r\n\r\nWILLIAM VITRY\r\nL\xC9NA PACALON\r\nNAO KHUTH\r\n\r\nWILLIAM
+    VITRY\r\nL\xC9NA PACALON\r\nNAO KHUTH\r\n\r\nMATH\xC9O DA SILVA\r\n\r\nDYLLAN
+    MOREAU\r\nLOUKA DA SILVA\r\n\r\nLOUKA DA SILVA\r\n\r\nMAHYRIS MELIH\r\n\r\n\r\n\r\n\r\n\r\nCAR\xC8NE
     GRILLET\r\n\r\nANTOINE MELLET\r\n\r\nLUDIVINE ETTARIAN\r\n\r\nL\xC9O MIALANE\r\n\r\nCHLO\xC9
     LOR-FOUI \r\nCHARLY BELLETON\r\n\r\nTOM FARGES\r\n\r\n\r\n\r\n\r\n\r\nPAUL FOURE\r\n\r\nPAUL
     FOURE\r\n\r\nPAUL FOURE\r\nELLIOT GRAVITO\r\n\t\t\t\r\nELLIOT GRAVITO\r\nEL\xC9ONORE
-    MALON\r\n\r\nEL\xC9ONORE MALON\r\n\r\nEL\xC9ONORE MALON\n\nCL\xC9O VITRY\nMICKAEL
-    VITRY\n\nAYA CAILLON\r\nARNAUD QUER\r\nFRAN\xC7OIS ZARAGOZA\r\nELLA ZARAGOZA\r\nSONNY
-    BAILLY\n\n\n\n\n"
+    MALON\r\n\r\n\n\r\n\r\n\r\n\n\nCL\xC9O VITRY\r\nMICKAEL VITRY\r\n\r\nAYA CAILLON\r\n\n\nJASPER
+    MARCUS\n\nARNAUD QUER\r\n\nFRAN\xC7OIS ZARAGOZA\r\n\nELLA ZARAGOZA\r\n\nSONNY
+    BAILLY\r\n\r\n\r\n\r\n\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fee42b592575af54ab22c4701d03dc25, type: 2}
   m_sharedMaterial: {fileID: 263543897046493209, guid: fee42b592575af54ab22c4701d03dc25,
