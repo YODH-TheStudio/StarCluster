@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_Project/2D Assets/UI Elements/PuzzleUI/Buttons/Virgo.png.meta
 guid: 7c787d8f01fabf9419d94b838b4ac680
+========
+guid: dda145cc533e7d848b12c8276c7ea155
+>>>>>>>> origin/Diode-FIX:Assets/_Project/2D Assets/UI Elements/PuzzleUI/Buttons/Leo.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
