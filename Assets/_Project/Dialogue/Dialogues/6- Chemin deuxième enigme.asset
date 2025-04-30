@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: "6- Chemin deuxi\xE8me enigme"
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+  - BaseNodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
+    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    TargetNodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
+  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    TargetNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+  - BaseNodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: -51, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: deac491e-b603-4a50-a72a-a019d4d6c89b
+    Position: {x: 639, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Anxious
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Mais je crois que non, je suis la seule \xE0 avoir surv\xE9cu."
+    - languageEnum: 1
+      LanguageGenericType: "Mais je crois que non, je suis la seule \xE0 avoir surv\xE9cu."
+    Duration: 0
+  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    Position: {x: 388, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Sad
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Je pourrais te poser la m\xEAme question."
+    - languageEnum: 1
+      LanguageGenericType: "Je pourrais te poser la m\xEAme question."
+    Duration: 0
+  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    Position: {x: 888, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Triste
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Je suis d\xE9sol\xE9, \xE7a a d\xFB \xEAtre horrible."
+    - languageEnum: 1
+      LanguageGenericType: "Je suis d\xE9sol\xE9, \xE7a a d\xFB \xEAtre horrible."
+    Duration: 0
+  - NodeGuid: e38f544c-ab6f-465a-9b93-6b6766be26c4
+    Position: {x: 1150, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Anxious
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Tout s'est pass\xE9 en une seconde, je ne sais m\xEAme
+        pas ce qu\u2019ils ont ressenti."
+    - languageEnum: 1
+      LanguageGenericType: "Tout s'est pass\xE9 en une seconde, je ne sais m\xEAme
+        pas ce qu\u2019ils ont ressenti."
+    Duration: 0
+  - NodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+    Position: {x: 145, y: 274}
+    Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
+    PortraitPosition: 3
+    Emotion: Pensive
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: 'Dit, tu es toute seule ? Tu sais si il y en a d''autres
+        comme toi, autre part ?
+
+'
+    - languageEnum: 1
+      LanguageGenericType: "Dit, tu es toute seule ? Tu sais s'il y en a d'autres
+        comme toi, autre part ?\r"
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 1387, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

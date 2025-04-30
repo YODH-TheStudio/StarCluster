@@ -1,27 +1,38 @@
- using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PhasableObject : Interactable
 {
+    #region Fields
+    private SoundSystem _soundSystem;
+    
     // Animation
-    public Transform _objectBasePosition;
-    [SerializeField] private Vector3 _startOffset = Vector3.zero;
-    [SerializeField] private Vector3 _endOffset = Vector3.zero;
-    public float _phaseDuration = 1.0f;
-    [SerializeField] private float _phaseRadius = 5.0f; // Restriction radius
+    [SerializeField] private GameObject _startPosition;
+    [SerializeField] private GameObject _endPosition;
+    [SerializeField] private float PhaseDuration = 2.0f;
+    [SerializeField] private float phaseRadius = 2.0f; // Restriction radius
 
-    // Liste des paires de positions (Start, End) pour les phases
-    private List<(Vector3 start, Vector3 end)> _phasePairs = new List<(Vector3, Vector3)>();
+    // Track a list of positions (Start, End) to phase
+    private readonly List<(Vector3 start, Vector3 end)> _phasePairs = new List<(Vector3, Vector3)>();
 
     // LineRenderer to draw the radius in the game
     private LineRenderer _lineRenderer;
 
-    // Base component
     private Collider _objectCollider;
+    
+    private PlayerScript _playerScript;
+    
+    private static readonly int Moving = Animator.StringToHash("IsMoving");
+    private static readonly int Phasing = Animator.StringToHash("IsPhasing");
 
+    #endregion
+
+    #region Main Functions
     private void Awake()
     {
+        _soundSystem = GameManager.Instance.GetSoundSystem();
+            
         _objectCollider = GetComponent<Collider>();
         _lineRenderer = gameObject.AddComponent<LineRenderer>();
 
@@ -32,90 +43,66 @@ public class PhasableObject : Interactable
         _lineRenderer.endColor = Color.red;
         _lineRenderer.positionCount = 2;
 
-        // Ajouter les paires de positions de d�part et d'arriv�e
-        _phasePairs.Add((_objectBasePosition.position + _startOffset, _objectBasePosition.position + _endOffset));
-        _phasePairs.Add((_objectBasePosition.position + _endOffset, _objectBasePosition.position + _startOffset));
+        // Add both start and end positions
+        _phasePairs.Add((_startPosition.transform.position, _endPosition.transform.position));
+        _phasePairs.Add((_endPosition.transform.position, _startPosition.transform.position));
     }
 
+    private void Start()
+    {
+        _playerScript = GameManager.Instance.GetPlayer();
+    }
+
+    #endregion
+
+    #region Interaction
     public override void Interact()
     {
         base.Interact();
         TogglePhase();
     }
+    
+    #endregion
+
+    #region Phase
 
     private void TogglePhase()
     {
-        if (_userTransform == null)
+        if (UserTransform == null)
         {
             Debug.LogError("_userTransform is null!");
             return;
         }
 
-        // Parcours chaque paire de phase (start, end)
+        // Loop through a pair of phase (start, end)
         foreach (var pair in _phasePairs)
         {
-            // V�rifie si le joueur est proche du point de d�part de cette paire
-            float distance = Vector3.Distance(_userTransform.position, pair.start);
+            // Check if the player is near the pair
+            float distance = Vector3.Distance(UserTransform.position, pair.start);
 
-            if (distance <= _phaseRadius)
+            if (distance <= phaseRadius)
             {
-                GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Phase Elctrophase", transform.position);
 
-                // Pr�pare l'animation
+                // Prepare the animation
                 if (_objectCollider != null)
                 {
                     _objectCollider.enabled = false;
                 }
 
-                StartCoroutine(PhaseAnimation(pair));  // Envoie la paire directement � l'animation
-                return;  // Fin de la m�thode d�s qu'une transition est effectu�e
+                StartCoroutine(PhaseAnimation(pair));  // Send the pair to the animator
+                return;  // End the methode on transition
             }
         }
 
-        // Si aucune paire de phase n'est activ�e (pas de transition possible)
-        Debug.Log("Player is out of phase radius. Phase transition denied.");
+        // If no pair phase is active (not transition possible)
     }
 
-    private IEnumerator PhaseAnimation((Vector3 start, Vector3 end) phasePair)
-    {
-        PlayerScript playerScript = _userTransform.GetComponent<PlayerScript>();
+    #endregion
 
-        yield return StartCoroutine(playerScript.MoveTo(phasePair.start, _phaseDuration));
-
-        // D�place le joueur � la fin de la phase et attend que �a soit fini
-        yield return StartCoroutine(playerScript.MoveTo(phasePair.end, _phaseDuration));
-
-        // R�active le collider
-        if (_objectCollider != null)
-        {
-            _objectCollider.enabled = true;
-        }
-    }
-
-    private void Update()
-    {
-        if (_userTransform == null)
-            return;
-
-        // Affiche la position du joueur et de la phase active
-        _lineRenderer.SetPosition(0, _userTransform.position);
-
-        // Optionnel : On peut aussi dessiner la ligne de phase active entre le joueur et le point de d�part de la phase
-        if (_phasePairs.Count > 0)
-        {
-            _lineRenderer.SetPosition(1, _phasePairs[0].start);  // Affiche la premi�re paire pour l'exemple
-        }
-    }
-
+    #region Draw Debug 
     private void OnDrawGizmos()
     {
-        if (_objectBasePosition == null)
-        {
-            Debug.LogError("_objectBasePosition is null in OnDrawGizmos!");
-            return;
-        }
-
-        // Dessine les paires de phases dans l'�diteur
+        // Draw the phase pairs in game
         foreach (var pair in _phasePairs)
         {
             Gizmos.color = Color.green;
@@ -128,4 +115,35 @@ public class PhasableObject : Interactable
             Gizmos.DrawLine(pair.start, pair.end);
         }
     }
+    #endregion
+
+    #region Coroutine
+    private IEnumerator PhaseAnimation((Vector3 start, Vector3 end) phasePair)
+    {
+        float dist = Vector3.Distance(_playerScript.transform.position, phasePair.start);
+        
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Phasing);
+        
+        _playerScript.GetAnimator().SetBool(Moving, true);
+        yield return StartCoroutine(_playerScript.MoveTo(phasePair.start, dist / 2f));
+
+        
+        _playerScript.GetAnimator().SetBool(Moving, false);
+        _playerScript.GetAnimator().SetBool(Phasing, true);
+        
+        _soundSystem.PlaySoundFXClipByKey("Phase Electrophase", transform.position);
+        
+        // Move the player and wait until the end of the phase
+        yield return StartCoroutine(_playerScript.MoveTo(phasePair.end, PhaseDuration));
+        _playerScript.GetAnimator().SetBool(Phasing, false);
+
+        GameManager.Instance.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
+        
+        // Activate the collider
+        if (_objectCollider != null)
+        {
+            _objectCollider.enabled = true;
+        }
+    }
+    #endregion
 }

@@ -1,40 +1,42 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    #region Fields
     [Flags] public enum PlayerState
     {
         Idle = 2,
         Menu = 4,
         Dialogue = 8,
         Phasing = 16,
-        PushPull = 32,
+        Loading = 32,
+        Puzzle = 64
     }
     
     private PlayerState _playerState;
     private PlayerState _previousState;
     
-    // Événement déclenché lorsqu'un état change
     public event Action<PlayerState> OnStateChanged;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    #endregion
+
+    #region Main Functions
+    private void Start()
     {
         _playerState = PlayerState.Idle;
     }
+    #endregion
 
-    // Méthode pour changer l'état
+    #region Sates
     public void ChangeState(PlayerState newState)
     {
         if (_playerState != newState)
         {
-            _previousState = _playerState; // Enregistre l'état précédent
+            _previousState = _playerState;
             _playerState = newState;
             
-            OnStateChanged?.Invoke(_playerState); // Déclenche l'événement
+            OnStateChanged?.Invoke(_playerState);
         }
     }
     
@@ -51,4 +53,5 @@ public class StateManager : MonoBehaviour
     {
         return _playerState;
     }
+    #endregion
 }

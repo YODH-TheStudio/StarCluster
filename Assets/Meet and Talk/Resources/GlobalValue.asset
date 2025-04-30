@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IntValues:
   - ValueName: DEMO_Level
-    Value: 20
+    Value: 1
     BaseValue: 1
   - ValueName: DEMO_GOLD
-    Value: 18000
+    Value: 100
     BaseValue: 100
   - ValueName: Demo/AdvanceNodes/Gem
     Value: 0
@@ -29,7 +29,10 @@ MonoBehaviour:
     Value: 0
     BaseValue: 0
   - ValueName: Demo/AdvanceNodes/HellishStar
-    Value: 8
+    Value: 0
+    BaseValue: 0
+  - ValueName: REMAINING_LINK
+    Value: 0
     BaseValue: 0
   FloatValues:
   - ValueName: Demo_PI
@@ -46,7 +49,10 @@ MonoBehaviour:
     Value: 0
     BaseValue: 0
   - ValueName: Demo/AdvanceNodes/Unlocked
-    Value: 1
+    Value: 0
+    BaseValue: 0
+  - ValueName: HAS_LINKED
+    Value: 0
     BaseValue: 0
   StringValues:
   - ValueName: PlayerName

@@ -4,77 +4,166 @@ using UnityEngine;
 
 public class PushPullObject : Interactable
 {
-    private bool _isOnPedestal = false;
-    private bool _isGrab = false;
+    #region Fields
+    private SoundSystem _soundSystem;
+    
+    private bool _isOnPedestal;
+    private bool _isGrab;
     private Vector3 _pushDirection;
 
-    private float _grabOffset = 2f;
+    private const float GrabOffset = 2f;
 
     private List<Vector3> _offsetPosition;
 
     private Transform _stoneOriginalParent;
     private Rigidbody _rigidbody;
 
-    private float _soundCooldown = 0f;
+    private VibrationManager _vibrationManager = null;
 
-    // Utilisation d'une variable pour savoir si l'objet est en collision
-    private bool _isColliding = false;
+    private float _soundCooldown;
+    
+    private PlayerScript _playerScript;
+    
+    [SerializeField] MeshRenderer _meshRenderer;
+    
+    [SerializeField] private Material _glowMaterial;
+
+    private static readonly int Pushing = Animator.StringToHash("IsPushing");
+
+    private static readonly int Pulling = Animator.StringToHash("IsPulling");
+
+    private static readonly int IsPushPull = Animator.StringToHash("IsPushPull");
+    
+    private AudioSource _pushAudioSource;
+    [SerializeField] private AudioClip pushClip;
+
+    private bool _isAudioPlaying;
+
+    private bool _isAnimating;
+
+    #endregion
+
+    #region Main Functions
+
+    private void Awake()
+    {
+        _soundSystem = GameManager.Instance.GetSoundSystem();
+    }
 
     void Start()
     {
         _offsetPosition = new List<Vector3>();
-        _offsetPosition.Add(new Vector3(0, 0, _grabOffset));
-        _offsetPosition.Add(new Vector3(0, 0, -_grabOffset));
-        _offsetPosition.Add(new Vector3(_grabOffset, 0, 0));
-        _offsetPosition.Add(new Vector3(-_grabOffset, 0, 0));
+        _offsetPosition.Add(new Vector3(0, 0, GrabOffset));
+        _offsetPosition.Add(new Vector3(0, 0, -GrabOffset));
+        _offsetPosition.Add(new Vector3(GrabOffset, 0, 0));
+        _offsetPosition.Add(new Vector3(-GrabOffset, 0, 0));
+        _playerScript = GameManager.Instance.GetPlayer();
+
+        _pushAudioSource = gameObject.AddComponent<AudioSource>();
+        _pushAudioSource.clip = pushClip;
+        _pushAudioSource.loop = true;
+        _pushAudioSource.playOnAwake = false;
+
+        _pushAudioSource.outputAudioMixerGroup = _soundSystem.GetSFXMixerGroup();
+
+        _vibrationManager = FindObjectOfType<VibrationManager>();
+
+    }
+    private void FixedUpdate()
+    {
+        if (!_isGrab) return;
+        
+        _soundCooldown -= Time.deltaTime;
+
+        Vector3 playerMoveDirection = _playerScript.GetLastMoveDirection();
+        Vector3 direction = transform.position - UserTransform.position;
+        direction.Normalize();
+        float dot = Vector3.Dot(playerMoveDirection, direction);
+        
+        if (dot > 0.5f)  // push
+        {
+            _pushDirection = direction;
+        
+            _playerScript.GetAnimator().SetBool(Pushing, true);
+            _playerScript.GetAnimator().SetBool(Pulling, false);
+            
+            MovePlayerAndObject(_pushDirection);
+            
+        }
+        else if (dot < -0.5f)  // pull
+        {
+            _pushDirection = -direction;
+            
+            _playerScript.GetAnimator().SetBool(Pulling, true);
+            _playerScript.GetAnimator().SetBool(Pushing, false);
+        
+            MovePlayerAndObject(_pushDirection);
+            
+        }
+        else
+        {
+            _playerScript.SetMoveDirection(Vector3.zero);
+            _playerScript.GetAnimator().SetBool(Pushing, false);
+            _playerScript.GetAnimator().SetBool(Pulling, false);
+            UserTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
+
+            if (_pushAudioSource.isPlaying)
+            {
+                _pushAudioSource.Stop();
+                _isAudioPlaying = false;
+            }
+        }
     }
 
+    #endregion
+
+    #region Interact
     public override void Interact()
     {
         base.Interact();
         TogglePushPull();
     }
+    #endregion
 
+    #region Push/Pull
     private void TogglePushPull()
     {
+        if (_isAnimating)
+        {
+            return;
+        }
         _isGrab = !_isGrab;
         
-        PlayerScript playerScriptComponent = _userTransform.GetComponent<PlayerScript>();
-        Vector3 playerTransformPosition = _userTransform.gameObject.transform.position;
+        Vector3 playerTransformPosition = UserTransform.gameObject.transform.position;
         
         if (!_isGrab)
         {
-            playerScriptComponent.MovementLimit = PlayerScript.MovementLimitType.None;
+            _playerScript.MovementLimit = PlayerScript.MovementLimitType.None;
             DetachObjectFromPlayer();
         }
         else
         {
-            // Trouver la position la plus proche
+            // Find nearest position
             Vector3 closestPosition = GetClosestPosition(playerTransformPosition);
-            
-            StartCoroutine(PhaseAnimation(closestPosition));
 
-            // if (PossibleToGrab(closestPosition))
-            // {
-            //     // Lancer la coroutine pour la position la plus proche
-            //     StartCoroutine(PhaseAnimation(closestPosition));
-            // }
+            if (PossibleToGrab(closestPosition))
+            {
+                _isAnimating = true;
+                StartCoroutine(MoveAnimation(closestPosition));
+            }
+            
         }
     }
 
-    private bool PossibleToGrab(Vector3 DestinationPosition)
+    private bool PossibleToGrab(Vector3 destinationPosition)
     {
-        //Shoot a raycast to check if the object is in the way
+        // Shoot a raycast to check if the object is in the way
         RaycastHit hit;
-        if (Physics.Raycast(_userTransform.position, DestinationPosition - _userTransform.position, out hit, _grabOffset))
-        {
-            if (hit.collider.gameObject != null)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        Debug.DrawLine(UserTransform.position, destinationPosition, Color.red, 1f);
+        if (!Physics.Linecast(UserTransform.position, destinationPosition, out hit)) return true;
+        // if (!Physics.Raycast(UserTransform.position, destinationPosition - UserTransform.position, out hit, GrabOffset)) return true;
+        
+        return hit.collider.gameObject == null;
     }
     
     public void SetIsOnPedestal(bool isOnPedestal)
@@ -82,20 +171,20 @@ public class PushPullObject : Interactable
         _isOnPedestal = isOnPedestal;
         
         GlowSymbol();
-    }
 
-    private void GlowSymbol()
-    {
-        if (_isOnPedestal)
+        if (_isGrab)
         {
-            //Glow the symbol
+            _soundSystem.PlaySoundFXClipByKey("Rock Socle", transform.position);
         }
-        else
+        
+        if (_isGrab)
         {
-            //Unglow the symbol
+            _playerScript.MovementLimit = PlayerScript.MovementLimitType.None;
+            DetachObjectFromPlayer();
         }
+
+        _isInteractable = false;
     }
-    
     private Vector3 GetClosestPosition(Vector3 playerPosition)
     {
         Vector3 closestPosition = _offsetPosition[0] + transform.position;
@@ -116,86 +205,143 @@ public class PushPullObject : Interactable
 
         return closestPosition;
     }
+    #endregion
 
+    #region Glow
+    private void GlowSymbol()
+    {
+        if (_isOnPedestal)
+        {
+            if (_glowMaterial && _meshRenderer)
+            {
+                Material[] materials = _meshRenderer.materials;
+                materials[0] = _glowMaterial;
+                _meshRenderer.materials = materials;
+                StartCoroutine(AtlassiumAnimation(3));
+            }
+        }
+    }
+    
+    public void DeactivateAtlassium()
+    {
+        if (_meshRenderer)
+        {
+            Material[] materials = _meshRenderer.materials;
+            materials = new Material[1] { materials[0] };
+            _meshRenderer.materials = materials;
+        }
+    }
+
+    public void SetAtlassiumAlpha(float alpha)
+    {
+        if (_meshRenderer)
+        {
+            Material[] materials = _meshRenderer.materials;
+            materials[1].SetFloat("_Alpha", alpha);
+            _meshRenderer.materials = materials;
+        }
+    }
+    
+    #endregion
+
+    #region Attach/Detach
     private void AttachObjectToPlayer()
     {
         _stoneOriginalParent = transform.parent;
         Vector3 originalWorldPosition = transform.position;
 
-        transform.SetParent(_userTransform);
+        transform.SetParent(UserTransform);
         transform.position = originalWorldPosition;
         
-        _userTransform.GetComponent<PlayerScript>().FreezeRotation();
-
-        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        _playerScript.GetAnimator().SetBool(IsPushPull, true);
+        
+        GameManager.Instance.GetPlayer().FreezeRotation();
     }
 
     private void DetachObjectFromPlayer()
     {
         transform.SetParent(_stoneOriginalParent);
         
-        _userTransform.GetComponent<PlayerScript>().UnfreezeRotation();
+        _playerScript.GetAnimator().SetBool(IsPushPull, false);
+        _playerScript.GetAnimator().SetBool(Pulling, false);
+        _playerScript.GetAnimator().SetBool(Pushing, false);
+        
+        GameManager.Instance.GetPlayer().UnfreezeRotation();
+        UserTransform.GetComponent<PlayerScript>().UnfreezeRotation();
 
-        // _rigidbody.constraints = RigidbodyConstraints.FreezeAll; // La pierre est complètement figée lorsqu'elle est détachée
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isGrab)
+        _isGrab = false;
+        
+        if (_isAudioPlaying)
         {
-            _soundCooldown -= Time.deltaTime;
-
-            Vector3 playerMoveDirection = _userTransform.GetComponent<PlayerScript>().GetLastMoveDirection();
-            Vector3 direction = transform.position - _userTransform.position;
-            direction.Normalize();
-            float dot = Vector3.Dot(playerMoveDirection, direction);
-            
-            if (dot > 0.5f)  // push
-            {
-                _pushDirection = direction;
-                MovePlayerAndObject(_pushDirection);
-            }
-            else if (dot < -0.5f)  // pull
-            {
-                _pushDirection = -direction;
-                MovePlayerAndObject(_pushDirection);
-            }
-            else
-            {
-                _userTransform.GetComponent<PlayerScript>().SetMoveDirection(Vector3.zero);
-            }
+            _pushAudioSource.Stop();
+            _isAudioPlaying = false;
         }
+
     }
 
+    #endregion
+
+    #region Movement
     private void MovePlayerAndObject(Vector3 direction)
     {
-        _userTransform.GetComponent<PlayerScript>().SetMoveDirection(direction);
+        _playerScript.SetMoveDirection(direction);
 
-        if (_soundCooldown <= 0f)
+
+        if (!_pushAudioSource.isPlaying)
         {
-            GameManager.Instance._soundSystem.PlaySoundFXClipByKey("Rock Slide", transform.position);
-            _soundCooldown = 1f; // joue un son toutes les 0.4 sec
+            _pushAudioSource.Play();
+            _isAudioPlaying = true;
         }
 
-        
+        if (_vibrationManager != null)
+        {
+            _vibrationManager.Vibrate(0.2f, 0.1f); 
+        }
+
     }
+    #endregion
 
-    private IEnumerator PhaseAnimation(Vector3 start)
+    #region Coroutines
+    private IEnumerator MoveAnimation(Vector3 start)
     {
-        PlayerScript playerScript = GameManager.Instance.GetPlayer();
-
-        //distance beetween player and start
-        float distance = Vector3.Distance(_userTransform.position, start);
-        yield return StartCoroutine(playerScript.MoveTo(start, distance / 2f));
+        // Distance between player and start
+        float distance = Vector3.Distance(UserTransform.position, start);
+        yield return StartCoroutine(_playerScript.MoveTo(start, distance / 2f));
         
-        //rotate the player to face the object instantly
-        Vector3 direction = transform.position - _userTransform.position;
+        // Rotate the player to face the object instantly
+        Vector3 direction = transform.position - UserTransform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation.z = 0;
         targetRotation.x = 0;
-        _userTransform.rotation = targetRotation;
+        UserTransform.rotation = targetRotation;
         
-        playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
+        _playerScript.MovementLimit = PlayerScript.MovementLimitType.ForwardBackwardNoLook;
         AttachObjectToPlayer();
+        _isAnimating = false;
     }
+    
+    private IEnumerator AtlassiumAnimation(float duration)
+    {
+        float elapsedTime = 0f;
+        Material[] materials = _meshRenderer.materials;
+        _meshRenderer.materials = materials;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float colorValue = Mathf.Lerp(0f, 1f, t);
+
+            materials[1].SetFloat("_ColorSlider", colorValue);
+            _meshRenderer.materials = materials;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure the final value is set
+        materials[1].SetFloat("_ColorSlider", 1f);
+        _meshRenderer.materials = materials;
+    }
+    
+    #endregion
 }

@@ -4,15 +4,16 @@ using System.Linq;
 
 namespace Systems.SceneManagement
 {
+    #region Classes
     [Serializable]
     public class SceneGroup
     {
         public string groupName = "New Scene Group";
-        public List<SceneData> Scenes;
+        public List<SceneData> scenes;
 
         public string FindSceneNameByType(SceneType sceneType)
         {
-            return Scenes.FirstOrDefault(scene => scene.sceneType == sceneType)?.sceneName; 
+            return scenes.FirstOrDefault(scene => scene.sceneType == sceneType)?.sceneName; 
         }
     }
 
@@ -25,5 +26,5 @@ namespace Systems.SceneManagement
     }
 
     public enum SceneType { ActiveScene, MainMenu, UserInterface, HUD, Cinematic, Enironment, Tooling }
-
+    #endregion
 }

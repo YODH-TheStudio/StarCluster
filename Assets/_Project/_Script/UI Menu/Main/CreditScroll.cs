@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CreditScroll : MonoBehaviour
 {
+    #region
     [SerializeField] private float scrollSpeed;
     [SerializeField] private float waitTime;
     [SerializeField] private CanvasGroup logo;
@@ -13,15 +13,17 @@ public class CreditScroll : MonoBehaviour
 
     private RectTransform _rectTransform;
 
-    void Start()
+    #endregion
+
+    #region Main Functions
+    private void Start()
     {
         _shouldScroll = false;
         StartCoroutine(WaitForScroll(waitTime));
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!_shouldScroll) return;
         
@@ -33,18 +35,25 @@ public class CreditScroll : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Credits 
     public void ExitCredit()
     {
             creditMenu.SetActive(false);
             mainMenu.gameObject.SetActive(true);
             ResetPosition();
     }
+    #endregion
 
+    #region Position 
     private void ResetPosition()
     {
         _rectTransform.localPosition = new Vector3(0, -975, 0);
     }
+    #endregion
 
+    #region Coroutine
     private IEnumerator WaitForScroll(float seconds)
     {
         logo.alpha = 0;
@@ -63,4 +72,5 @@ public class CreditScroll : MonoBehaviour
         
         _shouldScroll = true;
     }
+    #endregion
 }

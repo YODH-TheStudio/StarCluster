@@ -2,45 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class SoundSystem : MonoBehaviour
 {
     #region Classes
     public class SoundFX
     {
-        public string key;
-        public List<AudioClip> clip;
+        public string Key;
+        public List<AudioClip> Clip;
     }
 
     public class Track
     {
-        public string key;
-        public AudioClip clip;
+        public string Key;
+        public AudioClip Clip;
     }
 
     #endregion
 
     #region Fields
 
-    [SerializeField] private string SFXFolderPath;
+    [SerializeField] private string sfxFolderPath;
     [SerializeField] private string musicFolderPath;
     [SerializeField] private string ambianceFolderPath;
 
     private int _numberOfChannels;
 
-    [SerializeField] private AudioMixerGroup _masterMixerGroup;
-    [SerializeField] private AudioMixerGroup _musicMixerGroup;
-    [SerializeField] private AudioMixerGroup _ambianceMixerGroup;
-    [SerializeField] private AudioMixerGroup _sfxMixerGroup; 
+    [SerializeField] private AudioMixerGroup masterMixerGroup;
+    [SerializeField] private AudioMixerGroup musicMixerGroup;
+    [SerializeField] private AudioMixerGroup ambianceMixerGroup;
+    [SerializeField] private AudioMixerGroup sfxMixerGroup; 
     private AudioListener _audioListener;
 
-    [SerializeField] private AudioClip _startingMusic;
-    [SerializeField] private AudioClip _startingAmbianceSound;
+    [SerializeField] private AudioClip startingMusic;
+    [SerializeField] private AudioClip startingAmbianceSound;
 
-    [SerializeField] private float _fadeInDuration;
-    [SerializeField] private float _fadeOutDuration;
+    [SerializeField] private float fadeInDuration;
+    [SerializeField] private float fadeOutDuration;
 
     private List<AudioSource> _audioSources;
     private AudioSource _currentMusicSource;
@@ -50,12 +48,12 @@ public class SoundSystem : MonoBehaviour
 
     [SerializeField] private SFXPoolManager sfxPoolManager;
 
-    private PlayerScript _player => GameManager.Instance.GetPlayer();
+    private PlayerScript Player => GameManager.Instance.GetPlayer();
 
 
-    private List<SoundFX> _SFXList = new List<SoundFX>();
-    private List<Track> _musicList = new List<Track>();
-    private List<Track> _ambianceList = new List<Track>();
+    private readonly List<SoundFX> _sfxList = new List<SoundFX>();
+    private readonly List<Track> _musicList = new List<Track>();
+    private readonly List<Track> _ambianceList = new List<Track>();
 
     #endregion
 
@@ -67,7 +65,7 @@ public class SoundSystem : MonoBehaviour
     //}
     private void SetAudioScene()
     {
-        SetAudioListener(Camera.main.GetComponent<AudioListener>());
+        if (Camera.main != null) SetAudioListener(Camera.main.GetComponent<AudioListener>());
     }
 
     protected void Awake()
@@ -80,7 +78,7 @@ public class SoundSystem : MonoBehaviour
         _currentAmbianceSources = new List<AudioSource>();
         _numberOfChannels = GetComponents<AudioSource>().Length;
 
-        sfxPoolManager.SetMixerGroup(_sfxMixerGroup);
+        sfxPoolManager.SetMixerGroup(sfxMixerGroup);
 
         AudioSource[] attachedAudioSources = GetComponents<AudioSource>();
 
@@ -98,22 +96,22 @@ public class SoundSystem : MonoBehaviour
     
     private void GenerateKeys()
     {
-        GenerateSFXKeys();
+        GenerateSfxKeys();
         GenerateMusicKeys();
         GenerateAmbianceKeys();
     }
 
-    private void GenerateSFXKeys()
+    private void GenerateSfxKeys()
     {
-        AudioClip[] _audioClips = Resources.LoadAll<AudioClip>(SFXFolderPath);
+        AudioClip[] audioClips = Resources.LoadAll<AudioClip>(sfxFolderPath);
 
-        foreach (AudioClip _audioClip in _audioClips)
+        foreach (AudioClip audioClip in audioClips)
         {
-            string[] words = _audioClip.name.Split('_');
+            string[] words = audioClip.name.Split('_');
 
             if (words[0] != "SFX" || words.Length < 3)
             {
-                Debug.LogWarning($"The audio clip {_audioClip.name} has not the SFX_xxx_xxx format.");
+                Debug.LogWarning($"The audio clip {audioClip.name} has not the SFX_xxx_xxx format.");
             }
 
             string key = "";
@@ -132,24 +130,24 @@ public class SoundSystem : MonoBehaviour
 
             key = key.Substring(0, index + 1);
 
-            Debug.Log(key);
+            //Debug.Log(key);
 
-            SoundFX existingSound = _SFXList.Find(sound => sound.key == key);
+            SoundFX existingSound = _sfxList.Find(sound => sound.Key == key);
 
 
 
             if (existingSound != null)
             {
-                existingSound.clip.Add(_audioClip);
+                existingSound.Clip.Add(audioClip);
             }
             else
             {
                 SoundFX newSound = new SoundFX
                 {
-                    key = key,
-                    clip = new List<AudioClip> { _audioClip }
+                    Key = key,
+                    Clip = new List<AudioClip> { audioClip }
                 };
-                _SFXList.Add(newSound);
+                _sfxList.Add(newSound);
             }
         }
     }
@@ -186,8 +184,8 @@ public class SoundSystem : MonoBehaviour
 
             Track newTrack = new Track
             {
-                key = key,
-                clip = audioClip
+                Key = key,
+                Clip = audioClip
             };
 
             _musicList.Add(newTrack);
@@ -228,15 +226,15 @@ public class SoundSystem : MonoBehaviour
 
             Track newTrack = new Track
             {
-                key = key,
-                clip = audioClip
+                Key = key,
+                Clip = audioClip
             };
 
             _ambianceList.Add(newTrack);
         }
     }
 
-    public void SetAudioListener(AudioListener audioListener)
+    private void SetAudioListener(AudioListener audioListener)
     {
         _audioListener = audioListener;
     }
@@ -256,22 +254,17 @@ public class SoundSystem : MonoBehaviour
         return _audioSources[0];
     }
 
-    public AudioClip GetSFXByKey(string key)
+    private AudioClip GetSfxByKey(string key)
     {
-        foreach (var sound in _SFXList)
+        foreach (var sound in _sfxList)
         {
-            if (sound.key == key)
-            {
-                if (sound.clip.Count > 1)
-                {
-                    int randomIndex = Random.Range(0, sound.clip.Count);
-                    return sound.clip[randomIndex];
-                }
-                else
-                {
-                    return sound.clip[0];
-                }
-            }
+            if (sound.Key != key) continue;
+
+            if (sound.Clip.Count <= 1) return sound.Clip[0];
+            
+            int randomIndex = Random.Range(0, sound.Clip.Count);
+            return sound.Clip[randomIndex];
+
         }
         Debug.LogWarning($"SFX not found for key: {key}");
         return null;
@@ -282,9 +275,9 @@ public class SoundSystem : MonoBehaviour
 
         foreach (var sound in _musicList)
         {
-            if (sound.key == key)
+            if (sound.Key == key)
             {
-                return sound.clip;
+                return sound.Clip;
             }
         }
         Debug.LogWarning($"Music not found for key: {key}");
@@ -295,9 +288,9 @@ public class SoundSystem : MonoBehaviour
     {
         foreach (var sound in _ambianceList)
         {
-            if (sound.key == key)
+            if (sound.Key == key)
             {
-                return sound.clip;
+                return sound.Clip;
             }
         }
         Debug.LogWarning($"Ambiance not found for key: {key}");
@@ -315,14 +308,14 @@ public class SoundSystem : MonoBehaviour
         SetMasterVolume(master);
         SetMusicVolume(music);
         SetAmbianceVolume(music);
-        SetSFXVolume(sfx);
+        SetSfxVolume(sfx);
     }
     #endregion
 
     #region Master
     public void SetMasterVolume (float volume)
     {
-        _musicMixerGroup.audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
+        masterMixerGroup.audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("MasterVolume", volume);
         PlayerPrefs.Save();
     }
@@ -343,9 +336,18 @@ public class SoundSystem : MonoBehaviour
 
     public void SetMusicVolume (float volume)
     {
-        _musicMixerGroup.audioMixer.SetFloat("MusicVolume", LinearToDecibel(volume));
+        musicMixerGroup.audioMixer.SetFloat("MusicVolume", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("MusicVolume", volume);
         PlayerPrefs.Save();
+    }
+
+    public void StopMusicSource()
+    {
+        if (_currentMusicSource != null && _currentMusicSource.outputAudioMixerGroup == musicMixerGroup)
+        {
+            StartCoroutine(FadeOutAudio(_currentMusicSource, fadeOutDuration));
+            _currentMusicSource = null;
+        }
     }
 
     #endregion
@@ -356,7 +358,7 @@ public class SoundSystem : MonoBehaviour
     {
         foreach (AudioSource audioSource in _currentAmbianceSources)
         {
-            StartCoroutine(FadeOutAudio(audioSource, _fadeOutDuration));
+            StartCoroutine(FadeOutAudio(audioSource, fadeOutDuration));
         }
 
         _currentAmbianceSources.Clear();
@@ -365,12 +367,12 @@ public class SoundSystem : MonoBehaviour
     private void AddAmbianceSound(AudioClip audioClip, float volume = 1f)
     {
         AudioSource audioSource = GetAvailableAudioSource();
-        audioSource.outputAudioMixerGroup = _ambianceMixerGroup;
+        audioSource.outputAudioMixerGroup = ambianceMixerGroup;
         audioSource.clip = audioClip;
         audioSource.loop = true;
         audioSource.volume = volume;
         audioSource.Play();
-        StartCoroutine(FadeInAudio(audioSource, _fadeInDuration, volume));
+        StartCoroutine(FadeInAudio(audioSource, fadeInDuration, volume));
         _currentAmbianceSources.Add(audioSource);
     }
 
@@ -385,7 +387,7 @@ public class SoundSystem : MonoBehaviour
 
     public void SetAmbianceVolume(float volume)
     {
-        _ambianceMixerGroup.audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(volume));
+        ambianceMixerGroup.audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(volume));
     }
 
 
@@ -406,30 +408,30 @@ public class SoundSystem : MonoBehaviour
 
     public void PlaySoundFXClipByKey(string key, Vector3 spawnPosition, float volume = 1.0f)
     {
-        var audioClip = GetSFXByKey(key);
+        var audioClip = GetSfxByKey(key);
         if (audioClip != null)
         {
-            Debug.Log($"Playing sound: {key}");
+            //Debug.Log($"Playing sound: {key}");
             PlaySoundFXClip(audioClip, spawnPosition, volume);
         }
     }
 
-    //public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
-    //{
-    //    AudioSource audioSource = GetAvailableAudioSource();
-    //    AudioClip audioClip = GetSFXByKey(key);
+    public void PlaySoundFXClipByKey(string key, float volume = 1.0f)
+    {
+        AudioSource audioSource = GetAvailableAudioSource();
+        AudioClip audioClip = GetSfxByKey(key);
 
-    //    audioSource.clip = audioClip;
-    //    audioSource.volume = volume;
-    //    audioSource.Play();
-    //}
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+    }
 
     public void PlayRandomSoundFXClipByKeys(string[] keys, Vector3 spawnPosition, float volume = 1.0f)
     {
         List<AudioClip> clips = new List<AudioClip>();
         foreach (var key in keys)
         {
-            var clip = GetSFXByKey(key);
+            var clip = GetSfxByKey(key);
             if (clip != null)
             {
                 clips.Add(clip);
@@ -455,18 +457,22 @@ public class SoundSystem : MonoBehaviour
     //    Destroy(audioSource.gameObject, clipLength);
     //}
 
-    public void SetSFXVolume(float volume)
+    public void SetSfxVolume(float volume)
     {
-        _sfxMixerGroup.audioMixer.SetFloat("SFXVolume", LinearToDecibel(volume));
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("SFXVolume", volume);
         PlayerPrefs.Save();
     }
 
+    public AudioMixerGroup GetSFXMixerGroup()
+    {
+        return sfxMixerGroup; 
+    }
 
     #endregion
 
     #region ConvertDecibel
-    // Convertit une valeur de 0.0001 à 1.0 en dB (utile pour l'AudioMixer)
+    // Convert a value of 0.0001 to 1.0 in dB (useful for AudioMixer)
     private float LinearToDecibel(float linear)
     {
         if (linear <= 0.0001f)
@@ -481,11 +487,11 @@ public class SoundSystem : MonoBehaviour
     {
         if (_currentMusicSource != null)
         {
-            yield return StartCoroutine(FadeOutAudio(_currentMusicSource, _fadeOutDuration));
+            yield return StartCoroutine(FadeOutAudio(_currentMusicSource, fadeOutDuration));
         }
 
         AudioSource newMusicSource = GetAvailableAudioSource();
-        newMusicSource.outputAudioMixerGroup = _musicMixerGroup;
+        newMusicSource.outputAudioMixerGroup = musicMixerGroup;
         newMusicSource.clip = newClip;
         newMusicSource.loop = true;
         newMusicSource.volume = 0.0f;
@@ -493,10 +499,10 @@ public class SoundSystem : MonoBehaviour
 
         _currentMusicSource = newMusicSource;
 
-        yield return StartCoroutine(FadeInAudio(newMusicSource, _fadeInDuration));
+        yield return StartCoroutine(FadeInAudio(newMusicSource, fadeInDuration));
     }
 
-    public IEnumerator FadeOutAudio(AudioSource audioSource, float duration)
+    private static IEnumerator FadeOutAudio(AudioSource audioSource, float duration)
     {
         float currentTime = 0f;
         float startVolume = audioSource.volume;
@@ -512,7 +518,7 @@ public class SoundSystem : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
-    public IEnumerator FadeInAudio(AudioSource audioSource, float duration, float volume = 1f)
+    private static IEnumerator FadeInAudio(AudioSource audioSource, float duration, float volume = 1f)
     {
         float currentTime = 0f;
         audioSource.volume = 0.0f;

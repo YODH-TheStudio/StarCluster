@@ -1,21 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UIElements;
 
 public class ObjectFade: MonoBehaviour
 {
-    [SerializeField]
-    private float _fadeSpeed = 2f;
+    #region Fields
+    [SerializeField] private float _fadeSpeed = 2f;
 
-    [SerializeField]
-    private float _fadeAmount = 0.25f;
+    [SerializeField] private float _fadeAmount = 0.25f;
 
     private PlayerScript _player;
     private Camera _mainCamera;
@@ -26,8 +17,10 @@ public class ObjectFade: MonoBehaviour
     private List<GameObject> _oldHits;
     private List<GameObject> _toRemove;
 
-    // Start is called before the first frame update
-    void Start()
+    #endregion
+
+    #region Main Functions
+    private void Start()
     {
         _player = GameManager.Instance.GetPlayer();
         _mainCamera = Camera.main;
@@ -37,61 +30,65 @@ public class ObjectFade: MonoBehaviour
         _toRemove = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _distanceCamToPlayer = Vector3.Distance(_player.transform.position, _mainCamera.transform.position);
         _directionCamToPlayer = (_player.transform.position -  _mainCamera.transform.position).normalized;
 
+        Vector3 startPosition = _mainCamera.transform.position + (-_directionCamToPlayer * _distanceCamToPlayer * 9);
+        Debug.DrawRay(startPosition, _directionCamToPlayer * _distanceCamToPlayer * 10, Color.red);
+        
         RaycastHit hit;
-        if (Physics.Raycast(_mainCamera.transform.position, _directionCamToPlayer, out hit, _distanceCamToPlayer))
+        if (!Physics.Raycast(startPosition, _directionCamToPlayer, out hit, _distanceCamToPlayer * 10)) return;
+        
+        if (!hit.transform.gameObject.CompareTag("Player"))
         {
-            if (hit.transform.gameObject.tag != "Player")
-            {
-                SendRaycast();
+            SendRaycast(startPosition);
 
-                List<GameObject> toUnfade = new List<GameObject>();
-                foreach (GameObject value in _oldHits)
+            List<GameObject> toUnfade = new List<GameObject>();
+            foreach (GameObject value in _oldHits)
+            {
+                if(!value.transform.gameObject.CompareTag("Player"))
                 {
-                    if(value.transform.gameObject.tag != "Player")
+                    if (!_hits.Contains(value))
                     {
-                        if (!_hits.Contains(value))
-                        {
-                            toUnfade.Add(value);
-                        }
+                        toUnfade.Add(value);
                     }
-                    
                 }
-
-                UnfadeObject(toUnfade);
-
-                foreach (GameObject obj in _toRemove)
-                {
-                    _hits.Remove(obj);
-                }
-
-                FadeObject(_hits);
-
-                _toRemove.Clear();
             }
-            else
+
+            UnfadeObject(toUnfade);
+
+            foreach (GameObject obj in _toRemove)
             {
-                UnfadeObject(_oldHits);
-
-                foreach (GameObject obj in _toRemove)
-                {
-                    _hits.Remove(obj);
-                }
-
-                _toRemove.Clear();
+                _hits.Remove(obj);
             }
+
+            FadeObject(_hits);
+
+            _toRemove.Clear();
+        }
+        else
+        {
+            UnfadeObject(_oldHits);
+
+            foreach (GameObject obj in _toRemove)
+            {
+                _hits.Remove(obj);
+            }
+
+            _toRemove.Clear();
         }
     }
 
-    private void SendRaycast()
+    #endregion
+
+    #region Raycast
+    private void SendRaycast(Vector3 startPosition)
     {
         _hits.Clear();
-        RaycastHit[] hits = Physics.RaycastAll(_mainCamera.transform.position, _directionCamToPlayer, _distanceCamToPlayer);
+        Debug.DrawRay(startPosition, _directionCamToPlayer * _distanceCamToPlayer * 10, Color.blue);
+        RaycastHit[] hits = Physics.RaycastAll(startPosition, _directionCamToPlayer, _distanceCamToPlayer * 10);
         if (hits != null && _hits != null) 
         {
             foreach(RaycastHit hit in hits)
@@ -113,16 +110,22 @@ public class ObjectFade: MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fade Function
     private void FadeObject(List<GameObject> hits)
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
+            if (!hit.CompareTag("Player") && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
-                ToFadeMode(hitMaterial);
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, _fadeAmount, _fadeSpeed * Time.deltaTime));
-                hit.GetComponent<MeshRenderer>().material = hitMaterial;
+
+                ToTransparentMode(hitMaterial);
+
+                Color baseColor = hitMaterial.GetColor("_BaseColor");
+                baseColor.a = Mathf.Lerp(baseColor.a, _fadeAmount, _fadeSpeed * Time.deltaTime);
+                hitMaterial.SetColor("_BaseColor", baseColor);
             }
         }
     }
@@ -131,13 +134,15 @@ public class ObjectFade: MonoBehaviour
     {
         foreach (GameObject hit in hits)
         {
-            if (hit.tag != "Player" && hit.GetComponent<MeshRenderer>())
+            if (!hit.CompareTag("Player") && hit.GetComponent<MeshRenderer>())
             {
                 Material hitMaterial = hit.GetComponent<MeshRenderer>().material;
-                hitMaterial.color = new Color(hitMaterial.color.r, hitMaterial.color.g, hitMaterial.color.b, Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime));
-                hit.GetComponent<MeshRenderer>().material = hitMaterial;
 
-                if (Mathf.Lerp(hitMaterial.color.a, 1f, _fadeSpeed * Time.deltaTime) >= 0.999f )
+                Color baseColor = hitMaterial.GetColor("_BaseColor");
+                baseColor.a = Mathf.Lerp(baseColor.a, 1f, _fadeSpeed * Time.deltaTime);
+                hitMaterial.SetColor("_BaseColor", baseColor);
+
+                if (baseColor.a >= 0.999f)
                 {
                     ToOpaqueMode(hitMaterial);
                     _toRemove.Add(hit);
@@ -145,29 +150,43 @@ public class ObjectFade: MonoBehaviour
             }
         }
     }
+    #endregion
 
-
+    #region Material Mode
     private void ToOpaqueMode(Material material)
     {
-        material.SetOverrideTag("RenderType", "");
         material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
         material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
         material.SetInt("_ZWrite", 1);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.DisableKeyword("_ALPHABLEND_ON");
+        material.SetInt("_Surface", 0);
+
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
+
+        material.SetShaderPassEnabled("DepthOnly", true);
+        material.SetShaderPassEnabled("SHADOWCASTER", true);
+
+        material.SetOverrideTag("RenderType", "Opaque");
+
+        material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        material.renderQueue = -1;
     }
 
-    private void ToFadeMode(Material material)
+    private void ToTransparentMode(Material material)
     {
-        material.SetOverrideTag("RenderType", "Transparent");
         material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
         material.SetInt("_ZWrite", 0);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.EnableKeyword("_ALPHABLEND_ON");
-        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.SetInt("_Surface", 1);
+
         material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+
+        material.SetShaderPassEnabled("DepthOnly", false);
+        material.SetShaderPassEnabled("SHADOWCASTER", false);
+
+        material.SetOverrideTag("RenderType", "Transparent");
+
+        material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
     }
+    #endregion
 }

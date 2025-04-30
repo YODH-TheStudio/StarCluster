@@ -1,35 +1,40 @@
-using System.Threading.Tasks;
-using UnityEngine;
 using Systems.SceneManagement;
+using UnityEngine;
 
 public class MainMenu : Menu
 {
-    
-    [SerializeField] bool hasAlreadyPlayed = true; // TODO : Use the bool from the loaded save
-    [SerializeField] GameObject planetMenu;
-    
+    #region Fields 
+    [SerializeField] private bool hasAlreadyPlayed = true; // TODO : Use the bool from the loaded save
+    [SerializeField] private GameObject planetMenu;
+    private GameManager _gameManager;
+    private SoundSystem _soundSystem;
+
+    #endregion
+
+    #region Main Functions
+    private new void Awake()
+    {
+        base.Awake();
+
+        _gameManager = GameManager.Instance;
+        _soundSystem = _gameManager.GetSoundSystem();
+    }
+    #endregion
+
+    #region PlayGame
     public async void PlayGame()
     {
-        GameManager.Instance._soundSystem.PlaySoundFXClipByKey("UI Clicb", transform.position);
-        
+
         if (hasAlreadyPlayed)
         {
-            //planetMenu.SetActive(true);
-            //this.gameObject.SetActive(false);
-            // if (test)
-            // {
-            //     await SceneLoader.LoadSceneGroup(2);
-            //     GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
-            // }
-            // await SceneLoader.LoadSceneGroup(2);
-            // GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
             planetMenu.SetActive(true);
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         else
         {
+            _soundSystem.StopMusicSource();
             await SceneLoader.LoadSceneGroup(1);
-            GameManager.Instance.GetSaveManager().LoadGame(GameManager.Instance.GetSaveManager().currentSlot);
         }
     }
+    #endregion
 }

@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 namespace Systems.SceneManagement
 {
+    #region Classes
     public class SceneLoader : MonoBehaviour
     {
-        [SerializeField] private Image loadingBar;
+        [SerializeField] private Slider loadingBar;
         [SerializeField] private float fillSpeed = 0.5f;
         [SerializeField] private Camera loadingCamera;
         [SerializeField] private Canvas loadingCanvas;
@@ -16,7 +17,7 @@ namespace Systems.SceneManagement
         private float _targetProgress;
         private bool _isLoading;
 
-        public readonly SceneGroupManager Manager = new SceneGroupManager();
+        private readonly SceneGroupManager Manager = new SceneGroupManager();
 
         private void Awake()
         {
@@ -34,17 +35,17 @@ namespace Systems.SceneManagement
         {
             if (!_isLoading) return;
 
-            float currentFillAmount = loadingBar.fillAmount;
+            float currentFillAmount = loadingBar.value;
             float progressDifference = Mathf.Abs(currentFillAmount - _targetProgress);
 
             float dynamicFillSpeed = progressDifference * fillSpeed;
 
-            loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicFillSpeed);
+            loadingBar.value = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
 
         public async Task LoadSceneGroup(int index)
         {
-            loadingBar.fillAmount = 0f;
+            loadingBar.value = 0f;
             _targetProgress = 1f;
 
             if (index < 0 || index >= sceneGroups.Length)
@@ -68,16 +69,18 @@ namespace Systems.SceneManagement
             loadingCamera.gameObject.SetActive(enable);
         }
 
-        public class LoadingProgress : IProgress<float>
+        private class LoadingProgress : IProgress<float>
         {
             public event Action<float> Progressed;
 
-            const float ratio = 1f;
+            private const float Ratio = 1f;
 
             public void Report(float value)
             {
-                Progressed?.Invoke(value / ratio);
+                Progressed?.Invoke(value / Ratio);
             }
         }
     }
+
+    #endregion
 }

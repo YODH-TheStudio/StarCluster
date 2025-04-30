@@ -55,6 +55,34 @@ MonoBehaviour:
     m_Key: VIBRATIONS_TOGGLE
     m_Metadata:
       m_Items: []
+  - m_Id: 6571296715988992
+    m_Key: CREDITS_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6571628292497408
+    m_Key: SAVES_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6576980060823552
+    m_Key: SELECT_SAVE_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577072750747648
+    m_Key: DELETE_SAVE_BTN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6577710377230336
+    m_Key: TITLE_SAVES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9941805862842368
+    m_Key: MAIN_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10539688461369344
+    m_Key: HAND_DOMINANCE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

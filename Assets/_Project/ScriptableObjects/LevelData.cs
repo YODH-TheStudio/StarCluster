@@ -73,10 +73,7 @@ public class LevelData : ScriptableObject
     {
         _circuits.Add(new Circuit(circuitColor, startPoint, endPoint, sign));
     }
-
-
-
-
+    
     public void RemoveCircuit(int index)
     {
         if (index >= 0 && index < _circuits.Count)
@@ -84,6 +81,7 @@ public class LevelData : ScriptableObject
             _circuits.RemoveAt(index);
         }
     }
+    
     public void AddPoint(Vector2 _point, string name)
     {
         _points.Add(_point);
@@ -96,6 +94,7 @@ public class LevelData : ScriptableObject
         _points.Remove(_point);
         pointSizes.RemoveAll(p => p.pointPosition == _point);
     }
+    
     public void AddSegment(Vector2 _pointA, Vector2 _pointB)
     {
         _segments.Add(new Segment(_pointA, _pointB));
@@ -109,14 +108,6 @@ public class LevelData : ScriptableObject
             _segments.Remove(segmentToRemove);
         }
     }
-
-    //public void SetAllPointsToSmall()
-    //{
-    //    foreach (var point in _points)
-    //    {
-    //        pointSizes.Add(new PointSizeEntry(point, PointSize.Petite));
-    //    }
-    //}
 
     public void ClearSegments()
     {

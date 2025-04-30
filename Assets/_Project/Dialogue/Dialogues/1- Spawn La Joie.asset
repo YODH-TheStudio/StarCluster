@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1946feaec865d344dabf0419b1c94973, type: 3}
+  m_Name: 1- Spawn La Joie
+  m_EditorClassIdentifier: 
+  AllowDialogueSave: 0
+  BlockingReopeningDialogue: 0
+  ResetSavedNodeOnChoice: 1
+  LimitChoiceOptionPerNode: 0
+  MaxChoiceOptionPerNode: 8
+  NodeLinkDatas:
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+  - BaseNodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+    TargetNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+  - BaseNodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    TargetNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+  - BaseNodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+  StartNodeDatas:
+  - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    Position: {x: -51, y: 274}
+    startID: 
+  DialogueNodeDatas:
+  - NodeGuid: 4a5d73e0-28c0-4f34-9f06-35d70ad2bdc9
+    Position: {x: 145, y: 274}
+    Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
+    PortraitPosition: 3
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: Hey you over there, come here, I need help!!
+    - languageEnum: 1
+      LanguageGenericType: "Eh toi l\xE0-bas, viens par ici, j\u2019ai besoin d\u2019aide
+        !!"
+    Duration: 0
+  - NodeGuid: f21cae08-77e2-4145-ae75-96558a1e0ea2
+    Position: {x: 388, y: 274}
+    Character: {fileID: 11400000, guid: 4ac1b70943ec9a544980212430fcb119, type: 2}
+    PortraitPosition: 1
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "I\u2019ll get you out of here, just wait for me."
+    - languageEnum: 1
+      LanguageGenericType: "Je vais te sortir de l\xE0, ne bouge pas."
+    Duration: 0
+  - NodeGuid: 1bdf86dd-1333-4ce2-99d0-f5b8ba7044d5
+    Position: {x: 616, y: 274}
+    Character: {fileID: 11400000, guid: 0762dfa7a5780d947b2a1ddfe9f6feb8, type: 2}
+    PortraitPosition: 3
+    Emotion: Normal
+    SecoundCharacter: {fileID: 0}
+    SecoundPortraitPosition: 0
+    SecoundEmotion: 
+    AudioClips:
+    - languageEnum: 0
+      LanguageGenericType: {fileID: 0}
+    - languageEnum: 1
+      LanguageGenericType: {fileID: 0}
+    TextType:
+    - languageEnum: 0
+      LanguageGenericType: "Not like I have a choice anyway\u2026"
+    - languageEnum: 1
+      LanguageGenericType: "Pas s\xFBr que je puisse de toute mani\xE8re."
+    Duration: 0
+  DialogueChoiceNodeDatas: []
+  AdvancedChoiceNodeDatas: []
+  TimerChoiceNodeDatas: []
+  AdvancedTimeChoiceNodeDatas: []
+  EndNodeDatas:
+  - NodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
+    Position: {x: 849, y: 274}
+    EndNodeType: 0
+    Dialogue: {fileID: 0}
+    startID: 
+  EventNodeDatas: []
+  RandomNodeDatas: []
+  IfNodeDatas: []
+  AdvancedIFNodeDatas: []
+  ResetSavedNodeDatas: []
+  MusicNodeDatas: []
+  CommandNodeDatas: []

@@ -1,22 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using MeetAndTalk;
 using UnityEngine;
 
 public class DialogueMiniUIRef : MonoBehaviour
 {
-    [SerializeField]
-    private DialogueUIManager _dialogueMiniUIManager;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.Instance.GetDialogueManager().SetDialogueMiniUIManager(_dialogueMiniUIManager);
-    }
+    #region Fields
+    [SerializeField] private DialogueUIManager dialogueMiniUIManager;
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    #region Main Functions
+    private void Start()
     {
-        
+        GameManager.Instance.GetDialogueManager().SetDialogueMiniUIManager(dialogueMiniUIManager);
     }
+    #endregion
 }

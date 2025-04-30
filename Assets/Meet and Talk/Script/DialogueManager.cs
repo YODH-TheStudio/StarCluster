@@ -319,6 +319,8 @@ namespace MeetAndTalk
             dialogueUIManager.SetupPositionUI(_nodeData.PortraitPosition);
             
             // Display Dialogue Text
+            print(localizationManager.SelectedLang());
+            
             dialogueUIManager.DisplayText(_nodeData.Character, _nodeData.TextType.Find(text => text.languageEnum == localizationManager.SelectedLang()).LanguageGenericType);
             dialogueUIManager.SkipButton.SetActive(true);
             isSkippeable = true;

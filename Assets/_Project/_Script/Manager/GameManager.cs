@@ -1,131 +1,106 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
-
+    #region Fields
     private PlayerScript _player;
     private CompanionFollow _companion;
     
-    private VibrationManager _vibrationManager { get; set; }
-    public SoundSystem _soundSystem { get; private set; }
-    public StateManager _stateManager { get; private set; }
-    public DialogueManagerCustom _dialogueManager { get; private set; }
-    public PuzzleManager _puzzleManager { get; private set; }
-    public SaveManager _saveManager { get; private set; }
+    private VibrationManager VibrationManager { get; set; }
+    private HandDominanceManager HandDominanceManager { get; set; }
+    private SoundSystem SoundSystem { get; set; }
+    private StateManager StateManager { get; set; }
+    private DialogueManagerCustom DialogueManager { get; set; }
+    private PuzzleManager PuzzleManager { get; set; }
+    private SaveManager SaveManager { get; set; }
+    #endregion
 
-
-    public KeyCode _key = KeyCode.Space;
-    public KeyCode _keytoo = KeyCode.P;
-
-    // Start is called before the first frame update
+    #region Main Functions
     private new void Awake()
     {
-        // if (_player == null)
-        // {
-        //     FindPlayer();
-        // }
-        // if (_companion == null)
-        // {
-        //     FindCompanion();
-        // }
-
-        if (_vibrationManager == null)
+        if (VibrationManager == null)
         {
             FindVibrationManager();
         }
 
-        if (_soundSystem == null)
+        if (HandDominanceManager == null)
+        {
+            FindHandDominanceManager();
+        }
+
+        if (SoundSystem == null)
         {
             FindSoundManager();
         }
         
-        if (_stateManager == null)
+        if (StateManager == null)
         {
             FindStateManager();
         }
 
-        if (_dialogueManager == null)
+        if (DialogueManager == null)
         {
             FindDialogueManager();
         }
     }
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Instance._soundSystem.ChangeMusicByKey("Main");
+        QualitySettings.vSyncCount = 0; // Set vSyncCount to 0 so that using .targetFrameRate is enabled.
+        Application.targetFrameRate = 60;
+        
+        EnhancedTouchSupport.Enable();
+        Instance.SoundSystem.ChangeMusicByKey("Menu");
     }
+    #endregion
 
-    void FindPlayer()
+    #region Finders
+    private void FindPlayer()
     {
         _player = FindObjectOfType<PlayerScript>();
     }
     
-    void FindCompanion()
+    private void FindCompanion()
     {
         _companion = FindObjectOfType<CompanionFollow>();
     }
-    public void FindPuzzleManager()
+    private void FindPuzzleManager()
     {
-        _puzzleManager = FindObjectOfType<PuzzleManager>();
+        PuzzleManager = FindObjectOfType<PuzzleManager>();
     }
-    public void FindSaveManager()
+    private void FindSaveManager()
     {
-        _saveManager = FindObjectOfType<SaveManager>();
+        SaveManager = FindObjectOfType<SaveManager>();
     }
-    void FindVibrationManager()
+    private void FindVibrationManager()
     {
-        _vibrationManager = FindObjectOfType<VibrationManager>();
-    }
-
-    void FindSoundManager()
-    {
-        _soundSystem = FindObjectOfType<SoundSystem>();
+        VibrationManager = FindObjectOfType<VibrationManager>();
     }
 
-    void FindStateManager()
+    private void FindHandDominanceManager()
     {
-        _stateManager = FindObjectOfType<StateManager>();
+        HandDominanceManager = FindObjectOfType<HandDominanceManager>();
     }
 
-    void FindDialogueManager()
+    private void FindSoundManager()
     {
-        _dialogueManager = FindObjectOfType<DialogueManagerCustom>();
+        SoundSystem = FindObjectOfType<SoundSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FindStateManager()
     {
-        if (Input.GetKeyDown(_key))
-        {
-            PlayTestSFX();
-        }
-        else if (Input.GetKeyUp(_keytoo))
-        {
-            PlayTestSFXToo();
-        }
+        StateManager = FindObjectOfType<StateManager>();
     }
 
-    #region TestSon
-    void PlayTestSFX()
+    private void FindDialogueManager()
     {
-        Vector3 spawnPosition = transform.position;
-        Instance._soundSystem.PlaySoundFXClipByKey("Violon", spawnPosition);
-        Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
-    }   
-    void PlayTestSFXToo()
-    {
-        Vector3 spawnPosition = transform.position;
-        Instance._soundSystem.PlaySoundFXClipByKey("Tung", spawnPosition);
-        Debug.Log("SFX 'Violon' lanc� � la position : " + spawnPosition);
+        DialogueManager = FindObjectOfType<DialogueManagerCustom>();
     }
     #endregion
 
+    #region Getters
     public PlayerScript GetPlayer()
     {
         if (_player == null)
@@ -146,60 +121,79 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public VibrationManager GetVibrationManager()
     {
-        if (_vibrationManager == null)
+        if (VibrationManager == null)
         {
             FindVibrationManager();
         }
-        return _vibrationManager;
+        return VibrationManager;
+    }
+
+    public HandDominanceManager GetHandDominanceManager()
+    {
+        if (HandDominanceManager == null)
+        {
+            FindHandDominanceManager();
+        }
+        return HandDominanceManager;
     }
 
     public StateManager GetStateManager()
     {
-        if (_stateManager == null)
+        if (StateManager == null)
         {
             FindStateManager();
         }
-        return _stateManager;
+        return StateManager;
     }
 
     public PuzzleManager GetPuzzleManager()
     {
-        if (_puzzleManager == null)
+        if (PuzzleManager == null)
         {
             FindPuzzleManager();
         }
-        return _puzzleManager;
+        return PuzzleManager;
     }
     public SaveManager GetSaveManager()
     {
-        if (_saveManager == null)
+        if (SaveManager == null)
         {
             FindSaveManager();
         }
-        return _saveManager;
+        return SaveManager;
     }
     
     public DialogueManagerCustom GetDialogueManager()
     {
-        if (_dialogueManager == null)
+        if (DialogueManager == null)
         {
             FindDialogueManager();
         }
-        return _dialogueManager;
+        return DialogueManager;
     }
     
     public SoundSystem GetSoundSystem()
     {
-        if (_soundSystem == null)
+        if (SoundSystem == null)
         {
             FindSoundManager();
         }
-        return _soundSystem;
+        return SoundSystem;
     }
 
-
+    #endregion
+    
+    #region Save/Load   
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();
+        // Check if in the main menu, in that case don't save the game
+        //Debug.Log("Application Quit: PlayerState is" + GetStateManager().GetState());
+        if (GetStateManager().GetState() != StateManager.PlayerState.Menu)
+        {
+            Debug.LogWarning("Saving game on quit");
+            Instance.GetSaveManager().SaveGame();
+        }
     }
+    #endregion
 }
