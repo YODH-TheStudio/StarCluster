@@ -29,7 +29,6 @@ public class Menu : MonoBehaviour
     
     public void DeactivateMenuState()
     {
-       
         GameManager.GetStateManager().ChangeState(StateManager.PlayerState.Idle);
     }
     #endregion

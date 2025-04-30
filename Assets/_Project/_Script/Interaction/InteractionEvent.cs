@@ -13,7 +13,7 @@ public class InteractionEvent : Interactable
 
     #region Interact
 
-    public void Interact()
+    public override void Interact()  
     {
         _onInteract?.Invoke();
     }
