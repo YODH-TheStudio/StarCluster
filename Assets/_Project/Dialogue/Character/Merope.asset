@@ -52,7 +52,7 @@ MonoBehaviour:
   - EmotionName: "L\xE9vitation"
     Portrait:
       SpriteImage: {fileID: 21300000, guid: b3684c8148b72d642b0778cc3df0f62f, type: 3}
-  - EmotionName: "Enerv\xE9"
+  - EmotionName: Boo
     Portrait:
       SpriteImage: {fileID: 21300000, guid: 4a610c27221cfa6478601fa81d9a3b9c, type: 3}
   - EmotionName: Emo

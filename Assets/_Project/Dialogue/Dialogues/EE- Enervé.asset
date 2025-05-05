@@ -18,26 +18,26 @@ MonoBehaviour:
   LimitChoiceOptionPerNode: 0
   MaxChoiceOptionPerNode: 8
   NodeLinkDatas:
-  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
-    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
+    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
+  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
+    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
+  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
+    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
+    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+  - BaseNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
+    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
   - BaseNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
     TargetNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
   - BaseNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
     TargetNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
-  - BaseNodeGuid: 719d1066-2545-4aed-86a0-7cb9782baa36
-    TargetNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
-  - BaseNodeGuid: 0a45c46d-ca41-42b0-a596-5c3e759817c2
-    TargetNodeGuid: f9fdafad-ee0c-4703-9486-f9a5cea57bdf
-  - BaseNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
-    TargetNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
+  - BaseNodeGuid: 607f62b1-02d4-4744-8abf-7bd6a5500f74
+    TargetNodeGuid: c419a946-f0f8-4cdc-91b9-672abd216cb9
   - BaseNodeGuid: 09d39f4a-7eb1-428b-99f8-289e0edd647e
     TargetNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
   - BaseNodeGuid: 990d96cf-7041-488e-90d9-08cb64d905f4
     TargetNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
-  - BaseNodeGuid: 1f976e71-a9d8-460c-84b9-03d07a430ad4
-    TargetNodeGuid: 18f8f7cd-23b5-4ee6-a21b-97aa8a0d0a17
-  - BaseNodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
-    TargetNodeGuid: f73ccc73-5c2c-4ad9-965a-005331d40578
   StartNodeDatas:
   - NodeGuid: cfae6ee6-0cc0-4558-a4ff-35bcbecb8abc
     Position: {x: 256, y: 274}
@@ -85,7 +85,7 @@ MonoBehaviour:
     Position: {x: 1772, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: "Enerv\xE9e"
+    Emotion: Boo
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
@@ -204,7 +204,7 @@ MonoBehaviour:
     Position: {x: 2327, y: 274}
     Character: {fileID: 11400000, guid: 671edb8607ee2ed4d8c1dc24ba25a905, type: 2}
     PortraitPosition: 3
-    Emotion: "Enerv\xE9e"
+    Emotion: Boo
     SecoundCharacter: {fileID: 0}
     SecoundPortraitPosition: 0
     SecoundEmotion: 
