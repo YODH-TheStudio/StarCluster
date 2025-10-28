@@ -176,6 +176,8 @@ public class SaveManager : MonoBehaviour
     }
     
     private static void LoadPlayer(int slot){
+        print("aaaaaaaaaaaaaaaaa");
+        print(Application.persistentDataPath);
         string path = Application.persistentDataPath + "/Saves/Slot" + slot.ToString() + "/player.json";
         if(File.Exists(path)){
             string jsonString = File.ReadAllText(path);

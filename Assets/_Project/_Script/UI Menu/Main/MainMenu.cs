@@ -4,7 +4,7 @@ using UnityEngine;
 public class MainMenu : Menu
 {
     #region Fields 
-    [SerializeField] private bool hasAlreadyPlayed = true; // TODO : Use the bool from the loaded save
+    private bool _hasAlreadyPlayed = true;
     [SerializeField] private GameObject planetMenu;
     private GameManager _gameManager;
     private SoundSystem _soundSystem;
@@ -19,19 +19,33 @@ public class MainMenu : Menu
         _gameManager = GameManager.Instance;
         _soundSystem = _gameManager.GetSoundSystem();
     }
+    
+    private new void Start()
+    {
+        LoadPlayerPrefs();
+    }
     #endregion
 
+    #region Player Prefs
+    private void LoadPlayerPrefs()
+    {
+        _hasAlreadyPlayed = PlayerPrefs.GetInt("HasAlreadyPlayed", 0) == 1;
+    }
+    #endregion
+    
     #region PlayGame
     public async void PlayGame()
     {
 
-        if (hasAlreadyPlayed)
+        if (_hasAlreadyPlayed)
         {
             planetMenu.SetActive(true);
             gameObject.SetActive(false);
         }
         else
         {
+            PlayerPrefs.SetInt("HasAlreadyPlayed", 1);
+            PlayerPrefs.Save();
             _soundSystem.StopMusicSource();
             await SceneLoader.LoadSceneGroup(1);
         }
